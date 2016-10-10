@@ -45,8 +45,9 @@
     background-color: #b9d4e9;
     height: 70px;
 }
-.table_view p{
-    padding: 0 5px;
+.table_view p {
+  margin: 0;
+  padding: 5px;
 }
 .cam_search > input {
     border: 1px solid #7dc2e9;
@@ -217,4 +218,17 @@ ul.cam_rec {
     float: left;
     margin-right: 5px;
     margin-top: 3px;
+}
+.camera_view .camera_num{
+    float: left;
+    position: relative;
+    width: 470px;
+}
+.cam_2 {
+  margin-left: 20px;
+}
+.camera_view {
+  overflow: hidden;
+  padding-left: 15px;
+  padding-top: 10px;
 }
