@@ -9,11 +9,11 @@
 .menu_right {
     overflow: hidden;
     float: right;
-    width: 50%;
+    width: 60%;
 }
 .header_logo {
     float: left;
-    width: 50%;
+    width: 40%;
 }
 .menu_right ul{
     width: 100%;
