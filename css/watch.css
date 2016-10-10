@@ -232,3 +232,16 @@ ul.cam_rec {
   padding-left: 15px;
   padding-top: 10px;
 }
+
+
+.camera_view video{
+	width: 470px;
+}
+.vjs-control-bar, .vjs-big-play-button, .vjs-control-bar, .vjs-error-display, .vjs-caption-settings{
+	display:none;
+}
+#example-video, #example-video2, #example-video3, #example-video4{
+	float:left;
+	margin-right: 10px;
+	margin-bottom:10px;
+}
