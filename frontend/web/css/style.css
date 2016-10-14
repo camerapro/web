@@ -1,0 +1,150 @@
+body{
+    color: #000;
+}
+.left_col{
+    color: #000;
+}
+.table_view input {
+    background-color: #add1e7;
+    border: 1px solid #add1e7;
+    color: #000;
+    padding: 5px 10px;
+}
+.cam_search{
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.cam_search input {
+    border: 1px solid #b4b2b1;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    padding-left: 5px;
+}
+
+.cam_search .icon_search {
+    background-image: url("../images/search.png");
+    height: 24px;
+    position: absolute;
+    right: 5px;
+    top: 3px;
+    width: 24px;
+    background-size: 100%;
+    cursor: pointer;
+}
+.menu_section div ul {
+    margin: 0 !important;
+    overflow: hidden;
+    padding: 0 0 5px 5px;
+}
+.menu_section div ul li{
+    float: left;
+    list-style: none;
+}
+.cam_show_select {
+    background-color: #b9d4e9;
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid #7AC4EE;
+}
+.cam_show_select li{
+    margin-right: 20px;
+}
+.cam_res {
+    border-bottom: 1px solid #000;
+    height: 35px;
+    line-height: 35px;
+    margin: 0 5px;
+}
+.cam_res .icon{
+    margin-top: 5px;
+    cursor: pointer;
+}
+.icon_play{
+    display: block;
+    background-image: url("../images/icon_play.png");
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
+
+.icon_stop{
+    display: block;
+    background-image: url("../images/icon_stop.png");
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
+
+.icon_capture{
+    display: block;
+    background-image: url("../images/icon_capture.png");
+    width: 30px;
+    height: 30px;
+    background-size: 100%;
+}
+.icon_record{
+    display: block;
+    background-image: url("../images/icon_record.png");
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
+
+.cam_res li {
+    margin-right: 13px;
+}
+.cam_res li:last-child{
+    margin: 0!important;
+}
+
+.table_view_sc {
+    margin-left: 30px;
+    padding: 5px 20px !important;
+}
+.table_view{
+    background-color: #b9d4e9;
+    border: 1px solid #7ac4ee;
+}
+.icon_rec_1 {
+    background-image: url("../images/rectang-1.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+
+.icon_rec_4 {
+    background-image: url("../images/rectang-4.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+.icon_rec_9 {
+    background-image: url("../images/rectang-9.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+.icon_rec_16 {
+    background-image: url("../images/rectang-16.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+}
+.cam_rec li {
+    margin-right: 15px;
+}
+.cam_rec li:last-child{
+    margin-right: 0!important;
+}
+.cam_setup input {
+    height: 30px;
+    width: 32%;
+}
+.cam_rec p {
+    margin-top: 8px;
+}
+.cam_setup{
+    background-color: #B9D4E9;
+}

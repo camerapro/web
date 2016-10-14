@@ -1,0 +1,35 @@
+.clear
+{
+    clear:both;
+}
+
+.right
+{
+    float: right;
+}
+
+.left
+{
+    float: left;
+}
+.boder_1{
+    border: 1px solid #000;
+}
+.pd5{
+    padding: 5px;
+}
+.mt5{
+    margin-top: 5px;
+}
+.mt2{
+    margin-top: 2px;
+}
+.mr5{
+    margin-right: 5px;
+}
+.mbt5{
+    margin-bottom: 5px;
+}
+.boder_none{
+    border: none!important;
+}

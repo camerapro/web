@@ -1,0 +1,66 @@
+.left_col{
+    background-color: #FFF;
+    color: #000;
+    width: 300px!important;
+}
+.nav_title{
+    width: 300px!important;
+}
+.nav-md .container.body .right_col {
+    margin-left: 300px;
+}
+.main_container .top_nav {
+    display: block;
+    margin-left: 300px;
+}
+.modal-dialog {
+    margin: 30px auto;
+    width: 980px;
+}
+
+.form-group {
+    float: left;
+    width: 50%;
+}
+.modal-body {
+    overflow: hidden;
+    padding: 15px 0;
+}
+#cammodal img {
+    height: 180px;
+    width: 180px;
+}
+.show_error{
+    color: red;
+    text-align: center;
+    margin: 5px 0;
+}
+.camera_view .camera_num{
+    float: left;
+    position: relative;
+    width: 470px;
+}
+.cam_2 {
+    margin-left: 20px;
+}
+.camera_view {
+    overflow: hidden;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+.vjs-caption-settings {
+    display: none;
+}
+
+.camera_view video{
+    width: 480px;
+
+}
+.vjs-control-bar, .vjs-big-play-button, .vjs-control-bar, .vjs-error-display, .vjs-caption-settings{
+    display:none!important;
+}
+.camera_video{
+    float:left;
+    margin-right: 10px;
+    margin-bottom:10px;
+}
