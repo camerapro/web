@@ -9,6 +9,9 @@
 .nav-md .container.body .right_col {
     margin-left: 300px;
 }
+footer {
+    margin-left: 300px!important;;
+}
 .main_container .top_nav {
     display: block;
     margin-left: 300px;
