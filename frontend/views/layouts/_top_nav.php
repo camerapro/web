@@ -27,6 +27,8 @@
                         <li><a href="javascript:;">Giám sát</a></li>
                         <li><a href="javascript:;">Báo cáo</a></li>
                         <li><a href="javascript:;">Quản trị</a></li>
+                        <li><a href="javascript:;">Cài đặt cam</a></li>
+                        <li><a href="javascript:;">HD sử dụng PM</a></li>
                     </ul>
                 </li>
                 <li class="">
