@@ -24,7 +24,7 @@ AppAsset::register($this);
             <?php
             $controller = Yii::$app->controller->id;
             $action = Yii::$app->controller->action->id;
-            if($controller =='site' && $action=='watch') include('_menu_watch.php');
+            if($controller =='site' && $action=='index') include('_menu_watch.php');
             else include('_menu_left.php');
             ?>
             </div>
