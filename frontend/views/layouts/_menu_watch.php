@@ -25,10 +25,10 @@
             <ul class="cam_res">
                 <li><input type="checkbox"/></li>
                 <li class="pr2"><?= $cam->name?></li>
-                <li><i class="icon icon_play"></i></li>
-                <li><i class="icon icon_stop"></i></li>
-                <li><i class="icon icon_capture"></i></li>
-                <li><i class="icon icon_record"></i></li>
+                <li><i title="play" class="icon icon_play"></i></li>
+                <li><i title="dừng lại" class="icon icon_stop"></i></li>
+                <li><i title="chụp ảnh" class="icon icon_capture"></i></li>
+                <li><i title="ghi" class="icon icon_record"></i></li>
             </ul>
             <?php
                 endforeach;
