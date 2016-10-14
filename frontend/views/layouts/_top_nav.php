@@ -27,8 +27,6 @@
                         <li><a href="javascript:;">Giám sát</a></li>
                         <li><a href="javascript:;">Báo cáo</a></li>
                         <li><a href="javascript:;">Quản trị</a></li>
-                        <li><a href="javascript:;">Quản trị</a></li>
-                        <li><a href="javascript:;">Quản trị</a></li>
                     </ul>
                 </li>
                 <li class="">
