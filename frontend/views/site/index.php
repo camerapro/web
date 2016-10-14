@@ -160,7 +160,7 @@ $cams = \frontend\models\Camera::getListCam();
         });
 
         $('#save_and_close').on('click', function() {
-            var title_encoder = $('#title_encoder').val();
+            /*var title_encoder = $('#title_encoder').val();
 
             var title_camera = $('#title_camera').val();
             var protocol = $('#protocol').val();
@@ -189,7 +189,66 @@ $cams = \frontend\models\Camera::getListCam();
                         $('#CalenderModalNew').modal('hide');
                     }
                 },
-            });
-        });
+            });*/
+                var validate = 1;
+                var title_encoder = $('#title_encoder').val();
+                var title_camera = $('#title_camera').val();
+                var protocol = $('#protocol').val();
+                var channel = $('#channel').val();
+                var ip_address = $('#ip_address').val();
+                var port = $('#port').val();
+                var username = $('#username').val();
+                var password = $('#password').val();
+                if(title_encoder == ''){
+                    $('#title_encoder').focus();
+                    $('.show_error').html('Tên đầu ghi không được để trống');
+                }else if(title_camera == ''){
+                    $('#title_camera').focus();
+                    $('.show_error').html('Tên camera không được để trống');
+                }else if(protocol == ''){
+                    $('#protocol').focus();
+                    $('.show_error').html('Protocol không được để trống');
+                }else if(channel == ''){
+                    $('#channel').focus();
+                    $('.show_error').html('Tên kênh không được để trống');
+                }else if(ip_address == ''){
+                    $('#ip_address').focus();
+                    $('.show_error').html('Địa chỉ IP không được để trống');
+                }else if(port == ''){
+                    $('#port').focus();
+                    $('.show_error').html('Port không được để trống');
+                }else if(username == ''){
+                    $('#username').focus();
+                    $('.show_error').html('Username không được để trống');
+                }else if(password == ''){
+                    $('#password').focus();
+                    $('.show_error').html('Mật khẩu không được để trống');
+                }else {
+                    $.ajax({
+                        url: '/watch/create',
+                        type: "POST",
+                        data: {
+                            'title_encoder':title_encoder,
+                            'title_camera':title_camera,
+                            'protocol':protocol,
+                            'channel':channel,
+                            'ip_address':ip_address,
+                            'port':port,
+                            'username':username,
+                            'password':password
+                        } ,
+                        success: function (response) {
+                            data = JSON.parse(response);
+                            if(data['return_code'] == 0){
+                                alert(data['message']);
+                                $('#CalenderModalNew').modal('hide');
+                            }
+                        },
+
+
+                    });
+                }
+        }
+        );
     });
 </script>
