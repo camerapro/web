@@ -1,0 +1,94 @@
+.modal-dialog {
+    margin: 30px auto;
+    width: 800px;
+}
+.intro_img_ct li{
+    list-style: none;
+}
+.intro_img_ct img{
+    margin: 25%;
+}
+.login_icon1 {
+    padding-bottom: 5px;
+    width: 110px;
+}
+.login_icon2 {
+    width: 178px;
+}
+.login_icon3 {
+    width: 75px;
+}
+.login_content_area .intro{
+    text-align: center;
+}
+.login {
+    background-image: url("../images/login_bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    padding-top: 60px;
+    color: #29166F;
+}
+.login p{
+    font-weight:bold;
+}
+.intro p {
+    font-size: 27px;
+}
+.intro_img p{
+    font-size: 14px;
+}
+.company_about {
+    margin: 100px 0 0 0;
+}
+
+.login_wapper {
+    border: 1px solid;
+    border-radius: 15px;
+    width: 350px;
+}
+.logo_area {
+    border-bottom: 1px solid #000;
+    overflow: hidden;
+    padding: 10px 0;
+}
+.logo_area h3 {
+    font-size: 17px !important;
+    margin: 10px 0 !important;
+}
+.logo_area img {
+    margin: 5px 0 0 !important;
+}
+
+.login_wapper form {
+    margin: 10px;
+}
+.required .control-label{
+    display: none;
+}
+.button_login {
+    background-color: #add1e7;
+    border: 1px solid #add1e7;
+    color: #fff;
+}
+.company_about p{
+    padding-left: 50px;
+}
+.stepContainer{
+    height: 240px!important;
+}
+/*.wizard_steps{
+    display: none !important;
+}*/
+.buttonDisabled{
+    display: none;
+}
+.form-horizontal .control-label {
+    padding: 0 !important;
+    margin-top: 6px;
+}
+.register_msg p{
+    font-weight:normal;
+}
+.form_cf_reg {
+    text-align: center;
+}

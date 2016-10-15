@@ -34,11 +34,7 @@ footer {
     height: 180px;
     width: 180px;
 }
-.show_error{
-    color: red;
-    text-align: center;
-    margin: 5px 0;
-}
+
 .camera_view .camera_num{
     float: left;
     position: relative;

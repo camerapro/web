@@ -21,6 +21,9 @@
 .mt5{
     margin-top: 5px;
 }
+.mt25{
+    margin-top: 25px;
+}
 .mt2{
     margin-top: 2px;
 }
@@ -32,4 +35,10 @@
 }
 .boder_none{
     border: none!important;
+}
+.fs_16{
+    font-size: 16px;
+}
+.fw_bold{
+    font-weight: bold;
 }

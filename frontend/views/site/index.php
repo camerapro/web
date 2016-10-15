@@ -13,7 +13,7 @@ $cams = \frontend\models\Camera::getListCam();
     <?php endforeach;?>
 </div>
 
-<div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+<!--<div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>-->
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -89,6 +89,7 @@ $cams = \frontend\models\Camera::getListCam();
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function() {
         $('#save_and_create').on('click', function() {
@@ -160,36 +161,7 @@ $cams = \frontend\models\Camera::getListCam();
         });
 
         $('#save_and_close').on('click', function() {
-            /*var title_encoder = $('#title_encoder').val();
 
-            var title_camera = $('#title_camera').val();
-            var protocol = $('#protocol').val();
-            var channel = $('#channel').val();
-            var ip_address = $('#ip_address').val();
-            var port = $('#port').val();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            $.ajax({
-                url: '/watch/create',
-                type: "POST",
-                data: {
-                    'title_encoder':title_encoder,
-                    'title_camera':title_camera,
-                    'protocol':protocol,
-                    'channel':channel,
-                    'ip_address':ip_address,
-                    'port':port,
-                    'username':username,
-                    'password':password
-                } ,
-                success: function (response) {
-                    data = JSON.parse(response);
-                    if(data['return_code'] == 0){
-                        alert(data['message']);
-                        $('#CalenderModalNew').modal('hide');
-                    }
-                },
-            });*/
                 var validate = 1;
                 var title_encoder = $('#title_encoder').val();
                 var title_camera = $('#title_camera').val();

@@ -125,7 +125,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->auth_key;
+        return true;
     }
 
     /**
@@ -151,7 +151,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        echo $password;exit;
+
         return Yii::$app->security->validatePassword($password, '123');
     }
 }

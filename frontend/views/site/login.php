@@ -47,7 +47,8 @@ use yii\bootstrap\ActiveForm;
         </div>
         <div>
             <?= Html::submitButton('Đăng nhập', ['class' => 'btn btn-default submit button_login', 'name' => 'login-button']) ?>
-            <?= Html::Button('Tạo tài khoản', ['class' => 'btn btn-default button_login', 'name' => 'login-button']) ?>
+                <input class="btn btn-default submit button_login" data-toggle="modal" data-target="#create_account"  value="Tạo tài khoản" type="button" >
+
         </div>
 
         <div class="clearfix"></div>
@@ -60,9 +61,117 @@ use yii\bootstrap\ActiveForm;
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+<div id="create_account" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Thêm mới camera</h4>
+            </div>
+            <p class="show_error"></p>
+            <div id="wizard" class="form_wizard wizard_horizontal">
+                <ul class="wizard_steps">
+                    <li>
+                        <a href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr"> Bước 1: Đăng ký</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr"> Bước 2: Xác nhận</span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div id="step-1">
+                    <form class="col-md-6 form-horizontal form-label-left">
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Tên người dùng
+                            </label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <input type="text" id="fullname" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Tên truy cập
+                            </label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <input type="text" id="user_name" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Mật khẩu
+                            </label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <input type="password" id="password" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Điện thoại
+                            </label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <input type="text" id="phone_number" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-4 col-sm-3 col-xs-12" for="first-name">Email
+                            </label>
+                            <div class="col-md-8 col-sm-6 col-xs-12">
+                                <input type="text" id="email" required="required" class="form-control col-md-7 col-xs-12">
+                            </div>
+                        </div>
+                    </form>
+                    <div class="col-md-6 register_msg">
+                        <p class="fs_16 fw_bold" >Tất cả bạn cần là Camera IP kết nối Internet</p>
+                        <p>Dùng miễn phí 100%</p>
+                        <p>Hệ thống đầy đủ chức năng</p>
+                        <p>Không giới hạn số camera</p>
+                        <p>Nâng cấp lên bản chính thức bất cứ khi nào bàn muốn cùng gói dịch vụ phì hợp với nhu cầu của bạn</p>
+                        <p>Hệ thống đầy đủ chắc năng như xem camera trực tuyến, xem lại video trong vòng 24h, xem báo cáo theo thời gian thực</p>
+                    </div>
+                </div>
+                <div id="step-2">
+                    <form class="col-md-6 form-horizontal form-label-left form_cf_reg">
+                        <p>Hãy ghi nhớ tài khoản của bạn và bắt đầu sử dụng</p>
+                        <p class="mt25">Chào bạn: <span class="u_fullname"></span></p>
+                        <p>Tên truy cập: <span class="u_user_name"></span></p>
+                        <p>Mật khẩu: <span class="u_password"></span></p>
+                    </form>
+                    <div class="col-md-6 register_msg">
+                        <p class="fs_16 fw_bold" >Tất cả bạn cần là Camera IP kết nối Internet</p>
+                        <p>Dùng miễn phí 100%</p>
+                        <p>Hệ thống đầy đủ chức năng</p>
+                        <p>Không giới hạn số camera</p>
+                        <p>Nâng cấp lên bản chính thức bất cứ khi nào bàn muốn cùng gói dịch vụ phì hợp với nhu cầu của bạn</p>
+                        <p>Hệ thống đầy đủ chắc năng như xem camera trực tuyến, xem lại video trong vòng 24h, xem báo cáo theo thời gian thực</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <div class="company_about col-md-12">
     <p> Công ty TNHH Công Nghệ Thông Minh Á Châu Việt Nam</p>
     <p>Địa chỉ: số 28, ngõ 36, Đào Tấn, Ba Đình, Hà Nội</p>
     <p>Điện thoại : 0466 857 857 - 0462 952 952</p>
     <p>Website: http://astech.com.vn - http://thietbianninh.com</p>
 </div>
+
+<script>
+    $(document).ready(function() {
+        $('#wizard').smartWizard();
+
+        $('#wizard_verticle').smartWizard({
+            transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+    });
+</script>

@@ -44,12 +44,13 @@ class LoginForm extends Model
             $user = $this->getUser();
             if (!$user) {
                 $this->addError($attribute, 'Tên đăng nhập hoặc mật khẩu không chính xác');
+            }else{
+                if($user->password != md5($this->password)){
+//            if(!$user->validatePassword($user, $this->password)){
+                    $this->addError($attribute, 'Incorrect password.');
+                }
             }
-            /*echo $this->password;
-            if(!$user->validatePassword($this->password)){
-                $this->addError($attribute, 'Incorrect password.');
 
-            }*/
         }
     }
 
@@ -61,8 +62,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return true;
-//            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
+            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
             return false;
         }

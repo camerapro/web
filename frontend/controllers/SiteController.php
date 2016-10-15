@@ -35,7 +35,7 @@ class SiteController extends Controller
                     ],
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
+                        'allow' => false,
                         'roles' => ['@'],
                     ],
                 ],
@@ -72,6 +72,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+            return $this->actionLogin();
+        }
         return $this->render('index');
     }
 
@@ -88,7 +91,7 @@ class SiteController extends Controller
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->goHome();
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -219,4 +222,11 @@ class SiteController extends Controller
         $data = Yii::$app->request->get();
         print_r($data);exit;
     }
+
+    /**
+     * Logs in a user.
+     *
+     * @return mixed
+     */
+
 }
