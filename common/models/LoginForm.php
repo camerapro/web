@@ -23,7 +23,7 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password'], 'required', 'message'=>'Vui lòng nhập {attribute}.'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -42,9 +42,14 @@ class LoginForm extends Model
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (!$user) {
+                $this->addError($attribute, 'Tên đăng nhập hoặc mật khẩu không chính xác');
             }
+            /*echo $this->password;
+            if(!$user->validatePassword($this->password)){
+                $this->addError($attribute, 'Incorrect password.');
+
+            }*/
         }
     }
 
@@ -56,7 +61,8 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            return true;
+//            return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
             return false;
         }
@@ -72,7 +78,8 @@ class LoginForm extends Model
         if ($this->_user === null) {
             $this->_user = User::findByUsername($this->username);
         }
-
         return $this->_user;
     }
+
+
 }

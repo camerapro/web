@@ -2,55 +2,40 @@
     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
         <div class="menu_section">
             <ul class="nav side-menu">
-                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-home"></i>Giám sát<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="index.html">Dashboard</a></li>
-                        <li><a href="index2.html">Dashboard2</a></li>
-                        <li><a href="index3.html">Dashboard3</a></li>
+                        <li><a href="index.html">Xem cam</a></li>
+                        <li><a href="index2.html">Xem lại</a></li>
+                        <li><a href="index3.html">Kiểm soát</a></li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-edit"></i>Báo cáo<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="form.html">General Form</a></li>
-                        <li><a href="form_advanced.html">Advanced Components</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
-                        <li><a href="form_wizards.html">Form Wizard</a></li>
-                        <li><a href="form_upload.html">Form Upload</a></li>
-                        <li><a href="form_buttons.html">Form Buttons</a></li>
+                        <li><a href="form.html">Báo cáo chấm công</a></li>
+                        <li><a href="form_advanced.html">Dữ liệu gốc</a></li>
+                        <li><a href="form_validation.html">Báo cáo video</a></li>
+                        <li><a href="form_wizards.html">Báo cáo ảnh</a></li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-desktop"></i>Quản trị<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="general_elements.html">General Elements</a></li>
-                        <li><a href="media_gallery.html">Media Gallery</a></li>
-                        <li><a href="typography.html">Typography</a></li>
-                        <li><a href="icons.html">Icons</a></li>
-                        <li><a href="glyphicons.html">Glyphicons</a></li>
-                        <li><a href="widgets.html">Widgets</a></li>
-                        <li><a href="invoice.html">Invoice</a></li>
-                        <li><a href="inbox.html">Inbox</a></li>
-                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="general_elements.html">Cấu hình máy châm công</a></li>
+                        <li><a href="media_gallery.html">Cấu hình Camera</a></li>
+                        <li><a href="typography.html">Cấu hình trên máy tính</a></li>
+                        <li><a href="icons.html">Nhân viên</a></li>
+                        <li><a href="glyphicons.html">Tài khoản</a></li>
+                        <li><a href="widgets.html">Đổi mật khẩu</a></li>
+                        <li><a href="invoice.html">Phân quyền</a></li>
+                        <li><a href="inbox.html">Công ty</a></li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-table"></i>Hướng dẫn<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="tables.html">Tables</a></li>
-                        <li><a href="tables_dynamic.html">Table Dynamic</a></li>
-                    </ul>
-                </li>
-                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="chartjs.html">Chart JS</a></li>
-                        <li><a href="chartjs2.html">Chart JS2</a></li>
-                        <li><a href="morisjs.html">Moris JS</a></li>
-                        <li><a href="echarts.html">ECharts</a></li>
-                        <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                </li>
-                <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                        <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                        <li><a href="tables.html">Lưu dữ liệu trên máy tính</a></li>
+                        <li><a href="tables_dynamic.html">Cài teamview</a></li>
+                        <li><a href="tables_dynamic.html">Cấu hình cam</a></li>
+                        <li><a href="tables_dynamic.html">Cấu hình máy chấm công</a></li>
+                        <li><a href="tables_dynamic.html">Mở port Wifi</a></li>
                     </ul>
                 </li>
             </ul>

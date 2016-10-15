@@ -5,14 +5,6 @@
 </head>
 
 <body class="login">
-<div>
-
-    <div class="login_wrapper">
-        <div class="animate form login_form">
-            <?= $content ?>
-        </div>
-
-    </div>
-</div>
+<?= $content ?>
 </body>
 </html>

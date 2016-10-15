@@ -8,6 +8,7 @@
 }
 .nav-md .container.body .right_col {
     margin-left: 300px;
+    padding:10px 10px 0;
 }
 footer {
     margin-left: 300px!important;;
@@ -48,24 +49,24 @@ footer {
 }
 .camera_view {
     overflow: hidden;
-    padding-left: 15px;
-    padding-top: 10px;
+    padding-left: 5px;
 }
 .vjs-caption-settings {
     display: none;
 }
 
-.camera_view video{
-    width: 480px;
-
+.camera_view video {
+    width: 100%;
 }
 .vjs-control-bar, .vjs-big-play-button, .vjs-control-bar, .vjs-error-display, .vjs-caption-settings{
     display:none!important;
 }
-.camera_video{
-    float:left;
-    margin-right: 10px;
-    margin-bottom:10px;
-    margin-top:10px;
-
+.camera_video {
+    height: auto;
+}
+.nav.toggle > a {
+    display: none;
+}
+.cam_rec i{
+    cursor: pointer;
 }

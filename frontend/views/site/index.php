@@ -3,7 +3,7 @@ $cams = \frontend\models\Camera::getListCam();
 ?>
 <div class="camera_view">
     <?php foreach ($cams as $cam):?>
-        <video class=" camera_video" id=camera_video_<?= $cam->id;?>  width=480 height=260  >
+        <video class="col-md-6 camera_video" id=camera_video_<?= $cam->id;?>>
             <source src="<?= $cam->streaming_url;?>"  type="application/x-mpegURL">
         </video>
         <script>
@@ -41,8 +41,8 @@ $cams = \frontend\models\Camera::getListCam();
                             <label class="col-sm-3 control-label">Giao thức</label>
                             <div class="col-sm-9">
                                 <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="protocol" name="protocol">
-                                    <option value="rtsp">rtsp</option>
                                     <option value="http">http</option>
+                                    <option value="rtsp">rtsp</option>
                                 </select>
                             </div>
                         </div>
