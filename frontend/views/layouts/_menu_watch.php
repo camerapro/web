@@ -21,16 +21,17 @@
             </ul>
             <?php
             $cams = \frontend\models\Camera::getListCam();
+            $i=0;
             if($cams){
                 foreach ($cams as $cam):
             ?>
-            <ul class="cam_res">
+            <ul class="cam_res cam_number_<?= $cam->id?>">
                 <li class="col-xs-1"><input type="checkbox"/></li>
                 <li class="col-xs-3 pr2"><?= $cam->name?></li>
-                <li class="col-xs-2"><i title="play" class="icon icon_play"></i></li>
-                <li class="col-xs-2"><i title="dừng lại" class="icon icon_stop"></i></li>
-                <li class="col-xs-2"><i title="chụp ảnh" class="icon icon_capture"></i></li>
-                <li class="col-xs-2"><i title="ghi" class="icon icon_record"></i></li>
+                <li class="col-xs-2"><i title="tắt" class="icon icon_shutdown" value="<?= $cam->id?>"></i></li>
+                <li class="col-xs-2"><i title="dừng lại" class="icon icon_stop" value="<?= $cam->id?>"></i></li>
+                <li class="col-xs-2"><i title="chụp ảnh" class="icon icon_capture" value="<?= $cam->id?>"></i></li>
+                <li class="col-xs-2"><i title="ghi" class="icon icon_record" value="<?= $cam->id?>"></i></li>
             </ul>
             <?php
                 endforeach;

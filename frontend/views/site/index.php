@@ -221,5 +221,6 @@ $cams = \frontend\models\Camera::getListCam();
                 }
         }
         );
+        
     });
 </script>

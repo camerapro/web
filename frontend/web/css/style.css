@@ -68,6 +68,13 @@ body{
     height: 25px;
     background-size: 100%;
 }
+.icon_shutdown{
+    display: block;
+    background-image: url("../images/icon_shutdown.png");
+    width: 25px;
+    height: 25px;
+    background-size: 100%;
+}
 
 .icon_stop{
     display: block;

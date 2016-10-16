@@ -192,4 +192,29 @@ class AjaxController extends Controller
         exit;
     }
 
+    public function actionUpdate_cam(){
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $cam_id = $data['cam_id'];
+            $status = (int) $data['status'];
+            $check = Camera::getListCamId($cam_id);
+            if($check){
+                $check->status = $status;
+                $save = $check->save();
+                $return = array(
+                    'return_code'=>0,
+                    'message'=>'Success'
+                );
+            }    else{
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'UnSuccess'
+                );
+            }
+            echo json_encode($return);
+            exit;
+        }
+
+    }
+
 }
