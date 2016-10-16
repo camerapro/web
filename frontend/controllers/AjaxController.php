@@ -196,19 +196,24 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
-            $status = (int) $data['status'];
             $check = Camera::getListCamId($cam_id);
             if($check){
-                $check->status = $status;
+                if($check->status == 1 )  {
+                    $check_status = 0;
+                }
+                else{
+                    $check_status = 1;
+                }
+                $check->status = $check_status;
                 $save = $check->save();
                 $return = array(
                     'return_code'=>0,
-                    'message'=>'Success'
+                    'check_status'=>$check_status
                 );
             }    else{
                 $return = array(
                     'return_code'=>1,
-                    'message'=>'UnSuccess'
+//                    'check_status'=>$check_status
                 );
             }
             echo json_encode($return);
