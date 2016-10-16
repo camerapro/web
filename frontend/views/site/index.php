@@ -3,7 +3,7 @@ $cams = \frontend\models\Camera::getListCam();
 ?>
 <div class="camera_view">
     <?php foreach ($cams as $cam):?>
-        <video class="col-md-6 camera_video" id=camera_video_<?= $cam->id;?>>
+        <video class="col-md-6 camera_video <?php  echo $cam->status == 1 ? 'cam_enable' : 'cam_visible'?>" id=camera_video_<?= $cam->id;?> >
             <source src="<?= $cam->streaming_url;?>"  type="application/x-mpegURL">
         </video>
         <script>
@@ -221,6 +221,6 @@ $cams = \frontend\models\Camera::getListCam();
                 }
         }
         );
-        
+
     });
 </script>

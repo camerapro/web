@@ -12,8 +12,8 @@
 }
 footer {
     margin-left: 300px!important;
-    position: fixed;
-    botom: 0;
+    position: fixed!important;
+    bottom: 0;
     right: 0;
 }
 .main_container .top_nav {
@@ -68,4 +68,10 @@ footer {
 }
 .cam_rec i{
     cursor: pointer;
+}
+.cam_enable{
+    display: block;
+}
+.cam_visible{
+    display: none;
 }
