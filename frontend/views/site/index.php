@@ -13,7 +13,6 @@ $cams = \frontend\models\Camera::getListCam();
     <?php endforeach;?>
 </div>
 
-<!--<div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>-->
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -197,7 +196,7 @@ $cams = \frontend\models\Camera::getListCam();
                     $('.show_error').html('Mật khẩu không được để trống');
                 }else {
                     $.ajax({
-                        url: '/watch/create',
+                        url: '/ajax/create',
                         type: "POST",
                         data: {
                             'title_encoder':title_encoder,
