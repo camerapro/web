@@ -30,7 +30,7 @@ use yii\helpers\Url;
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="javascript:;">Giám sát</a></li>
                         <li><a href="javascript:;">Báo cáo</a></li>
-                        <li><a href="javascript:;">Quản trị</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/camera/index">Quản trị</a></li>
                         <li><a href="javascript:;">Cài đặt cam</a></li>
                         <li><a href="javascript:;">HD sử dụng PM</a></li>
                     </ul>

@@ -20,7 +20,7 @@
                 <li><a><i class="fa fa-desktop"></i>Quản trị<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="general_elements.html">Cấu hình máy châm công</a></li>
-                        <li><a href="media_gallery.html">Cấu hình Camera</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/camera/index">Cấu hình Camera</a></li>
                         <li><a href="typography.html">Cấu hình trên máy tính</a></li>
                         <li><a href="icons.html">Nhân viên</a></li>
                         <li><a href="glyphicons.html">Tài khoản</a></li>
