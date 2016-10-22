@@ -123,7 +123,6 @@ class AjaxController extends Controller
             $user->email = $data['email'];
             $user->status = 1;
 //            try{
-            print_r($user);
                 $save = $user->save(false);
 //            $save = true;
                 if($save){
