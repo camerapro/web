@@ -35,12 +35,16 @@ class CameraController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CameraSearch();
+        /*$searchModel = new CameraSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+        ]);*/
+        $cams = Camera::getListCam();
+        return $this->render('index',[
+            'cams'=>$cams,
         ]);
     }
 

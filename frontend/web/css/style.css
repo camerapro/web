@@ -177,3 +177,12 @@ body{
     padding: 7px 20px;
     width: 100%;
 }
+.tbody_view tr td{
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    line-height: 1.42857;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+}
