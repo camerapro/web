@@ -116,6 +116,7 @@ class AjaxController extends Controller
             $user_name = trim($data['user_name']);
             $password = trim($data['password']);
             $camera = new User();
+            print_r($camera);exit;
             $camera->fullname = $data['fullname'];
             $camera->username = $user_name;
             $camera->password = md5($password);
