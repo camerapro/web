@@ -17,13 +17,13 @@
         </div>
         <div class="cam_show boder_1 mbt5">
             <?php
-            $cams = \frontend\models\Camera::getListCam();
+            $cams = \frontend\models\Camera::getListCam(Yii::$app->user->identity->id);
             $i=0;
             if($cams){
                 foreach ($cams as $cam):
             ?>
             <ul class="cam_res cam_number_<?= $cam->id?>">
-                <li class="col-xs-3 pr2"><a class="cam_name <?php  echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" value="<?= $cam->id?>"><?= $cam->name?></a></li>
+                <li class="pr2"><a class="cam_name <?php  echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" value="<?= $cam->id?>"><?= $cam->name?></a></li>
             </ul>
             <?php
                 $i++;
@@ -34,8 +34,7 @@
 
         <div class="cam_setup boder_1 pd5">
             <input id="fc_create" data-toggle="modal" data-target="#CalenderModalNew" value="Thêm mới" type="button" >
-            <input value="Gán cam" type="button">
-            <input value="Xóa" type="button">
+            <input id="fc_grand_cam" data-toggle="modal" data-target="#grand_cam" value="Gán cam" type="button" >
         </div>
         <hr>
         <ul class="nav side-menu">

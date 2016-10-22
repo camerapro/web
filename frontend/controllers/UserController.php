@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Camera;
 use Yii;
 use frontend\models\User;
 use frontend\models\search\UserSearch;
@@ -77,10 +78,6 @@ class UserController extends Controller
 
             $full_name = $data['name'];
             $email = $data['email'];
-            if($email == $check_exits->email) {
-                $error = 'Email đã được sử dụng bởi tài khoản khác, vui lòng nhập email chính xác!';
-                goto return_exit;
-            }
             $phone = $data['phone'];
             $occupation = $data['occupation'];
             $password = $data['password'];
@@ -92,14 +89,16 @@ class UserController extends Controller
             $model->phone = $phone;
             $model->password = md5($password);
             $model->address = $occupation;
+            $model->level = $data['level'];
             if(isset($data['gender'])) $model->gender = (int) $data['gender'];
-            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
+//            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
             $model->created_time = date('Y-m-d H:i:s');
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
+                print_r($model->getErrors());exit;
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
                 goto return_exit;
             }
@@ -202,5 +201,19 @@ class UserController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionGrand(){
+        $user_grand_id = Yii::$app->session['user_id'];
+        if(empty($user_grand_id)){
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+        $list_cam = Camera::getAllCamByGrandId($user_grand_id);
+        $user_id = Yii::$app->user->identity->id;
+        $list_cam_granded = Camera::getAllCamGranded($user_grand_id, $user_id);
+        return $this->render('grand', [
+            'list_cam'=>$list_cam,
+            'list_cam_granded'=>$list_cam_granded,
+        ]);
     }
 }

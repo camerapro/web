@@ -42,7 +42,7 @@ class User extends \common\models\User
             [['address'], 'string', 'max' => 128],
             [['city'], 'string', 'max' => 32],
             [['language'], 'string', 'max' => 20],
-            [['phone'], 'unique'],
+//            [['phone'], 'unique'],
         ];
     }
 

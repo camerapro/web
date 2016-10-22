@@ -24,6 +24,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script src="/js/validator.js"></script>
+    <script src="/js/multiselect.js"></script>
 
 
 </head>

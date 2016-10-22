@@ -15,9 +15,11 @@
 }
 .modal-dialog {
     margin: 30px auto;
-    width: 980px;
+    /*width: 980px;*/
 }
-
+.modal-sm{
+    width: 400px;
+}
 .form-group {
     float: left;
     width: 50%;

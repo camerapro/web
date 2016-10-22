@@ -42,3 +42,6 @@
 .fw_bold{
     font-weight: bold;
 }
+.w100{
+    width: 100%!important;
+}

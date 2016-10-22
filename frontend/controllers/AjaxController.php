@@ -9,6 +9,7 @@
 namespace frontend\controllers;
 use common\models\User;
 use frontend\models\Camera;
+use frontend\models\RelationsCamUser;
 use Yii;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
@@ -246,6 +247,80 @@ class AjaxController extends Controller
             echo json_encode($return);
             exit;
         }
+    }
+
+    public function actionGrandcam(){
+        if (Yii::$app->request->isAjax) {
+            $session = Yii::$app->session;
+            $data = Yii::$app->request->post();
+            $cam_ids = isset($data['cam_ids']) ? $data['cam_ids'] : null;
+            $user_id = Yii::$app->user->identity->id;
+
+            if(empty($cam_ids)){
+                RelationsCamUser::deleteAll(['user_id'=>$user_id, 'created_by_id'=>$session['user_id']]);
+                $return =[
+                    'return_code'=>0,
+                ];
+                echo json_encode($return);
+                exit;
+            }
+            $res = false;
+            RelationsCamUser::deleteAll(['user_id'=>$user_id, 'created_by_id'=>$session['user_id']]);
+            foreach ($cam_ids as $cam_id){
+                $cam_user = new RelationsCamUser();
+                $cam_user->cam_id = $cam_id;
+                $cam_user->user_id = $user_id;
+                $cam_user->created_by_id = $session['user_id'];
+                $cam_user->created_by_name = $session['user_name'];
+                $cam_user->created_time = date('Y-m-d H:i:s');
+                $res = $cam_user->save();
+            }
+            if($res)
+            {
+                $return =[
+                    'return_code'=>0,
+                ];
+            }else{
+                $return =[
+                    'return_code'=>1,
+                ];
+            }
+            echo json_encode($return);
+            exit;
+        }
+    }
+
+    public function actionLoginajax(){
+        try{
+            $data = Yii::$app->request->post();
+            $user_name = trim($data['username_login']);
+            $password = trim($data['password_login']);
+            $login = \frontend\models\User::findOne(['username'=>$user_name, 'password'=>md5($password)]);
+
+            if ($login) {
+                $session = Yii::$app->session;
+                $session['user_id'] = $login->id;
+                $session['user_name'] = $login->username;
+                $return = array(
+                    'return_code'=>0,
+                    'message'=>'Đăng nhập thành công',
+                    'session'=>$_SESSION['user_id'],
+                );
+            } else {
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Đăng nhập không thành công, vui lòng đăng nhập lại'
+                );
+            }
+        }catch (Exception $ex){
+            $return = array(
+                'return_code'=>1,
+                'message'=>'Đăng nhập không thành công, vui lòng đăng nhập lại'
+            );
+        }
+
+        echo json_encode($return);
+        exit;
     }
 
 }

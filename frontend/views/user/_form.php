@@ -83,13 +83,26 @@ use yii\widgets\ActiveForm;
                             </div>
                         </div>
                     </div>
-                   <div class="item form-group">
+                   <!--<div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12"></span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" value="<?= date('d-m-Y', strtotime($model->birthday));?>">
+                            <input id="birthday" name="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" value="<?/*= date('d-m-Y', strtotime($model->birthday));*/?>">
+                        </div>
+                    </div>-->
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="heard" class="form-control" required  name="level">
+                                <?php $lever = \frontend\models\Level::findAll(['status'=>1])?>
+                                <?php foreach ($lever as $item):?>
+                                    <option <?= ($model->level == $item->id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->level_name?></option>
+                                <?php endforeach;?>
+                            </select>
                         </div>
                     </div>
+
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
