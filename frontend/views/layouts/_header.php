@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Camera An Ninh</title>
-
+    <title>Thiết bị An Ninh | Astech Việt Nam</title>
+    <link href="/web/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap -->
     <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script src="/js/validator.js"></script>
     <script src="/js/multiselect.js"></script>
+    <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 
 </head>

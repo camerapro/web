@@ -86,73 +86,13 @@ $cams = \frontend\models\Camera::getListCam();
         </div>
     </div>
 </div>
-<div id="grand_cam" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="form-horizontal form-label-left" method="get" style="padding-top: 30px;">
-                    <div class="item form-group w100">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"></label>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <input id="username_login" class="form-control col-md-7 col-xs-12 has-feedback-left"  name="username" placeholder="Tên đăng nhập" required="required" type="text" >
-                            <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                        </div>
-                    </div>
 
-                    <div class="item form-group w100">
-                        <label for="password" class="control-label col-md-3"></label>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <input id="password_login" type="password" name="password" data-validate-length="6,11" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Mật khẩu">
-                            <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="button" id="login_require" class="btn btn-primary">Đăng nhập</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 </div>
 
 <script>
     $(document).ready(function() {
-        $('#login_require').on('click', function() {
-            var username_login = $('#username_login').val();
-            var password_login = $('#password_login').val();
-            if(username_login ==''){
-                $('#username_login').focus();
-                $('.show_error_login').html('Tên đăng nhập không được để trống');
-            }else if(password_login == ''){
-                $('#password_login').focus();
-                $('.show_error_login').html('Mật khẩu không được để trống');
-            }else{
-                $.ajax({
-                    url: '/ajax/loginajax',
-                    type: "POST",
-                    data: {
-                        'username_login':username_login,
-                        'password_login':password_login
-                    } ,
-                    success: function (response) {
-                        data = JSON.parse(response);
-                        if(data['return_code'] == 0){
-                            window.location.href = '/user/grand';
-                        }else{
-                            alert(data['message']);
-                        }
-                    },
 
-
-                });
-            }
-
-        });
         $('#save_and_create').on('click', function() {
             var validate = 1;
             var title_encoder = $('#title_encoder').val();

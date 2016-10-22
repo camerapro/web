@@ -10,21 +10,20 @@
 }
 .login_icon1 {
     padding-bottom: 5px;
-    width: 110px;
+    /*width: 110px;*/
 }
 .login_icon2 {
-    width: 178px;
+    padding-bottom: 30px;
 }
 .login_icon3 {
-    width: 75px;
+    /*width: 75px;*/
 }
 .login_content_area .intro{
     text-align: center;
 }
 .login {
-    background-image: url("../images/login_bg.png");
-    background-repeat: no-repeat;
-    background-size: 100% auto;
+    background-image: url("../images/login-b.jpg");
+    /*background-size: 100% auto;*/
     padding-top: 60px;
     color: #29166F;
 }
@@ -66,8 +65,8 @@
     display: none;
 }
 .button_login {
-    background-color: #add1e7;
-    border: 1px solid #add1e7;
+    background-color: #1AB394;
+    border: 1px solid #1AB394;
     color: #fff;
 }
 .company_about p{

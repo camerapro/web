@@ -205,15 +205,19 @@ class UserController extends Controller
 
     public function actionGrand(){
         $user_grand_id = Yii::$app->session['user_id'];
-        if(empty($user_grand_id)){
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }
-        $list_cam = Camera::getAllCamByGrandId($user_grand_id);
         $user_id = Yii::$app->user->identity->id;
-        $list_cam_granded = Camera::getAllCamGranded($user_grand_id, $user_id);
+        $list_cam = $list_cam_granded = [];
+        $granded = 0;
+        if(($user_grand_id)){
+            $granded = 1;
+            $list_cam = Camera::getAllCamByGrandId($user_grand_id);
+            $list_cam_granded = Camera::getAllCamGranded($user_grand_id, $user_id);
+        }
+
         return $this->render('grand', [
             'list_cam'=>$list_cam,
             'list_cam_granded'=>$list_cam_granded,
+            'granded'=>$granded,
         ]);
     }
 }
