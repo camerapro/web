@@ -380,33 +380,13 @@ function SmartWizard(target, options) {
             $('.show_error').html('Email không được để trống');
             return false;
         }else{
-            /*$.ajax({
-                url: '/ajax/camera',
-                type: "POST",
-                data: {
-                    'fullname':fullname,
-                    'user_name':user_name,
-                    'password':password,
-                    'phone_number':phone_number,
-                    'email':email
-                } ,
-                success: function (response) {
-                    var data_type = JSON.parse(response);
-                    if(data_type['return_code'] == 0){
-                        $('.u_fullname').html(fullname);
-                        $('.u_user_name').html(user_name);
-                        $('.u_password').html(password);
-                        _loadContent(nextStepReg, nextStepIdx);
-                    }else{
-                        alert(data_type['message']);
-                    }
-                },
-            });*/
             $.ajax({
                 url: '/ajax/check_username',
                 type: "POST",
                 data: {
-                    'user_name':user_name
+                    'user_name':user_name,
+                    'phone_number': phone_number,
+                    'email': email,
                 } ,
                 success: function (response) {
                     var data_type = JSON.parse(response);

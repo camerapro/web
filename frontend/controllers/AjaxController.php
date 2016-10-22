@@ -7,6 +7,7 @@
  */
 
 namespace frontend\controllers;
+use common\components\Common;
 use common\models\User;
 use frontend\models\Camera;
 use frontend\models\RelationsCamUser;
@@ -92,18 +93,37 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $username = $data['user_name'];
+            $phone_number = $data['phone_number'];
+            $mail = $data['email'];
             $check = User::findByUsername($username);
             if($check){
                 $return = array(
                     'return_code'=>1,
                     'message'=>'Người dùng đã tồn tại'
                 );
-            }    else{
-                $return = array(
-                    'return_code'=>0,
-                    'message'=>'Người dùng không tồn tại'
-                );
+                echo json_encode($return);
+                exit;
             }
+            if(!Common::validatePhone($phone_number)){
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Số điện thoại không hợp lệ'
+                );
+                echo json_encode($return);
+                exit;
+            }
+            if(!Common::validateEmail($mail)){
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Email không hợp lệ'
+                );
+                echo json_encode($return);
+                exit;
+            }
+            $return = array(
+                'return_code'=>0,
+                'message'=>'Người dùng không tồn tại'
+            );
             echo json_encode($return);
             exit;
         }
@@ -125,7 +145,6 @@ class AjaxController extends Controller
             try{
                 //$save = $user->save(false);
                 $save = $user->save();
-//            $save = true;
                 if($save){
                     $model = new LoginForm();
                     $model->username = $user_name;
