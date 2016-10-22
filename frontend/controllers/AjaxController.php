@@ -136,14 +136,14 @@ class AjaxController extends Controller
                             'message'=>'Đăng nhập thành công'
                         );
                     } else {
-//                        User::deleteAll(['username'=>$user_name]);
+                        User::deleteAll(['username'=>$user_name]);
                         $return = array(
                             'return_code'=>1,
                             'message'=>'Đăng nhập không thành công'
                         );
                     }
                 }else{
-//                    User::deleteAll(['username'=>$user_name]);
+                    User::deleteAll(['username'=>$user_name]);
                     $return = array(
                         'return_code'=>1,
                         'message'=>'Đăng nhập không thành công đâu nhé'
