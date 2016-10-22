@@ -111,50 +111,58 @@ class AjaxController extends Controller
     }
 
     public function actionCreate_and_login(){
-        $data = Yii::$app->request->post();
-        $user_name = trim($data['user_name']);
-        $password = trim($data['password']);
-        $camera = new User();
-        $camera->fullname = $data['fullname'];
-        $camera->username = $user_name;
-        $camera->password = md5($password);
-        $camera->phone = $data['phone_number'];
-        $camera->email = $data['email'];
-        $camera->status = 1;
-        try{
-            $save = $camera->save(false);
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $user_name = trim($data['user_name']);
+            $password = trim($data['password']);
+            $camera = new User();
+            $camera->fullname = $data['fullname'];
+            $camera->username = $user_name;
+            $camera->password = md5($password);
+            $camera->phone = $data['phone_number'];
+            $camera->email = $data['email'];
+            $camera->status = 1;
+            try{
+                $save = $camera->save(false);
 //            $save = true;
-            if($save){
-                $model = new LoginForm();
-                $model->username = $user_name;
-                $model->password = $password;
-                if ($model->login()) {
-                    $return = array(
-                        'return_code'=>0,
-                        'message'=>'Đăng nhập thành công'
-                    );
-                } else {
-                    $user_name = User::findByUsername($user_name);
-                    $user_name->delete();
+                if($save){
+                    $model = new LoginForm();
+                    $model->username = $user_name;
+                    $model->password = $password;
+                    if ($model->login()) {
+                        $return = array(
+                            'return_code'=>0,
+                            'message'=>'Đăng nhập thành công'
+                        );
+                    } else {
+                        $user_name = User::findByUsername($user_name);
+                        $user_name->delete();
+                        $return = array(
+                            'return_code'=>1,
+                            'message'=>'Đăng nhập không thành công'
+                        );
+                    }
+                }else{
+                    /*$user_name = User::findByUsername($user_name);
+                    $user_name->delete();*/
                     $return = array(
                         'return_code'=>1,
-                        'message'=>'Đăng nhập không thành công'
+                        'message'=>'Đăng nhập không thành công đâu nhé'
                     );
                 }
-            }else{
-                /*$user_name = User::findByUsername($user_name);
-                $user_name->delete();*/
+            }catch (Exception $ex){
                 $return = array(
                     'return_code'=>1,
-                    'message'=>'Đăng nhập không thành công đâu nhé'
+                    'message'=>'Đăng nhập không thành công'
                 );
             }
-        }catch (Exception $ex){
+        }else{
             $return = array(
                 'return_code'=>1,
-                'message'=>'Đăng nhập không thành công'
+                'message'=>'Not ajax request!'
             );
         }
+
         echo json_encode($return);
         exit;
     }
