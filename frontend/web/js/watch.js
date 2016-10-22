@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+    
     $('.icon_rec_1').on('click', function() {
         $('.camera_view').children().removeClass('col-md-6').removeClass('col-md-12').removeClass('col-md-4').removeClass('col-md-3').addClass('col-md-12');
     });
@@ -11,6 +12,32 @@ $( document ).ready(function() {
     $('.icon_rec_16').on('click', function() {
         $('.camera_view').children().removeClass('col-md-6').removeClass('col-md-12').removeClass('col-md-4').removeClass('col-md-3').addClass('col-md-3');
     });
+
+    $('.cam_name').on('click', function() {
+        var cam_id = $(this).attr('value');
+        var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
+        $(this).parent().parent().parent().find('.cam_select').removeClass('cam_select');
+        $('.cam_number_' + cam_id + ' li a').addClass('cam_select');
+        var player = videojs('camera_video_' + current_cam_id);
+        player.dispose();
+        $.ajax({
+            url: '/ajax/play',
+            type: "POST",
+            data: {
+                'cam_id':cam_id,
+            } ,
+            success: function (response) {
+                data = JSON.parse(response);
+                if(data['return_code'] == 0){
+                    $('.camera_view').html(data['return_html']);
+                }
+            },
+
+
+        });
+
+    });
+
 /*    $('.icon_shutdown').on('click', function() {
         $(this).removeClass('icon_shutdown').addClass('icon_play');
         var cam_id = $(this).attr('value');
@@ -34,7 +61,7 @@ $( document ).ready(function() {
          });
     });*/
 
-    $('.icon_play_shut').on('click', function() {
+    /*$('.icon_play_shut').on('click', function() {
         var here = $(this);
         var cam_id = $(this).attr('value');
         //ajax update status
@@ -63,7 +90,7 @@ $( document ).ready(function() {
                 }
             },
         });
-    });
+    });*/
 
     $('.icon_capture').on('click', function() {
         var cam_id = $(this).attr('value');

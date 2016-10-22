@@ -10,7 +10,7 @@ body{
     color: #000;
     border: 1px solid #ADD1E7;
     height: 30px;
-    margin: 0 20px;
+    margin: 0 15px;
 }
 .cam_search{
     position: relative;
@@ -154,4 +154,26 @@ body{
     color: red;
     text-align: center;
     margin: 5px 0;
+}
+.control-label{
+    width: 20%;
+    float: left;
+}
+.nav_li {
+    margin: 0 30px;
+}
+.nav > li > a {
+    display: block;
+    padding: 10px;
+    position: relative;
+}
+.navbar-brand, .navbar-nav > li > a {
+    color: #ecf0f1 !important;
+    font-weight: 500;
+    line-height: 15px;
+    margin-left: 0 !important;
+}
+.top_nav .dropdown-menu li a {
+    padding: 7px 20px;
+    width: 100%;
 }

@@ -1,17 +1,24 @@
 .left_col{
     background-color: #FFF;
     color: #000;
+    width: 300px!important;
+}
+.nav_title{
+    width: 300px!important;
 }
 .nav-md .container.body .right_col {
+    margin-left: 300px;
     padding:10px 10px 0;
 }
-/*footer {
+footer {
+    margin-left: 300px!important;
     position: fixed!important;
     bottom: 0;
     right: 0;
-}*/
+}
 .main_container .top_nav {
     display: block;
+    margin-left: 300px;
 }
 .modal-dialog {
     margin: 30px auto;
@@ -49,13 +56,15 @@
 
 .camera_view video {
     width: 100%;
-    height: 692px;
 }
 .vjs-control-bar, .vjs-big-play-button, .vjs-control-bar, .vjs-error-display, .vjs-caption-settings{
     display:none!important;
 }
 .camera_video {
     height: auto;
+}
+.nav.toggle > a {
+    display: none;
 }
 .cam_rec i{
     cursor: pointer;
@@ -68,9 +77,6 @@
     display: none;
 }*/
 
-.cam_select{
-    color:red !important;
-}
-.camera_view .camera_video {
-    height: 648px;
+.cam_select a{
+    color:red;
 }

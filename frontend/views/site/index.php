@@ -2,15 +2,13 @@
 $cams = \frontend\models\Camera::getListCam();
 ?>
 <div class="camera_view">
-    <?php foreach ($cams as $cam):?>
-        <video class="col-md-6 camera_video <?php  echo $cam->status == 1 ? 'cam_enable' : 'cam_visible'?>" id=camera_video_<?= $cam->id;?> >
-            <source src="<?= $cam->streaming_url;?>"  type="application/x-mpegURL">
+        <video class="col-md-12 camera_video <?php  echo $cams[0]->status == 1 ? 'cam_enable' : 'cam_visible'?>" id=camera_video_<?= $cams[0]->id;?> >
+            <source src="<?= $cams[0]->streaming_url;?>"  type="application/x-mpegURL">
         </video>
-        <script>
-            var player<?= $cam->id;?> = videojs('camera_video_<?= $cam->id;?>');
-            player<?= $cam->id;?>.play();
-        </script>
-    <?php endforeach;?>
+    <script>
+        var player<?= $cams[0]->id;?> = videojs('camera_video_<?= $cams[0]->id;?>');
+        player<?= $cams[0]->id;?>.play();
+    </script>
 </div>
 
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -74,7 +72,6 @@ $cams = \frontend\models\Camera::getListCam();
                             </div>
                         </div>
                     </form>
-
                 </div>
                 <div id="cammodal" style="width: 25%; float: left;">
                     <img src="../images/picture.jpg">

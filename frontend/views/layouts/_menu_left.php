@@ -4,7 +4,7 @@
             <ul class="nav side-menu">
                 <li><a><i class="fa fa-home"></i>Giám sát<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="<?=\yii\helpers\Url::base()?>/site/index"">Xem cam</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/site/index">Xem cam</a></li>
                         <li><a href="#">Xem lại</a></li>
                         <li><a href="#">Kiểm soát</a></li>
                     </ul>
@@ -23,7 +23,7 @@
                         <li><a href="<?=\yii\helpers\Url::base()?>/camera/index">Cấu hình Camera</a></li>
                         <li><a href="#">Cấu hình trên máy tính</a></li>
                         <li><a href="#">Nhân viên</a></li>
-                        <li><a href="#">Tài khoản</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/user/index">Tài khoản</a></li>
                         <li><a href="#">Đổi mật khẩu</a></li>
                         <li><a href="#">Phân quyền</a></li>
                         <li><a href="#">Công ty</a></li>
