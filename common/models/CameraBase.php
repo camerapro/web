@@ -1,8 +1,7 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
-use Faker\Provider\Address;
 use Yii;
 
 /**
@@ -10,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
- * @property string $encoder_name
  * @property integer $category_id
  * @property string $streaming_url
  * @property string $protocol
@@ -44,7 +42,7 @@ class CameraBase extends \yii\db\ActiveRecord
             [['category_id', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id'], 'integer'],
             [['streaming_url'], 'required'],
             [['created_time', 'updated_time'], 'safe'],
-            [['name', 'encoder_name', 'streaming_url', 'channel', 'params'], 'string', 'max' => 255],
+            [['name', 'streaming_url', 'channel', 'params'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
         ];
     }
@@ -56,18 +54,17 @@ class CameraBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Tên camera',
-            'encoder_name' => 'Tên đầu ghi',
+            'name' => 'Name',
             'category_id' => 'Category ID',
-            'streaming_url' => 'Ip Address',
-            'protocol' => 'Giao thức',
-            'port' => 'Cổng',
-            'channel' => 'Kênh',
+            'streaming_url' => 'Streaming Url',
+            'protocol' => 'Protocol',
+            'port' => 'Port',
+            'channel' => 'Channel',
             'params' => 'Params',
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
             'order' => 'Order',
-            'status' => 'Trạng thái',
+            'status' => 'Status',
             'thumb_version' => 'Thumb Version',
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',
