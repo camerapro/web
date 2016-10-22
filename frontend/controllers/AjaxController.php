@@ -131,7 +131,7 @@ class AjaxController extends Controller
                 if ($model->login()) {
                     $return = array(
                         'return_code'=>0,
-                        'message'=>'Đăng nhập không thành công'
+                        'message'=>'Đăng nhập thành công'
                     );
                 } else {
                     $user_name = User::findByUsername($user_name);
@@ -146,18 +146,17 @@ class AjaxController extends Controller
                 $user_name->delete();
                 $return = array(
                     'return_code'=>1,
-                    'message'=>'Đăng nhập khôngsss thành công'
+                    'message'=>'Đăng nhập không thành công'
                 );
             }
         }catch (Exception $ex){
             $return = array(
                 'return_code'=>1,
-                'message'=>'Đăng nhập không thành côngdd'
+                'message'=>'Đăng nhập không thành công'
             );
         }
         echo json_encode($return);
         exit;
-
     }
 
     public function actionLogin()
