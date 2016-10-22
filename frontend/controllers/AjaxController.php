@@ -115,16 +115,15 @@ class AjaxController extends Controller
             $data = Yii::$app->request->post();
             $user_name = trim($data['user_name']);
             $password = trim($data['password']);
-            $camera = new User();
-            print_r($camera);exit;
-            $camera->fullname = $data['fullname'];
-            $camera->username = $user_name;
-            $camera->password = md5($password);
-            $camera->phone = $data['phone_number'];
-            $camera->email = $data['email'];
-            $camera->status = 1;
+            $user = new User();
+            $user->fullname = $data['fullname'];
+            $user->username = $user_name;
+            $user->password = md5($password);
+            $user->phone = $data['phone_number'];
+            $user->email = $data['email'];
+            $user->status = 1;
             try{
-                $save = $camera->save(false);
+                $save = $user->save(false);
 //            $save = true;
                 if($save){
                     $model = new LoginForm();
@@ -144,6 +143,7 @@ class AjaxController extends Controller
                         );
                     }
                 }else{
+                    print_r($user->getErrors());exit;
                     /*$user_name = User::findByUsername($user_name);
                     $user_name->delete();*/
                     $return = array(
