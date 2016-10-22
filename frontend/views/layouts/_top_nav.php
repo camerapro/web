@@ -25,12 +25,12 @@ use yii\helpers\Url;
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="">
-                    <a href="<?= $url = Url::to(['/site/logout']);?>" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" >
+                    <a href="<?= \yii\helpers\Url::base()?>/site/logout">
                         <i class="fa fa-sign-out pull-right"></i>Thoát
                     </a>
                 </li>
                 <li class="">
-                    <a href="javascript:;#" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-table mr5"></i>Hướng dẫn
                         <span class=" fa fa-angle-down"></span>
                     </a>

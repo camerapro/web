@@ -71,11 +71,16 @@ class UserController extends Controller
             $user_name = trim($data['username']);
             $check_exits = User::findOne(['username'=>$user_name]);
             if($check_exits){
-                $error = 'Tên đăng nhập đã tồn tại';
+                $error = 'Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác';
                 goto return_exit;
             }
+
             $full_name = $data['name'];
             $email = $data['email'];
+            if($email == $check_exits->email) {
+                $error = 'Email đã được sử dụng bởi tài khoản khác, vui lòng nhập email chính xác!';
+                goto return_exit;
+            }
             $phone = $data['phone'];
             $occupation = $data['occupation'];
             $password = $data['password'];
@@ -131,12 +136,17 @@ class UserController extends Controller
         if(!empty($data) && !empty($data['username'])){
             $user_name = trim($data['username']);
             $check_exits = User::findOne(['username'=>$user_name]);
-            if($check_exits){
-                $error = 'Tên đăng nhập đã tồn tại';
+            if($check_exits && $user_name <>  $model->username){
+                $error = 'Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác';
                 goto return_exit;
             }
+
             $full_name = $data['name'];
             $email = $data['email'];
+            if($email == $check_exits->email && $email <>  $model->email) {
+                $error = 'Email đã được sử dụng bởi tài khoản khác, vui lòng nhập email chính xác!';
+                goto return_exit;
+            }
             $phone = $data['phone'];
             $occupation = $data['occupation'];
 

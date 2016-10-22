@@ -7,11 +7,14 @@ use yii\widgets\ActiveForm;
 /* @var $model frontend\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-<?php
-if(isset($error) && $error != '');
-echo $error;
-?>
+
 <div class="row">
+    <p class="show_error">
+        <?php
+        if(isset($error) && $error != '');
+        echo $error;
+        ?>
+    </p>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
@@ -20,6 +23,7 @@ echo $error;
             </div>
             <div class="x_content">
                 <form class="form-horizontal form-label-left" method="get">
+                   <input type="hidden" name="id" value="<?= $model->id?>"/>
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
