@@ -142,11 +142,11 @@ class AjaxController extends Controller
                     );
                 }
             }else{
-                $user_name = User::findByUsername($user_name);
-                $user_name->delete();
+                /*$user_name = User::findByUsername($user_name);
+                $user_name->delete();*/
                 $return = array(
                     'return_code'=>1,
-                    'message'=>'Đăng nhập không thành công'
+                    'message'=>'Đăng nhập không thành công đâu nhé'
                 );
             }
         }catch (Exception $ex){
