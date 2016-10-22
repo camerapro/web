@@ -146,7 +146,8 @@ class AjaxController extends Controller
                     User::deleteAll(['username'=>$user_name]);
                     $return = array(
                         'return_code'=>1,
-                        'message'=>'Đăng nhập không thành công đâu nhé'
+//                        'message'=>'Đăng nhập không thành công đâu nhé'
+                        'message'=>$user->getErrors();
                     );
                 }
             }catch (Exception $ex){
