@@ -34,7 +34,7 @@
 
         <div class="cam_setup boder_1 pd5">
             <input id="fc_create" data-toggle="modal" data-target="#CalenderModalNew" value="Thêm mới" type="button" >
-            <input id="fc_grand_cam" data-toggle="modal" data-target="#grand_cam" value="Gán cam" type="button" >
+            <input data-toggle="modal" data-target="#grand_cam" value="Gán cam" type="button"  onclick="window.location='<?=\yii\helpers\Url::base()?>/user/grand';">
         </div>
         <hr>
         <ul class="nav side-menu">

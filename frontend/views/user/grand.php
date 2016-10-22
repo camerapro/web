@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-6 col-md-offset-3">
-                <button type="cancel" onclick="javascript:window.location='<?=\yii\helpers\Url::base()?>/user/index';" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;  Đóng&nbsp;&nbsp; &nbsp;&nbsp; </button>
+                <button type="cancel" onclick="javascript:window.location='<?=\yii\helpers\Url::base()?>/site/index';" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;  Đóng&nbsp;&nbsp; &nbsp;&nbsp; </button>
                 <button id="send" type="submit" class="btn btn-success">&nbsp;&nbsp; &nbsp;&nbsp; Lưu&nbsp;&nbsp; &nbsp;&nbsp; </button>
             </div>
         </div>
