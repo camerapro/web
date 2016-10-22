@@ -148,6 +148,8 @@ class AjaxController extends Controller
                         'message'=>'Đăng nhập không thành công đâu nhé'
                     );
                 }
+            echo json_encode($return);
+            exit;
             /*}catch (Exception $ex){
                 $return = array(
                     'return_code'=>1,
