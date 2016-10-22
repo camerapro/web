@@ -126,9 +126,7 @@ class AjaxController extends Controller
                 $save = $user->save(false);
 //            $save = true;
                 if($save){
-                    echo 1;
                     $model = new LoginForm();
-                    print_r($model);exit;
                     $model->username = $user_name;
                     $model->password = $password;
                     if ($model->login()) {
@@ -137,8 +135,9 @@ class AjaxController extends Controller
                             'message'=>'Đăng nhập thành công'
                         );
                     } else {
-                        $user_name = User::findByUsername($user_name);
-                        $user_name->delete();
+                        print_r($user->getErrors());
+                        /*$user_name = User::findByUsername($user_name);
+                        $user_name->delete();*/
                         $return = array(
                             'return_code'=>1,
                             'message'=>'Đăng nhập không thành công'
