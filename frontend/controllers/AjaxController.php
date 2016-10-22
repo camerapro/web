@@ -122,7 +122,7 @@ class AjaxController extends Controller
             $user->phone = $data['phone_number'];
             $user->email = $data['email'];
             $user->status = 1;
-//            try{
+            try{
                 //$save = $user->save(false);
                 $save = $user->save();
 //            $save = true;
@@ -149,12 +149,12 @@ class AjaxController extends Controller
                         'message'=>'Đăng nhập không thành công đâu nhé'
                     );
                 }
-           /* }catch (Exception $ex){
+            }catch (Exception $ex){
                 $return = array(
                     'return_code'=>1,
                     'message'=>'Đăng nhập không thành công'
                 );
-            }*/
+            }
         }else{
             $return = array(
                 'return_code'=>1,
