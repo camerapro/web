@@ -31,35 +31,43 @@ class AjaxController extends Controller
     }
 
     public function actionCreate(){
-        $data = Yii::$app->request->post();
-        $camera = new Camera();
-        $camera->name = $data['title_encoder'];
-        $camera->encoder_name = $data['title_camera'];
-        $camera->streaming_url = $data['ip_address'];
-        $camera->protocol = $data['protocol'];
-        $camera->port = $data['port'];
-        $camera->channel = $data['channel'];
-        $save = $camera->save(false);
-        if($save){
-            $camera_user = new RelationsCamUser();
-            $camera_user->cam_id = $camera->id;
-            $camera_user->created_by_id = Yii::$app->user->identity->id;
-            $camera_user->user_id = Yii::$app->user->identity->id;
-            $camera_user->created_by_name = Yii::$app->user->identity->username;
-            $camera_user->created_time = date('Y-m-d H:i:s');
-            $camera_user->save();
-            $return = array(
-                'return_code'=>0,
-                'message'=>'Thêm mới thành công'
-            );
-        }    else{
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $camera = new Camera();
+            $camera->name = $data['title_encoder'];
+            $camera->encoder_name = $data['title_camera'];
+            $camera->streaming_url = $data['ip_address'];
+            $camera->protocol = $data['protocol'];
+            $camera->port = $data['port'];
+            $camera->channel = $data['channel'];
+            $save = $camera->save();
+            if($save){
+                $camera_user = new RelationsCamUser();
+                $camera_user->cam_id = $camera->id;
+                $camera_user->created_by_id = Yii::$app->user->identity->id;
+                $camera_user->user_id = Yii::$app->user->identity->id;
+                $camera_user->created_by_name = Yii::$app->user->identity->username;
+                $camera_user->created_time = date('Y-m-d H:i:s');
+                $camera_user->save();
+                $return = array(
+                    'return_code'=>0,
+                    'message'=>'Thêm mới thành công'
+                );
+            }    else{
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Thêm mới không thành công thành công'
+                );
+            }
+        }else{
             $return = array(
                 'return_code'=>1,
-                'message'=>'Thêm mới không thành công thành công'
+                'message'=>'Not Ajax request!'
             );
         }
         echo json_encode($return);
         exit;
+
     }
 
     public function actionCamera(){
