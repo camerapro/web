@@ -41,10 +41,8 @@ class AjaxController extends Controller
             $camera->port = $data['port'];
             $camera->channel = $data['channel'];
             $save = $camera->save();
-            echo Yii::$app->user->identity->id;
-            echo Yii::$app->user->identity->username;
-            exit;
             if($save){
+                echo 1;
                 $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
                 $camera_user->created_by_id = Yii::$app->user->identity->id;
