@@ -186,3 +186,6 @@ body{
     text-align: center;
     vertical-align: top;
 }
+#CalenderModalNew .modal-content .modal-body .control-label {
+    width: 25%;
+}
