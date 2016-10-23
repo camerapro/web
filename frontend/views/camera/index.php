@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <td>
                     <a href="<?=  Url::to(['camera/view', 'id' => $cam->id])?>"><?= $cam->name;?></a>
                     <br />
-                    <small>Ngày tạo: 01.01.2015</small>
+                    <small>Ngày tạo: <?= date('H:i:s d-m-Y', strtotime($cam->created_time));?></small>
                 </td>
                 <td>
                     <?= $cam->encoder_name;?>
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $cam->channel;?>
                 </td>
                 <td>
-                    <?= $cam->streaming_url;?>
+                    <a href="<?=  Url::to(['site/index', 'id' => $cam->id])?>"><?= $cam->streaming_url;?></a>
                 </td>
                 <td class="project_progress">
                     <?= $cam->protocol;?>

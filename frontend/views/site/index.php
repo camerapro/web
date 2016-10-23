@@ -1,17 +1,19 @@
-<?php
-$cams = \frontend\models\Camera::getListCam();
-?>
-<?php if($cams):?>
 <div class="camera_view">
-        <video class="col-md-12 camera_video <?php  echo $cams[0]->status == 1 ? 'cam_enable' : 'cam_visible'?>" id=camera_video_<?= $cams[0]->id;?> >
-            <source src="<?= $cams[0]->streaming_url;?>"  type="application/x-mpegURL">
+    <?php if($cam_info):?>
+
+        <video class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> >
+            <source src="<?= $cam_info->streaming_url;?>"  type="application/x-mpegURL">
         </video>
     <script>
-        var player<?= $cams[0]->id;?> = videojs('camera_video_<?= $cams[0]->id;?>');
-        player<?= $cams[0]->id;?>.play();
+        var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
+        player<?= $cam_info->id;?>.play();
     </script>
+    <?php elseif($message):?>
+        <?= $message; ?>
+    <?php endif;?>
+
 </div>
-<?php endif;?>
+
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 980px">
         <div class="modal-content">

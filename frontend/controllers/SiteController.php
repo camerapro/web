@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\Camera;
 use Yii;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
@@ -75,7 +76,22 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->actionLogin();
         }
-        return $this->render('index');
+        $cam_info = [];
+        $message = '';
+        $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        if(!empty($cam_id)){
+            $cam_info = Camera::getOneCamById($cam_id);
+            if(!$cam_info){
+                $message = 'Bạn không có quyền xem camera này, vui lòng chọn camera của bạn để xem!';
+            }
+        }else{
+            $cams = \frontend\models\Camera::getListCam();
+            $cam_info = $cams['0'];
+            if(empty($cam_info)){
+                $message = 'Hiện tại bạn không có camera nào để xem, vui lòng tạo mới camera';
+            }
+        }
+        return $this->render('index', ['cam_info'=>$cam_info, 'message'=>$message]);
     }
 
     /**
