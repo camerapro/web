@@ -41,6 +41,10 @@ class AjaxController extends Controller
             $camera->port = $data['port'];
             $camera->channel = $data['channel'];
             $save = $camera->save();
+            print ($camera->getErrors());
+            echo $camera->id;
+            echo Yii::$app->user->identity->id;
+            echo Yii::$app->user->identity->username;
             if($save){
                 $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
@@ -49,11 +53,12 @@ class AjaxController extends Controller
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
                 $camera_user->save();
+                print ($camera_user->getErrors());exit;
                 $return = array(
                     'return_code'=>0,
                     'message'=>'Thêm mới thành công'
                 );
-            }    else{
+            }else{
                 $return = array(
                     'return_code'=>1,
                     'message'=>'Thêm mới không thành công thành công'
