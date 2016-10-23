@@ -157,7 +157,7 @@ class UserController extends Controller
                 $model->password = md5($data['password']);
             $model->address = $occupation;
             if(isset($data['gender'])) $model->gender = (int) $data['gender'];
-            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
+//            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
             if ($model->save()) {
