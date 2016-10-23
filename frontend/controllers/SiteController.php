@@ -86,7 +86,9 @@ class SiteController extends Controller
             }
         }else{
             $cams = \frontend\models\Camera::getListCam();
-            $cam_info = $cams['0'];
+            if(!empty($cams)){
+                $cam_info = $cams['0'];
+            }
             if(empty($cam_info)){
                 $message = 'Hiện tại bạn không có camera nào để xem, vui lòng tạo mới camera';
             }
