@@ -386,7 +386,7 @@ function SmartWizard(target, options) {
                 data: {
                     'user_name':user_name,
                     'phone_number': phone_number,
-                    'email': email,
+                    'email': email
                 } ,
                 success: function (response) {
                     var data_type = JSON.parse(response);
