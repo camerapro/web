@@ -45,6 +45,7 @@ class AjaxController extends Controller
             echo $camera->id;
             echo Yii::$app->user->identity->id;
             echo Yii::$app->user->identity->username;
+            exit;
             if($save){
                 $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
