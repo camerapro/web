@@ -40,6 +40,8 @@ class AjaxController extends Controller
             $camera->protocol = $data['protocol'];
             $camera->port = $data['port'];
             $camera->channel = $data['channel'];
+            $camera->created_time = date('Y-m-d H:i:s');
+            $camera->updated_time = date('Y-m-d H:i:s');
             $save = $camera->save();
             if($save){
                 $camera_user = new RelationsCamUser();
