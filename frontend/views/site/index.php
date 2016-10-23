@@ -142,9 +142,9 @@ $cams = \frontend\models\Camera::getListCam();
                         'password':password
                     } ,
                     success: function (response) {
-                        data = JSON.parse(response);
-                        if(data['return_code'] == 0){
-                            alert(data['message']);
+                        data_res = JSON.parse(response);
+                        if(data_res['return_code'] == 0){
+                            alert(data_res['message']);
                             $('#title_encoder').val('');
                             $('#title_camera').val('');
                             $('#channel').val('');
@@ -211,14 +211,12 @@ $cams = \frontend\models\Camera::getListCam();
                             'password':password
                         } ,
                         success: function (response) {
-                            data = JSON.parse(response);
-                            if(data['return_code'] == 0){
-                                alert(data['message']);
+                            data_res = JSON.parse(response);
+                            if(data_res['return_code'] == 0){
+                                alert(data_res['message']);
                                 $('#CalenderModalNew').modal('hide');
                             }
                         },
-
-
                     });
                 }
         }
