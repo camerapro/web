@@ -99,6 +99,8 @@ class AjaxController extends Controller
     public function actionCheck_username(){
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
+            print_r($data);exit;
+
             $username = $data['user_name'];
             $phone_number = $data['phone_number'];
             $mail = $data['email'];
