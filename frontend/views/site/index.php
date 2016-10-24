@@ -96,7 +96,6 @@
     $(document).ready(function() {
         var height_camshow = $('.cam_show').height();
         var height = $(window).height();
-        alert(height);
         $('.cam_show').css('max-height',height - 140);
         if(height_camshow > 600){
             $('.cam_show').css('overflow-y','scroll');
