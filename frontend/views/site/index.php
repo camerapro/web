@@ -94,7 +94,10 @@
 
 <script>
     $(document).ready(function() {
-
+        var height_camshow = $('.cam_show').height();
+        if(height_camshow > 600){
+            $('.cam_show').css('overflow-y','scroll');
+        }
         $('#save_and_create').on('click', function() {
             var validate = 1;
             var title_encoder = $('#title_encoder').val();

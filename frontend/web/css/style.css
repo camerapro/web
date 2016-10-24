@@ -189,3 +189,6 @@ body{
 #CalenderModalNew .modal-content .modal-body .control-label {
     width: 25%;
 }
+.navbar-nav li:hover ul.dropdown-menu{
+    display: block;
+}

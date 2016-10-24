@@ -1,9 +1,12 @@
+body{
+    overflow: hidden;
+}
 .left_col{
     background-color: #FFF;
     color: #000;
 }
 .nav-md .container.body .right_col {
-    padding:10px 10px 0;
+    padding: 0 !important;
 }
 /*footer {
     position: fixed!important;
@@ -42,8 +45,8 @@
     margin-left: 20px;
 }
 .camera_view {
-    overflow: hidden;
-    padding-left: 5px;
+    /*overflow: hidden;*/
+    /*padding-left: 5px;*/
 }
 .vjs-caption-settings {
     display: none;
@@ -51,7 +54,7 @@
 
 .camera_view video {
     width: 100%;
-    height: 692px;
+    height: 100%;
 }
 .vjs-control-bar, .vjs-big-play-button, .vjs-control-bar, .vjs-error-display, .vjs-caption-settings{
     display:none!important;
@@ -74,5 +77,13 @@
     color:red !important;
 }
 .camera_view .camera_video {
-    height: 648px;
+    height: 100%;
+}
+video{
+    width: 100%;
+    height:100%;
+}
+.cam_show {
+    max-height: 620px;
+    /*overflow-y: scroll;*/
 }

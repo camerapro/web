@@ -6,11 +6,6 @@
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
-        <div class="table_view boder_1 pd5">
-            <p>Bảng hiển thị</p>
-            <input class="col-xs-4 table_view_fs" value="Xem camera" type="button">
-            <input class="col-xs-4 table_view_sc" value="Xem lại" type="button">
-        </div>
         <div class="cam_search mt5">
             <input type="text" placeholder="Tìm camera cần xem" />
             <i class="icon_search"></i>
