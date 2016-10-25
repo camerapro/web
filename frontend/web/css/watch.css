@@ -83,6 +83,10 @@ video{
     width: 100%;
     height:100%;
 }
+.vxgplayer{
+    width: 100% !important;
+    height: 100%!important;
+}
 .cam_show {
     /*max-height: 620px;*/
     /*overflow-y: scroll;*/
