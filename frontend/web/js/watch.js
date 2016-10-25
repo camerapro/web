@@ -9,6 +9,8 @@ $( document ).ready(function() {
         if(protocol == 'http'){
             var player = videojs('camera_video_' + current_cam_id);
             player.dispose();
+        }else{
+            vxgplayer('vxg_media_player_' + current_cam_id).stop();
         }
         $.ajax({
             url: '/ajax/play',
