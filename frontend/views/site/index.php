@@ -11,14 +11,16 @@
                 </script>
             <?php }else{
             if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false  || strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {?>
-                <div class="vxgplayer" id="vxg_media_player1" url="<?= $cam_info->streaming_url;?>" witdh="100%" height="100%"
+                <div class="vxgplayer" id="vxg_media_player1" url="<?= $cam_info->streaming_url;?>"
                      nmf-src="/player/pnacl/Release/media_player.nmf"  nmf-path="media_player.nmf" useragent-prefix="MMP/3.0" latency="10000"  autohide="2"
                      volume="0.7"  autostart=true avsync  mute aspect-ratio aspect-ratio-mode="1" auto-reconnect>
                 </div>
                 <script>
                     $(document).ready(function() {
                         var height = $(window).height();
-                        $('.vxgplayer').css('height',height - 80);
+                        var width = $(window).width();
+                        $('.vxgplayer').css('height',height);
+                        $('.vxgplayer').css('width',width);
                     });
                 </script>
             <?php }else{ ?>
