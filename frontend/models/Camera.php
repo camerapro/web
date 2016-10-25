@@ -11,6 +11,17 @@ class Camera extends CameraBase
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
 
+    public static function getListAllCam($user_id = NULL){
+        if(empty($user_id)){
+            $user_id = Yii::$app->user->identity->id;
+            if(empty($user_id)) return false;
+        }
+        $query = Camera::find()
+            -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+            ->where(['=', 'relations_cam_user.user_id', $user_id])
+            ->all();
+        return $query;
+    }
     
     public static function getListCam($user_id = NULL){
         if(empty($user_id)){

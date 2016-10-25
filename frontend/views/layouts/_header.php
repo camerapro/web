@@ -14,6 +14,7 @@
     <link href="/css/custom.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/define.css" rel="stylesheet">
+    <link href="/css/vxgplayer-1.7.44.min.css" rel="stylesheet">
     <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 
     <!--    <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>-->
@@ -25,6 +26,7 @@
     <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
     <script src="/js/validator.js"></script>
     <script src="/js/multiselect.js"></script>
+    <script src="/js/vxgplayer-1.7.44.min.js"></script>
     <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 

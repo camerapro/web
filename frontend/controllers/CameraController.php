@@ -43,7 +43,7 @@ class CameraController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);*/
-        $cams = Camera::getListCam();
+        $cams = Camera::getListAllCam();
         return $this->render('index',[
             'cams'=>$cams,
         ]);
@@ -75,7 +75,7 @@ class CameraController extends Controller
             if($model->protocol == 'http')
                 $model->streaming_url = $model->ip_address;
             elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '$password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
             if($model->save()){
                 $user_id = Yii::$app->user->identity->id;
                 $camera_user = new RelationsCamUser();
@@ -108,7 +108,7 @@ class CameraController extends Controller
             if($model->protocol == 'http')
                 $model->streaming_url = $model->ip_address;
             elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '$password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }

@@ -1,33 +1,34 @@
 <div class="camera_view">
     <div class="camera_detail">
-     <?php if($cam_info):?>
-     <?php if($cam_info->protocol == 'http'):?>
-         <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
-             <source src="<?= $cam_info->streaming_url;?>"  type="application/x-mpegURL">
-         </video>
-     <script>
-         var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
-         player<?= $cam_info->id;?>.play();
-     </script>
-         <?php else:?>
-             <div style="width:500px; height:400px; position:relative;">
+        <?php if($cam_info):?>
+            <?php if($cam_info->protocol == 'http'){?>
+                <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
+                    <source src="<?= $cam_info->streaming_url;?>"  type="application/x-mpegURL">
+                </video>
+                <script>
+                    var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
+                    player<?= $cam_info->id;?>.play();
+                </script>
+            <?php }else{
+            if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false  || strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {?>
+                <div class="vxgplayer" id="vxg_media_player1" url="<?= $cam_info->streaming_url;?>" witdh="100%" height="100%"
+                     nmf-src="/player/pnacl/Release/media_player.nmf"  nmf-path="media_player.nmf" useragent-prefix="MMP/3.0" latency="10000"  autohide="2"
+                     volume="0.7"  autostart=true avsync  mute aspect-ratio aspect-ratio-mode="1" auto-reconnect>
+                </div>
+            <?php }else{ ?>
 
-                 <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
-                        version="VideoLAN.VLCPlugin.2" id="vlc1"
-                        style="z-index:-1; position:absolute; left:0px; top:0px; width:100%; height:100%"
-                        windowless="true"
-                        text="Waiting for Video..." />
-
-                 <div style="z-index:0; position:absolute; left:0px; top:0px; width:100%; height:100%; color:white" id="pano1">
-                     Overlay
-                 </div>
-
-             </div>
-
-         <?php endif;?>
-     <?php elseif($message):?>
-         <?= $message; ?>
-     <?php endif;?>
+                <embed  windowless="true" data-target="rtsp" id="camera_video_<?= $cam_info->id;?>"  type="application/x-google-vlc-plugin" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="100%" height="100%"
+                        target="<?= $cam_info->streaming_url;?>" ></embed>
+                <script>
+                    $(document).ready(function() {
+                        var height = $(window).height();
+                        $('.camera_detail').css('height',height - 80);
+                    });
+                </script>
+            <?php }} ?>
+        <?php elseif($message):?>
+            <?= $message; ?>
+        <?php endif;?>
     </div>
 </div>
 

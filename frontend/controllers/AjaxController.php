@@ -47,7 +47,7 @@ class AjaxController extends Controller
             if($data['protocol'] == 'http')
                 $camera->streaming_url = $data['ip_address'];
             elseif ($data['protocol'] == 'rtsp')
-                $camera->streaming_url = 'rtsp://' .$data['ip_address']. ':' . $data['port'] . '/user=' . $data['username'] . '$password='.$data['password'] . '&channel=' . $data['channel'] . '&stream=1.sdp';
+                $camera->streaming_url = 'rtsp://' .$data['ip_address']. ':' . $data['port'] . '/user=' . $data['username'] . '&password='.$data['password'] . '&channel=' . $data['channel'] . '&stream=1.sdp';
             $save = $camera->save();
             if($save){
                 $camera_user = new RelationsCamUser();
