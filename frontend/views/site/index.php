@@ -15,6 +15,12 @@
                      nmf-src="/player/pnacl/Release/media_player.nmf"  nmf-path="media_player.nmf" useragent-prefix="MMP/3.0" latency="10000"  autohide="2"
                      volume="0.7"  autostart=true avsync  mute aspect-ratio aspect-ratio-mode="1" auto-reconnect>
                 </div>
+                <script>
+                    $(document).ready(function() {
+                        var height = $(window).height();
+                        $('.vxgplayer').css('height',height - 80);
+                    });
+                </script>
             <?php }else{ ?>
 
                 <embed  windowless="true" data-target="rtsp" id="camera_video_<?= $cam_info->id;?>"  type="application/x-google-vlc-plugin" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="100%" height="100%"
