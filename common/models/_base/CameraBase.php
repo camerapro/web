@@ -2,7 +2,6 @@
 
 namespace common\models\_base;
 
-use Faker\Provider\Address;
 use Yii;
 
 /**
@@ -13,6 +12,9 @@ use Yii;
  * @property string $encoder_name
  * @property integer $category_id
  * @property string $streaming_url
+ * @property string $ip_address
+ * @property string $encoder_username
+ * @property string $encoder_password
  * @property string $protocol
  * @property integer $port
  * @property string $channel
@@ -42,9 +44,9 @@ class CameraBase extends \yii\db\ActiveRecord
     {
         return [
             [['category_id', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id'], 'integer'],
-            [['streaming_url'], 'required'],
+//            [['streaming_url'], 'required'],
             [['created_time', 'updated_time'], 'safe'],
-            [['name', 'encoder_name', 'streaming_url', 'channel', 'params'], 'string', 'max' => 255],
+            [['name', 'encoder_name', 'streaming_url', 'ip_address', 'encoder_username', 'encoder_password', 'channel', 'params'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
         ];
     }
@@ -56,18 +58,21 @@ class CameraBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Tên camera',
-            'encoder_name' => 'Tên đầu ghi',
+            'name' => 'Name',
+            'encoder_name' => 'Encoder Name',
             'category_id' => 'Category ID',
-            'streaming_url' => 'Ip Address',
-            'protocol' => 'Giao thức',
-            'port' => 'Cổng',
-            'channel' => 'Kênh',
+            'streaming_url' => 'Streaming Url',
+            'ip_address' => 'Ip Address',
+            'encoder_username' => 'Encoder Username',
+            'encoder_password' => 'Encoder Password',
+            'protocol' => 'Protocol',
+            'port' => 'Port',
+            'channel' => 'Channel',
             'params' => 'Params',
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
             'order' => 'Order',
-            'status' => 'Trạng thái',
+            'status' => 'Status',
             'thumb_version' => 'Thumb Version',
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',

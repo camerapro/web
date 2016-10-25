@@ -34,14 +34,20 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $camera = new Camera();
-            $camera->name = $data['title_encoder'];
-            $camera->encoder_name = $data['title_camera'];
-            $camera->streaming_url = $data['ip_address'];
+            $camera->encoder_name = $data['title_encoder'];
+            $camera->name = $data['title_camera'];
+            $camera->ip_address = $data['ip_address'];
             $camera->protocol = $data['protocol'];
             $camera->port = $data['port'];
             $camera->channel = $data['channel'];
+            $camera->encoder_username = $data['username'];
+            $camera->encoder_password = $data['password'];
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
+            if($data['protocol'] == 'http')
+                $camera->streaming_url = $data['ip_address'];
+            elseif ($data['protocol'] == 'rtsp')
+                $camera->streaming_url = 'rtsp://' .$data['ip_address']. ':' . $data['port'] . '/user=' . $data['username'] . '$password='.$data['password'] . '&channel=' . $data['channel'] . '&stream=1.sdp';
             $save = $camera->save();
             if($save){
                 $camera_user = new RelationsCamUser();
@@ -275,9 +281,9 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
-            $check = Camera::getListCamId($cam_id);
-            if($check){
-                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'check'=>$check]);
+            $cam_info = Camera::getListCamId($cam_id);
+            if($cam_info){
+                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info]);
                 $return =[
                     'return_code'=>0,
                     'return_html'=> $html

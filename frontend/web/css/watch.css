@@ -76,7 +76,7 @@ body{
 .cam_select{
     color:red !important;
 }
-.camera_view .camera_video {
+.camera_detail .camera_video {
     height: 100%;
 }
 video{

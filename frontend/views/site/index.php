@@ -1,17 +1,34 @@
 <div class="camera_view">
-    <?php if($cam_info):?>
+    <div class="camera_detail">
+     <?php if($cam_info):?>
+     <?php if($cam_info->protocol == 'http'):?>
+         <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
+             <source src="<?= $cam_info->streaming_url;?>"  type="application/x-mpegURL">
+         </video>
+     <script>
+         var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
+         player<?= $cam_info->id;?>.play();
+     </script>
+         <?php else:?>
+             <div style="width:500px; height:400px; position:relative;">
 
-        <video class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> >
-            <source src="<?= $cam_info->streaming_url;?>"  type="application/x-mpegURL">
-        </video>
-    <script>
-        var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
-        player<?= $cam_info->id;?>.play();
-    </script>
-    <?php elseif($message):?>
-        <?= $message; ?>
-    <?php endif;?>
+                 <embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+                        version="VideoLAN.VLCPlugin.2" id="vlc1"
+                        style="z-index:-1; position:absolute; left:0px; top:0px; width:100%; height:100%"
+                        windowless="true"
+                        text="Waiting for Video..." />
 
+                 <div style="z-index:0; position:absolute; left:0px; top:0px; width:100%; height:100%; color:white" id="pano1">
+                     Overlay
+                 </div>
+
+             </div>
+
+         <?php endif;?>
+     <?php elseif($message):?>
+         <?= $message; ?>
+     <?php endif;?>
+    </div>
 </div>
 
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -89,7 +106,6 @@
     </div>
 </div>
 
-
 </div>
 
 <script>
@@ -100,134 +116,5 @@
         if(height_camshow > 600){
             $('.cam_show').css('overflow-y','scroll');
         }
-        $('#save_and_create').on('click', function() {
-            var validate = 1;
-            var title_encoder = $('#title_encoder').val();
-            var title_camera = $('#title_camera').val();
-            var protocol = $('#protocol').val();
-            var channel = $('#channel').val();
-            var ip_address = $('#ip_address').val();
-            var port = $('#port').val();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            if(title_encoder == ''){
-                $('#title_encoder').focus();
-                $('.show_error').html('Tên đầu ghi không được để trống');
-            }else if(title_camera == ''){
-                $('#title_camera').focus();
-                $('.show_error').html('Tên camera không được để trống');
-            }else if(protocol == ''){
-                $('#protocol').focus();
-                $('.show_error').html('Protocol không được để trống');
-            }else if(channel == ''){
-                $('#channel').focus();
-                $('.show_error').html('Tên kênh không được để trống');
-            }else if(ip_address == ''){
-                $('#ip_address').focus();
-                $('.show_error').html('Địa chỉ IP không được để trống');
-            }else if(port == ''){
-                $('#port').focus();
-                $('.show_error').html('Port không được để trống');
-            }else if(username == ''){
-                $('#username').focus();
-                $('.show_error').html('Username không được để trống');
-            }else if(password == ''){
-                $('#password').focus();
-                $('.show_error').html('Mật khẩu không được để trống');
-            }else {
-                $.ajax({
-                    url: '/ajax/create',
-                    type: "POST",
-                    data: {
-                        'title_encoder':title_encoder,
-                        'title_camera':title_camera,
-                        'protocol':protocol,
-                        'channel':channel,
-                        'ip_address':ip_address,
-                        'port':port,
-                        'username':username,
-                        'password':password
-                    } ,
-                    success: function (response) {
-                        data_res = JSON.parse(response);
-                        if(data_res['return_code'] == 0){
-                            alert(data_res['message']);
-                            $('#title_encoder').val('');
-                            $('#title_camera').val('');
-                            $('#channel').val('');
-                            $('#ip_address').val('');
-                            $('#port').val('');
-                            $('#username').val('');
-                            $('#password').val('');
-                        }
-                    },
-
-
-                });
-            }
-
-        });
-
-        $('#save_and_close').on('click', function() {
-
-                var validate = 1;
-                var title_encoder = $('#title_encoder').val();
-                var title_camera = $('#title_camera').val();
-                var protocol = $('#protocol').val();
-                var channel = $('#channel').val();
-                var ip_address = $('#ip_address').val();
-                var port = $('#port').val();
-                var username = $('#username').val();
-                var password = $('#password').val();
-                if(title_encoder == ''){
-                    $('#title_encoder').focus();
-                    $('.show_error').html('Tên đầu ghi không được để trống');
-                }else if(title_camera == ''){
-                    $('#title_camera').focus();
-                    $('.show_error').html('Tên camera không được để trống');
-                }else if(protocol == ''){
-                    $('#protocol').focus();
-                    $('.show_error').html('Protocol không được để trống');
-                }else if(channel == ''){
-                    $('#channel').focus();
-                    $('.show_error').html('Tên kênh không được để trống');
-                }else if(ip_address == ''){
-                    $('#ip_address').focus();
-                    $('.show_error').html('Địa chỉ IP không được để trống');
-                }else if(port == ''){
-                    $('#port').focus();
-                    $('.show_error').html('Port không được để trống');
-                }else if(username == ''){
-                    $('#username').focus();
-                    $('.show_error').html('Username không được để trống');
-                }else if(password == ''){
-                    $('#password').focus();
-                    $('.show_error').html('Mật khẩu không được để trống');
-                }else {
-                    $.ajax({
-                        url: '/ajax/create',
-                        type: "POST",
-                        data: {
-                            'title_encoder':title_encoder,
-                            'title_camera':title_camera,
-                            'protocol':protocol,
-                            'channel':channel,
-                            'ip_address':ip_address,
-                            'port':port,
-                            'username':username,
-                            'password':password
-                        } ,
-                        success: function (response) {
-                            data_res = JSON.parse(response);
-                            if(data_res['return_code'] == 0){
-                                alert(data_res['message']);
-                                $('#CalenderModalNew').modal('hide');
-                            }
-                        },
-                    });
-                }
-        }
-        );
-
     });
 </script>

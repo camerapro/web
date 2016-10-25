@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\RelationsCamUser;
 use Yii;
 use frontend\models\Camera;
 use frontend\models\search\CameraSearch;
@@ -71,6 +72,20 @@ class CameraController extends Controller
         $model->created_time = date('Y-m-d H:i:s');
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if($model->protocol == 'http')
+                $model->streaming_url = $model->ip_address;
+            elseif ($model->protocol == 'rtsp')
+                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '$password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            if($model->save()){
+                $user_id = Yii::$app->user->identity->id;
+                $camera_user = new RelationsCamUser();
+                $camera_user->user_id = $user_id;
+                $camera_user->created_by_id = $user_id;
+                $camera_user->created_by_name = Yii::$app->user->identity->username;
+                $camera_user->created_time = date('Y-m-d H:i:s');
+                $camera_user->cam_id = $model->id;
+                $camera_user->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -90,7 +105,14 @@ class CameraController extends Controller
         $model = $this->findModel($id);
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if($model->protocol == 'http')
+                $model->streaming_url = $model->ip_address;
+            elseif ($model->protocol == 'rtsp')
+                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '$password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            if($model->save()){
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
         } else {
             return $this->render('update', [
                 'model' => $model,
