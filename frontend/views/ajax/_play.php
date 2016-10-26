@@ -14,16 +14,15 @@
         </div>
         <script>
             $(document).ready(function() {
-                vxgplayer('vxg_media_player_<?= $cam_info->id;?>').play();
-                vxgplayer('vxg_media_player2').isPlaying();
                 var height = $(window).height();
                 var width = $(window).width();
                 $('.camera_detail').css('height',height-80);
                 $('.camera_detail').css('width',width - 240);
+                vxgplayer('vxg_media_player_<?= $cam_info->id;?>').play();
+                vxgplayer('vxg_media_player2').isPlaying();
             });
         </script>
     <?php }else{ ?>
-
         <embed  windowless="true" data-target="rtsp" id="camera_video_<?= $cam_info->id;?>"  type="application/x-google-vlc-plugin" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="100%" height="100%"
                 target="<?= $cam_info->streaming_url;?>" ></embed>
         <script>

@@ -88,6 +88,8 @@ video{
     height: 100%!important;
 }
 .cam_show {
+    height: 281px;
+    overflow-y: scroll;
     /*max-height: 620px;*/
     /*overflow-y: scroll;*/
 }
