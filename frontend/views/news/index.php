@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -23,11 +23,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
+            [
+                'label'=>'Tiêu đề',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::a($model->title, ['/guide/index', 'id' => $model->id]);
+                },
+            ],
+//            'title',
             'desc_content',
-//            'content:ntext',
             'created_time',
             // 'updated_time',
             // 'created_by_id',
