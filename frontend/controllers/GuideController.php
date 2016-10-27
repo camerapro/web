@@ -3,11 +3,13 @@
 namespace frontend\controllers;
 use frontend\models\News;
 use \yii\web\Controller;
+use Yii;
 class GuideController extends Controller
 {
     public function actionIndex()
     {
-        $news = News::findOne(['id'=>1, 'status'=>1]);
+        $guide_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : 1;
+        $news = News::findOne(['id'=>$guide_id, 'status'=>1]);
         return $this->render('index', ['news'=>$news]);
     }
 
