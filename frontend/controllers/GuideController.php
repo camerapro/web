@@ -1,10 +1,10 @@
 <?php
 
 namespace frontend\controllers;
+use common\components\FrontendController;
 use frontend\models\News;
-use \yii\web\Controller;
 use Yii;
-class GuideController extends Controller
+class GuideController extends FrontendController
 {
     public function actionIndex()
     {

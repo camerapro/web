@@ -16,7 +16,8 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
-        'error'=>$error
+        'error'=>$error,
+        'relation_user_group'=>$relation_user_group
     ]) ?>
 
 </div>

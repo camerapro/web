@@ -32,6 +32,13 @@ use yii\widgets\ActiveForm;
                         </div>
                     </div>
                     <div class="item form-group">
+                        <label for="password" class="control-label col-md-3"></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="password" type="password" name="password" data-validate-length="6,11" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Mật khẩu">
+                            <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name"></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input id="name" class="form-control col-md-7 col-xs-12 has-feedback-left" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Tên đầy đủ" required="required" type="text" value="<?= $model->fullname;?>">
@@ -51,14 +58,6 @@ use yii\widgets\ActiveForm;
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <input type="tel" id="telephone" name="phone" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Số điện thoại" value="<?= $model->phone;?>">
                             <span class="fa fa-phone form-control-feedback left" aria-hidden="true"></span>
-                        </div>
-                    </div>
-
-                    <div class="item form-group">
-                        <label for="password" class="control-label col-md-3"></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="password" type="password" name="password" data-validate-length="6,11" class="form-control col-md-7 col-xs-12 has-feedback-left" placeholder="Mật khẩu">
-                            <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
                         </div>
                     </div>
 
@@ -98,6 +97,19 @@ use yii\widgets\ActiveForm;
                                 <?php $lever = \frontend\models\Level::findAll(['status'=>1])?>
                                 <?php foreach ($lever as $item):?>
                                     <option <?= ($model->level == $item->id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->level_name?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"></span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select id="heard" class="form-control" required  name="permission">
+                                <?php $lever = \frontend\models\PermissionGroup::findAll(['status'=>1])?>
+                                <?php foreach ($lever as $item):?>
+                                    <option <?= ( isset($relation_user_group->permission_group_id) && $item->id == $relation_user_group->permission_group_id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->name?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>

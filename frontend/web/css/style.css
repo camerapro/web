@@ -192,3 +192,14 @@ body{
 .navbar-nav li:hover ul.dropdown-menu{
     display: block;
 }
+.permission-group-form {
+    margin: 0 25%;
+    width: 50%;
+}
+#permissiongroup-name{
+    width: 80%;
+}
+.permission-group-form .form-group > span {
+    margin-left: 5px;
+    margin-right: 22px;
+}

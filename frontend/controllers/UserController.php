@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use frontend\models\Camera;
+use frontend\models\RelationsUserPermissionGroup;
 use Yii;
 use frontend\models\User;
 use frontend\models\search\UserSearch;
@@ -96,6 +97,10 @@ class UserController extends Controller
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
             if ($model->save()) {
+                $permission_user = new RelationsUserPermissionGroup();
+                $permission_user->user_id =  $model->id;
+                $permission_user->permission_group_id = 1;
+                $permission_user->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 print_r($model->getErrors());exit;
@@ -132,6 +137,7 @@ class UserController extends Controller
         $error= '';
 //        print_r(Yii::$app->request->get());exit;
         $data = (Yii::$app->request->get());
+        $relation_user_group = RelationsUserPermissionGroup::findOne(['user_id'=>$id]);
         if(!empty($data) && !empty($data['username'])){
             $user_name = trim($data['username']);
             $check_exits = User::findOne(['username'=>$user_name]);
@@ -161,6 +167,16 @@ class UserController extends Controller
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
             if ($model->save()) {
+                if(isset($relation_user_group)){
+                    $relation_user_group->permission_group_id = $data['permission'];
+                    $relation_user_group->save();
+                }else{
+                    $permission_user = new RelationsUserPermissionGroup();
+                    $permission_user->user_id =  $model->id;
+                    $permission_user->permission_group_id = 1;
+                    $permission_user->save();
+                }
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
@@ -170,7 +186,8 @@ class UserController extends Controller
         return_exit:
         return $this->render('update', [
             'model' => $model,
-            'error'=>$error
+            'error'=>$error,
+            'relation_user_group'=>$relation_user_group
         ]);
     }
 
