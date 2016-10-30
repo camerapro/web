@@ -80,7 +80,8 @@ class PerController extends FrontendController
             $model->permission_ids = $permission_ids;
             $model->created_time = date('Y-m-d H:i:s');
             $model->save();
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
+//            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -112,6 +113,7 @@ class PerController extends FrontendController
             $model->permission_ids = $permission_ids;
             $model->created_time = date('Y-m-d H:i:s');
             $model->save();
+            return $this->redirect(['index']);
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
