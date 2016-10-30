@@ -86,6 +86,18 @@ class AccountController extends Controller
         }
         
     }
+	    /**
+     * Logs out the current user.
+     *
+     * @return mixed
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+		if (Yii::$app->user->isGuest) {
+           return ['error_code'=>0,'message'=>'Logout'];
+        }
+    }
 	
 	public function actionValidate()
     {

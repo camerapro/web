@@ -8,11 +8,12 @@ use yii\filters\AccessControl;
 use common\models\LoginForm;
 use api\models\RelationsCamUser;
 use api\models\Camera;
+use api\components\ApiController;
 
 /**
  * Site controller
  */
-class RecorderController extends Controller
+class RecorderController extends ApiController
 {
 	public $enableCsrfValidation = false;
 	private $api_key ='43S4342@342Asfd';
