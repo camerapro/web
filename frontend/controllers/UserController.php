@@ -168,6 +168,7 @@ class UserController extends FrontendController
             if(isset($data['gender'])) $model->gender = (int) $data['gender'];
 //            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
             $model->updated_time = date('Y-m-d H:i:s');
+            $model->level = $data['level'];
             $model->status = 1;
             if ($model->save()) {
                 if(isset($relation_user_group)){
