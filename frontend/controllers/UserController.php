@@ -162,8 +162,9 @@ class UserController extends FrontendController
             $model->fullname = $full_name;
             $model->email = $email;
             $model->phone = $phone;
-            if(isset($data['password']))
+            if(isset($data['password']) && $data['password'] != ''){
                 $model->password = md5($data['password']);
+            }
             $model->address = $occupation;
             if(isset($data['gender'])) $model->gender = (int) $data['gender'];
 //            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
