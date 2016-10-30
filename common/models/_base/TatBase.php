@@ -10,14 +10,15 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property integer $category_id
- * @property string $streaming_url
- * @property string $ip_address
+ * @property string $ip
  * @property integer $port
  * @property string $protocol
  * @property string $created_time
  * @property string $updated_time
+ * @property string $description
  * @property integer $order
- * @property integer $camera_id
+ * @property integer $camera_main_id
+ * @property integer $camera_secondary_id
  * @property integer $user_id
  * @property integer $agency_id
  * @property integer $status
@@ -38,10 +39,11 @@ class TatBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'port', 'order', 'camera_id', 'user_id', 'agency_id', 'status'], 'integer'],
+            [['category_id', 'port', 'order', 'camera_main_id', 'camera_secondary_id', 'user_id', 'agency_id', 'status'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
-            [['name', 'streaming_url', 'ip_address'], 'string', 'max' => 255],
+            [['name', 'ip'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
+            [['description'], 'string', 'max' => 500],
         ];
     }
 
@@ -54,14 +56,15 @@ class TatBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'category_id' => 'Category ID',
-            'streaming_url' => 'Streaming Url',
-            'ip_address' => 'Ip Address',
+            'ip' => 'Ip',
             'port' => 'Port',
             'protocol' => 'Protocol',
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
+            'description' => 'Description',
             'order' => 'Order',
-            'camera_id' => 'Camera ID',
+            'camera_main_id' => 'Camera Main ID',
+            'camera_secondary_id' => 'Camera Secondary ID',
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',
             'status' => 'Status',
