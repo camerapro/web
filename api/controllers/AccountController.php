@@ -5,14 +5,14 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use api\models\LoginForm;
 /**
  * Site controller
  */
 class AccountController extends Controller
 {
 	public $enableCsrfValidation = false;
-	private $api_key ='43S4342@342Asfd';
+	private $api_key ='43S4342342Asfd';
 	public $layout =false;
 	public function init()
     {
@@ -77,12 +77,20 @@ class AccountController extends Controller
         if (!Yii::$app->user->isGuest) {
            return ['error_code'=>0,'message'=>'Logined'];
         }
-		$model = new LoginForm();
-        if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
-            return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
-        } else {
-            return ['error_code'=>1,'message'=>'Login fail'];
-        }
+		if($post = Yii::$app->request->post()){
+			
+			if(!$this->validateToken($post)){
+				return ['error_code'=>1,'message'=>'Validate token fail'];
+			}
+			$model = new LoginForm();
+			if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
+				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
+			} else {
+				return ['error_code'=>1,'message'=>'Login fail'];
+			}
+		}
+	
+		
         
     }
 	    /**
@@ -98,29 +106,25 @@ class AccountController extends Controller
         }
     }
 	
-	public function actionValidate()
+	public function actionToken()
     {
-        
+		if($data = Yii::$app->request->post())
+        {
+			Yii::$app->session['token'] =  hash('sha256',time().session_id());
+			return ['error_code'=>0,'message'=>'Success','data'=>['token'=>Yii::$app->session['token']]];
+		}
+		exit();
     }
-	public function actionRecoderGet()
+	private function validateToken($post)
     {
-        $cam_info = [];
-        $message = '';
-        $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        if(!empty($cam_id)){
-            $cam_info = Camera::getOneCamById($cam_id);
-            if(!$cam_info){
-                return ['error_code'=>1,'message'=>'No permistion'];
-            }
-        }else{
-            $cams = \frontend\models\Camera::getListCam();
-            if(!empty($cams)){
-                $cam_info = $cams;
-				return ['error_code'=>0,'message'=>'Success','data'=>$cam_info];
-            }
-            if(empty($cam_info)){
-                return ['error_code'=>401,'message'=>'Data empty','data'=>[]];
-            }
-        }
+		$token_sv = Yii::$app->session['token'];
+		$hash_sv = hash("sha256",$token_sv.'@'.$this->api_key);
+		$token = isset($post['token'])?$post['token']:'';
+		$hash = isset($post['hash'])?$post['hash']:'';
+		if($hash_sv ==$hash)
+			return true;
+		
+		return false;
     }
+
 }
