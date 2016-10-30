@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $cam->channel;?>
                 </td>
                 <td>
-                    <a href="<?=  Url::to(['site/index', 'id' => $cam->id])?>"><?= $cam->streaming_url;?></a>
+                    <a href="<?=  Url::to(['site/index', 'id' => $cam->id])?>"><?= \common\components\Common::getLinkStream($cam->id);?></a>
                 </td>
                 <td class="project_progress">
                     <?= $cam->protocol;?>
