@@ -94,7 +94,9 @@ use yii\widgets\ActiveForm;
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select id="heard" class="form-control" required  name="level">
-                                <?php $lever = \frontend\models\Level::findAll(['status'=>1])?>
+                                <?php
+                                $lever = \frontend\models\Level::find()->where(['<=', 'id', Yii::$app->user->identity->level])->andWhere(['=', 'status', 1])->all()
+                                ?>
                                 <?php foreach ($lever as $item):?>
                                     <option <?= ($model->level == $item->id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->level_name?></option>
                                 <?php endforeach;?>
@@ -107,7 +109,13 @@ use yii\widgets\ActiveForm;
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <select id="heard" class="form-control" required  name="permission">
-                                <?php $lever = \frontend\models\PermissionGroup::findAll(['status'=>1])?>
+                                <?php
+                                $lever = \frontend\models\PermissionGroup::findAll(['status'=>1]);
+                                if(Yii::$app->user->identity->level <4){
+                                    $permission = \frontend\models\RelationsUserPermissionGroup::findOne(['user_id'=>Yii::$app->user->identity->id]);
+                                    $lever = \frontend\models\PermissionGroup::findAll(['id'=>$permission->permission_group_id]);
+                                }
+                                ?>
                                 <?php foreach ($lever as $item):?>
                                     <option <?= ( isset($relation_user_group->permission_group_id) && $item->id == $relation_user_group->permission_group_id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->name?></option>
                                 <?php endforeach;?>
