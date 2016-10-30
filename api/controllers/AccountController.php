@@ -78,7 +78,6 @@ class AccountController extends Controller
            return ['error_code'=>0,'message'=>'Logined'];
         }
 		$model = new LoginForm();
-		var_dump( Yii::$app->request->post());
         if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
             return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
         } else {
