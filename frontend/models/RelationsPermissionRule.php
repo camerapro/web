@@ -20,8 +20,8 @@ class RelationsPermissionRule extends RelationsPermissionRuleBase
             ->where(['=', 'relations_permission_rule.permission_id', $permission_id])
             ->andWhere(['=', 'relations_permission_rule.controller_name', $controller])
             ->andWhere(['=', 'relations_permission_rule.action_name', $action])
-            ->all();
-        if($query) return true;
+            ->one();
+        if($query) return $query;
         else return false;
     }
 }

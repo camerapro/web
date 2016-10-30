@@ -14,7 +14,6 @@ use yii\helpers\Url;
 class FrontendController extends Controller
 {
     public function beforeAction($action) {
-
         if (\Yii::$app->getUser()->isGuest){
             Yii::$app->getResponse()->redirect(\Yii::$app->getUser()->loginUrl)->send();
             return;
@@ -23,7 +22,8 @@ class FrontendController extends Controller
         //check required
         $controller =  strtolower(Yii::$app->controller->id);
         $action_controller =  strtolower(Yii::$app->controller->action->id);
-        $check_per_session = isset ($_SESSION[$user_id . '_' . $controller . '_' . $action_controller])  ? $_SESSION[$user_id . '_' . $controller . '_' . $action_controller] : NULL;
+        $current_params_id = isset($_GET['id']) ? $_GET['id'] : NULL;
+        $check_per_session = isset ($_SESSION[$user_id . '_' . $controller . '_' . $action_controller . '_' . $current_params_id])  ? $_SESSION[$user_id . '_' . $controller . '_' . $action_controller. '_' . $current_params_id] : NULL;
         if(isset($check_per_session)){
             if($check_per_session == 'has_permission'){
                 return parent::beforeAction($action);
@@ -39,12 +39,15 @@ class FrontendController extends Controller
         foreach ($list_permistion as $per){
             $check = RelationsPermissionRule::getListAction($per, $controller, $action_controller);
             if($check){
-                $permission_enable = true;
-                $_SESSION[$user_id . '_' . $controller . '_' . $action_controller] = 'has_permission';
+                if(!isset($check['params']) || empty($check['params']) || trim($check['params']) == 'id=' . $current_params_id){
+                    $permission_enable = true;
+                    $_SESSION[$user_id . '_' . $controller . '_' . $action_controller . '_' . $current_params_id] = 'has_permission';
+                    continue;
+                }
             }
         }
         if(!$permission_enable){
-            $_SESSION[$user_id . '_' . $controller . '_' . $action_controller] = 'no_permission';
+            $_SESSION[$user_id . '_' . $controller . '_' . $action_controller . '_' . $current_params_id] = 'no_permission';
             Yii::$app->getResponse()->redirect('/site/permission', 302)->send();
             return;
         }
