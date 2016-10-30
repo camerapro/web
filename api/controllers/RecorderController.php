@@ -30,13 +30,14 @@ class RecorderController extends ApiController
         $cam_info = [];
         $message = '';
         $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
         if(!empty($cam_id)){
             $cam_info = Camera::getOneCamById($cam_id);
             if(!$cam_info){
                 return ['error_code'=>1,'message'=>'No permistion'];
             }
         }else{
-            $cams = \frontend\models\Camera::getListCam();
+            $cams = \frontend\models\Camera::getListCam($user_id);
             if(!empty($cams)){
                 $cam_info = $cams;
 				return ['error_code'=>0,'message'=>'Success','data'=>$cam_info];
