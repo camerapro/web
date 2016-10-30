@@ -45,6 +45,14 @@ class CameraController extends FrontendController
             'dataProvider' => $dataProvider,
         ]);*/
         $cams = Camera::getListAllCam();
+        //set defaul for user demo
+        if(Yii::$app->user->identity->username == 'demo'){
+            $cams = Camera::find()
+                -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+                ->where(['=', 'relations_cam_user.user_id', Yii::$app->user->identity->id])
+                ->andWhere(['=', 'relations_cam_user.owner', 1])
+                ->all();
+        }
         return $this->render('index',[
             'cams'=>$cams,
         ]);
@@ -84,10 +92,11 @@ class CameraController extends FrontendController
                 $camera_user->created_by_id = $user_id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
+                $camera_user->owner = 1;
                 $camera_user->cam_id = $model->id;
                 $camera_user->save();
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -37,6 +37,7 @@ $( document ).ready(function() {
         var channel = $('#channel').val();
         var ip_address = $('#ip_address').val();
         var port = $('#port').val();
+        var port_http = $('#port_http').val();
         var username = $('#username').val();
         var password = $('#password').val();
         if(title_encoder == ''){
@@ -60,7 +61,11 @@ $( document ).ready(function() {
         }else if(username == ''){
             $('#username').focus();
             $('.show_error').html('Username không được để trống');
-        }else {
+        }else if(port_http == ''){
+            $('#port_http').focus();
+            $('.show_error').html('Cổng http không được để trống');
+        }
+        else {
             $.ajax({
                 url: '/ajax/create',
                 type: "POST",
@@ -71,6 +76,7 @@ $( document ).ready(function() {
                     'channel':channel,
                     'ip_address':ip_address,
                     'port':port,
+                    'port_http':port_http,
                     'username':username,
                     'password':password
                 } ,

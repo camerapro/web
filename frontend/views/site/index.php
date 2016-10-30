@@ -40,6 +40,7 @@
     </div>
 </div>
 
+
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 980px">
         <div class="modal-content">
@@ -63,15 +64,7 @@
                                 <input type="text" class="form-control" id="title_camera" name="title_camera">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">Giao thức</label>
-                            <div class="col-sm-9">
-                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="protocol" name="protocol">
-                                    <option value="http">http</option>
-                                    <option value="rtsp">rtsp</option>
-                                </select>
-                            </div>
-                        </div>
+
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Kênh</label>
                             <div class="col-sm-9">
@@ -84,11 +77,27 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Port</label>
+                            <label class="col-sm-3 control-label">Cổng media</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="port" name="port">
                             </div>
-                        </div> <div class="form-group">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Cổng http</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="port_http" name="port_http">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Giao thức</label>
+                            <div class="col-sm-9">
+                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="protocol" name="protocol">
+                                    <option value="http">http</option>
+                                    <option value="rtsp">rtsp</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Tên người dùng</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="username" name="username">

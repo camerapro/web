@@ -2,6 +2,9 @@
 
 namespace common\components;
 
+use common\models\_base\CameraBase;
+use frontend\models\Camera;
+
 class Common
 {
     public static function validatePhone($phone) {
@@ -24,6 +27,14 @@ class Common
         else {
             return false;
         }
+    }
+
+    public static function getLinkStream($camera_id){
+        $camera_model = CameraBase::findOne($camera_id);
+        if($camera_model->protocol == 'http')
+            return $camera_model->ip_address;
+        elseif ($camera_model->protocol == 'rtsp')
+            return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream=1.sdp';
     }
 
 }

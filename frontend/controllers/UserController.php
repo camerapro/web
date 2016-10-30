@@ -126,19 +126,8 @@ class UserController extends FrontendController
      */
     public function actionUpdate($id)
     {
-        /*$model = $this->findModel($id);
-        $error= '';
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-                'error'=>$error
-            ]);
-        }*/
         $model = $this->findModel($id);
         $error= '';
-//        print_r(Yii::$app->request->get());exit;
         $data = (Yii::$app->request->get());
         $relation_user_group = RelationsUserPermissionGroup::findOne(['user_id'=>$id]);
         if(!empty($data) && !empty($data['username'])){
@@ -151,7 +140,7 @@ class UserController extends FrontendController
 
             $full_name = $data['name'];
             $email = $data['email'];
-            if($email == $check_exits->email && $email <>  $model->email) {
+            if($check_exits && $email == $check_exits->email && $email <>  $model->email) {
                 $error = 'Email đã được sử dụng bởi tài khoản khác, vui lòng nhập email chính xác!';
                 goto return_exit;
             }

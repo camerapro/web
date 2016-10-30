@@ -13,6 +13,7 @@ use Yii;
  * @property string $created_time
  * @property integer $created_by_id
  * @property string $created_by_name
+ * @property integer $owner
  */
 class RelationsCamUserBase extends \yii\db\ActiveRecord
 {
@@ -30,7 +31,7 @@ class RelationsCamUserBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'cam_id', 'created_by_id'], 'integer'],
+            [['user_id', 'cam_id', 'created_by_id', 'owner'], 'integer'],
             [['created_time'], 'safe'],
             [['created_by_name'], 'string', 'max' => 255],
         ];
@@ -48,6 +49,7 @@ class RelationsCamUserBase extends \yii\db\ActiveRecord
             'created_time' => 'Created Time',
             'created_by_id' => 'Created By ID',
             'created_by_name' => 'Created By Name',
+            'owner' => 'Owner',
         ];
     }
 }

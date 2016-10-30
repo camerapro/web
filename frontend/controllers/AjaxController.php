@@ -40,6 +40,7 @@ class AjaxController extends Controller
             $camera->ip_address = $data['ip_address'];
             $camera->protocol = $data['protocol'];
             $camera->port = $data['port'];
+            $camera->encoder_port = $data['port_http'];
             $camera->channel = $data['channel'];
             $camera->encoder_username = $data['username'];
             $camera->encoder_password = $data['password'];
@@ -57,6 +58,7 @@ class AjaxController extends Controller
                 $camera_user->user_id = Yii::$app->user->identity->id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
+                $camera_user->owner = 1;
                 $camera_user->save();
                 $return = array(
                     'return_code'=>0,
