@@ -29,62 +29,31 @@ use yii\helpers\Url;
                         <i class="fa fa-sign-out pull-right"></i>Thoát
                     </a>
                 </li>
-                <li class="">
+                <?php $menu = \frontend\models\FrontendMenu::getMenu();?>
+                <?php foreach ($menu as $item):?>
+                <li>
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-table mr5"></i>Hướng dẫn
+                        <i class="<?= $item['icon']?> mr5"></i><?= $item['name']?>
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;">Lưu dữ liệu trên máy tính</a></li>
-                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=5">Cài teamview</a></li>
-                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=4">Cấu hình camera</a></li>
-                        <li><a href="javascript:;">Cấu hình máy chấm công</a></li>
-                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=6">Mở port Wifi</a></li>
+                    <?php foreach ($item['child'] as $child):
+                        $link = '#';
+                        $class = '';
+                        if(isset($child['controller']) && isset($child['action'])){
+                            $link = \yii\helpers\Url::base() . '/'. $child['controller'] . '/'. $child['action'];
+                            $checkMenuShow = \frontend\models\Permission::checkShowMenu($user_id = Yii::$app->user->identity->id, $child['controller'], $child['action']);
+                            if(!$checkMenuShow){
+                                $class = 'hidden';
+                            }
+                            if(isset($child['params'])) $link .=   '?' .  $child['params'];
+                        }
+                        ?>
+                        <li class="<?= $class?>"><a href="<?= $link?>"><?= $child['name']?></a></li>
+                    <?php endforeach;?>
                     </ul>
                 </li>
-
-
-                <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-desktop mr5"></i>Quản trị
-                        <span class=" fa fa-angle-down"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;">Cấu hình máy châm công</a></li>
-                        <li><a href="<?=\yii\helpers\Url::base()?>/camera/index">Cấu hình Camera</a></li>
-                        <li><a href="javascript:;">Cấu hình trên máy tính</a></li>
-                        <li><a href="javascript:;">Nhân viên</a></li>
-                        <li><a href="<?=\yii\helpers\Url::base()?>/user/index">Tài khoản</a></li>
-                        <li><a href="javascript:;">Đổi mật khẩu</a></li>
-                        <li><a href="javascript:;">Phân quyền</a></li>
-                        <li><a href="javascript:;">Công ty</a></li>
-                    </ul>
-                </li>
-
-
-                <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-edit mr5"></i>Báo cáo
-                        <span class=" fa fa-angle-down"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="javascript:;">Báo cáo chấm công</a></li>
-                        <li><a href="javascript:;">Dữ liệu gốc</a></li>
-                        <li><a href="javascript:;">Báo cáo video</a></li>
-                        <li><a href="javascript:;">Báo cáo ảnh</a></li>
-                    </ul>
-                </li>
-                <li class="">
-                    <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-home mr5"></i>Giám sát
-                        <span class=" fa fa-angle-down"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="<?=\yii\helpers\Url::base()?>/site/index">Xem cam</a></li>
-                        <li><a href="javascript:;">Xem lại</a></li>
-                        <li><a href="javascript:;">Kiểm soát</a></li>
-                    </ul>
-                </li>
+                <?php endforeach;?>
             </ul>
         </nav>
     </div>

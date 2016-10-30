@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\FrontendController;
 use frontend\models\Permission;
 use Yii;
 use frontend\models\PermissionGroup;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * PerController implements the CRUD actions for PermissionGroup model.
  */
-class PerController extends Controller
+class PerController extends FrontendController
 {
     /**
      * @inheritdoc
