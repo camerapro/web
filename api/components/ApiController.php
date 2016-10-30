@@ -32,13 +32,15 @@ class ApiController extends Controller{
     /*Khởi tạo môi trường*/
     public function beforeAction($action)
     {
+		
 		\Yii::$app->response->format = 'json';
-		if(!Yii::$app->user->isGuest)
+		if(Yii::$app->user->isGuest)
 		{
-			return ['error_code'=>1,'message'=>'No Login'];
+			echo  json_encode(['error_code'=>1,'message'=>'No Login']);
 			exit();
 		}
-        return parent::beforeAction($action);
+		return parent::beforeAction($action);
+        
     }
 
 }
