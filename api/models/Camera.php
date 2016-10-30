@@ -29,7 +29,7 @@ class Camera extends CameraBase
             if(empty($user_id)) return false;
         }
         $query = Camera::find()
-            -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+            ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
             ->where(['=', 'camera.status', 1])
             ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
             ->all();
