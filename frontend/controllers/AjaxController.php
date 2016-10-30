@@ -11,6 +11,7 @@ use common\components\Common;
 use common\models\User;
 use frontend\models\Camera;
 use frontend\models\RelationsCamUser;
+use frontend\models\RelationsUserPermissionGroup;
 use Yii;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
@@ -165,10 +166,15 @@ class AjaxController extends Controller
             $user->phone = $data['phone_number'];
             $user->email = $data['email'];
             $user->status = 1;
+            $user->level = 1;
             try{
                 //$save = $user->save(false);
                 $save = $user->save();
                 if($save){
+                    $permission_user = new RelationsUserPermissionGroup();
+                    $permission_user->user_id =  $user->id;
+                    $permission_user->permission_group_id = 1;
+                    $permission_user->save();
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;

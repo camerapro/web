@@ -39,14 +39,17 @@ use yii\helpers\Url;
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <?php foreach ($item['child'] as $child):
                         $link = '#';
-                        $class = '';
+                        $class = 'hidden';
                         if(isset($child['controller']) && isset($child['action'])){
                             $link = \yii\helpers\Url::base() . '/'. $child['controller'] . '/'. $child['action'];
                             $checkMenuShow = \frontend\models\Permission::checkShowMenu($user_id = Yii::$app->user->identity->id, $child['controller'], $child['action']);
-                            if(!$checkMenuShow){
-                                $class = 'hidden';
+                            if($checkMenuShow){
+                                $class = '';
                             }
                             if(isset($child['params'])) $link .=   '?' .  $child['params'];
+                        }
+                        if(Yii::$app->user->identity->level >= 3){
+                            $class = '';
                         }
                         ?>
                         <li class="<?= $class?>"><a href="<?= $link?>"><?= $child['name']?></a></li>

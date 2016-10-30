@@ -103,7 +103,8 @@ class UserController extends FrontendController
                 $permission_user->user_id =  $model->id;
                 $permission_user->permission_group_id = 1;
                 $permission_user->save();
-                return $this->redirect(['view', 'id' => $model->id]);
+//                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }else{
                 print_r($model->getErrors());exit;
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
@@ -178,7 +179,7 @@ class UserController extends FrontendController
                     $permission_user->permission_group_id = 1;
                     $permission_user->save();
                 }
-
+                return $this->redirect(['index']);
                 return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
