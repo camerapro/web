@@ -24,6 +24,9 @@ class RecorderController extends ApiController
     }
     public function actionGet()
     {
+		 if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+        }
         $cam_info = [];
         $message = '';
         $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
@@ -45,6 +48,9 @@ class RecorderController extends ApiController
     }
     public function actionAdd()
     {
+		 if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
           if($data = Yii::$app->request->post())
             {
             $camera = new Camera();
