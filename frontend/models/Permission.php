@@ -59,7 +59,6 @@ class Permission extends PermissionBase
                 return false;
             }
         }
-        die('1');
         $list_permistion_gr = RelationsUserPermissionGroup::findByUser($user_id)->permission_group_id;
         $permission = PermissionGroup::findOne($list_permistion_gr)->permission_ids;
         $list_permistion = explode(',', $permission);
