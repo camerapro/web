@@ -36,10 +36,10 @@ use yii\helpers\Url;
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                         <li><a href="javascript:;">Lưu dữ liệu trên máy tính</a></li>
-                        <li><a href="javascript:;">Cài teamview</a></li>
-                        <li><a href="javascript:;">Cấu hình camera</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=5">Cài teamview</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=4">Cấu hình camera</a></li>
                         <li><a href="javascript:;">Cấu hình máy chấm công</a></li>
-                        <li><a href="javascript:;">Mở port Wifi</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=6">Mở port Wifi</a></li>
                     </ul>
                 </li>
 

@@ -17,8 +17,10 @@ AppAsset::register($this);
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-camera"></i> <span>Camera An Ninh</span></a>
+                <div class="navbar nav_title" style="border: 0;  height: 72px;">
+                    <a href="/site/index" class="site_title">
+                        <img src="http://cam.thietbianninh.com/images/logo_ssm.png" alt="trang chủ">
+                    </a>
                 </div>
                 <div class="clearfix"></div>
             <?php
