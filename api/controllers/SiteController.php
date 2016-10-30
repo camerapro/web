@@ -11,6 +11,13 @@ use common\models\LoginForm;
  */
 class SiteController extends Controller
 {
+	public $enableCsrfValidation = false;
+	private $api_key ='43S4342@342Asfd';
+	public $layout =false;
+	public function init()
+    {
+        \Yii::$app->response->format = 'json';
+    }
     /**
      * @inheritdoc
      */
