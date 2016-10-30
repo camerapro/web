@@ -19,13 +19,13 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'ip_address')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'port')->textInput() ?>
+    <?= $form->field($model, 'encoder_port')->textInput() ?>
 
     <?= $form->field($model, 'channel')->textInput() ?>
 
     <?php
 //    echo $form->field($model, 'channel')->dropDownList(['web' => 'web', 'wap' => 'wap', 'desktop' => 'desktop', 'mobile' => 'mobile'],['prompt'=>'Chọn kênh']);
     ?>
-
     <?= $form->field($model, 'encoder_username')->textInput() ?>
     <?= $form->field($model, 'encoder_password')->textInput() ?>
 
