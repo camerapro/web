@@ -72,38 +72,44 @@ class AccountController extends Controller
        die("HELLO API");
     }
 
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
-     */
-    public function actionLogin()
+     public function actionLogin()
     {
-        $this->layout = 'login/main.php';
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+           return ['error_code'=>0,'message'=>'Logined'];
         }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goHome();
+		$model = new LoginForm();
+		var_dump( Yii::$app->request->post());
+        if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
+            return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
         } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            return ['error_code'=>1,'message'=>'Login fail'];
+        }
+        
+    }
+	
+	public function actionValidate()
+    {
+        
+    }
+	public function actionRecoderGet()
+    {
+        $cam_info = [];
+        $message = '';
+        $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        if(!empty($cam_id)){
+            $cam_info = Camera::getOneCamById($cam_id);
+            if(!$cam_info){
+                return ['error_code'=>1,'message'=>'No permistion'];
+            }
+        }else{
+            $cams = \frontend\models\Camera::getListCam();
+            if(!empty($cams)){
+                $cam_info = $cams;
+				return ['error_code'=>0,'message'=>'Success','data'=>$cam_info];
+            }
+            if(empty($cam_info)){
+                return ['error_code'=>401,'message'=>'Data empty','data'=>[]];
+            }
         }
     }
-
-    /**
-     * Logs out the current user.
-     *
-     * @return mixed
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
-
-
 }

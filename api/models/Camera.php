@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\models;
+namespace api\models;
 
 use common\models\_base\CameraBase;
 use Yii;
