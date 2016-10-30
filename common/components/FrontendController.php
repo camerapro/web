@@ -22,17 +22,17 @@ class FrontendController extends Controller
         $user_id = Yii::$app->user->identity->id;
         //check required
         $controller =  strtolower(Yii::$app->controller->id);
-        $action =  strtolower(Yii::$app->controller->action->id);
+        $action_controller =  strtolower(Yii::$app->controller->action->id);
         $permission_enable = false;
         $list_permistion_gr = RelationsUserPermissionGroup::findByUser($user_id)->permission_group_id;
         $permission = PermissionGroup::findOne($list_permistion_gr)->permission_ids;
         $list_permistion = explode(',', $permission);
         foreach ($list_permistion as $per){
-            $check = RelationsPermissionRule::getListAction($per, $controller, $action);
+            $check = RelationsPermissionRule::getListAction($per, $controller, $action_controller);
             if($check) $permission_enable = true;
         }
         if(!$permission_enable){
-            Yii::$app->getResponse()->redirect(\Yii::$app->errorHandler->errorAction)->send();
+            Yii::$app->getResponse()->redirect('/site/permission', 302)->send();
             return;
         }
         return parent::beforeAction($action);

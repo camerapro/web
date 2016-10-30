@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\FrontendController;
 use frontend\models\Camera;
 use frontend\models\RelationsUserPermissionGroup;
 use Yii;
@@ -14,7 +15,8 @@ use yii\filters\VerbFilter;
 /**
  * UserController implements the CRUD actions for User model.
  */
-class UserController extends Controller
+class UserController extends FrontendController
+//class UserController extends Controller
 {
     /**
      * @inheritdoc
@@ -236,5 +238,10 @@ class UserController extends Controller
             'list_cam_granded'=>$list_cam_granded,
             'granded'=>$granded,
         ]);
+    }
+
+    public function actionPermission(){
+        die('1');
+
     }
 }

@@ -45,3 +45,7 @@
 .w100{
     width: 100%!important;
 }
+
+.hidden{
+    display: none;
+}

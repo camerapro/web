@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\FrontendController;
 use frontend\models\RelationsCamUser;
 use Yii;
 use frontend\models\Camera;
@@ -13,7 +14,7 @@ use yii\filters\VerbFilter;
 /**
  * CameraController implements the CRUD actions for Camera model.
  */
-class CameraController extends Controller
+class CameraController extends FrontendController
 {
     /**
      * @inheritdoc

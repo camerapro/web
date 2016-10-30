@@ -32,10 +32,10 @@
                 <li><a><i class="fa fa-table"></i>Hướng dẫn<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="#">Lưu dữ liệu trên máy tính</a></li>
-                        <li><a href="#">Cài teamview</a></li>
-                        <li><a href="#">Cấu hình cam</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=5"">Cài teamview</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=4">Cấu hình cam</a></li>
                         <li><a href="#">Cấu hình máy chấm công</a></li>
-                        <li><a href="#">Mở port Wifi</a></li>
+                        <li><a href="<?=\yii\helpers\Url::base()?>/guide/index?id=6">Mở port Wifi</a></li>
                     </ul>
                 </li>
             </ul>

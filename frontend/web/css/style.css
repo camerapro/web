@@ -203,3 +203,7 @@ body{
     margin-left: 5px;
     margin-right: 22px;
 }
+.nav-sm .main_menu_side{
+    width: 0px;
+    overflow: hidden;
+}

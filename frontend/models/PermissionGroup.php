@@ -17,4 +17,8 @@ class PermissionGroup extends PermissionGroupBase
             'created_time' => 'Ngày tạo',
         ];
     }
+
+    public function checkPerGr($user_id, $controller, $action){
+        return false;
+    }
 }
