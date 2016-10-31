@@ -41,7 +41,7 @@ $( document ).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val() ;
         var encoder_model = $('#encoder_model').val() ;
-
+        alert(encoder_model);
         if(title_encoder == ''){
             $('#title_encoder').focus();
             $('.show_error').html('Tên đầu ghi không được để trống');
@@ -80,7 +80,8 @@ $( document ).ready(function() {
                     'port':port,
                     'port_http':port_http,
                     'username':username,
-                    'password':password
+                    'password':password,
+                    'encoder_model':encoder_model
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
