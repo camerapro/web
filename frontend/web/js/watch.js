@@ -70,7 +70,15 @@ $( document ).ready(function() {
                 url: '/ajax/create',
                 type: "POST",
                 data: {
-                    'title_encoder':title_encoder
+                    'title_encoder':title_encoder,
+                    'title_camera':title_camera,
+                    'protocol':protocol,
+                    'channel':channel,
+                    'ip_address':ip_address,
+                    'port':port,
+                    'username':username,
+                    'password':password,
+                    'port_http':port_http
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
