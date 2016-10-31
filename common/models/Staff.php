@@ -14,6 +14,13 @@ class Staff extends StaffBase
         return $tat->save(false);
     }
     public static  function getStaffByUserId($userId=0){
-        return self::find()->where(['created_by'=>$userId])->asArray()->all();
+        $return = self::find()->where(['created_by'=>$userId])->all();
+        $rt = array();
+        foreach ($return as $value)
+        {
+            $value->image = 'http://api.thietbianninh.com/kute.jpg';
+            $rt[] = $value;
+        }
+        return $rt;
     }
 }
