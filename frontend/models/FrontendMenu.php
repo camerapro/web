@@ -7,12 +7,16 @@ use Yii;
 
 class FrontendMenu extends Menu
 {
-    public static function getMenu(){
+    public static function getMenu($order = 1){
         $data = [];
         $list = FrontendMenu::find()
-            ->where(['=', 'parrent_id', 0])
-            ->asArray()
-            ->all();
+            ->where(['=', 'parrent_id', 0]);
+            if($order == 0){
+                $list ->orderBy([
+                    'id' => SORT_DESC
+                ]);
+            }
+            $list = $list->asArray()->all();
         foreach ($list as $item){
             $data[$item['id']]  = $item;
             $data[$item['id']]['child'] =  FrontendMenu::getChildMenu($item['id']);

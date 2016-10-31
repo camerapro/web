@@ -39,8 +39,14 @@ class UserController extends FrontendController
      */
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        if( Yii::$app->user->identity->level >= 3){
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        }else{
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            $dataProvider->query->andWhere(['id'=>Yii::$app->user->identity->id]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,

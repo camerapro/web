@@ -29,7 +29,7 @@ use yii\helpers\Url;
                         <i class="fa fa-sign-out pull-right"></i>Thoát
                     </a>
                 </li>
-                <?php $menu = \frontend\models\FrontendMenu::getMenu();?>
+                <?php $menu = \frontend\models\FrontendMenu::getMenu(0);?>
                 <?php foreach ($menu as $item):?>
                 <li>
                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
