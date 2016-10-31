@@ -41,11 +41,11 @@ $( document ).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val() ;
         var encoder_type = $('#encoder_model').val() ;
-
+        alert(password);
         if(title_encoder == ''){
             $('#title_encoder').focus();
             $('.show_error').html('Tên đầu ghi không được để trống');
-        }else if(title_camera == ''){
+        /*}else if(title_camera == ''){
             $('#title_camera').focus();
             $('.show_error').html('Tên camera không được để trống');
         }else if(protocol == ''){
@@ -65,9 +65,10 @@ $( document ).ready(function() {
             $('.show_error').html('Username không được để trống');
         }else if(port_http == ''){
             $('#port_http').focus();
-            $('.show_error').html('Cổng media không được để trống');
+            $('.show_error').html('Cổng media không được để trống');*/
         }
         else {
+            alert(password);
             $.ajax({
                 url: '/ajax/create',
                 type: "POST",
