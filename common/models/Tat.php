@@ -13,6 +13,6 @@ class Tat extends TatBase
     public static  function add($params){
         $tat = new self;
         $tat->attributes = $params;
-        $tat->save(false);
+        return $tat->save(false);
     }
 }
