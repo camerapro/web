@@ -78,7 +78,8 @@ $( document ).ready(function() {
                     'port':port,
                     'username':username,
                     'password':password,
-                    'port_http':port_http
+                    'port_http':port_http,
+                    'encoder_type':encoder_type
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
