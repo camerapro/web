@@ -99,10 +99,44 @@ class TimekeepingController extends Controller
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
-        return ['error_code' => 0, 'message' => 'Success'];
+        if ($data = Yii::$app->request->post()) {
+            return ['error_code' => 0, 'message' => 'Success'];
+        }
+        exit();
 
     }
+    /**
+     * @return array
+     */
+    public function actionDelete()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        if ($data = Yii::$app->request->post()) {
+            $this->findModel($id)->delete();
+            return ['error_code' => 0, 'message' => 'Success'];
+        }
+        return ['error_code' => 1, 'message' => 'Fail'];
+        exit();
 
+    }
+    /**
+     * Finds the Camera model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Camera the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Timekeeping::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return ['error_code' => 1, 'message' => 'Fail'];
+        }
+    }
     /**
      * @return array
      */
