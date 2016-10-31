@@ -118,6 +118,12 @@ class TimekeepingController extends Controller
             $this->findModel($id)->delete();
             return ['error_code' => 0, 'message' => 'Success'];
         }
+        else{
+            return array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
         return ['error_code' => 1, 'message' => 'Fail'];
         exit();
 
