@@ -88,6 +88,8 @@ class StaffController extends Controller
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
         if (!empty($id)) {
             $staff = Staff::findOne(['id'=>$id]);
+            if($staff)
+                $staff->image = 'http://api.thietbianninh.com/kute.jpg';
             return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
         } elseif(!empty($user_id)) {
             $staff = Staff::getStaffByUserId(['user_id'=>$user_id]);
