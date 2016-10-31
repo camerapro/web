@@ -25,10 +25,12 @@ class Timekeeping extends TimekeepingBase
         $tat->attributes = $params;
         return $tat->save(false);
     }
-    public static  function getByUserId($userId=0){
-        $return = self::find()->where(['created_by'=>$userId])->all();
+    public static  function search($card_code=0,$staff_name=''){
+        $staff = Timekeeping::find()->where(['and', ['card_code' => $card_code]])
+            ->orFilterWhere(['like', 'staff_name', $staff_name])
+            ->all();
         $rt = array();
-        foreach ($return as $value)
+        foreach ($staff as $value)
         {
             $value->image = 'http://api.thietbianninh.com/kute.jpg';
             $rt[] = $value;
