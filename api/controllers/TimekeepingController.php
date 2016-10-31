@@ -78,27 +78,35 @@ class TimekeepingController extends Controller
     /**
      * @return array
      */
-    public function actionInfo()
+    public function actionGet()
     {
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
         $staff = [];
         $message = '';
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $card_code = isset(Yii::$app->request->get()['card_code']) ? Yii::$app->request->get()['card_code'] : '';
-        $staff = Staff::find()->where(['and', ['id' => $id]])
-            ->orWhere(['card_code' => $card_code])->one();
-        if ($staff)
-            $staff->image = 'http://api.thietbianninh.com/kute.jpg';
+        $staff_name = isset(Yii::$app->request->get()['staff_name']) ? Yii::$app->request->get()['staff_name'] : '';
+        $staff = Timekeeping::search($card_code,$staff_name);
         return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+
+    }
+    /**
+     * @return array
+     */
+    public function actionUpdate()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        return ['error_code' => 0, 'message' => 'Success'];
 
     }
 
     /**
      * @return array
      */
-    public function actionGet()
+    public function actionGet22()
     {
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
