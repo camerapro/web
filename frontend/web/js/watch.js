@@ -30,7 +30,6 @@ $( document ).ready(function() {
 
     });
     $('#save_and_create').on('click', function() {
-        var validate = 1;
         var title_encoder = $('#title_encoder').val();
         var title_camera = $('#title_camera').val();
         var protocol = $('#protocol').val();
@@ -71,15 +70,7 @@ $( document ).ready(function() {
                 url: '/ajax/create',
                 type: "POST",
                 data: {
-                    'title_encoder':title_encoder,
-                    'title_camera':title_camera,
-                    'protocol':protocol,
-                    'channel':channel,
-                    'ip_address':ip_address,
-                    'port':port,
-                    'port_http':port_http,
-                    'username':username,
-                    'password':password
+                    'title_encoder':title_encoder
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
