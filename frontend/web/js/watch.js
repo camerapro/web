@@ -73,7 +73,14 @@ $( document ).ready(function() {
                 type: "POST",
                 data: {
                     'title_encoder':title_encoder,
-                    'title_camera':title_camera
+                    'title_camera':title_camera,
+                    'protocol':protocol,
+                    'channel':channel,
+                    'ip_address':ip_address,
+                    'port':port,
+                    'port_http':port_http,
+                    'username':username,
+                    'password':password
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
