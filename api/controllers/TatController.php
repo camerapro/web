@@ -75,7 +75,6 @@ class TatController extends ApiController
                     'channel'=>isset($data['channel_main']) ? $data['channel_main'] : '',
                     'protocol'=>isset($data['protocol_main']) ? $data['protocol_main'] : '',
                     'order'=>isset($data['order_main']) ? $data['order_main'] : 0,
-                    'agency_id'=>isset($data['agency_main_id']) ? $data['agency_main_id'] : '',
                     'user_id'=>isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                     'agency_id'=>isset($data['agency_id']) ? $data['agency_id'] : 0,
                  ];
@@ -94,7 +93,6 @@ class TatController extends ApiController
                     'channel'=>isset($data['channel_2nd']) ? $data['channel_2nd'] : '',
                     'protocol'=>isset($data['protocol_2nd']) ? $data['protocol_2nd'] : '',
                     'order'=>isset($data['order_2nd']) ? $data['order_2nd'] : 0,
-                    'agency_id'=>isset($data['agency_2nd_id']) ? $data['agency_2nd_id'] : '',
                     'user_id'=>isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                     'agency_id'=>isset($data['agency_id']) ? $data['agency_id'] : 0
                  ];
