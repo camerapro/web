@@ -140,7 +140,7 @@ class SiteController extends Controller
 	public function actionError()
     {
         $exception = Yii::$app->errorHandler->exception;
-        if ($exception !== null && isset($_GET['dev'])) {
+        if ($exception !== null) {
            var_dump($exception->getMessage());
         }
         else{
