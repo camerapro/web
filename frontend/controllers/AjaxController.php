@@ -43,7 +43,7 @@ class AjaxController extends Controller
             $camera->encoder_port = $data['port_http'];
             $camera->channel = $data['channel'];
             $camera->encoder_username = $data['username'];
-            $camera->encoder_password = $data['password'];
+            $camera->encoder_password = isset($data['password'])? $data['password'] : NULL;
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->encoder_model = $data['encoder_model'];

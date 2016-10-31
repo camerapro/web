@@ -41,7 +41,7 @@ use yii\helpers\Url;
                         <?= Yii::$app->user->identity->username;?></a>
                 </li>
 
-                
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
