@@ -9,6 +9,10 @@ use yii\helpers\Url;
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                    <a href="<?= \yii\helpers\Url::base()?>/site/logout">
+                        <i class="fa fa-sign-out pull-right"></i>Thoát
+                    </a>
                 <li class="nav_li">
                     <a href="#"><i class="fa fa-phone mr5" aria-hidden="true"></i>
                         Liên hệ
@@ -36,6 +40,11 @@ use yii\helpers\Url;
                     <a href="#"><i class="fa fa-user mr5" aria-hidden="true"></i>
                         <?= Yii::$app->user->identity->username;?></a>
                 </li>
+
+                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <i class="<?= $item['icon']?> mr5"></i><?= $item['name']?>
+                    <span class=" fa fa-angle-down"></span>
+                </a>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
