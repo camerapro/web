@@ -6,6 +6,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\Staff;
+
 /**
  * Site controller
  */
@@ -18,49 +20,7 @@ class StaffController extends Controller
     {
         \Yii::$app->response->format = 'json';
     }
-    /**
-     * @inheritdoc
-     */
-    /*public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => false,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }*/
 
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
 
     /**
      * Displays homepage.
@@ -72,38 +32,49 @@ class StaffController extends Controller
        die("HELLO API");
     }
 
-    /**
-     * Logs in a user.
-     *
-     * @return mixed
-     */
-    public function actionLogin()
+    public function actionAdd()
     {
-        $this->layout = 'login/main.php';
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
         }
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goHome();
+        if ($data = Yii::$app->request->post()) {
+            
+            $params = [
+                'name' => isset($data['name']) ? $data['name'] : '',
+                'card_code'=>isset($data['card_code']) ? $data['card_code'] : '',
+                'card_id'=>isset($data['card_id']) ? $data['card_id'] : '',
+                'department'=>isset($data['department']) ? $data['department'] : '',
+                'image'=>isset($data['image']) ? $data['image'] : '',
+                'order'=>isset($data['order']) ? $data['order'] : '',
+                'created_by'=>isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
+                'description'=>isset($data['description']) ? $data['description'] : '',
+                'created_time'=>date('Y-m-d H:i:s'),
+            ];
+            print_r($params);
+            $save = Staff::add($params);
+
+            if ($save) {
+                $return = array(
+                    'error_code' => 0,
+                    'message' => 'Success'
+                );
+            } else {
+                $return = array(
+                    'error_code' => 1,
+                    'message' => 'Add fail'
+                );
+            }
         } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
+            $return = array(
+                'error_code' => 1,
+                'message' => 'Method not supported!'
+            );
         }
+        echo json_encode($return);
+        exit;
+
     }
 
-    /**
-     * Logs out the current user.
-     *
-     * @return mixed
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
 
 
 }
