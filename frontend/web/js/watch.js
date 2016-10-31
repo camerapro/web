@@ -40,7 +40,7 @@ $( document ).ready(function() {
         var port_http = $('#port_http').val();
         var username = $('#username').val();
         var password = $('#password').val() ;
-        var encoder_model = $('#encoder_model').val() ;
+        var encoder_type = $('#encoder_model').val() ;
 
         if(title_encoder == ''){
             $('#title_encoder').focus();
@@ -68,7 +68,7 @@ $( document ).ready(function() {
             $('.show_error').html('Cổng media không được để trống');
         }
         else {
-            alert(encoder_model);
+            alert(encoder_type);
             $.ajax({
                 url: '/ajax/create',
                 type: "POST",
@@ -81,7 +81,8 @@ $( document ).ready(function() {
                     'port':port,
                     'port_http':port_http,
                     'username':username,
-                    'password':password
+                    'password':password,
+                    'encoder_type':encoder_type
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
