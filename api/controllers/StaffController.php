@@ -50,7 +50,7 @@ class StaffController extends Controller
                 'description'=>isset($data['description']) ? $data['description'] : '',
                 'created_time'=>date('Y-m-d H:i:s'),
             ];
-            var_dump($params);
+            print_r($params);
             $save = Staff::add($params);
 
             if ($save) {
