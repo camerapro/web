@@ -50,7 +50,6 @@ class StaffController extends Controller
                 'description'=>isset($data['description']) ? $data['description'] : '',
                 'created_time'=>date('Y-m-d H:i:s'),
             ];
-            print_r($params);
             $save = Staff::add($params);
 
             if ($save) {
@@ -74,6 +73,32 @@ class StaffController extends Controller
         exit;
 
     }
+
+    /**
+     * @return array
+     */
+    public function actionGet()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        $staff = [];
+        $message = '';
+        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
+        if (!empty($id)) {
+            $staff = Staff::findOne(['id'=>$id]);
+            return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+        } elseif(!empty($user_id)) {
+            $staff = Staff::getStaffByUserId(['user_id'=>$user_id]);
+            if (!empty($staff)) {
+                return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+            }
+
+        }
+        return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
+    }
+
 
 
 
