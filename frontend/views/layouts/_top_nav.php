@@ -36,11 +36,6 @@ use yii\helpers\Url;
                     <a href="#"><i class="fa fa-user mr5" aria-hidden="true"></i>
                         <?= Yii::$app->user->identity->username;?></a>
                 </li>
-
-                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <i class="<?= $item['icon']?> mr5"></i><?= $item['name']?>
-                    <span class=" fa fa-angle-down"></span>
-                </a>
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
