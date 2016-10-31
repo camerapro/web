@@ -46,6 +46,7 @@ class AjaxController extends Controller
             $camera->encoder_password = $data['password'];
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
+            $camera->encoder_model = $data['encoder_model'];
             if($data['protocol'] == 'http')
                 $camera->streaming_url = $data['ip_address'];
             elseif ($data['protocol'] == 'rtsp')

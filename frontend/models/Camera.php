@@ -16,10 +16,14 @@ class Camera extends CameraBase
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
         }
-        $query = Camera::find()
-            -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
-            ->where(['=', 'relations_cam_user.user_id', $user_id])
-            ->all();
+        if(Yii::$app->user->identity->level ==4){
+            $query = Camera::find()->all();
+        }else{
+            $query = Camera::find()
+                -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+                ->where(['=', 'relations_cam_user.user_id', $user_id])
+                ->all();
+        }
         return $query;
     }
     
@@ -82,19 +86,19 @@ class Camera extends CameraBase
             'name' => 'Name camera',
             'streaming_url' => 'Link streaming',
             'protocol' => 'Giao thức',
-            'port' => 'Cổng',
             'channel' => 'Kênh',
             'ip_address' => 'Địa chỉ Ip',
             'encoder_username' => 'Username đầu ghi',
             'encoder_password' => 'Mật khẩu đầu ghi',
             'protocol' => 'Giao thức',
             'port' => 'Cổng rtsp',
-            'encoder_port' => 'Cổng http',
+            'encoder_port' => 'Cổng Media',
             'channel' => 'Kênh',
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
             'order' => 'Sắp xếp',
             'status' => 'Trạng thái',
+            'encoder_model' => 'Loại thiết bị',
         ];
     }
 }

@@ -57,13 +57,13 @@ $( document ).ready(function() {
             $('.show_error').html('Địa chỉ IP không được để trống');
         }else if(port == ''){
             $('#port').focus();
-            $('.show_error').html('Port không được để trống');
+            $('.show_error').html('Port rtsp không được để trống');
         }else if(username == ''){
             $('#username').focus();
             $('.show_error').html('Username không được để trống');
         }else if(port_http == ''){
             $('#port_http').focus();
-            $('.show_error').html('Cổng http không được để trống');
+            $('.show_error').html('Cổng media không được để trống');
         }
         else {
             $.ajax({
@@ -78,7 +78,8 @@ $( document ).ready(function() {
                     'port':port,
                     'port_http':port_http,
                     'username':username,
-                    'password':password
+                    'password':password,
+                    'encoder_model':encoder_model,
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
