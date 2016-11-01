@@ -1,7 +1,7 @@
 <?php
 namespace frontend\models;
 
-use common\models\User;
+//use common\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -78,7 +78,7 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
+            $this->_user = FrontendUser::findByUsername($this->username);
         }
         return $this->_user;
     }
