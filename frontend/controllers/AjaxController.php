@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use common\components\Common;
 use common\models\User;
 use frontend\models\FrontendCamera;
+use frontend\models\FrontendUser;
 use frontend\models\LoginForm;
 use frontend\models\RelationsCamUser;
 use frontend\models\RelationsUserPermissionGroup;
@@ -363,7 +364,7 @@ class AjaxController extends Controller
             $data = Yii::$app->request->post();
             $user_name = trim($data['username_login']);
             $password = trim($data['password_login']);
-            $login = \frontend\models\User::findOne(['username'=>$user_name, 'password'=>md5($password)]);
+            $login = FrontendUser::findOne(['username'=>$user_name, 'password'=>md5($password)]);
 
             if ($login) {
                 $session = Yii::$app->session;
