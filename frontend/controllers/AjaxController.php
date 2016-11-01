@@ -165,8 +165,8 @@ class AjaxController extends Controller
             $user->status = 1;
             $user->level = 1;
 //            try{
-                $save = $user->save(false);
-//                $save = $user->save();
+//                $save = $user->save(false);
+                $save = $user->save();
                 if($save){
                     /*$permission_user = new RelationsUserPermissionGroup();
                     $permission_user->user_id =  $user->id;
@@ -181,14 +181,14 @@ class AjaxController extends Controller
                             'message'=>'Đăng nhập thành công'
                         );
                     } else {
-                        User::deleteAll(['username'=>$user_name]);
+                        //User::deleteAll(['username'=>$user_name]);
                         $return = array(
                             'return_code'=>1,
                             'message'=>'Đăng nhập không thành công'
                         );
                     }
                 }else{
-                    User::deleteAll(['username'=>$user_name]);
+                    //User::deleteAll(['username'=>$user_name]);
                     $return = array(
                         'return_code'=>1,
 //                        'message'=>'Đăng nhập không thành công đâu nhé'
