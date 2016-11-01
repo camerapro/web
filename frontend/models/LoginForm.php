@@ -63,7 +63,7 @@ class LoginForm extends Model
      */
     public function login()
     {
-        print_r(static::findOne(['username' => $this->username, 'status' => 1]));exit;
+        print_r(FrontendUser::findOne(['username' => $this->username, 'status' => 1]));exit;
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
