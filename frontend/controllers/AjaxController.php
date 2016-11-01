@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: KOIGIANG
- * Date: 10/14/2016
- * Time: 10:44 AM
- */
 
 namespace frontend\controllers;
 use common\components\Common;
@@ -174,10 +168,10 @@ class AjaxController extends Controller
                 //$save = $user->save(false);
                 $save = $user->save();
                 if($save){
-                    $permission_user = new RelationsUserPermissionGroup();
+                    /*$permission_user = new RelationsUserPermissionGroup();
                     $permission_user->user_id =  $user->id;
                     $permission_user->permission_group_id = 1;
-                    $permission_user->save();
+                    $permission_user->save();*/
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;
