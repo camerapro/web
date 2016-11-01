@@ -181,10 +181,12 @@ class AjaxController extends Controller
                             'message'=>'Đăng nhập thành công'
                         );
                     } else {
+                        print_r($model->getErrors());
                         //User::deleteAll(['username'=>$user_name]);
                         $return = array(
                             'return_code'=>1,
-                            'message'=>'Đăng nhập không thành công'
+//                            'message'=>'Đăng nhập không thành công'
+                            'message'=>$model->getErrors()
                         );
                     }
                 }else{
