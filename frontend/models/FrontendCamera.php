@@ -99,6 +99,7 @@ class FrontendCamera extends Camera
             'order' => 'Sắp xếp',
             'status' => 'Trạng thái',
             'encoder_model' => 'Loại thiết bị',
+            'quality' => 'Chất lượng',
         ];
     }
 }

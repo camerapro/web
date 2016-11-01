@@ -28,6 +28,7 @@ use Yii;
  * @property integer $user_id
  * @property integer $agency_id
  * @property string $encoder_model
+ * @property integer $quality
  */
 class CameraBase extends \yii\db\ActiveRecord
 {
@@ -45,7 +46,7 @@ class CameraBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'encoder_port', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id'], 'integer'],
+            [['category_id', 'encoder_port', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id', 'quality'], 'integer'],
             [['created_time', 'updated_time'], 'safe'],
             [['name', 'encoder_name', 'streaming_url', 'ip_address', 'encoder_username', 'encoder_password', 'channel', 'params', 'encoder_model'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
@@ -79,6 +80,7 @@ class CameraBase extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',
             'encoder_model' => 'Encoder Model',
+            'quality' => 'Quality',
         ];
     }
 }

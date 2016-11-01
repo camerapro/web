@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\Common;
 use common\components\FrontendController;
 use frontend\models\RelationsCamUser;
 use Yii;
@@ -99,10 +100,7 @@ class CameraController extends FrontendController
         $model->created_time = date('Y-m-d H:i:s');
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->protocol == 'http')
-                $model->streaming_url = $model->ip_address;
-            elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            $model->streaming_url = Common::getLinkStream($model->id);
             if($model->save()){
                 $user_id = Yii::$app->user->identity->id;
                 $camera_user = new RelationsCamUser();
@@ -133,10 +131,7 @@ class CameraController extends FrontendController
         $model = $this->findModel($id);
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->protocol == 'http')
-                $model->streaming_url = $model->ip_address;
-            elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            $model->streaming_url = Common::getLinkStream($model->id);
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
