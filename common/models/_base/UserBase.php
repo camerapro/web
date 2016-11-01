@@ -56,7 +56,6 @@ class UserBase extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 128],
             [['city'], 'string', 'max' => 32],
             [['language'], 'string', 'max' => 20],
-            [['phone'], 'unique'],
         ];
     }
 
