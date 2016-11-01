@@ -9,7 +9,7 @@
 namespace frontend\controllers;
 use common\components\Common;
 use common\models\User;
-use frontend\models\Camera;
+use frontend\models\FrontendCamera;
 use frontend\models\LoginForm;
 use frontend\models\RelationsCamUser;
 use frontend\models\RelationsUserPermissionGroup;
@@ -34,7 +34,7 @@ class AjaxController extends Controller
     public function actionCreate(){
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
-            $camera = new Camera();
+            $camera = new FrontendCamera();
             $camera->encoder_name = $data['title_encoder'];
             $camera->name = $data['title_camera'];
             $camera->ip_address = $data['ip_address'];
@@ -170,18 +170,14 @@ class AjaxController extends Controller
             $user->email = $data['email'];
             $user->status = 1;
             $user->level = 1;
+            $user->permission_group_id = 1;
             try{
                 //$save = $user->save(false);
                 $save = $user->save();
                 if($save){
-                    $permission_user = new RelationsUserPermissionGroup();
-                    $permission_user->user_id =  $user->id;
-                    $permission_user->permission_group_id = 1;
-                    $permission_user->save();
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;
-                    print_r($model->login());exit;
                     if ($model->login()) {
                         $return = array(
                             'return_code'=>0,
@@ -262,7 +258,7 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
-            $check = Camera::getListCamId($cam_id);
+            $check = FrontendCamera::getListCamId($cam_id);
             if($check){
                 if($check->status == 1 )  {
                     $check_status = 0;
@@ -271,7 +267,7 @@ class AjaxController extends Controller
                     $check_status = 1;
                 }
                 $check->status = $check_status;
-                $save = $check->save();
+                $check->save();
                 $return = array(
                     'return_code'=>0,
                     'check_status'=>$check_status
@@ -291,7 +287,7 @@ class AjaxController extends Controller
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
-            $cam_info = Camera::getListCamId($cam_id);
+            $cam_info = FrontendCamera::getListCamId($cam_id);
             if($cam_info){
                 $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info]);
                 $return =[
@@ -332,6 +328,7 @@ class AjaxController extends Controller
                 $cam_user->created_by_id = $session['user_id'];
                 $cam_user->created_by_name = $session['user_name'];
                 $cam_user->created_time = date('Y-m-d H:i:s');
+                $cam_user->owner = 0;
                 $res = $cam_user->save();
             }
             if($res)

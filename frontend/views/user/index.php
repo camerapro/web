@@ -37,14 +37,11 @@ $this->title = 'Quản lý tài khoản';
                 },
             ],
             [
-                'label'=>'Phân quyền quyền',
+                'label'=>'Phân quyền',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    $permission_gr = \frontend\models\RelationsUserPermissionGroup::findOne(['user_id'=>$model->id]);
-                    if($permission_gr){
-                        return \frontend\models\PermissionGroup::findOne(\frontend\models\RelationsUserPermissionGroup::findOne(['user_id'=>$model->id])->permission_group_id)->name;
-                    }
-                    return '';
+                    $permission = \frontend\models\PermissionGroup::findOne($model->permission_group_id);
+                        return isset($permission) ? $permission->name : '';
                 },
             ],
             [

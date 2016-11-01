@@ -2,11 +2,11 @@
 
 namespace frontend\models;
 
-use common\models\_base\CameraBase;
+use common\models\Camera;
 use Yii;
 
 
-class Camera extends CameraBase
+class FrontendCamera extends Camera
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;

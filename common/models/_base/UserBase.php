@@ -11,6 +11,7 @@ use Yii;
  * @property string $username
  * @property integer $point
  * @property integer $level
+ * @property integer $permission_group_id
  * @property string $password
  * @property string $fullname
  * @property string $email
@@ -47,7 +48,7 @@ class UserBase extends \yii\db\ActiveRecord
     {
         return [
             [['username', 'password', 'fullname', 'email'], 'required'],
-            [['point', 'level', 'gender', 'country', 'status'], 'integer'],
+            [['point', 'level', 'permission_group_id', 'gender', 'country', 'status'], 'integer'],
             [['birthday', 'created_time', 'updated_time', 'login_time'], 'safe'],
             [['username'], 'string', 'max' => 100],
             [['password', 'email', 'facebook_id', 'google_id', 'thumb_version', 'avatar'], 'string', 'max' => 255],
@@ -69,6 +70,7 @@ class UserBase extends \yii\db\ActiveRecord
             'username' => 'Username',
             'point' => 'Point',
             'level' => 'Level',
+            'permission_group_id' => 'Permission Group ID',
             'password' => 'Password',
             'fullname' => 'Fullname',
             'email' => 'Email',

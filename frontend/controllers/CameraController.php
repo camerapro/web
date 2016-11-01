@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use common\components\FrontendController;
 use frontend\models\RelationsCamUser;
 use Yii;
-use frontend\models\Camera;
+use frontend\models\FrontendCamera;
 use frontend\models\search\CameraSearch;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -55,9 +55,9 @@ class CameraController extends FrontendController
                 ->all();
         }*/
         if(Yii::$app->user->identity->level ==4){
-            $query = Camera::find();
+            $query = FrontendCamera::find();
         }else{
-            $query = Camera::find()
+            $query = FrontendCamera::find()
                 -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['=', 'relations_cam_user.user_id', Yii::$app->user->identity->id]);
             if(Yii::$app->user->identity->username == 'demo'){
@@ -95,7 +95,7 @@ class CameraController extends FrontendController
      */
     public function actionCreate()
     {
-        $model = new Camera();
+        $model = new FrontendCamera();
         $model->created_time = date('Y-m-d H:i:s');
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -170,7 +170,7 @@ class CameraController extends FrontendController
      */
     protected function findModel($id)
     {
-        if (($model = Camera::findOne($id)) !== null) {
+        if (($model = FrontendCamera::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

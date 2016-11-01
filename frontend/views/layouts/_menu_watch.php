@@ -12,7 +12,7 @@
         </div>
         <div class="cam_show boder_1 mbt5">
             <?php
-            $cams = \frontend\models\Camera::getListCam(Yii::$app->user->identity->id);
+            $cams = \frontend\models\FrontendCamera::getListCam(Yii::$app->user->identity->id);
             $i=0;
             if($cams){
                 foreach ($cams as $cam):

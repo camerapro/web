@@ -1,7 +1,7 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\models\Camera;
+use frontend\models\FrontendCamera;
 use frontend\models\LoginForm;
 use Yii;
 use yii\base\InvalidParamException;
@@ -9,7 +9,6 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-//use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -20,36 +19,6 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    /*public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout', 'signup'],
-                'rules' => [
-                    [
-                        'actions' => ['signup'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => false,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }*/
 
     /**
      * @inheritdoc
@@ -84,12 +53,12 @@ class SiteController extends Controller
         $message = '';
         $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         if(!empty($cam_id)){
-            $cam_info = Camera::getOneCamById($cam_id);
+            $cam_info = FrontendCamera::getOneCamById($cam_id);
             if(!$cam_info){
                 $message = 'Bạn không có quyền xem camera này, vui lòng chọn camera của bạn để xem!';
             }
         }else{
-            $cams = \frontend\models\Camera::getListCam();
+            $cams = FrontendCamera::getListCam();
             if(!empty($cams)){
                 $cam_info = $cams['0'];
             }

@@ -2,9 +2,10 @@
 
 namespace frontend\models;
 
+use common\models\User;
 use Yii;
 
-class User extends \common\models\User
+class FrontendUser extends User
 {
     public function attributeLabels()
     {

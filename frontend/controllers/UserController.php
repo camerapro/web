@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use common\components\FrontendController;
-use frontend\models\Camera;
+use frontend\models\FrontendCamera;
 use frontend\models\RelationsUserPermissionGroup;
 use Yii;
-use frontend\models\User;
+use frontend\models\FrontendUser;
 use frontend\models\search\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -73,13 +73,13 @@ class UserController extends FrontendController
      */
     public function actionCreate()
     {
-        $model = new User();
+        $model = new FrontendUser();
         $error= '';
 //        print_r(Yii::$app->request->get());exit;
         $data = (Yii::$app->request->get());
         if(!empty($data)){
             $user_name = trim($data['username']);
-            $check_exits = User::findOne(['username'=>$user_name]);
+            $check_exits = FrontendUser::findOne(['username'=>$user_name]);
             if($check_exits){
                 $error = 'Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác';
                 goto return_exit;
@@ -104,15 +104,10 @@ class UserController extends FrontendController
             $model->created_time = date('Y-m-d H:i:s');
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
+            $model->permission_group_id =  isset($data['permission']) ? $data['permission'] : 1;
             if ($model->save()) {
-                $permission_user = new RelationsUserPermissionGroup();
-                $permission_user->user_id =  $model->id;
-                $permission_user->permission_group_id = 1;
-                $permission_user->save();
-//                return $this->redirect(['view', 'id' => $model->id]);
                 return $this->redirect(['index']);
             }else{
-                print_r($model->getErrors());exit;
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
                 goto return_exit;
             }
@@ -135,10 +130,9 @@ class UserController extends FrontendController
         $model = $this->findModel($id);
         $error= '';
         $data = (Yii::$app->request->get());
-        $relation_user_group = RelationsUserPermissionGroup::findOne(['user_id'=>$id]);
         if(!empty($data) && !empty($data['username'])){
             $user_name = trim($data['username']);
-            $check_exits = User::findOne(['username'=>$user_name]);
+            $check_exits = FrontendUser::findOne(['username'=>$user_name]);
             if($check_exits && $user_name <>  $model->username){
                 $error = 'Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác';
                 goto return_exit;
@@ -166,18 +160,9 @@ class UserController extends FrontendController
             $model->updated_time = date('Y-m-d H:i:s');
             $model->level = $data['level'];
             $model->status = 1;
+            $model->permission_group_id = isset($data['permission']) ? $data['permission'] : 1;
             if ($model->save()) {
-                if(isset($relation_user_group)){
-                    $relation_user_group->permission_group_id = $data['permission'];
-                    $relation_user_group->save();
-                }else{
-                    $permission_user = new RelationsUserPermissionGroup();
-                    $permission_user->user_id =  $model->id;
-                    $permission_user->permission_group_id = 1;
-                    $permission_user->save();
-                }
                 return $this->redirect(['index']);
-                return $this->redirect(['view', 'id' => $model->id]);
             }else{
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
                 goto return_exit;
@@ -187,7 +172,6 @@ class UserController extends FrontendController
         return $this->render('update', [
             'model' => $model,
             'error'=>$error,
-            'relation_user_group'=>$relation_user_group
         ]);
     }
 
@@ -213,7 +197,7 @@ class UserController extends FrontendController
      */
     protected function findModel($id)
     {
-        if (($model = User::findOne($id)) !== null) {
+        if (($model = FrontendUser::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -227,8 +211,8 @@ class UserController extends FrontendController
         $granded = 0;
         if(($user_grand_id)){
             $granded = 1;
-            $list_cam = Camera::getAllCamByGrandId($user_grand_id);
-            $list_cam_granded = Camera::getAllCamGranded($user_grand_id, $user_id);
+            $list_cam = FrontendCamera::getAllCamByGrandId($user_grand_id);
+            $list_cam_granded = FrontendCamera::getAllCamGranded($user_grand_id, $user_id);
         }
 
         return $this->render('grand', [
@@ -238,8 +222,4 @@ class UserController extends FrontendController
         ]);
     }
 
-    public function actionPermission(){
-        die('1');
-
-    }
 }
