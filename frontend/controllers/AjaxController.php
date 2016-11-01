@@ -177,7 +177,7 @@ class AjaxController extends Controller
                     $model->password = $password;
                     $return = array(
                         'return_code'=>0,
-                        'message'=>$model->login(),
+                        'message'=>'test',
                     );
                     echo json_encode($return);
                     exit;
