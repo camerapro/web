@@ -6,12 +6,12 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use common\models\Staff;
+use common\models\Timekeeping;
 
 /**
  * Site controller
  */
-class StaffController extends Controller
+class TimekeepingController extends Controller
 {
     public $enableCsrfValidation = false;
     private $api_key = '43S4342@342Asfd';
@@ -41,17 +41,17 @@ class StaffController extends Controller
         if ($data = Yii::$app->request->post()) {
 
             $params = [
-                'name' => isset($data['name']) ? $data['name'] : '',
                 'card_code' => isset($data['card_code']) ? $data['card_code'] : '',
-                'card_id' => isset($data['card_id']) ? $data['card_id'] : '',
-                'department' => isset($data['department']) ? $data['department'] : '',
+                'staff_id' => isset($data['staff_id']) ? $data['staff_id'] : '',
+                'tap_id' => isset($data['tap_id']) ? $data['tap_id'] : '',
                 'image' => isset($data['image']) ? $data['image'] : '',
-                'order' => isset($data['order']) ? $data['order'] : '',
+                'type' => isset($data['type']) ? $data['type'] : '',
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                 'description' => isset($data['description']) ? $data['description'] : '',
-                'created_time' => date('Y-m-d H:i:s'),
+                'created_time' => isset($data['created_time']) ? $data['created_time'] : date('Y-m-d H:i:s'),
             ];
-            $save = Staff::add($params);
+
+            $save = Timekeeping::add($params);
 
             if ($save) {
                 $return = array(
@@ -78,27 +78,75 @@ class StaffController extends Controller
     /**
      * @return array
      */
-    public function actionInfo()
+    public function actionGet()
     {
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
         $staff = [];
         $message = '';
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $card_code = isset(Yii::$app->request->get()['card_code']) ? Yii::$app->request->get()['card_code'] : '';
-        $staff = Staff::find()->where(['and', ['id' => $id]])
-            ->orWhere(['card_code' => $card_code])->one();
-        if ($staff)
-            $staff->image = 'http://api.thietbianninh.com/kute.jpg';
+        $staff_name = isset(Yii::$app->request->get()['staff_name']) ? Yii::$app->request->get()['staff_name'] : '';
+        $staff = Timekeeping::search($card_code,$staff_name);
         return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
 
     }
-
     /**
      * @return array
      */
-    public function actionGet()
+    public function actionUpdate()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        if ($data = Yii::$app->request->post()) {
+            return ['error_code' => 0, 'message' => 'Success'];
+        }
+        exit();
+
+    }
+    /**
+     * @return array
+     */
+    public function actionDelete()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        if ($data = Yii::$app->request->post()) {
+            $this->findModel($id)->delete();
+            return ['error_code' => 0, 'message' => 'Success'];
+        }
+        else{
+            return array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        return ['error_code' => 1, 'message' => 'Fail'];
+        exit();
+
+    }
+    /**
+     * Finds the Camera model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Camera the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Timekeeping::findOne($id)) !== null) {
+            return $model;
+        } else {
+            return ['error_code' => 1, 'message' => 'Fail'];
+        }
+    }
+    /**
+     * @return array
+     */
+    public function actionGet22()
     {
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
