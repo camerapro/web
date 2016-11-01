@@ -63,8 +63,6 @@ class LoginForm extends Model
      */
     public function login()
     {
-        echo '1';
-        print_r(FrontendUser::findAll(['username' => 'LoginForm', 'status' => 1]));exit;
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
@@ -80,8 +78,7 @@ class LoginForm extends Model
     protected function getUser()
     {
         if ($this->_user === null) {
-            $this->_user = static::findOne(['username' => $this->username, 'status' => self::STATUS_ACTIVE]);
-//            $this->_user = FrontendUser::findByUsername($this->username);
+            $this->_user = FrontendUser::findByUsername($this->username);
         }
         return $this->_user;
     }

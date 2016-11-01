@@ -178,8 +178,19 @@ class AjaxController extends Controller
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;
-                    print_r($model->login());
-                    if ($model->login()) {
+                    try{
+                        $login = $model->login();
+                    }
+                    catch (Exception $ex){
+                        User::deleteAll(['username'=>$user_name]);
+                        $return = array(
+                            'return_code'=>1,
+                            'message'=>'Đăng nhập không thành công'
+                        );
+                        echo json_encode($return);
+                        exit;
+                    }
+                    if ($login) {
                         $return = array(
                             'return_code'=>0,
                             'message'=>'Đăng nhập thành công'
