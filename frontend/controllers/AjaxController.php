@@ -164,6 +164,12 @@ class AjaxController extends Controller
             $user->email = $data['email'];
             $user->status = 1;
             $user->level = 1;
+            $return = array(
+                'return_code'=>0,
+                'message'=>'Đăng nhập thành công'
+            );
+            echo json_encode($return);
+            exit;
             try{
                 //$save = $user->save(false);
                 $save = $user->save();
