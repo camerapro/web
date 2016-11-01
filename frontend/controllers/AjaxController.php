@@ -178,6 +178,7 @@ class AjaxController extends Controller
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;
+                    print_r($model->login());
                     if ($model->login()) {
                         $return = array(
                             'return_code'=>0,
