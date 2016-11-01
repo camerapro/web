@@ -64,7 +64,7 @@ class LoginForm extends Model
     public function login()
     {
         echo '1';
-        print_r(FrontendUser::findOne(['username' => 'LoginForm', 'status' => 1]));exit;
+        print_r(FrontendUser::findAll(['username' => 'LoginForm', 'status' => 1]));exit;
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {
