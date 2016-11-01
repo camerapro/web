@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: KOIGIANG
+ * Date: 10/14/2016
+ * Time: 10:44 AM
+ */
 
 namespace frontend\controllers;
 use common\components\Common;
@@ -164,51 +170,43 @@ class AjaxController extends Controller
             $user->email = $data['email'];
             $user->status = 1;
             $user->level = 1;
-//            try{
-//                $save = $user->save(false);
+            try{
+                //$save = $user->save(false);
                 $save = $user->save();
                 if($save){
-                    /*$permission_user = new RelationsUserPermissionGroup();
+                    $permission_user = new RelationsUserPermissionGroup();
                     $permission_user->user_id =  $user->id;
                     $permission_user->permission_group_id = 1;
-                    $permission_user->save();*/
+                    $permission_user->save();
                     $model = new LoginForm();
                     $model->username = $user_name;
                     $model->password = $password;
-                    $return = array(
-                        'return_code'=>0,
-                        'message'=>'test',
-                    );
-                    echo json_encode($return);
-                    exit;
                     if ($model->login()) {
                         $return = array(
                             'return_code'=>0,
                             'message'=>'Đăng nhập thành công'
                         );
                     } else {
-                        print_r($model->getErrors());
-                        //User::deleteAll(['username'=>$user_name]);
+                        User::deleteAll(['username'=>$user_name]);
                         $return = array(
                             'return_code'=>1,
-//                            'message'=>'Đăng nhập không thành công'
-                            'message'=>$model->getErrors()
+                            'message'=>'Đăng nhập không thành công'
                         );
                     }
                 }else{
-                    //User::deleteAll(['username'=>$user_name]);
+                    User::deleteAll(['username'=>$user_name]);
                     $return = array(
                         'return_code'=>1,
 //                        'message'=>'Đăng nhập không thành công đâu nhé'
                         'message'=>$user->getErrors(),
                     );
                 }
-           /* }catch (Exception $ex){
+            }catch (Exception $ex){
                 $return = array(
                     'return_code'=>1,
                     'message'=>'Đăng nhập không thành công'
                 );
-            }*/
+            }
         }else{
             $return = array(
                 'return_code'=>1,
