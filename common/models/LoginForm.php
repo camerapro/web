@@ -1,7 +1,8 @@
 <?php
 namespace common\models;
 
-use common\models\User;
+//use common\models\User;
+use frontend\models\User;
 use Yii;
 use yii\base\Model;
 
