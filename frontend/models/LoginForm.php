@@ -1,8 +1,7 @@
 <?php
-namespace common\models;
+namespace frontend\models;
 
-//use common\models\User;
-use frontend\models\User;
+use common\models\User;
 use Yii;
 use yii\base\Model;
 
@@ -64,7 +63,6 @@ class LoginForm extends Model
      */
     public function login()
     {
-        print_r(User::findByUsername($this->username));exit;
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), 3600 * 24 * 30);
         } else {

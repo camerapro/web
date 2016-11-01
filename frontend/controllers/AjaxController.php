@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use common\components\Common;
 use common\models\User;
 use frontend\models\Camera;
+use frontend\models\LoginForm;
 use frontend\models\RelationsCamUser;
 use frontend\models\RelationsUserPermissionGroup;
 use Yii;
@@ -17,7 +18,6 @@ use yii\base\Exception;
 use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use common\models\LoginForm;
 
 class AjaxController extends Controller
 {
