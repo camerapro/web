@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <th style="width: 15%">Tên camera</th>
             <th style="width: 15%">Tên Đầu ghi</th>
             <th style="width: 15%">Kênh</th>
+            <th style="width: 15%">Tên đăng nhập</th>
             <th style="width: 20%">Link Streaming</th>
             <th style="width: 10%">Giao thức</th>
             <th style="width: 5%">Trạng thái</th>
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <tr>
                 <td><?= $cam->id;?></td>
                 <td>
-                    <a href="<?=  Url::to(['camera/view', 'id' => $cam->id])?>"><?= $cam->name;?></a>
+                    <?= $cam->name;?>
                     <br />
                     <small>Ngày tạo: <?= date('H:i:s d-m-Y', strtotime($cam->created_time));?></small>
                 </td>
@@ -48,6 +49,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </td>
                 <td>
                     <?= $cam->channel;?>
+                </td>
+                <td>
+                    <?= $cam->encoder_username;?>
                 </td>
                 <td>
                     <a href="<?=  Url::to(['site/index', 'id' => $cam->id])?>"><?= \common\components\Common::getLinkStream($cam->id);?></a>
@@ -59,7 +63,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <button type="button" class="btn btn-success btn-xs"><?= $cam->status;?></button>
                 </td>
                 <td>
-                    <a href="<?=  Url::to(['camera/view', 'id' => $cam->id])?>" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                     <a href="<?=  Url::to(['camera/update', 'id' => $cam->id])?>" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                     <a href="<?=  Url::to(['camera/delete', 'id' => $cam->id])?>" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                 </td>

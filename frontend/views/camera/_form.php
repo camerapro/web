@@ -33,11 +33,11 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'encoder_model')->dropDownList(['H264DVR' => 'H264DVR', 'HikVision' => 'HikVision', 'Dahua' => 'Dahua', 'Camera IP' => 'Camera IP', 'other' => 'Loại khác'],['prompt'=>'Chọn loại thiết bị']);
     ?>
     <?php $list = [0 => 'Không hiển thị', 1 => 'Hiển thị'];
-    $model->status = '1';
+    $model->isNewRecord ? $model->status = 1 : '';
     echo $form->field($model, 'status')->radioList($list);
     ?>
     <?php $list = [0 => 'SD', 1 => 'HD'];
-    $model->quality = 0;
+    $model->isNewRecord ? $model->quality = 1 : '';
     echo $form->field($model, 'quality')->radioList($list);
     ?>
     <div class="form-group">
