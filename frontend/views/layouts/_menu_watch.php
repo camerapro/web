@@ -20,8 +20,13 @@
             <ul class="cam_res cam_number_<?= $cam->id?>">
                 <li class="pr2">
                     <a class="cam_name <?php  echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" value="<?= $cam->id?>"><?= $cam->name?></a>
-
                 </li>
+                <?php if($cam->protocol == 'rtsp'):
+                        if($cam->quality == 0) $src = 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/sd_standard_definition_1.png';
+                        else  $src = 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/hd_high_definition_1.png';
+                    ?>
+                <img class="img_hd_sd" alt="chuyển đổi chất lượng" value="<?= $cam->quality?>" src="<?=$src?>">
+                <?php endif;?>
             </ul>
             <?php
                 $i++;

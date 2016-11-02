@@ -207,3 +207,13 @@ body{
     width: 0px;
     overflow: hidden;
 }
+.cam_res .img_hd_sd {
+    cursor: pointer;
+    float: right;
+    display: none;
+}
+.cam_res:hover .img_hd_sd{
+    display: block;
+}
+
+
