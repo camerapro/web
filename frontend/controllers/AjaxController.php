@@ -51,16 +51,16 @@ class AjaxController extends Controller
 
             $save = $camera->save(false);
             if($save){
-//                $camera->streaming_url = Common::getLinkStream($camera->id);
-//                $camera->save();
-               /* $camera_user = new RelationsCamUser();
+                $camera->streaming_url = Common::getLinkStream($camera->id);
+                $camera->update();
+                $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
                 $camera_user->created_by_id = Yii::$app->user->identity->id;
                 $camera_user->user_id = Yii::$app->user->identity->id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
                 $camera_user->owner = 1;
-                $camera_user->save();*/
+                $camera_user->save();
                 $return = array(
                     'return_code'=>0,
                     'message'=>'Thêm mới thành công'

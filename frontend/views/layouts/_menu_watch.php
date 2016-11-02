@@ -18,7 +18,10 @@
                 foreach ($cams as $cam):
             ?>
             <ul class="cam_res cam_number_<?= $cam->id?>">
-                <li class="pr2"><a class="cam_name <?php  echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" value="<?= $cam->id?>"><?= $cam->name?></a></li>
+                <li class="pr2">
+                    <a class="cam_name <?php  echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" value="<?= $cam->id?>"><?= $cam->name?></a>
+
+                </li>
             </ul>
             <?php
                 $i++;
