@@ -48,20 +48,19 @@ class AjaxController extends Controller
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->encoder_model = $data['encoder_model'];
-            if($data['protocol'] == 'http')
-                $camera->streaming_url = $data['ip_address'];
-            elseif ($data['protocol'] == 'rtsp')
-                $camera->streaming_url = 'rtsp://' .$data['ip_address']. ':' . $data['port'] . '/user=' . $data['username'] . '&password='.$data['password'] . '&channel=' . $data['channel'] . '&stream=1.sdp';
+
             $save = $camera->save();
             if($save){
-                $camera_user = new RelationsCamUser();
+                $camera->streaming_url = Common::getLinkStream($camera->id);
+                $camera->save();
+               /* $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
                 $camera_user->created_by_id = Yii::$app->user->identity->id;
                 $camera_user->user_id = Yii::$app->user->identity->id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
                 $camera_user->owner = 1;
-                $camera_user->save();
+                $camera_user->save();*/
                 $return = array(
                     'return_code'=>0,
                     'message'=>'Thêm mới thành công'
