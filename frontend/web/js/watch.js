@@ -2,7 +2,6 @@ $( document ).ready(function() {
     $('.cam_name').on('click', function() {
         var cam_id = $(this).attr('value');
         var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
-
         $(this).parent().parent().parent().find('.cam_select').removeClass('cam_select');
         $('.cam_number_' + cam_id + ' li a').addClass('cam_select');
         var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
@@ -218,46 +217,7 @@ $( document ).ready(function() {
 
     );
 
-    $('.img_hd_sd').on('click', function(){
-        value = ($(this).attr('value'));
-        var cam_id = $(this).parent().find('.cam_name ').attr('value');
-        // alert(cam_id);
-        var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
-        var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
-        // alert(protocol);
-        if(value == 0){
-            $(this).attr("src", 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/hd_high_definition_1.png');
-            $(this).attr("value", 1);
-        }else{
-            $(this).attr("src", 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/sd_standard_definition_1.png');
-            $(this).attr("value", 0);
-        }
-        /*var cam_id = $(this).attr('value');
-        var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
 
-        $(this).parent().parent().parent().find('.cam_select').removeClass('cam_select');
-        $('.cam_number_' + cam_id + ' li a').addClass('cam_select');
-        var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
-        if(protocol == 'http'){
-            var player = videojs('camera_video_' + current_cam_id);
-            player.dispose();
-        }else{
-            vxgplayer('vxg_media_player_' + current_cam_id).stop();
-        }
-        $.ajax({
-            url: '/ajax/play',
-            type: "POST",
-            data: {
-                'cam_id':cam_id,
-            } ,
-            success: function (response) {
-                data = JSON.parse(response);
-                if(data['return_code'] == 0){
-                    $('.camera_detail').html(data['return_html']);
-                }
-            },
-        });*/
-    });
 
 });
 

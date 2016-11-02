@@ -171,6 +171,7 @@ class AjaxController extends Controller
             $user->status = 1;
             $user->level = 1;
             $user->permission_group_id = 1;
+            $user->created_time = date('Y-m-d H:i:s');
             try{
                 //$save = $user->save(false);
                 $save = $user->save();
