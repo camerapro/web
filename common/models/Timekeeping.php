@@ -20,5 +20,21 @@ use Yii;
  */
 class Timekeeping extends TimekeepingBase
 {
-
+    public static  function add($params){
+        $tat = new self;
+        $tat->attributes = $params;
+        return $tat->save(false);
+    }
+    public static  function search($card_code=0,$staff_name=''){
+        $staff = Timekeeping::find()->where(['and', ['card_code' => $card_code]])
+            ->orFilterWhere(['like', 'staff_name', $staff_name])
+            ->all();
+        $rt = array();
+        foreach ($staff as $value)
+        {
+            $value->image = 'http://api.thietbianninh.com/kute.jpg';
+            $rt[] = $value;
+        }
+        return $rt;
+    }
 }

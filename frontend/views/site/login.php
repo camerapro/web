@@ -66,7 +66,7 @@ use yii\bootstrap\ActiveForm;
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title" id="myModalLabel">Thêm mới camera</h4>
+                <h4 class="modal-title" id="myModalLabel">Tạo tài khoản</h4>
             </div>
             <p class="show_error"></p>
             <div id="wizard" class="form_wizard wizard_horizontal">

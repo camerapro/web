@@ -9,26 +9,42 @@ use yii\helpers\Url;
                 <a id="menu_toggle"><i class="fa fa-bars"></i></a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-
+                <li class="">
+                    <a href="<?= \yii\helpers\Url::base()?>/site/logout">
+                        <i class="fa fa-sign-out pull-right"></i>Thoát
+                    </a>
                 <li class="nav_li">
                     <a href="#"><i class="fa fa-phone mr5" aria-hidden="true"></i>
-                        Liên hệ</a>
+                        Liên hệ
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li class=""><a>CÔNG TY TNHH CÔNG NGHỆ THÔNG MINH Á CHÂU VIỆT NAM</a></li>
+                        <li class=""><a>Địa chỉ : Số 28, ngõ 36, Đào Tấn, Ba Đình, Hà Nội</a></li>
+                        <li class=""><a>web : thietbianninh.com - astech.com.vn</a></li>
+                    </ul>
                 </li>
+
                 <li class="nav_li">
                     <a href="#"><i class="fa fa-skype mr5" aria-hidden="true"></i>
-                        Hỗ trợ</a>
+                        Hỗ trợ
+                        <span class=" fa fa-angle-down"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
+                        <li class=""><a>Skype : viet_hung902</a></li>
+                        <li class=""><a>Zalo : 0969 617 388</a></li>
+                        <li class=""><a>Hotline : 0969 617 388</a></li>
+                    </ul>
                 </li>
                 <li class="nav_li">
                     <a href="#"><i class="fa fa-user mr5" aria-hidden="true"></i>
                         <?= Yii::$app->user->identity->username;?></a>
                 </li>
+
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                    <a href="<?= \yii\helpers\Url::base()?>/site/logout">
-                        <i class="fa fa-sign-out pull-right"></i>Thoát
-                    </a>
-                </li>
+
                 <?php $menu = \frontend\models\FrontendMenu::getMenu(0);?>
                 <?php foreach ($menu as $item):?>
                 <li>

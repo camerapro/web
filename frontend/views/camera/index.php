@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </tr>
         </thead>
         <tbody class="tbody_view">
-        <?php foreach ($cams as $cam):?>
+        <?php foreach ($models as $cam):?>
             <tr>
                 <td><?= $cam->id;?></td>
                 <td>
@@ -68,4 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </tbody>
     </table>
+    <?php
+    echo \yii\widgets\LinkPager::widget([
+        'pagination' => $pages,
+    ]);
+    ?>
 </div>

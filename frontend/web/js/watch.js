@@ -30,7 +30,6 @@ $( document ).ready(function() {
 
     });
     $('#save_and_create').on('click', function() {
-        var validate = 1;
         var title_encoder = $('#title_encoder').val();
         var title_camera = $('#title_camera').val();
         var protocol = $('#protocol').val();
@@ -39,7 +38,8 @@ $( document ).ready(function() {
         var port = $('#port').val();
         var port_http = $('#port_http').val();
         var username = $('#username').val();
-        var password = $('#password').val();
+        var password = $('#password').val() ;
+        var encoder_type = $('#encoder_model').val() ;
         if(title_encoder == ''){
             $('#title_encoder').focus();
             $('.show_error').html('Tên đầu ghi không được để trống');
@@ -57,13 +57,13 @@ $( document ).ready(function() {
             $('.show_error').html('Địa chỉ IP không được để trống');
         }else if(port == ''){
             $('#port').focus();
-            $('.show_error').html('Port không được để trống');
+            $('.show_error').html('Cổng rtsp không được để trống');
         }else if(username == ''){
             $('#username').focus();
             $('.show_error').html('Username không được để trống');
         }else if(port_http == ''){
             $('#port_http').focus();
-            $('.show_error').html('Cổng http không được để trống');
+            $('.show_error').html('Cổng media không được để trống');
         }
         else {
             $.ajax({
@@ -76,9 +76,10 @@ $( document ).ready(function() {
                     'channel':channel,
                     'ip_address':ip_address,
                     'port':port,
-                    'port_http':port_http,
                     'username':username,
-                    'password':password
+                    'password':password,
+                    'port_http':port_http,
+                    'encoder_type':encoder_type
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
@@ -103,6 +104,9 @@ $( document ).ready(function() {
             var port = $('#port').val();
             var username = $('#username').val();
             var password = $('#password').val();
+            var encoder_model = $('#encoder_model').val() ;
+            var port_http = $('#port_http').val();
+
             if(title_encoder == ''){
                 $('#title_encoder').focus();
                 $('.show_error').html('Tên đầu ghi không được để trống');
@@ -135,8 +139,10 @@ $( document ).ready(function() {
                         'channel':channel,
                         'ip_address':ip_address,
                         'port':port,
+                        'port_http':port_http,
                         'username':username,
-                        'password':password
+                        'password':password,
+                        'encoder_model':encoder_model
                     } ,
                     success: function (response) {
                         data_res = JSON.parse(response);

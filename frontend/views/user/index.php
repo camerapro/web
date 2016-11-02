@@ -29,6 +29,28 @@ $this->title = 'Quản lý tài khoản';
              'fullname',
              'email:email',
              'phone',
+            [
+                'label'=>'Nhóm quyền',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return \frontend\models\Level::findOne($model->level)->level_name;
+                },
+            ],
+            [
+                'label'=>'Phân quyền',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    $permission = \frontend\models\PermissionGroup::findOne($model->permission_group_id);
+                        return isset($permission) ? $permission->name : '';
+                },
+            ],
+            [
+                'label'=>'Thời gian tạo',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return date('H:i d/m/Y', strtotime($model->created_time));
+                },
+            ],
             // 'birthday',
             // 'gender',
 //             'address',

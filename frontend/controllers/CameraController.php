@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
+use common\components\Common;
 use common\components\FrontendController;
 use frontend\models\RelationsCamUser;
 use Yii;
-use frontend\models\Camera;
+use frontend\models\FrontendCamera;
 use frontend\models\search\CameraSearch;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -44,17 +46,34 @@ class CameraController extends FrontendController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);*/
-        $cams = Camera::getListAllCam();
+        //$cams = Camera::getListAllCam();
         //set defaul for user demo
-        if(Yii::$app->user->identity->username == 'demo'){
+        /*if(Yii::$app->user->identity->username == 'demo'){
             $cams = Camera::find()
                 -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['=', 'relations_cam_user.user_id', Yii::$app->user->identity->id])
                 ->andWhere(['=', 'relations_cam_user.owner', 1])
                 ->all();
+        }*/
+        if(Yii::$app->user->identity->level ==4){
+            $query = FrontendCamera::find();
+        }else{
+            $query = FrontendCamera::find()
+                -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+                ->where(['=', 'relations_cam_user.user_id', Yii::$app->user->identity->id]);
+            if(Yii::$app->user->identity->username == 'demo'){
+                $query->andWhere(['=', 'relations_cam_user.owner', 1]);
+            }
         }
-        return $this->render('index',[
-            'cams'=>$cams,
+        $countQuery = clone $query;
+        $pages = new Pagination(['totalCount' => $countQuery->count()]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
+
+        return $this->render('index', [
+            'models' => $models,
+            'pages' => $pages,
         ]);
     }
 
@@ -77,14 +96,11 @@ class CameraController extends FrontendController
      */
     public function actionCreate()
     {
-        $model = new Camera();
+        $model = new FrontendCamera();
         $model->created_time = date('Y-m-d H:i:s');
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->protocol == 'http')
-                $model->streaming_url = $model->ip_address;
-            elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            $model->streaming_url = Common::getLinkStream($model->id);
             if($model->save()){
                 $user_id = Yii::$app->user->identity->id;
                 $camera_user = new RelationsCamUser();
@@ -115,10 +131,7 @@ class CameraController extends FrontendController
         $model = $this->findModel($id);
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->protocol == 'http')
-                $model->streaming_url = $model->ip_address;
-            elseif ($model->protocol == 'rtsp')
-                $model->streaming_url = 'rtsp://' .$model->ip_address. ':' . $model->port . '/user=' . $model->encoder_username . '&password='. $model->encoder_password . '&channel=' . $model->channel . '&stream=1.sdp';
+            $model->streaming_url = Common::getLinkStream($model->id);
             if($model->save()){
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -152,7 +165,7 @@ class CameraController extends FrontendController
      */
     protected function findModel($id)
     {
-        if (($model = Camera::findOne($id)) !== null) {
+        if (($model = FrontendCamera::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
