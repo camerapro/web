@@ -226,9 +226,15 @@ $( document ).ready(function() {
         var cam_id = $(this).parent().find('.cam_name ').attr('value');
         // alert(cam_id);
         var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
-        var isChrome = !!window.chrome && !!window.chrome.webstore;
-        if(isChrome){
-            vxgplayer('vxg_media_player_' + current_cam_id).stop();
+        var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
+        if(protocol == 'http'){
+            var player = videojs('camera_video_' + current_cam_id);
+            player.dispose();
+        }else{
+            var isChrome = !!window.chrome && !!window.chrome.webstore;
+            if(isChrome){
+                vxgplayer('vxg_media_player_' + current_cam_id).stop();
+            }
         }
         $.ajax({
             url: '/ajax/play_quality',

@@ -14,12 +14,13 @@
         </div>
         <script>
             $(document).ready(function() {
+                alert('vxg_media_player_<?= $cam_info->id;?>');
                 var height = $(window).height();
                 var width = $(window).width();
                 $('.camera_detail').css('height',height-80);
                 $('.camera_detail').css('width',width - 240);
                 vxgplayer('vxg_media_player_<?= $cam_info->id;?>').play();
-                vxgplayer('vxg_media_player2').isPlaying();
+                vxgplayer('vxg_media_player_<?= $cam_info->id;?>').isPlaying();
             });
         </script>
     <?php }else{ ?>
