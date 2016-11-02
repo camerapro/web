@@ -66,7 +66,6 @@ $( document ).ready(function() {
             $('.show_error').html('Cổng media không được để trống');
         }
         else {
-            alert(title_encoder);
             $.ajax({
                 url: '/ajax/create',
                 type: "GET",
