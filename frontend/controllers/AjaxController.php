@@ -34,7 +34,7 @@ class AjaxController extends Controller
 
     public function actionCreate(){
         if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->post();
+            $data = Yii::$app->request->get();
             $camera = new FrontendCamera();
             $camera->encoder_name = $data['title_encoder'];
             $camera->name = $data['title_camera'];
@@ -47,7 +47,7 @@ class AjaxController extends Controller
             $camera->encoder_password = isset($data['password'])? $data['password'] : NULL;
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
-            $camera->encoder_model = $data['encoder_type'];
+            $camera->encoder_model = $data['encoder_model'];
             if($data['protocol'] == 'http')
                 $camera->streaming_url = $data['ip_address'];
             elseif ($data['protocol'] == 'rtsp')
@@ -84,7 +84,7 @@ class AjaxController extends Controller
     }
 
     public function actionCamera(){
-        $data = Yii::$app->request->post();
+        $data = Yii::$app->request->get();
         $camera = new User();
         $camera->fullname = $data['fullname'];
         $camera->username = $data['user_name'];
@@ -160,7 +160,7 @@ class AjaxController extends Controller
 
     public function actionCreate_and_login(){
         if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->post();
+            $data = Yii::$app->request->get();
             $user_name = trim($data['user_name']);
             $password = trim($data['password']);
             $user = new User();
