@@ -69,6 +69,7 @@ class AccountController extends Controller
      */
     public function actionIndex()
     {
+		
        die("HELLO API");
     }
 
@@ -76,7 +77,7 @@ class AccountController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
 			
-           return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
+        return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
         }
 		if($post = Yii::$app->request->post()){
 			
