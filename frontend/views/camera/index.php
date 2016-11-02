@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $cam->channel;?>
                 </td>
                 <td>
-                    <?= \frontend\models\RelationsCamUser::findOne(['cam_id'=>$cam->id, 'owner'=>1])->created_by_name;?>
+                    <?= isset(\frontend\models\RelationsCamUser::findOne(['cam_id'=>$cam->id, 'owner'=>1])->created_by_name) ? \frontend\models\RelationsCamUser::findOne(['cam_id'=>$cam->id, 'owner'=>1])->created_by_name : ''?>
                 </td>
                 <td>
                     <a href="<?=  Url::to(['site/index', 'id' => $cam->id])?>"><?= \common\components\Common::getLinkStream($cam->id);?></a>
