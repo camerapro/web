@@ -49,10 +49,10 @@ class AjaxController extends Controller
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->encoder_model = $data['encoder_model'];
 
-            $save = $camera->save();
+            $save = $camera->save(false);
             if($save){
-                $camera->streaming_url = Common::getLinkStream($camera->id);
-                $camera->save();
+//                $camera->streaming_url = Common::getLinkStream($camera->id);
+//                $camera->save();
                /* $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
                 $camera_user->created_by_id = Yii::$app->user->identity->id;
