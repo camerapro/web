@@ -9,7 +9,10 @@ $( document ).ready(function() {
             var player = videojs('camera_video_' + current_cam_id);
             player.dispose();
         }else{
-            vxgplayer('vxg_media_player_' + current_cam_id).stop();
+            var isChrome = !!window.chrome && !!window.chrome.webstore;
+            if(isChrome){
+                vxgplayer('vxg_media_player_' + current_cam_id).stop();
+            }
         }
         $.ajax({
             url: '/ajax/play',
@@ -217,7 +220,38 @@ $( document ).ready(function() {
 
     );
 
-
+    $('.img_hd_sd').on('click', function(){
+        var data_this = $(this);
+        var quality_value = (data_this.attr('value'));
+        var cam_id = $(this).parent().find('.cam_name ').attr('value');
+        // alert(cam_id);
+        var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
+        var isChrome = !!window.chrome && !!window.chrome.webstore;
+        if(isChrome){
+            vxgplayer('vxg_media_player_' + current_cam_id).stop();
+        }
+        $.ajax({
+            url: '/ajax/play_quality',
+            type: "POST",
+            data: {
+                'cam_id':cam_id,
+                'quality_value':quality_value
+            } ,
+            success: function (response) {
+                data = JSON.parse(response);
+                if(data['return_code'] == 0){
+                    if(quality_value == 0){
+                        data_this.attr("src", 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/hd_high_definition_1.png');
+                        data_this.attr("value", 1);
+                    }else{
+                        data_this.attr("src", 'https://cdn0.iconfinder.com/data/icons/iconsweets2/40/sd_standard_definition_1.png');
+                        data_this.attr("value", 0);
+                    }
+                    $('.camera_detail').html(data['return_html']);
+                }
+            },
+        })
+    });
 
 });
 

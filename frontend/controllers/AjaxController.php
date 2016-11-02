@@ -301,8 +301,34 @@ class AjaxController extends Controller
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
             $cam_info = FrontendCamera::getListCamId($cam_id);
+            $streaming_url = Common::getLinkStream($cam_id);
             if($cam_info){
-                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info]);
+                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info, 'streaming_url'=>$streaming_url]);
+                $return =[
+                    'return_code'=>0,
+                    'return_html'=> $html
+                ];
+            }    else{
+                $return = array(
+                    'return_code'=>1,
+                );
+            }
+            echo json_encode($return);
+            exit;
+        }
+    }
+
+    public function actionPlay_quality(){
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $cam_id = $data['cam_id'];
+            $quality_value = $data['quality_value'];
+            if($quality_value == 1) $require_quality = 0;
+            else $require_quality = 1;
+            $cam_info = FrontendCamera::getListCamId($cam_id);
+            $streaming_url = Common::getLinkStreamByQuality($cam_id, $require_quality);
+            if($cam_info){
+                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info, 'streaming_url'=>$streaming_url]);
                 $return =[
                     'return_code'=>0,
                     'return_html'=> $html

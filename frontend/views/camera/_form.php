@@ -36,8 +36,8 @@ use yii\widgets\ActiveForm;
     $model->isNewRecord ? $model->status = 1 : '';
     echo $form->field($model, 'status')->radioList($list);
     ?>
-    <?php $list = [0 => 'SD', 1 => 'HD'];
-    $model->isNewRecord ? $model->quality = 1 : '';
+    <?php $list = [1 => 'SD', 0 => 'HD'];
+    $model->isNewRecord ? $model->quality = 0 : '';
     echo $form->field($model, 'quality')->radioList($list);
     ?>
     <div class="form-group">

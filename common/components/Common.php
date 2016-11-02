@@ -37,4 +37,12 @@ class Common
             return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
     }
 
+    public static function getLinkStreamByQuality($camera_id, $quality){
+        $camera_model = CameraBase::findOne($camera_id);
+        if($camera_model->protocol == 'http')
+            return $camera_model->ip_address;
+        elseif ($camera_model->protocol == 'rtsp')
+            return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $quality .'.sdp';
+    }
+
 }

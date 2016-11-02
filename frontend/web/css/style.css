@@ -211,6 +211,9 @@ body{
     cursor: pointer;
     float: right;
     display: none;
+    height: 25px;
+    margin-top: 5px;
+    width: 25px;
 }
 .cam_res:hover .img_hd_sd{
     display: block;
