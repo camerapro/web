@@ -83,7 +83,7 @@ function SmartWizard(target, options) {
                     var email = $('#email').val();
                     $.ajax({
                         url: '/ajax/create_and_login',
-                        type: "POST",
+                        type: "GET",
                         data: {
                             'fullname':fullname,
                             'user_name':user_name,
@@ -94,7 +94,7 @@ function SmartWizard(target, options) {
                         success: function (response) {
                             var data_type = JSON.parse(response);
                             if(data_type['return_code'] == 0){
-                                window.location = 'http://cam.thietbianninh.com';
+                                 window.location = 'http://cam.thietbianninh.com';
                             }else{
                                 alert(data_type['message']);
                             }
