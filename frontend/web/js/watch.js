@@ -131,7 +131,7 @@ $( document ).ready(function() {
             }else {
                 $.ajax({
                     url: '/ajax/create',
-                    type: "POST",
+                    type: "GET",
                     data: {
                         'title_encoder':title_encoder,
                         'title_camera':title_camera,
