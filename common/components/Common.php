@@ -33,8 +33,12 @@ class Common
         $camera_model = CameraBase::findOne($camera_id);
         if($camera_model->protocol == 'http')
             return $camera_model->ip_address;
-        elseif ($camera_model->protocol == 'rtsp')
+        elseif ($camera_model->protocol == 'rtsp'){
+            if($camera_model->encoder_model == 'DAHUA'){
+                return 'rtsp://' . $camera_model->encoder_username . ':' . $camera_model->encoder_password . '@' . $camera_model->ip_address. ':' . $camera_model->port . '/cam/realmonitor?channel=1&subtype=0';
+            }
             return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
+        }
     }
 
     public static function getLinkStreamByQuality($camera_id, $quality){
@@ -44,5 +48,11 @@ class Common
         elseif ($camera_model->protocol == 'rtsp')
             return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $quality .'.sdp';
     }
+
+    public static function getLinkStreamByModelDAHUA($camera_id){
+        $camera_model = CameraBase::findOne($camera_id);
+        return 'rtsp://' . $camera_model->encoder_username . ':' . $camera_model->encoder_password . '@' . $camera_model->ip_address . 'cam/realmonitor?channel=1&subtype=0';
+
+}
 
 }

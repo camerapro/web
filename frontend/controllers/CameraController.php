@@ -133,7 +133,7 @@ class CameraController extends FrontendController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->streaming_url = Common::getLinkStream($model->id);
             if($model->save()){
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
 
         } else {
