@@ -34,8 +34,8 @@ class Common
         if($camera_model->protocol == 'http')
             return $camera_model->ip_address;
         elseif ($camera_model->protocol == 'rtsp'){
-            if($camera_model->encoder_model == 'DAHUA'){
-                return 'rtsp://' . $camera_model->encoder_username . ':' . $camera_model->encoder_password . '@' . $camera_model->ip_address. ':' . $camera_model->port . '/cam/realmonitor?channel=1&subtype=0';
+            if(strtoupper($camera_model->encoder_model) == 'DAHUA'){
+                return 'rtsp://' . $camera_model->encoder_username . ':' . $camera_model->encoder_password . '@' . $camera_model->ip_address. ':' . $camera_model->port . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype=0';
             }
             return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
         }

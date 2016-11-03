@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'protocol')->dropDownList(['http' => 'http', 'rtsp' => 'rtsp']);
     ?>
     <?php
-    echo $form->field($model, 'encoder_model')->dropDownList(['H264DVR' => 'H264DVR', 'HikVision' => 'HikVision', 'Dahua' => 'Dahua', 'Camera IP' => 'Camera IP', 'other' => 'Loại khác'],['prompt'=>'Chọn loại thiết bị']);
+    echo $form->field($model, 'encoder_model')->dropDownList(['H264DVR' => 'H264DVR', 'HikVision' => 'HikVision', 'DAHUA' => 'DAHUA', 'Camera IP' => 'Camera IP', 'other' => 'Loại khác'],['prompt'=>'Chọn loại thiết bị']);
     ?>
     <?php $list = [0 => 'Không hiển thị', 1 => 'Hiển thị'];
     $model->isNewRecord ? $model->status = 1 : '';
