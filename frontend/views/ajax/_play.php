@@ -14,6 +14,7 @@
         </div>
         <script>
             $(document).ready(function() {
+                alert('vxg_media_player_<?= $cam_info->id;?>');
                 var height = $(window).height();
                 var width = $(window).width();
                 $('.camera_detail').css('height',height-80);

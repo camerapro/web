@@ -104,8 +104,8 @@
                             <label class="col-sm-3 control-label">Giao thức</label>
                             <div class="col-sm-9">
                                 <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="protocol" name="protocol">
-                                    <option value="rtsp">rtsp</option>
                                     <option value="http">http</option>
+                                    <option value="rtsp">rtsp</option>
                                 </select>
                             </div>
                         </div>

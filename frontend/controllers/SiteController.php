@@ -210,6 +210,7 @@ class SiteController extends Controller
     }
 
     public function actionCreate(){
+        echo date('Y-m-d H:i:s');exit;
         $data = Yii::$app->request->get();
         print_r($data);exit;
     }

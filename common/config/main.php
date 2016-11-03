@@ -8,4 +8,5 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
     ],
+    'timeZone' => 'Asia/Ho_Chi_Minh',
 ];
