@@ -15,7 +15,7 @@
     <link href="/css/login.css" rel="stylesheet">
     <link href="/css/define.css" rel="stylesheet">
 <!--    <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
     <script src="/js/smartwizard.js"></script>
 
