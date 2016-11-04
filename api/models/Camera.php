@@ -10,8 +10,8 @@ class Camera extends CameraBase
 {
     const STATUS_INACTIVE = 0;
     const STATUS_ACTIVE = 1;
-	public $activation_time;
-	public $model;
+	//public $activation_time;
+	//public $model;
     public static function getListAllCam($user_id = NULL){
         if(empty($user_id)){
             $user_id = Yii::$app->user->identity->id;
