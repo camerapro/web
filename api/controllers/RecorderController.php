@@ -55,6 +55,11 @@ class RecorderController extends ApiController
           if($data = Yii::$app->request->post())
             {
             $camera = new Camera();
+			if(!isset($data['name']) || $data['ip'] )
+				 return  array(
+                    'error_code'=>1,
+                    'message'=>'Parameters are missing'
+                );
             $camera->name = $data['name'];
             $camera->ip_address = $data['ip'];
             $camera->protocol = $data['protocol'];
