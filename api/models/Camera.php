@@ -29,8 +29,8 @@ class Camera extends CameraBase
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
         }
-        $query = Camera::find()
-		    ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','camera.created_time','camera.updated_time','camera.order','camera.status','thumb_version','camera.user_id','agency_id','encoder_model','quality','created_time'=>'activation_time','encoder_model'=>  'model'])
+        $query = self::find()
+		    ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','camera.created_time','camera.updated_time','camera.order','camera.status','thumb_version','camera.user_id','agency_id','encoder_model','quality','created_time as activation_time','encoder_model as model'])
             ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
             ->where(['=', 'camera.status', 1])
             ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
