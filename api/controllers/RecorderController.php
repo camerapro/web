@@ -66,6 +66,7 @@ class RecorderController extends ApiController
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->user_id =isset($data['iduser'])?$data['iduser']:0;
             $camera->encoder_model =isset($data['model'])?$data['model']:0;
+            $camera->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
 			
             if($data['protocol'] == 'http')
                 $camera->streaming_url = $data['ip'];
