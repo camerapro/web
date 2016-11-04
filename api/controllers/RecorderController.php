@@ -37,7 +37,7 @@ class RecorderController extends ApiController
                 return ['error_code'=>1,'message'=>'No permistion'];
             }
         }else{
-            $cams = \frontend\models\Camera::getListCam($user_id);
+            $cams = \api\models\Camera::getListCam($user_id);
             if(!empty($cams)){
                 $cam_info = $cams;
 				return ['error_code'=>0,'message'=>'Success','data'=>$cam_info];
