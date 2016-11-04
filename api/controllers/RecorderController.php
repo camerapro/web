@@ -62,9 +62,10 @@ class RecorderController extends ApiController
             $camera->channel = $data['channel'];
             $camera->encoder_username = isset($data['username'])?$data['username']:'';
             $camera->encoder_password = isset($data['password'])?$data['password']:'';
-            $camera->created_time = date('Y-m-d H:i:s');
+            $camera->created_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
-            $camera->user_id =isset($data['user_id'])?$data['user_id']:0;
+            $camera->user_id =isset($data['iduser'])?$data['iduser']:0;
+            $camera->encoder_model =isset($data['model'])?$data['model']:0;
 			
             if($data['protocol'] == 'http')
                 $camera->streaming_url = $data['ip'];
@@ -74,8 +75,8 @@ class RecorderController extends ApiController
             if($save){
                 $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
-                $camera_user->created_by_id = Yii::$app->user->identity->id;
-                $camera_user->user_id = Yii::$app->user->identity->id;
+                $camera_user->created_by_id = $camera->user_id;
+                $camera_user->user_id =  $camera->user_id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
                 $camera_user->save();
