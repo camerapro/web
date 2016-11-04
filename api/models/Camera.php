@@ -29,7 +29,7 @@ class Camera extends CameraBase
             if(empty($user_id)) return false;
         }
         $query = Camera::find()
-		    ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','ip_address'=>'ip','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','created_time','updated_time','order','status','thumb_version','user_id','agency_id','encoder_model','quality','camera.created_time'=>'activation_time','encoder_model'=>  'model'])
+		    ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','ip_address'=>'ip','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','camera.created_time','camera.updated_time','camera.order','camera.status','thumb_version','user_id','agency_id','encoder_model','quality','camera.created_time'=>'activation_time','encoder_model'=>  'model'])
             ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
             ->where(['=', 'camera.status', 1])
             ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
