@@ -84,7 +84,7 @@ class RecorderController extends ApiController
                 else
                     $recorder_id = $data['recorder_id'];
 
-            $camera->name = $data['name'];
+            $camera->name = $data['cam_name'];
             $camera->ip_address = $data['ip'];
             $camera->protocol = $data['protocol'];
             $camera->port = $data['port'];
