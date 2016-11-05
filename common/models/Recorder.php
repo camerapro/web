@@ -47,6 +47,7 @@ class Recorder extends RecorderBase
                 $recorder['channels'] = $channel;
             }
             return $recorder;
+			
         }
         $recorder = self::find()
             ->where(['status'=>1,'user_id'=>$user_id])
