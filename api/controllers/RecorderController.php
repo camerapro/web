@@ -70,6 +70,7 @@ class RecorderController extends ApiController
                     $recorder->password = isset($data['password'])?$data['password']:'';
                     $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
                     $recorder->port = isset($data['port'])?$data['port']:'';
+                    $recorder->media_port = isset($data['media_port'])?$data['media_port']:'';
                     $recorder->params = isset($data['params'])?$data['params']:'';
                     $recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
                     $recorder->created_time = isset($data['created_time'])?$data['created_time']:date('Y-m-d H:i:s');
