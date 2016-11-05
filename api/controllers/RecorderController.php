@@ -60,6 +60,30 @@ class RecorderController extends ApiController
                     'error_code'=>1,
                     'message'=>'Parameters are missing'
                 );
+                // Recorder
+                if(!isset($data['recorder_id']) || (int)$data['recorder_id'] ==0 ){
+                    $recorder = new \common\models\Recorder();
+                    $recorder->name = isset($data['recorder_name'])?$data['recorder_name']:'Undefined';
+                    $recorder->ip = isset($data['ip'])?$data['ip']:'';
+                    $recorder->category_id = isset($data['category_id'])?$data['category_id']:'';
+                    $recorder->username = isset($data['username'])?$data['username']:'';
+                    $recorder->password = isset($data['password'])?$data['password']:'';
+                    $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
+                    $recorder->port = isset($data['port'])?$data['port']:'';
+                    $recorder->params = isset($data['params'])?$data['params']:'';
+                    $recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
+                    $recorder->created_time = isset($data['created_time'])?$data['created_time']:date('Y-m-d H:i:s');
+                    $recorder->order = isset($data['order'])?$data['order']:0;
+                    $recorder->user_id = isset($data['user_id'])?$data['user_id']:0;
+                    $recorder->agency_id = isset($data['agency_id'])?$data['agency_id']:0;
+                    $recorder->model = isset($data['model'])?$data['model']:0;
+                    if($recorder->save(false)){
+                        $recorder_id = $recorder->id;
+                    }
+                }
+                else
+                    $recorder_id = $data['recorder_id'];
+
             $camera->name = $data['name'];
             $camera->ip_address = $data['ip'];
             $camera->protocol = $data['protocol'];
@@ -71,6 +95,7 @@ class RecorderController extends ApiController
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->user_id =isset($data['iduser'])?$data['iduser']:0;
             $camera->encoder_model =isset($data['model'])?$data['model']:0;
+            $camera->recorder_id =$recorder_id;
             $camera->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
 			
             if($data['protocol'] == 'http')
