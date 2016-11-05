@@ -114,7 +114,8 @@ class RecorderController extends ApiController
                 $camera_user->save();
                 $return = array(
                     'error_code'=>0,
-                    'message'=>'Success'
+                    'message'=>'Success',
+                    'data'=>['recorder_id'=>$recorder_id],
                 );
             }else{
                 $return = array(
