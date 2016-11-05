@@ -14,6 +14,7 @@ use Yii;
  * @property string $username
  * @property string $password
  * @property string $protocol
+ * @property integer $media_port
  * @property integer $port
  * @property string $params
  * @property string $activation_time
@@ -41,7 +42,7 @@ class RecorderBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
+            [['category_id', 'media_port', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
             [['activation_time', 'created_time', 'updated_time'], 'safe'],
             [['name', 'ip', 'username', 'password', 'params', 'model'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
@@ -61,6 +62,7 @@ class RecorderBase extends \yii\db\ActiveRecord
             'username' => 'Username',
             'password' => 'Password',
             'protocol' => 'Protocol',
+            'media_port' => 'Media Port',
             'port' => 'Port',
             'params' => 'Params',
             'activation_time' => 'Activation Time',
