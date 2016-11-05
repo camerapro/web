@@ -75,7 +75,7 @@ class RecorderController extends ApiController
                     $recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
                     $recorder->created_time = isset($data['created_time'])?$data['created_time']:date('Y-m-d H:i:s');
                     $recorder->order = isset($data['order'])?$data['order']:0;
-                    $recorder->user_id = isset($data['user_id'])?$data['user_id']:0;
+                    $recorder->user_id = isset($data['user_id'])?$data['user_id']:Yii::$app->user->identity->id;
                     $recorder->agency_id = isset($data['agency_id'])?$data['agency_id']:0;
                     $recorder->model = isset($data['model'])?$data['model']:0;
                     if($recorder->save(false)){
