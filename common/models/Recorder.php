@@ -44,7 +44,7 @@ class Recorder extends RecorderBase
                 ->one();
             if($recorder){
                 $channel = \api\models\Camera::getListCam($user_id,$recorder_id);
-                $recorder['channels'] => $channel;
+                $recorder['channels'] = $channel;
             }
             return $recorder;
         }
