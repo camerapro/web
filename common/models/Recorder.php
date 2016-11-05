@@ -33,10 +33,5 @@ class Recorder extends RecorderBase
         $rt = $recorder->save(false);
         return $recorder;
     }
-    public static  function add($params){
-        $recorder = new self;
-        $recorder->attributes = $params;
-        $rt = $recorder->save(false);
-        return $recorder;
-    }
+   
 }
