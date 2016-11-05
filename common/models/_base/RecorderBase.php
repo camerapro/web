@@ -25,6 +25,7 @@ use Yii;
  * @property integer $user_id
  * @property integer $agency_id
  * @property string $model
+ * @property string $channels
  */
 class RecorderBase extends \yii\db\ActiveRecord
 {
@@ -44,7 +45,7 @@ class RecorderBase extends \yii\db\ActiveRecord
         return [
             [['category_id', 'media_port', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
             [['activation_time', 'created_time', 'updated_time'], 'safe'],
-            [['name', 'ip', 'username', 'password', 'params', 'model'], 'string', 'max' => 255],
+            [['name', 'ip', 'username', 'password', 'params', 'model','channels'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
         ];
     }
