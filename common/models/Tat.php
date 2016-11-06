@@ -30,7 +30,7 @@ class Tat extends TatBase
         $tat = self::find()
             ->where(['status'=>1,'user_id'=>$user_id])
             ->all();
-            return $rt;
+            return $tat;
 
 
     }
