@@ -33,7 +33,7 @@ class RecorderController extends ApiController
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
         
 		$cams = \common\models\Recorder::getRecorder($id,$user_id);
-		var_dump($cams);
+	
 		if(!empty($cams)){
 			$cam_info = $cams;
 			return ['error_code'=>0,'message'=>'Success','data'=>$cam_info];
@@ -128,4 +128,187 @@ class RecorderController extends ApiController
         exit;
         
     }
+	public function actionDelete()
+    {
+		 if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
+          if($data = Yii::$app->request->post())
+          {
+            $camera = new Camera();
+			if(!isset($data['recorder_id']) )
+				 return  array(
+                    'error_code'=>1,
+                    'message'=>'Parameters are missing'
+                );
+             $id =    $data['recorder_id'];
+			$recorder = \common\models\Recorder::find()->where(['user_id'=>Yii::$app->user->identity->id,'id'=>$id])->one();
+
+			if($recorder){
+				 $recorder->delete();
+				 $return = array(
+                    'error_code'=>0,
+                    'message'=>'Deleted'
+                );
+			}else{
+                $return = array(
+                    'error_code'=>1,
+                    'message'=>'Recorder not found or no permission'
+                );
+            }
+            
+            
+		}else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+        
+    }
+	public function actionDeletecam()
+    {
+		 if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
+          if($data = Yii::$app->request->post())
+          {
+			if(!isset($data['cam_id']) )
+				 return  array(
+                    'error_code'=>1,
+                    'message'=>'Parameters are missing'
+                );
+             $id =    $data['cam_id'];
+			$camera = \common\models\Camera::find()->where(['user_id'=>Yii::$app->user->identity->id,'id'=>$id])->one();
+
+			if($camera){
+				 $camera->delete();
+				 $return = array(
+                    'error_code'=>0,
+                    'message'=>'Deleted'
+                );
+			}else{
+                $return = array(
+                    'error_code'=>1,
+                    'message'=>'Camera not found or no permission'
+                );
+            }
+            
+            
+		}else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+        
+    }
+	   /**
+     * Updates an existing News model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate()
+    {
+		if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
+        if($data = Yii::$app->request->post())
+        {
+			$id =  $data['recorder_id'];
+			$recorder = \common\models\Recorder::find()->where(['user_id'=>Yii::$app->user->identity->id,'id'=>$id])->one();
+			if($recorder){
+				 $recorder->name = isset($data['recorder_name'])?$data['recorder_name']:$recorder->name;
+		
+				$recorder->ip = isset($data['ip'])?$data['ip']:$recorder->ip;
+				$recorder->category_id = isset($data['category_id'])?$data['category_id']:$recorder->category_id;
+				$recorder->username = isset($data['username'])?$data['username']:$recorder->username;
+				$recorder->password = isset($data['password'])?$data['password']:$recorder->password;
+				$recorder->protocol = isset($data['protocol'])?$data['protocol']:$recorder->protocol;
+				$recorder->port = isset($data['port'])?$data['port']:$recorder->port ;
+				$recorder->media_port = isset($data['media_port'])?$data['media_port']:$recorder->media_port;
+				$recorder->params = isset($data['params'])?$data['params']:$recorder->params;
+				$recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:$recorder->activation_time ;
+				$recorder->created_time = isset($data['created_time'])?$data['created_time']:$recorder->created_time;
+				$recorder->updated_time = date('Y-m-d H:i:s');
+				$recorder->order = isset($data['order'])?$data['order']:$recorder->order;
+				$recorder->agency_id = isset($data['agency_id'])?$data['agency_id']:$recorder->agency_id;
+				$recorder->model = isset($data['model'])?$data['model']:$recorder->model;
+				if($recorder->save(false)){
+					$recorder_id = $recorder->id;
+					$return = array(
+						'error_code'=>0,
+						'message'=>'Success',
+						'data'=>['recorder_id'=>$recorder_id],
+					);
+				}
+			}else{
+                $return = array(
+                    'error_code'=>1,
+                    'message'=>'Recorder not found or no permission'
+                );
+            }
+			
+		      
+		}else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+	   /**
+     * Updates an existing News model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdatecam()
+    {
+		if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
+        if($data = Yii::$app->request->post())
+        {
+			$id =  $data['cam_id'];
+			$camera = \common\models\Camera::find()->where(['user_id'=>Yii::$app->user->identity->id,'id'=>$id])->one();
+			if($camera){
+				$camera->name = $data['cam_name'];
+				$camera->channel = $data['channel'];
+				$camera->updated_time = date('Y-m-d H:i:s');
+				if($camera->save(false)){
+					$camera_id = $camera->id;
+					$return = array(
+						'error_code'=>0,
+						'message'=>'Success',
+						'data'=>['camera_id'=>$camera_id],
+					);
+				}
+			}else{
+                $return = array(
+                    'error_code'=>1,
+                    'message'=>'Camera not found or not permission'
+                );
+            }
+			
+		      
+		}else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+    
 }

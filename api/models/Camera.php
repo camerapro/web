@@ -25,20 +25,20 @@ class Camera extends CameraBase
     }
     
     public static function getListCam($user_id = NULL,$recorder_id =0){
-        if(empty($user_id)){
+        if(empty($user_id) && empty($recorder_id)){
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
         }
         if($recorder_id){
             return self::find()
-                ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','camera.order','camera.status','thumb_version','relations_cam_user.user_id','agency_id','encoder_model','quality','camera.activation_time','encoder_model'])
+                ->select(['id','name','protocol','channel','params','camera.order','camera.status','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
                 ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['camera.status'=>1,'recorder_id'=>$recorder_id])
                 ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
                 ->all();
         }
         return self::find()
-		    ->select(['id','name','encoder_name','category_id','streaming_url','ip_address','encoder_username','encoder_password','protocol','encoder_port','port','channel','params','camera.order','camera.status','thumb_version','relations_cam_user.user_id','agency_id','encoder_model','quality','camera.activation_time','encoder_model'])
+		   ->select(['id','name','protocol','channel','params','camera.order','camera.status','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
             ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
             ->where(['camera.status'=>1])
             ->andWhere(['=', 'relations_cam_user.user_id', $user_id])

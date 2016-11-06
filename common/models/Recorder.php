@@ -27,6 +27,7 @@ use common\models\_base\RecorderBase;
  */
 class Recorder extends RecorderBase
 {
+	public $channels;
     public static  function add($params){
         $recorder = new self;
         $recorder->attributes = $params;
@@ -34,7 +35,7 @@ class Recorder extends RecorderBase
         return $recorder;
     }
     public static  function getRecorder($recorder_id =0,$user_id=0){
-        if(empty($user_id)){
+        if(empty($user_id) && empty($recorder_id)){
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
         }
@@ -53,13 +54,17 @@ class Recorder extends RecorderBase
             ->where(['status'=>1,'user_id'=>$user_id])
             ->all();
         $rt = [];
+		//echo "data";
         if($recorder) {
+			$i =0;
             foreach ($recorder as $records) {
-                $rt = $records;
-				
-                $channel = \api\models\Camera::getListCam($user_id, $records->id);
-                $rt['channels'] = $channel;
 
+                $channel = \api\models\Camera::getListCam($user_id, $records->id);
+				$rt[$i] = $records;
+                $rt[$i]['channels'] = $channel;
+               
+				$i++;
+				//break;
             }
             return $rt;
         }
