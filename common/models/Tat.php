@@ -42,7 +42,7 @@ class Tat extends TatBase
             foreach ($tat as $tats) {
 				$camera_main_id = $tats['camera_main_id'];
 				$camera_2nd_id = $tats['camera_secondary_id'];
-				if($camera_main_id){
+				if(!empty($camera_main_id)){
 					$cam = \api\models\Camera::findOne($camera_main_id);
 					$cam_main['camera_main_ip'] = $cam->ip_address;
 					$cam_main['cam_main_name'] = $cam->name;
@@ -52,7 +52,7 @@ class Tat extends TatBase
 					$cam_main['protocol_main'] = $cam->protocol;
 					$cam_main['order_main'] = $cam->order;
 				}
-				if($camera_2nd_id){
+				if(!empty($camera_2nd_id)){
 					$cam = \api\models\Camera::findOne($camera_2nd_id);
 					$cam_2nd['camera_2nd_ip'] = $cam->ip_address;
 					$cam_2nd['cam_2nd_name'] = $cam->name;
