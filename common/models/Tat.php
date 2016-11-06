@@ -34,12 +34,13 @@ class Tat extends TatBase
 		
         $rt = [];
 		//echo "data";
-		$cam_main = [];
-		$cam_2nd = [];
+		
         if($tat) {
 			$i =0;
 			$rest = [];
             foreach ($tat as $tats) {
+				$cam_main = [];
+				$cam_2nd = [];
 				$camera_main_id = $tats['camera_main_id'];
 				$camera_2nd_id = $tats['camera_secondary_id'];
 				if(!empty($camera_main_id)){
