@@ -100,7 +100,7 @@ class RecorderController extends ApiController
             if( $camera->protocol == 'http')
                 $camera->streaming_url = $recorder->ip;
             elseif ($camera->protocol == 'rtsp')
-                $camera->streaming_url = 'rtsp://' .$data['ip']. ':' . $camera->port . '/user=' .  $camera->encoder_username . '&password='.$camera->encoder_username . '&channel=' . $data['channel'] . '&stream=1.sdp';
+                $camera->streaming_url = 'rtsp://' .$camera->ip_address. ':' . $camera->port . '/user=' .  $camera->encoder_username . '&password='.$camera->encoder_username . '&channel=' . $data['channel'] . '&stream=1.sdp';
             $save = $camera->save(false);
             if($save){
                 $camera_user = new RelationsCamUser();
