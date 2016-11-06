@@ -41,20 +41,13 @@ class TatController extends ApiController
         $message = '';
         $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-        if (!empty($id)) {
-            $tat = Tat::findOne($id);
-            if (!$tat) {
-                return ['error_code' => 1, 'message' => 'No permistion Or Tat not found'];
-            }
-        } else {
-            $tat = Tat::getTats($id,$user_id);
-            if (!empty($tat)) {
-                return ['error_code' => 0, 'message' => 'Success', 'data' => $tat];
-            }
-            if (empty($tat)) {
-                return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
-            }
-        }
+		$tat = Tat::getTats($id,$user_id);
+		if (!empty($tat)) {
+			return ['error_code' => 0, 'message' => 'Success', 'data' => $tat];
+		}
+		if (empty($tat)) {
+			return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
+		}
     }
 
     public function actionAdd()
