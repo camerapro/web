@@ -36,7 +36,7 @@ class Tat extends TatBase
         if($tat) {
 			$i =0;
             foreach ($tat as $tats) {
-				$camera_main_id = $tats->camera_main_id;
+				$camera_main_id = $tats['camera_main_id'];
 				if($camera_main_id){
 					$cam_main = \api\models\Camera::findOne($camera_main_id);
 					$cam['camera_main_ip'] = $cam_main->ip_address;
