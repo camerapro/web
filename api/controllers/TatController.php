@@ -39,7 +39,7 @@ class TatController extends ApiController
         }
         $tat = [];
         $message = '';
-        $id = isset(Yii::$app->request->get()['tat_id']) ? Yii::$app->request->get()['tat_id'] : '';
+        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
         if (!empty($cam_id)) {
             $tat = Tat::findOne($id);
