@@ -32,23 +32,35 @@ class Tat extends TatBase
             ->all();
         $rt = [];
 		//echo "data";
-		$cam = [];
+		$cam_main = [];
+		$cam_2nd = [];
         if($tat) {
 			$i =0;
 			$rest = [];
             foreach ($tat as $tats) {
 				$camera_main_id = $tats['camera_main_id'];
+				$camera_2nd_id = $tats['camera_secondary_id'];
 				if($camera_main_id){
-					$cam_main = \api\models\Camera::findOne($camera_main_id);
-					$cam['camera_main_ip'] = $cam_main->ip_address;
-					$cam['cam_main_name'] = $cam_main->name;
-					$cam['port_main'] = $cam_main->port;
-					$cam['category_main_id'] = $cam_main->category_id;
-					$cam['channel_main'] = $cam_main->channel;
-					$cam['protocol_main'] = $cam_main->protocol;
-					$cam['order_main'] = $cam_main->order;
+					$cam = \api\models\Camera::findOne($camera_main_id);
+					$cam_main['camera_main_ip'] = $cam->ip_address;
+					$cam_main['cam_main_name'] = $cam->name;
+					$cam_main['port_main'] = $cam->port;
+					$cam_main['category_main_id'] = $cam->category_id;
+					$cam_main['channel_main'] = $cam->channel;
+					$cam_main['protocol_main'] = $cam->protocol;
+					$cam_main['order_main'] = $cam->order;
 				}
-                $rest[] =array_merge($cam,$tats);
+				if($camera_2nd_id){
+					$cam_main = \api\models\Camera::findOne($camera_2nd_id);
+					$cam_2nd['camera_main_ip'] = $cam->ip_address;
+					$cam_2nd['cam_main_name'] = $cam->name;
+					$cam_2nd['port_main'] = $cam->port;
+					$cam_2nd['category_main_id'] = $cam->category_id;
+					$cam_2nd['channel_main'] = $cam->channel;
+					$cam_2nd['protocol_main'] = $cam->protocol;
+					$cam_2nd['order_main'] = $cam->order;
+				}
+                $rest[] =array_merge($tats,$cam_main,$cam_2nd);
 				$i++;
 				//break;
             }
