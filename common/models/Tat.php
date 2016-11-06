@@ -31,8 +31,6 @@ class Tat extends TatBase
             ->where(['status'=>1,'user_id'=>$user_id])
             ->all();
             return $rt;
-        }
-        return false;
 
 
     }
