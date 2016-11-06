@@ -16,7 +16,7 @@ use api\components\ApiController;
 class RecorderController extends ApiController
 {
 	public $enableCsrfValidation = false;
-	private $api_key ='43S4342@342Asfd';
+	private $api_key ='43S4342342Asfd';
 	public $layout =false;
 	public function init()
     {
@@ -77,20 +77,23 @@ class RecorderController extends ApiController
                         $recorder_id = $recorder->id;
                     }
                 }
-                else
-                    $recorder_id = $data['recorder_id'];
+                else{
+					 $recorder_id = $data['recorder_id'];
+					 $recorder = \common\models\Recorder:findOne($recorder_id);
+				}
+                   
 
             $camera->name = $data['cam_name'];
-            $camera->ip_address = $data['ip'];
-            $camera->protocol = $data['protocol'];
-            $camera->port = $data['port'];
+            $camera->ip_address = $recorder->ip;
+            $camera->protocol = $recorder->protocol;
+            $camera->port = $recorder->port;
             $camera->channel = $data['channel'];
-            $camera->encoder_username = isset($data['username'])?$data['username']:'';
-            $camera->encoder_password = isset($data['password'])?$data['password']:'';
+            $camera->encoder_username = isset($data['username'])?$data['username']:$recorder->username;
+            $camera->encoder_password = isset($data['password'])?$data['password']:$recorder->password;
             $camera->created_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
-            $camera->user_id =isset($data['iduser'])?$data['iduser']:0;
-            $camera->encoder_model =isset($data['model'])?$data['model']:0;
+            $camera->user_id =isset($data['iduser'])?$data['iduser']:Yii::$app->user->identity->id;;
+            $camera->encoder_model =isset($data['model'])?$data['model']:$recorder->model;
             $camera->recorder_id =$recorder_id;
             $camera->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
 			
