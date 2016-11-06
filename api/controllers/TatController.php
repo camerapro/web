@@ -47,7 +47,7 @@ class TatController extends ApiController
                 return ['error_code' => 1, 'message' => 'No permistion'];
             }
         } else {
-            $tat = Tat::getListTat($user_id,$id);
+            $tat = Tat::getTats($id,$user_id);
             if (!empty($tat)) {
                 return ['error_code' => 0, 'message' => 'Success', 'data' => $tat];
             }
