@@ -37,22 +37,21 @@ class TatController extends ApiController
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
-        $cam_info = [];
+        $tat = [];
         $message = '';
-        $cam_id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+        $id = isset(Yii::$app->request->get()['tat_id']) ? Yii::$app->request->get()['tat_id'] : '';
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
         if (!empty($cam_id)) {
-            $cam_info = Camera::getOneCamById($cam_id);
-            if (!$cam_info) {
+            $tat = Tat::findOne($id);
+            if (!$tat) {
                 return ['error_code' => 1, 'message' => 'No permistion'];
             }
         } else {
-            $cams = \frontend\models\Camera::getListCam($user_id);
-            if (!empty($cams)) {
-                $cam_info = $cams;
-                return ['error_code' => 0, 'message' => 'Success', 'data' => $cam_info];
+            $tat = Tat::getListTat($user_id,$id);
+            if (!empty($tat)) {
+                return ['error_code' => 0, 'message' => 'Success', 'data' => $tat];
             }
-            if (empty($cam_info)) {
+            if (empty($tat)) {
                 return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
             }
         }
