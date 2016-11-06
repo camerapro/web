@@ -94,7 +94,9 @@ class TatController extends ApiController
             }
 
             $tat_params = [
+				'name' => isset($data['name']) ? $data['name'] : '',
                 'ip' => isset($data['ip']) ? $data['ip'] : '',
+               
                 'port'=>isset($data['port']) ? $data['ip'] : '',
                 'category_id'=>isset($data['category_id']) ? $data['category_id'] : '',
                 'protocol'=>isset($data['protocol']) ? $data['protocol'] : '',
