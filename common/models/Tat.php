@@ -62,6 +62,7 @@ class Tat extends TatBase
 					$cam_2nd['protocol_2nd'] = $cam->protocol;
 					$cam_2nd['order_2nd'] = $cam->order;
 				}
+				var_dump($tats,$cam_main,$cam_2nd);die();
                 $rest[] =array_merge($tats,$cam_main,$cam_2nd);
 				$i++;
 				//break;
