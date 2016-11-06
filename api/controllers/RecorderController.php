@@ -170,7 +170,8 @@ class RecorderController extends ApiController
     }
 	public function actionDeletecam()
     {
-		 if (Yii::$app->user->isGuest) {
+		 if (Yii::$app->user->isGuest) {  
+		 
            return ['error_code'=>1,'message'=>'Not login'];
          }
           if($data = Yii::$app->request->post())
