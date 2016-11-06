@@ -27,6 +27,33 @@ class Tat extends TatBase
             return $tat;
 			
         }
+		 $tat = self::find()
+            ->where(['status'=>1,'user_id'=>$user_id])
+            ->all();
+        $rt = [];
+		//echo "data";
+		$cam = [];
+        if($tat) {
+			$i =0;
+            foreach ($tat as $tats) {
+				$camera_main_id = $tats->camera_main_id
+				if($camera_main_id){
+					$cam_main = \api\models\Camera::findOne($camera_main_id);
+					$cam['camera_main_ip'] = $cam_main->ip_address;
+					$cam['name_main'] = $cam_main->name_main;
+					$cam['cam_main_name'] = $cam_main->cam_main_name;
+					$cam['port_main'] = $cam_main->port_main;
+					$cam['category_main_id'] = $cam_main->category_main_id;
+					$cam['channel_main'] = $cam_main->channel_main;
+					$cam['protocol_main'] = $cam_main->protocol_main;
+					$cam['order_main'] = $cam_main->order_main;
+				}
+                $rest =array_merge($cam,$tats);
+				$i++;
+				//break;
+            }
+            return $rest;
+        }
         $tat = self::find()
             ->where(['status'=>1,'user_id'=>$user_id])
             ->all();
