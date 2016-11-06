@@ -79,7 +79,7 @@ class RecorderController extends ApiController
                 }
                 else{
 					 $recorder_id = $data['recorder_id'];
-					 $recorder = \common\models\Recorder:findOne($recorder_id);
+					 $recorder = \common\models\Recorder::findOne($recorder_id);
 				}
                    
 
