@@ -24,12 +24,14 @@ class Tat extends TatBase
             $tat = self::find()
                 ->where(['status'=>1,'id'=>$tat_id,'user_id'=>$user_id])->asArray()
                 ->one();
-            return $tat;
 			
         }
-		 $tat = self::find()
+		else{
+			 $tat = self::find()
             ->where(['status'=>1,'user_id'=>$user_id])->asArray()
             ->all();
+		}
+		
         $rt = [];
 		//echo "data";
 		$cam_main = [];
@@ -66,10 +68,7 @@ class Tat extends TatBase
             }
             return $rest;
         }
-        $tat = self::find()
-            ->where(['status'=>1,'user_id'=>$user_id])
-            ->all();
-            return $tat;
+		return false;
 
 
     }
