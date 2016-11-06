@@ -28,7 +28,7 @@ class Tat extends TatBase
 			
         }
 		 $tat = self::find()
-            ->where(['status'=>1,'user_id'=>$user_id])
+            ->where(['status'=>1,'user_id'=>$user_id])->asArray()
             ->all();
         $rt = [];
 		//echo "data";
