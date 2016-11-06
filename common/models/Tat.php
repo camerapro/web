@@ -54,13 +54,13 @@ class Tat extends TatBase
 				}
 				if($camera_2nd_id){
 					$cam_main = \api\models\Camera::findOne($camera_2nd_id);
-					$cam_2nd['camera_main_ip'] = $cam->ip_address;
-					$cam_2nd['cam_main_name'] = $cam->name;
-					$cam_2nd['port_main'] = $cam->port;
-					$cam_2nd['category_main_id'] = $cam->category_id;
-					$cam_2nd['channel_main'] = $cam->channel;
-					$cam_2nd['protocol_main'] = $cam->protocol;
-					$cam_2nd['order_main'] = $cam->order;
+					$cam_2nd['camera_2nd_ip'] = $cam->ip_address;
+					$cam_2nd['cam_2nd_name'] = $cam->name;
+					$cam_2nd['port_2nd'] = $cam->port;
+					$cam_2nd['category_2nd_id'] = $cam->category_id;
+					$cam_2nd['channel_2nd'] = $cam->channel;
+					$cam_2nd['protocol_2nd'] = $cam->protocol;
+					$cam_2nd['order_2nd'] = $cam->order;
 				}
                 $rest[] =array_merge($tats,$cam_main,$cam_2nd);
 				$i++;
