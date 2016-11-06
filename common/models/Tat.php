@@ -35,6 +35,7 @@ class Tat extends TatBase
 		$cam = [];
         if($tat) {
 			$i =0;
+			$rest = [];
             foreach ($tat as $tats) {
 				$camera_main_id = $tats['camera_main_id'];
 				if($camera_main_id){
@@ -47,9 +48,7 @@ class Tat extends TatBase
 					$cam['protocol_main'] = $cam_main->protocol;
 					$cam['order_main'] = $cam_main->order;
 				}
-				var_dump($tats,$cam);
-				die();
-                $rest =array_merge($cam,$tats);
+                $rest[] =array_merge($cam,$tats);
 				$i++;
 				//break;
             }
