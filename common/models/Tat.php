@@ -23,7 +23,7 @@ class Tat extends TatBase
         if($tat_id){
             $tat = self::find()
                 ->where(['status'=>1,'id'=>$tat_id,'user_id'=>$user_id])->asArray()
-                ->one();
+                ->all();
 			
         }
 		else{
