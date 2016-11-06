@@ -41,10 +41,10 @@ class TatController extends ApiController
         $message = '';
         $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-        if (!empty($cam_id)) {
+        if (!empty($id)) {
             $tat = Tat::findOne($id);
             if (!$tat) {
-                return ['error_code' => 1, 'message' => 'No permistion'];
+                return ['error_code' => 1, 'message' => 'No permistion Or Tat not found'];
             }
         } else {
             $tat = Tat::getTats($id,$user_id);
