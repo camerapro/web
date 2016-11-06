@@ -63,7 +63,7 @@ class Tat extends TatBase
 					$cam_2nd['order_2nd'] = $cam->order;
 				}
 				//var_dump($tats,$cam_main,$cam_2nd);die();
-                $rest[] =array_merge($tats,$cam_main,$cam_2nd);
+                $rest[] =array_merge($tats,$cam_2nd,$cam_main);
 				$i++;
 				//break;
             }
