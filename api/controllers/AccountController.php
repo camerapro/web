@@ -77,7 +77,10 @@ class AccountController extends Controller
     {
         if (!Yii::$app->user->isGuest) {
 			
-        return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
+			$permission_group_id = Yii::$app->user->identity->permission_group_id;
+			$permission = \common\model\Permission::getListPermissionById(Yii::$app->user->identity->id);
+			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
+			
         }
 		if($post = Yii::$app->request->post()){
 			
