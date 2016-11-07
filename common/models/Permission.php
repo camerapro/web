@@ -45,7 +45,7 @@ class Permission extends PermissionBase
     public function getListPermissionByGroup($permission_group_id){
         $permission_group = PermissionGroupBase::findOne($permission_group_id);
         if($permission_group)
-            return $this-->$this->getPermissionName($permission_group->permission_ids);
+            return $this->getPermissionName($permission_group->permission_ids);
         return null;
     }
     public function getPermissionName($pemission_ids){
