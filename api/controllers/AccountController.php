@@ -109,7 +109,7 @@ class AccountController extends Controller
         if (!Yii::$app->user->isGuest) {
 			
 			$permission_group_id = Yii::$app->user->identity->permission_group_id;
-			$permission = Permission::getListPermissionById(Yii::$app->user->identity->id);
+			$permission = Permission::getListPermissionByGroup($permission_group_id);
 
 			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
 			
@@ -122,7 +122,7 @@ class AccountController extends Controller
 			$model = new LoginForm();
 			if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
 				$permission_group_id = Yii::$app->user->identity->permission_group_id;
-				$permission = Permission::getListPermissionById(Yii::$app->user->identity->id);
+				$permission = Permission::getListPermissionByGroup($permission_group_id);
 				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
 			} else {
 				return ['error_code'=>1,'message'=>'Login fail'];
