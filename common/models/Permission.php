@@ -1,6 +1,6 @@
 <?php
 
-namespace commond\models;
+namespace common\models;
 
 use common\models\_base\PermissionBase;
 use Yii;
