@@ -50,10 +50,18 @@ class Permission extends PermissionBase
     public static  function getListPermissionByGroup($permission_group_id){
         $permission_group = PermissionGroupBase::findOne($permission_group_id);
         if($permission_group)
-            return self::getPermissionName($permission_group->permission_ids);
+            return $permission_group->permission_ids;
         return null;
     }
-
+    public static function getUserPermission($pemission_ids){
+        $list_permission_by_group = explode(',', $pemission_ids);
+        $name = [];
+        foreach ($list_permission_by_group as $item){
+            $name[] =   self::findOne($item)->name;
+        }
+        $name = implode(', ', $name);
+        return $name;
+    }
     public static function getPermissionName($pemission_ids){
         $list_permission_by_group = explode(',', $pemission_ids);
         $name = [];
