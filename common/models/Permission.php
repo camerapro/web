@@ -42,13 +42,13 @@ class Permission extends PermissionBase
      * @param $pemission_ids
      * @return array|string
      */
-    public function getListPermissionByGroup($permission_group_id){
+    public static  function getListPermissionByGroup($permission_group_id){
         $permission_group = PermissionGroupBase::findOne($permission_group_id);
         if($permission_group)
             return self::getPermissionName($permission_group->permission_ids);
         return null;
     }
-    public function getPermissionName($pemission_ids){
+    public static function getPermissionName($pemission_ids){
         $list_permission_by_group = explode(',', $pemission_ids);
         $name = [];
         foreach ($list_permission_by_group as $item){
