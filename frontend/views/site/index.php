@@ -53,6 +53,20 @@
                 <div id="testmodal" style="width: 95%;float: left;">
                     <form id="antoform" class="form-horizontal calender" role="form">
                         <div class="form-group">
+                            <label class="col-sm-3 control-label">Chọn đầu ghi</label>
+                            <div class="col-sm-9">
+                                <?php
+                                $recoders = \frontend\models\FrontendRecorder::getRecorderById();
+                                ?>
+                                <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="recoder_id" name="recoder_id">
+                                    <option value="0">Tạo đầu ghi mới</option>
+                                    <?php foreach ($recoders as $item){ ?>
+                                    <option value="<?= $item['id'];?>"><?= $item['name'];?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-3 control-label">Tên đầu ghi</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="title_encoder" name="title_encoder">
@@ -146,4 +160,42 @@
             $('.cam_show').css('overflow-y','scroll');
         }
     });
+    $( "#recoder_id" )
+        .change(function () {
+            $( "#recoder_id option:selected" ).each(function() {
+                var id_recoder = $( this ).val();
+                if(id_recoder != 0){
+                    $.ajax({
+                        url: '/ajax/encorder_info',
+                        type: "POST",
+                        data: {
+                            'id_recoder':id_recoder,
+                        } ,
+                        success: function (response) {
+                            data_res = JSON.parse(response);
+                            if(data_res['return_code'] == 0){
+                                $('#title_encoder').prop('readonly', 'readonly').val(data_res['data']['name']);
+                                $('#ip_address').prop('readonly', 'readonly').val(data_res['data']['ip']);
+                                $('#port').prop('readonly', 'readonly').val(data_res['data']['port']);
+                                $('#port_http').prop('readonly', 'readonly').val(data_res['data']['media_port']);
+                                $('#username').prop('readonly', 'readonly').val(data_res['data']['username']);
+                                $('#password').prop('readonly', 'readonly').val(data_res['data']['password']);
+                                $('#protocol').prop('readonly', 'readonly').val(data_res['data']['protocol']);
+                                $('#encoder_model').prop('readonly', 'readonly').val(data_res['data']['model']);
+                            }
+                        },
+                    });
+                }else{
+                    $('#title_encoder').prop('readonly', false).val('');
+                    $('#ip_address').prop('readonly', false).val('');
+                    $('#port').prop('readonly', false).val('');
+                    $('#port_http').prop('readonly', false).val('');
+                    $('#username').prop('readonly', false).val('');
+                    $('#password').prop('readonly', false).val('');
+                    $('#protocol').prop('readonly', false).val('');
+                    $('#encoder_model').prop('readonly', false).val('');
+                }
+            });
+        })
+        .change();
 </script>

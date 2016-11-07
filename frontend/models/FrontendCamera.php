@@ -81,6 +81,7 @@ class FrontendCamera extends Camera
     {
         return [
             'id' => 'ID',
+            'recorder_id' => 'Tên đầu ghi',
             'name' => 'Tên camera',
             'encoder_name' => 'Tên đầu ghi',
             'name' => 'Name camera',

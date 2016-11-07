@@ -8,8 +8,10 @@
 
 namespace frontend\controllers;
 use common\components\Common;
+use common\models\Recorder;
 use common\models\User;
 use frontend\models\FrontendCamera;
+use frontend\models\FrontendRecorder;
 use frontend\models\FrontendUser;
 use frontend\models\LoginForm;
 use frontend\models\RelationsCamUser;
@@ -35,6 +37,24 @@ class AjaxController extends Controller
     public function actionCreate(){
         if (Yii::$app->request->isAjax) {
             $data = Yii::$app->request->get();
+            if(!isset($data['recorder_id']) || (int)$data['recorder_id'] ==0 ){
+                $recorder = new FrontendRecorder();
+                $recorder->name = isset($data['title_encoder'])?$data['title_encoder']:'Undefined';
+                $recorder->ip = isset($data['ip_address'])?$data['ip_address']:'';
+                $recorder->username = isset($data['username'])?$data['username']:'';
+                $recorder->password = isset($data['password'])?$data['password']:'';
+                $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
+                $recorder->port = isset($data['port'])?$data['port']:'';
+                $recorder->media_port = isset($data['port_http'])?$data['port_http']:'';
+                $recorder->created_time = date('Y-m-d H:i:s');
+                $recorder->user_id = Yii::$app->user->identity->id;
+                $recorder->model = isset($data['encoder_model'])?$data['encoder_model']:0;
+                if($recorder->save(false)){
+                    $recorder_id = $recorder->id;
+                }
+            } else{
+                $recorder_id = $data['recorder_id'];
+            }
             $camera = new FrontendCamera();
             $camera->encoder_name = $data['title_encoder'];
             $camera->name = $data['title_camera'];
@@ -48,7 +68,7 @@ class AjaxController extends Controller
             $camera->created_time = date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->encoder_model = $data['encoder_model'];
-
+            $camera->recorder_id = $recorder_id;
             $save = $camera->save(false);
             if($save){
                 $camera->streaming_url = Common::getLinkStream($camera->id);
@@ -416,6 +436,27 @@ class AjaxController extends Controller
 
         echo json_encode($return);
         exit;
+    }
+
+    public function actionEncorder_info(){
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            $id_recoder = trim($data['id_recoder']);
+            $res = Recorder::find()->where(['id'=>$id_recoder])->asArray()->one();
+            if($res)
+            {
+                $return =[
+                    'return_code'=>0,
+                    'data'=>$res,
+                ];
+            }else{
+                $return =[
+                    'return_code'=>1,
+                ];
+            }
+            echo json_encode($return);
+            exit;
+        }
     }
 
 }

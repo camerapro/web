@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "camera".
  *
  * @property integer $id
+ * @property integer $recorder_id
  * @property string $name
  * @property string $encoder_name
  * @property integer $category_id
@@ -47,8 +48,8 @@ class CameraBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'encoder_port', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id', 'quality'], 'integer'],
-            [['created_time', 'updated_time','activation_time'], 'safe'],
+            [['recorder_id', 'category_id', 'encoder_port', 'port', 'order', 'status', 'thumb_version', 'user_id', 'agency_id', 'quality'], 'integer'],
+            [['created_time', 'updated_time', 'activation_time'], 'safe'],
             [['name', 'encoder_name', 'streaming_url', 'ip_address', 'encoder_username', 'encoder_password', 'channel', 'params', 'encoder_model'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
         ];
@@ -61,6 +62,7 @@ class CameraBase extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'recorder_id' => 'Recorder ID',
             'name' => 'Name',
             'encoder_name' => 'Encoder Name',
             'category_id' => 'Category ID',
@@ -82,6 +84,7 @@ class CameraBase extends \yii\db\ActiveRecord
             'agency_id' => 'Agency ID',
             'encoder_model' => 'Encoder Model',
             'quality' => 'Quality',
+            'activation_time' => 'Activation Time',
         ];
     }
 }

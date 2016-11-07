@@ -39,6 +39,7 @@ $( document ).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val() ;
         var encoder_model = $('#encoder_model').val() ;
+        var recoder_id = $('#recoder_id').val() ;
         if(title_encoder == ''){
             $('#title_encoder').focus();
             $('.show_error').html('Tên đầu ghi không được để trống');
@@ -65,6 +66,7 @@ $( document ).ready(function() {
             $('.show_error').html('Cổng media không được để trống');
         }
         else {
+
             $.ajax({
                 url: '/ajax/create',
                 type: "GET",
@@ -78,7 +80,8 @@ $( document ).ready(function() {
                     'username':username,
                     'password':password,
                     'port_http':port_http,
-                    'encoder_model':encoder_model
+                    'encoder_model':encoder_model,
+                    'recoder_id':recoder_id
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
@@ -94,66 +97,7 @@ $( document ).ready(function() {
     });
 
     $('#save_and_close').on('click', function() {
-            /*var validate = 1;
-            var title_encoder = $('#title_encoder').val();
-            var title_camera = $('#title_camera').val();
-            var protocol = $('#protocol').val();
-            var channel = $('#channel').val();
-            var ip_address = $('#ip_address').val();
-            var port = $('#port').val();
-            var username = $('#username').val();
-            var password = $('#password').val();
-            var encoder_model = $('#encoder_model').val() ;
-            var port_http = $('#port_http').val();
 
-            if(title_encoder == ''){
-                $('#title_encoder').focus();
-                $('.show_error').html('Tên đầu ghi không được để trống');
-            }else if(title_camera == ''){
-                $('#title_camera').focus();
-                $('.show_error').html('Tên camera không được để trống');
-            }else if(protocol == ''){
-                $('#protocol').focus();
-                $('.show_error').html('Protocol không được để trống');
-            }else if(channel == ''){
-                $('#channel').focus();
-                $('.show_error').html('Tên kênh không được để trống');
-            }else if(ip_address == ''){
-                $('#ip_address').focus();
-                $('.show_error').html('Địa chỉ IP không được để trống');
-            }else if(port == ''){
-                $('#port').focus();
-                $('.show_error').html('Port không được để trống');
-            }else if(username == ''){
-                $('#username').focus();
-                $('.show_error').html('Username không được để trống');
-            }else {
-                $.ajax({
-                    url: '/ajax/create',
-                    type: "GET",
-                    data: {
-                        'title_encoder':title_encoder,
-                        'title_camera':title_camera,
-                        'protocol':protocol,
-                        'channel':channel,
-                        'ip_address':ip_address,
-                        'port':port,
-                        'port_http':port_http,
-                        'username':username,
-                        'password':password,
-                        'encoder_model':encoder_model
-                    } ,
-                    success: function (response) {
-                        data_res = JSON.parse(response);
-                        if(data_res['return_code'] == 0){
-                            // alert(data_res['message']);
-                            $('.modal-backdrop').hide();
-                            $('#CalenderModalNew').hide();
-                            $('body').removeClass('modal-open');
-                        }
-                    },
-                });
-            }*/
         var title_encoder = $('#title_encoder').val();
         var title_camera = $('#title_camera').val();
         var protocol = $('#protocol').val();
@@ -164,6 +108,7 @@ $( document ).ready(function() {
         var username = $('#username').val();
         var password = $('#password').val() ;
         var encoder_model = $('#encoder_model').val() ;
+        var recoder_id = $('#recoder_id').val() ;
         if(title_encoder == ''){
             $('#title_encoder').focus();
             $('.show_error').html('Tên đầu ghi không được để trống');
@@ -203,7 +148,8 @@ $( document ).ready(function() {
                     'username':username,
                     'password':password,
                     'port_http':port_http,
-                    'encoder_model':encoder_model
+                    'encoder_model':encoder_model,
+                    'recoder_id':recoder_id
                 } ,
                 success: function (response) {
                     data_res = JSON.parse(response);
