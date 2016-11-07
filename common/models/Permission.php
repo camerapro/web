@@ -18,7 +18,7 @@ class Permission extends PermissionBase
         return $query;
     }
 
-    public function getAll(){
+    public static  function getAll(){
         $data = [];
         $list = self::find()
             ->where(['=', 'parent_id', 0])
@@ -48,6 +48,7 @@ class Permission extends PermissionBase
             return self::getPermissionName($permission_group->permission_ids);
         return null;
     }
+
     public static function getPermissionName($pemission_ids){
         $list_permission_by_group = explode(',', $pemission_ids);
         $name = [];
