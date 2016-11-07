@@ -37,7 +37,12 @@ class Permission extends PermissionBase
             ->asArray()
             ->all();
     }
-
+    public static function getAllPermission(){
+        return self::find()
+            ->where(['status'=>1])
+            ->asArray()
+            ->all();
+    }
     /**
      * @param $pemission_ids
      * @return array|string
