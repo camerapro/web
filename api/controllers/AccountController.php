@@ -75,7 +75,7 @@ class AccountController extends Controller
        die("HELLO API");
     }
 
-    public function actionLogin()
+    public function actionLogin_bk()
     {
         if (!Yii::$app->user->isGuest) {
 			
@@ -104,7 +104,7 @@ class AccountController extends Controller
 		
         
     }
-	public function actionLogintest()
+	public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
 			
@@ -123,8 +123,10 @@ class AccountController extends Controller
 			$model = new LoginForm();
 			if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
 				$permission_group_id = Yii::$app->user->identity->permission_group_id;
-				$permission = Permission::getListPermissionByGroup($permission_group_id);
-				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
+				$user_permission = \common\models\Permission::getListPermissionByGroup($permission_group_id);
+				$list_permissions = Permission::getAllPermission();
+
+				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'user_permission'=>$user_permission,'list_permission'=>$list_permissions]];
 			} else {
 				return ['error_code'=>1,'message'=>'Login fail'];
 			}
