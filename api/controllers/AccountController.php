@@ -6,6 +6,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use api\models\LoginForm;
+use common\models\Permission;
+
 /**
  * Site controller
  */
@@ -73,11 +75,15 @@ class AccountController extends Controller
        die("HELLO API");
     }
 
-     public function actionLogin()
+    public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
 			
-        return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
+			$permission_group_id = Yii::$app->user->identity->permission_group_id;
+			//$permission = \common\models\Permission::getListPermissionById(Yii::$app->user->identity->id);
+			$permission = null;
+			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
+			
         }
 		if($post = Yii::$app->request->post()){
 			
@@ -86,7 +92,38 @@ class AccountController extends Controller
 			}
 			$model = new LoginForm();
 			if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
-				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username]];
+				$permission_group_id = Yii::$app->user->identity->permission_group_id;
+				//$permission = \common\models\Permission::getListPermissionById(Yii::$app->user->identity->id);
+				$permission = null;
+				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
+			} else {
+				return ['error_code'=>1,'message'=>'Login fail'];
+			}
+		}
+	
+		
+        
+    }
+	public function actionLogintest()
+    {
+        if (!Yii::$app->user->isGuest) {
+			
+			$permission_group_id = Yii::$app->user->identity->permission_group_id;
+			$permission = Permission::getListPermissionByGroup($permission_group_id);
+
+			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
+			
+        }
+		if($post = Yii::$app->request->post()){
+			
+			if(!$this->validateToken($post)){
+				return ['error_code'=>1,'message'=>'Validate token fail'];
+			}
+			$model = new LoginForm();
+			if ($model->load(['LoginForm' => Yii::$app->request->post()]) && $model->login()) {
+				$permission_group_id = Yii::$app->user->identity->permission_group_id;
+				$permission = Permission::getListPermissionByGroup($permission_group_id);
+				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'permission'=>$permission]];
 			} else {
 				return ['error_code'=>1,'message'=>'Login fail'];
 			}
