@@ -12,7 +12,6 @@ class Permission extends PermissionBase
        public static function getListPermissionById($user_id){
         $query = self::find()
             -> leftJoin('relations_user_permission_group', 'relations_user_permission_group.permission_group_id = permission.permission_group_id')
-            -> leftJoin('relations_user_permission_group', 'relations_user_permission_group.permission_group_id = permission.permission_group_id')
             ->where(['=', 'relations_user_permission_group.user_id', $user_id])
             ->all();
         return $query;
