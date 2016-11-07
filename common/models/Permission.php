@@ -50,16 +50,7 @@ class Permission extends PermissionBase
             ->asArray()
             ->all();
     }
-    /**
-     * @param $pemission_ids
-     * @return array|string
-     */
-    public static  function getListPermissionByGroup($permission_group_id){
-        $permission_group = PermissionGroupBase::findOne($permission_group_id);
-        if($permission_group)
-            return $permission_group->permission_ids;
-        return null;
-    }
+
     /**
      * @param $pemission_ids
      * @return array|string
