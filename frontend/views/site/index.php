@@ -91,13 +91,13 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Cổng media</label>
+                            <label class="col-sm-3 control-label">Cổng đầu ghi</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="port_http" name="port_http">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Cổng rtsp</label>
+                            <label class="col-sm-3 control-label">Cổng media</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="port" name="port">
                             </div>
@@ -118,8 +118,8 @@
                             <label class="col-sm-3 control-label">Giao thức</label>
                             <div class="col-sm-9">
                                 <select name="datatable-responsive_length" aria-controls="datatable-responsive" class="form-control input-sm" id="protocol" name="protocol">
-                                    <option value="http">http</option>
                                     <option value="rtsp">rtsp</option>
+                                    <option value="http">http</option>
                                 </select>
                             </div>
                         </div>
@@ -137,9 +137,6 @@
                         </div>
                     </form>
                 </div>
-                <!--<div id="cammodal" style="width: 25%; float: left;">
-                    <img src="../images/picture.jpg">
-                </div>-->
             </div>
             <div class="modal-footer">
                 <button type="button" id="save_and_create" class="btn btn-primary antosubmit">Lưu và thêm mới</button>
@@ -159,6 +156,9 @@
         if(height_camshow > 600){
             $('.cam_show').css('overflow-y','scroll');
         }
+        $("#port_http").val('34567');
+        $("#port").val('554');
+        $('#protocol').val('rtsp');
     });
     $( "#recoder_id" )
         .change(function () {
@@ -188,8 +188,8 @@
                 }else{
                     $('#title_encoder').prop('readonly', false).val('');
                     $('#ip_address').prop('readonly', false).val('');
-                    $('#port').prop('readonly', false).val('');
-                    $('#port_http').prop('readonly', false).val('');
+                    $('#port').prop('readonly', false).val('554');
+                    $('#port_http').prop('readonly', false).val('34567');
                     $('#username').prop('readonly', false).val('');
                     $('#password').prop('readonly', false).val('');
                     $('#protocol').prop('readonly', false).val('');

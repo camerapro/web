@@ -20,17 +20,11 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'recorder_id')->dropDownList($data,['prompt'=>'Chọn đâu ghi']);
     ?>
     <?= $form->field($model, 'encoder_name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'ip_address')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'port')->textInput() ?>
-
     <?= $form->field($model, 'encoder_port')->textInput() ?>
-
     <?= $form->field($model, 'channel')->textInput() ?>
-
     <?= $form->field($model, 'encoder_username')->textInput() ?>
     <?= $form->field($model, 'encoder_password')->textInput() ?>
 
@@ -56,6 +50,11 @@ use yii\widgets\ActiveForm;
 
 </div>
 <script>
+    $(document).ready(function() {
+        $("#frontendcamera-encoder_port").val('34567');
+        $("#frontendcamera-port").val('554');
+        $("#frontendcamera-protocol").val('rtsp');
+    });
     $( "#frontendcamera-recorder_id" )
         .change(function () {
             $( "#frontendcamera-recorder_id option:selected" ).each(function() {
@@ -85,11 +84,11 @@ use yii\widgets\ActiveForm;
                 }else{
                     $('#frontendcamera-encoder_name').prop('readonly', false).val('');
                     $('#frontendcamera-ip_address').prop('readonly', false).val('');
-                    $('#frontendcamera-port').prop('readonly', false).val('');
-                    $('#frontendcamera-encoder_port').prop('readonly', false).val('');
+                    $('#frontendcamera-port').prop('readonly', false).val('554');
+                    $('#frontendcamera-encoder_port').prop('readonly', false).val('34567');
                     $('#frontendcamera-encoder_username').prop('readonly', false).val('');
                     $('#frontendcamera-encoder_password').prop('readonly', false).val('');
-                    $('#frontendcamera-protocol').prop('readonly', false).val('');
+                    $('#frontendcamera-protocol').prop('readonly', false).val('rtsp');
                     $('#frontendcamera-encoder_port').prop('readonly', false).val('');
                     $('#frontendcamera-encoder_model').prop('readonly', false).val('');
                 }

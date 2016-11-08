@@ -84,7 +84,7 @@ class FrontendCamera extends Camera
             'recorder_id' => 'Tên đầu ghi',
             'name' => 'Tên camera',
             'encoder_name' => 'Tên đầu ghi',
-            'name' => 'Name camera',
+            'name' => 'Tên camera',
             'streaming_url' => 'Link streaming',
             'protocol' => 'Giao thức',
             'channel' => 'Kênh',

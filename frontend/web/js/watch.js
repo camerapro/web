@@ -57,13 +57,13 @@ $( document ).ready(function() {
             $('.show_error').html('Địa chỉ IP không được để trống');
         }else if(port == ''){
             $('#port').focus();
-            $('.show_error').html('Cổng rtsp không được để trống');
+            $('.show_error').html('Cổng media không được để trống');
         }else if(username == ''){
             $('#username').focus();
             $('.show_error').html('Username không được để trống');
         }else if(port_http == ''){
             $('#port_http').focus();
-            $('.show_error').html('Cổng media không được để trống');
+            $('.show_error').html('Cổng đầu ghi không được để trống');
         }
         else {
 
@@ -97,7 +97,6 @@ $( document ).ready(function() {
     });
 
     $('#save_and_close').on('click', function() {
-
         var title_encoder = $('#title_encoder').val();
         var title_camera = $('#title_camera').val();
         var protocol = $('#protocol').val();
@@ -155,6 +154,7 @@ $( document ).ready(function() {
                     data_res = JSON.parse(response);
                     if(data_res['return_code'] == 0){
                         alert(data_res['message']);
+
                         $('.modal-backdrop').hide();
                         $('#CalenderModalNew').hide();
                         $('body').removeClass('modal-open');
