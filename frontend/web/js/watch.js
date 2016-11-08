@@ -125,7 +125,7 @@ $( document ).ready(function() {
             $('.show_error').html('Địa chỉ IP không được để trống');
         }else if(port == ''){
             $('#port').focus();
-            $('.show_error').html('Cổng rtsp không được để trống');
+            $('.show_error').html('Cổng media không được để trống');
         }else if(username == ''){
             $('#username').focus();
             $('.show_error').html('Username không được để trống');
@@ -154,10 +154,10 @@ $( document ).ready(function() {
                     data_res = JSON.parse(response);
                     if(data_res['return_code'] == 0){
                         alert(data_res['message']);
-
-                        $('.modal-backdrop').hide();
-                        $('#CalenderModalNew').hide();
-                        $('body').removeClass('modal-open');
+                        window.location.reload();
+                        // $('.modal-backdrop').hide();
+                        // $('#CalenderModalNew').hide();
+                        // $('body').removeClass('modal-open');
                     }
                 },
             });

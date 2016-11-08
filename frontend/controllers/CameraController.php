@@ -107,8 +107,8 @@ class CameraController extends FrontendController
                 $recorder->username = isset($data['encoder_username'])?$data['encoder_username']:'';
                 $recorder->password = isset($data['encoder_password'])?$data['encoder_password']:'';
                 $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
-                $recorder->port = isset($data['port'])?$data['port']:'';
-                $recorder->media_port = isset($data['encoder_port'])?$data['encoder_port']:'';
+                $recorder->media_port = isset($data['port'])?$data['port']:'';
+                $recorder->port = isset($data['encoder_port'])?$data['encoder_port']:'';
                 $recorder->created_time = date('Y-m-d H:i:s');
                 $recorder->user_id = Yii::$app->user->identity->id;
                 $recorder->model = isset($data['encoder_model'])?$data['encoder_model']:0;

@@ -44,8 +44,8 @@ class AjaxController extends Controller
                 $recorder->username = isset($data['username'])?$data['username']:'';
                 $recorder->password = isset($data['password'])?$data['password']:'';
                 $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
-                $recorder->port = isset($data['port'])?$data['port']:'';
-                $recorder->media_port = isset($data['port_http'])?$data['port_http']:'';
+                $recorder->media_port = isset($data['port'])?$data['port']:'';
+                $recorder->port = isset($data['port_http'])?$data['port_http']:'';
                 $recorder->created_time = date('Y-m-d H:i:s');
                 $recorder->user_id = Yii::$app->user->identity->id;
                 $recorder->model = isset($data['encoder_model'])?$data['encoder_model']:0;
