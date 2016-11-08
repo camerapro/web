@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="camera-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <p class="show_error"></p>
     <?php
     $data = [];
     $recoder = \frontend\models\FrontendRecorder::getRecorderById();
@@ -43,11 +44,16 @@ use yii\widgets\ActiveForm;
     echo $form->field($model, 'quality')->radioList($list);
     ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Tạo mới' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php if($model->isNewRecord ):?>
+            <button id="btn_save_and_create" class="btn btn-success">Lưu và thêm mới</button>
+        <?php endif;?>
+        <?= Html::submitButton($model->isNewRecord ? 'Lưu và đóng' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?php if($model->isNewRecord ):?>
+            <button id="btn_close" class="btn btn-primary">Đóng</button>
+        <?php endif;?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>
 <script>
     $(document).ready(function() {
@@ -55,8 +61,7 @@ use yii\widgets\ActiveForm;
         $("#frontendcamera-port").val('554');
         $("#frontendcamera-protocol").val('rtsp');
     });
-    $( "#frontendcamera-recorder_id" )
-        .change(function () {
+    $( "#frontendcamera-recorder_id" ).change(function () {
             $( "#frontendcamera-recorder_id option:selected" ).each(function() {
                 var id_recoder = $( this ).val();
                 if(id_recoder != ''){
@@ -93,6 +98,83 @@ use yii\widgets\ActiveForm;
                     $('#frontendcamera-encoder_model').prop('readonly', false).val('');
                 }
             });
-        })
-        .change();
+        }) .change();
+    $("#btn_save_and_create").on('click', function() {
+        var title_encoder = $('#frontendcamera-encoder_name').val();
+        var title_camera = $('#frontendcamera-name').val();
+        var protocol = $('#frontendcamera-protocol').val();
+        var channel = $('#frontendcamera-channel').val();
+        var ip_address = $('#frontendcamera-ip_address').val();
+        var port = $('#frontendcamera-port').val();
+        var port_http = $('#frontendcamera-encoder_port').val();
+        var username = $('#frontendcamera-encoder_username').val();
+        var password = $('#frontendcamera-encoder_password').val() ;
+        var encoder_model = $('#frontendcamera-encoder_model').val() ;
+        var recoder_id = $('#frontendcamera-recorder_id').val() ;
+        if(title_encoder == ''){
+            $('#frontendcamera-encoder_name').focus();
+            $('.show_error').html('Tên đầu ghi không được để trống');
+            return false;
+        }else if(title_camera == ''){
+            $('#frontendcamera-name').focus();
+            $('.show_error').html('Tên camera không được để trống');
+            return false;
+        }else if(protocol == ''){
+            $('#frontendcamera-protocol').focus();
+            $('.show_error').html('Protocol không được để trống');
+            return false;
+        }else if(channel == ''){
+            $('#frontendcamera-channel').focus();
+            $('.show_error').html('Tên kênh không được để trống');
+            return false;
+        }else if(ip_address == ''){
+            $('#frontendcamera-ip_address').focus();
+            $('.show_error').html('Địa chỉ IP không được để trống');
+            return false;
+        }else if(port == ''){
+            $('#frontendcamera-port').focus();
+            $('.show_error').html('Cổng media không được để trống');
+            return false;
+        }else if(username == ''){
+            $('#frontendcamera-encoder_username').focus();
+            $('.show_error').html('Username không được để trống');
+            return false;
+        }else if(port_http == ''){
+            $('#frontendcamera-encoder_port').focus();
+            $('.show_error').html('Cổng đầu ghi không được để trống');
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '/ajax/create',
+                type: "GET",
+                data: {
+                    'title_encoder':title_encoder,
+                    'title_camera':title_camera,
+                    'protocol':protocol,
+                    'channel':channel,
+                    'ip_address':ip_address,
+                    'port':port,
+                    'username':username,
+                    'password':password,
+                    'port_http':port_http,
+                    'encoder_model':encoder_model,
+                    'recoder_id':recoder_id
+                } ,
+                success: function (response) {
+                    data_res = JSON.parse(response);
+                    if(data_res['return_code'] == 0){
+                        alert(data_res['message']);
+                        $('#frontendcamera-name').val('');
+                        $('#frontendcamera-channel').val('');
+                    }
+                },
+            });
+            return false;
+        }
+    });
+    $("#btn_close").on('click',function () {
+        window.location = 'http://cam.thietbianninh.com/camera/index';
+        return false
+    })
 </script>
