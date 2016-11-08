@@ -92,7 +92,7 @@ class FrontendCamera extends Camera
             'encoder_username' => 'Username đầu ghi',
             'encoder_password' => 'Mật khẩu đầu ghi',
             'protocol' => 'Giao thức',
-            'port' => 'Cổng media',
+            'port' => 'Cổng RTSP',
             'encoder_port' => 'Cổng đầu ghi',
             'channel' => 'Kênh',
             'created_time' => 'Created Time',
