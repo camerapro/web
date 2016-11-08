@@ -69,6 +69,7 @@ class AjaxController extends Controller
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->encoder_model = $data['encoder_model'];
             $camera->recorder_id = $recorder_id;
+            $camera->user_id = Yii::$app->user->identity->id;
             $save = $camera->save(false);
             if($save){
                 $camera->streaming_url = Common::getLinkStream($camera->id);

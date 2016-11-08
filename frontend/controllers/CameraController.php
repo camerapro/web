@@ -125,6 +125,7 @@ class CameraController extends FrontendController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $model->streaming_url = Common::getLinkStream($model->id);
             $model->recorder_id = $recorder_id;
+            $model->user_id = Yii::$app->user->identity->id;
             if($model->save()){
                 $user_id = Yii::$app->user->identity->id;
                 $camera_user = new RelationsCamUser();
@@ -152,7 +153,6 @@ class CameraController extends FrontendController
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
         $model->updated_time = date('Y-m-d H:i:s');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -160,7 +160,6 @@ class CameraController extends FrontendController
             if($model->save()){
                 return $this->redirect(['index']);
             }
-
         } else {
             return $this->render('update', [
                 'model' => $model,
