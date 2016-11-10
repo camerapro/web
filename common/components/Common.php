@@ -34,7 +34,7 @@ class Common
         $camera_model = CameraBase::findOne($camera_id);
         $recorder_model = Recorder::findOne($camera_model->recorder_id);
         if($recorder_model->protocol == 'http')
-            return $camera_model->ip_address;
+            return $camera_model->streaming_url;
         elseif ($recorder_model->protocol == 'rtsp'){
             if(strtoupper($recorder_model->model) == 'DAHUA'){
                 return 'rtsp://' . $recorder_model->username . ':' . $recorder_model->password . '@' . $recorder_model->ip. ':' . $recorder_model->media_port . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype='.  $camera_model->quality;
