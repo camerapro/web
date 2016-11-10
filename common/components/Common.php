@@ -3,6 +3,7 @@
 namespace common\components;
 
 use common\models\_base\CameraBase;
+use common\models\Recorder;
 use frontend\models\Camera;
 
 class Common
@@ -31,13 +32,14 @@ class Common
 
     public static function getLinkStream($camera_id){
         $camera_model = CameraBase::findOne($camera_id);
-        if($camera_model->protocol == 'http')
+        $recorder_model = Recorder::findOne($camera_model->recorder_id);
+        if($recorder_model->protocol == 'http')
             return $camera_model->ip_address;
-        elseif ($camera_model->protocol == 'rtsp'){
-            if(strtoupper($camera_model->encoder_model) == 'DAHUA'){
-                return 'rtsp://' . $camera_model->encoder_username . ':' . $camera_model->encoder_password . '@' . $camera_model->ip_address. ':' . $camera_model->port . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype='.  $camera_model->quality;
+        elseif ($recorder_model->protocol == 'rtsp'){
+            if(strtoupper($recorder_model->model) == 'DAHUA'){
+                return 'rtsp://' . $recorder_model->username . ':' . $recorder_model->password . '@' . $recorder_model->ip. ':' . $recorder_model->port . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype='.  $camera_model->quality;
             }
-            return 'rtsp://' .$camera_model->ip_address. ':' . $camera_model->port . '/user=' . $camera_model->encoder_username . '&password='. $camera_model->encoder_password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
+            return 'rtsp://' .$recorder_model->ip. ':' . $recorder_model->port . '/user=' . $recorder_model->username . '&password='. $recorder_model->password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
         }
     }
 

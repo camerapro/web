@@ -35,5 +35,7 @@
     <script src="/js/bootstrap-switch.js"></script>
 
     <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
+    <script>
+        var lever = parseInt(<?= Yii::$app->user->identity->level;?>);
+    </script>
 </head>

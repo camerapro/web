@@ -83,24 +83,13 @@ class FrontendCamera extends Camera
             'id' => 'ID',
             'recorder_id' => 'Tên đầu ghi',
             'name' => 'Tên camera',
-            'encoder_name' => 'Tên đầu ghi',
-            'name' => 'Tên camera',
             'streaming_url' => 'Link streaming',
-            'protocol' => 'Giao thức',
-            'channel' => 'Kênh',
-            'ip_address' => 'Địa chỉ Ip',
-            'encoder_username' => 'Username đầu ghi',
-            'encoder_password' => 'Mật khẩu đầu ghi',
-            'protocol' => 'Giao thức',
-            'port' => 'Cổng RTSP',
-            'encoder_port' => 'Cổng đầu ghi',
             'channel' => 'Kênh',
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
-            'order' => 'Sắp xếp',
             'status' => 'Trạng thái',
-            'encoder_model' => 'Loại thiết bị',
             'quality' => 'Chất lượng',
         ];
+
     }
 }

@@ -23,28 +23,8 @@ class Camera extends CameraBase
             ->all();
         return $query;
     }
-    
-    public static function getListCam($user_id = NULL,$recorder_id =0){
-        if(empty($user_id) && empty($recorder_id)){
-            $user_id = Yii::$app->user->identity->id;
-            if(empty($user_id)) return false;
-        }
-        if($recorder_id){
-            return self::find()
-                ->select(['id','name','protocol','channel','params','camera.order','camera.status','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
-                ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
-                ->where(['camera.status'=>1,'recorder_id'=>$recorder_id])
-                ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
-                ->all();
-        }
-        return self::find()
-		   ->select(['id','name','protocol','channel','params','camera.order','camera.status','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
-            ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
-            ->where(['camera.status'=>1])
-            ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
-            ->all();
 
-    }
+
     public static function getAllCamByGrandId($grand_id){
         $query = Camera::find()
             -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
