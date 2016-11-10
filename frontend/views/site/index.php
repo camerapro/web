@@ -1,8 +1,11 @@
 <div class="camera_view">
     <div class="camera_detail">
-        <?php if($cam_info):?>
-            <?php
+        <?php
+//        print_r($cam_info->id);exit;
+        if($cam_info):
             $recoder = \frontend\models\FrontendRecorder::findOne($cam_info->recorder_id);
+            if($recoder):?>
+            <?php
             $link_stream = \common\components\Common::getLinkStream($cam_info->id);
             if($recoder->protocol == 'http'){?>
                 <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
@@ -39,6 +42,7 @@
             <?php }} ?>
         <?php elseif($message):?>
             <?= $message; ?>
+        <?php endif;?>
         <?php endif;?>
     </div>
 </div>
