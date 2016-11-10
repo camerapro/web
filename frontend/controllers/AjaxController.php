@@ -322,9 +322,10 @@ class AjaxController extends Controller
             $data = Yii::$app->request->post();
             $cam_id = $data['cam_id'];
             $cam_info = FrontendCamera::getListCamId($cam_id);
+            $recorder_info = FrontendRecorder::findOne($cam_info->recorder_id);
             $streaming_url = Common::getLinkStream($cam_id);
             if($cam_info){
-                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info, 'streaming_url'=>$streaming_url]);
+                $html =  $this->renderAjax('_play', [ 'cam_id' => $cam_id, 'cam_info'=>$cam_info, 'streaming_url'=>$streaming_url, 'recorder_info'=>$recorder_info]);
                 $return =[
                     'return_code'=>0,
                     'return_html'=> $html
