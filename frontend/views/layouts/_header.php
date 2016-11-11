@@ -33,7 +33,7 @@
     <script src="/js/multiselect.js"></script>
     <script src="/js/vxgplayer-1.7.44.min.js"></script>
     <script src="/js/bootstrap-switch.js"></script>
-
+    <script src="/js/watch.js"></script>
     <link href="/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <script>
         var lever = parseInt(<?= Yii::$app->user->identity->level;?>);

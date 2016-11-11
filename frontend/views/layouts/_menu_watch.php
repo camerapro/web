@@ -1,7 +1,7 @@
 <script src="/video.js"></script>
 <script src="/js/videojs-contrib-hls.js"></script>
 <link href="/css/watch.css" rel="stylesheet">
-<script src="/js/watch.js"></script>
+
 
 <!-- sidebar menu -->
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">

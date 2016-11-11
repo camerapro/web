@@ -36,8 +36,8 @@ class RecorderController extends Controller
     public function actionIndex()
     {
         $searchModel = new RecorderSearch();
+        $searchModel->user_id = Yii::$app->user->identity->id;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
