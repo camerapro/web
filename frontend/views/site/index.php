@@ -159,8 +159,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="save_and_create" class="btn btn-primary antosubmit">Lưu và thêm mới</button>
-                <button type="button" id="save_and_close" class="btn btn-primary antoclose">Lưu và đóng</button>
+                <button type="button" id="save_and_create" class="btn btn-primary antosubmit">Lưu</button>
                 <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Đóng</button>
             </div>
             <input id="number_cam_show" type="hidden" value="1"/>
