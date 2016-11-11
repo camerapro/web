@@ -96,8 +96,8 @@ class RecorderController extends ApiController
             if($save){
                 $camera_user = new RelationsCamUser();
                 $camera_user->cam_id = $camera->id;
-                $camera_user->created_by_id = $camera->user_id;
-                $camera_user->user_id =  $camera->user_id;
+                $camera_user->created_by_id =  $recorder->user_id;
+                $camera_user->user_id =  $recorder->user_id;
                 $camera_user->created_by_name = Yii::$app->user->identity->username;
                 $camera_user->created_time = date('Y-m-d H:i:s');
                 $camera_user->save();
