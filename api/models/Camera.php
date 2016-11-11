@@ -68,7 +68,7 @@ class Camera extends CameraBase
 		$password = isset($recorder->password)?$recorder->password:'';
 		$channel = isset($camera->channel)?$camera->channel:'';
 		$quality = isset($camera->quality)?$camera->quality:0;
-		$stream = $protocol."://".$ip."/?user=".$username."?password=".$password.'&channel='.$channel.'&stream='.$quality;
+		$stream = $protocol."://".$ip."/?user=".$username."?password=".$password.'&channel='.$channel.'&stream='.$quality .'.sdp';
         return $stream ;
     }
     public static function getAllCamByGrandId($grand_id){
