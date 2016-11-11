@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <p>
-        <?= Html::a('Tạo mới', ['create'], ['class' => 'btn btn-success']) ?>
+        <a data-ignore-state="1" id="notify-id"  data-target="#CalenderModalNew" data-toggle="modal" class="title pull-left btn btn-success" href="/recorder/new">Tạo mới</a>
     </p>
     <?php if(Yii::$app->user->identity->level < 3):?>
         <?= GridView::widget([
@@ -142,4 +142,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ]); ?>
     <?php endif;?>
 
+</div>
+
+<div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 980px">
+        <div class="modal-content"></div>
+    </div>
 </div>

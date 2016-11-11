@@ -121,4 +121,11 @@ class RecorderController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionNew(){
+        $this->layout = false;
+        return $this->render('new');
+    }
+
+
 }

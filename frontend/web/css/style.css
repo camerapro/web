@@ -233,3 +233,13 @@ body{
 .recoder_sl{
     width: 325px;
 }
+#recorder_modal .form-group, #camera_modal .form-group{
+    float: left;
+    width: 50%;
+}
+#camera_info{
+    overflow: hidden;
+}
+.summary{
+    display: none;
+}
