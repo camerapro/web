@@ -56,6 +56,8 @@ class Camera extends CameraBase
 	
 			}
 			return $return;
+			
+			
     }
 	public static  function getStreamingUrl($camera,$recorder){
 		if(!$camera)
