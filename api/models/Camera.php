@@ -27,7 +27,7 @@ class Camera extends CameraBase
     public static function getListCam($user_id = NULL,$recorder_id =0,$recorder=null){
         if(empty($user_id) && empty($recorder_id)){
             $user_id = Yii::$app->user->identity->id;
-            if(empty($user_id)) return false;
+            if(empty($user_id)) return false; 
         }
 		$return =[];
         if($recorder_id){
