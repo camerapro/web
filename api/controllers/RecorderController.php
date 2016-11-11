@@ -82,26 +82,16 @@ class RecorderController extends ApiController
 					 $recorder = \common\models\Recorder::findOne($recorder_id);
 				}
                    
-
             $camera->name = isset($data['cam_name'])?$data['cam_name']:$recorder->name;
-            $camera->encoder_name = $recorder->name;
-            $camera->ip_address = $recorder->ip;
-            $camera->protocol = $recorder->protocol;
-            $camera->port = $recorder->port;
             $camera->channel = $data['channel'];
-            $camera->encoder_username = isset($data['username'])?$data['username']:$recorder->username;
-            $camera->encoder_password = isset($data['password'])?$data['password']:$recorder->password;
             $camera->created_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
             $camera->updated_time = date('Y-m-d H:i:s');
-            $camera->user_id =isset($data['iduser'])?$data['iduser']:Yii::$app->user->identity->id;;
-            $camera->encoder_model =isset($data['model'])?$data['model']:$recorder->model;
             $camera->recorder_id =$recorder_id;
             $camera->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
-			
             if( $camera->protocol == 'http')
                 $camera->streaming_url = $recorder->ip;
             elseif ($camera->protocol == 'rtsp')
-                $camera->streaming_url = 'rtsp://' .$camera->ip_address. ':' . $camera->port . '/user=' .  $camera->encoder_username . '&password='.$camera->encoder_username . '&channel=' . $data['channel'] . '&stream=1.sdp';
+                $camera->streaming_url = 'rtsp://' .$camera->ip_address. ':' . $camera->port . '/user=' .  $recorder->username . '&password='.$recorder->password . '&channel=' . $data['channel'] . '&stream=1.sdp';
             $save = $camera->save(false);
             if($save){
                 $camera_user = new RelationsCamUser();
