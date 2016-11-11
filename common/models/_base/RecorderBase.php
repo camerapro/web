@@ -15,6 +15,7 @@ use Yii;
  * @property string $password
  * @property string $protocol
  * @property integer $media_port
+ * @property integer $port_stream
  * @property integer $port
  * @property string $params
  * @property string $activation_time
@@ -43,9 +44,10 @@ class RecorderBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'media_port', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
+            [['category_id', 'media_port', 'port_stream', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
             [['activation_time', 'created_time', 'updated_time'], 'safe'],
-            [['name', 'ip', 'username', 'password', 'params', 'model','channels'], 'string', 'max' => 255],
+            [['channels'], 'string'],
+            [['name', 'ip', 'username', 'password', 'params', 'model'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
         ];
     }
@@ -64,6 +66,7 @@ class RecorderBase extends \yii\db\ActiveRecord
             'password' => 'Password',
             'protocol' => 'Protocol',
             'media_port' => 'Media Port',
+            'port_stream' => 'Port Stream',
             'port' => 'Port',
             'params' => 'Params',
             'activation_time' => 'Activation Time',
@@ -74,6 +77,7 @@ class RecorderBase extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',
             'model' => 'Model',
+            'channels' => 'Channels',
         ];
     }
 }

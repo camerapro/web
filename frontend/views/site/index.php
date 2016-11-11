@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label">Cổng rtsp</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="port" name="port">
+                                <input type="text" class="form-control" id="port_stream" name="port_stream">
                             </div>
                         </div>
                         <div class="form-group">
@@ -177,7 +177,7 @@
             $('.cam_show').css('overflow-y','scroll');
         }
         $("#media_port").val('34567');
-        $("#port").val('554');
+        $("#port_stream").val('554');
         $('#protocol').val('rtsp');
     });
     $( "#recorder_id" ) .change(function () {
@@ -196,7 +196,7 @@
                                 $('#title_encoder').prop('readonly', 'readonly').val(data_res['data']['name']);
                                 $('#protocol').prop('readonly', 'readonly').val(data_res['data']['protocol']);
                                 $('#encoder_model').prop('readonly', 'readonly').val(data_res['data']['model']);
-                                $('#port').prop('readonly', 'readonly').val(data_res['data']['port']);
+                                $('#port_stream').prop('readonly', 'readonly').val(data_res['data']['port_stream']);
                                 $('#media_port').prop('readonly', 'readonly').val(data_res['data']['media_port']);
                                 if(lever >=3){
                                     $('#ip_address').prop('readonly', 'readonly').val(data_res['data']['ip']);
@@ -209,7 +209,7 @@
                 }else{
                     $('#title_encoder').prop('readonly', false).val('');
                     $('#ip_address').prop('readonly', false).val('');
-                    $('#port').prop('readonly', false).val('554');
+                    $('#port_stream').prop('readonly', false).val('554');
                     $('#media_port').prop('readonly', false).val('34567');
                     $('#username').prop('readonly', false).val('');
                     $('#password').prop('readonly', false).val('');
