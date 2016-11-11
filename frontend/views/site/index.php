@@ -82,16 +82,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Cổng media</label>
+                            <label class="col-sm-3 control-label">Cổng rtsp</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="media_port" name="media_port">
+                                <input type="text" class="form-control" id="port" name="port">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">Cổng rtsp</label>
+                            <label class="col-sm-3 control-label">Cổng media</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" id="port" name="port">
+                                <input type="text" class="form-control" id="media_port" name="media_port">
                             </div>
                         </div>
                         <div class="form-group">
