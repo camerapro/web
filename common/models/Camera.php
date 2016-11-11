@@ -25,5 +25,55 @@ class Camera extends CameraBase
         }
         return $cam;
     }
+
+    public static function getListCam($user_id = NULL,$recorder_id =0,$recorder=null){
+        if(empty($user_id) && empty($recorder_id)){
+            $user_id = Yii::$app->user->identity->id;
+            if(empty($user_id)) return false;
+        }
+        $return =[];
+        if($recorder_id){
+            $rec = self::find()
+                ->select(['id','name','channel','params','camera.status','camera.recorder_id','streaming_url','relations_cam_user.user_id','quality','camera.activation_time'])
+                ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+                ->where(['camera.status'=>1,'recorder_id'=>$recorder_id])
+                ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
+                ->all();
+            foreach($rec as $camera ){
+                $camera->streaming_url = Camera::getStreamingUrl($camera,$recorder);
+                $return[] = $camera;
+
+            }
+            return $return;
+        }
+        $rec = self::find()
+            ->select(['id','name','protocol','channel','params','camera.order','camera.status','camera.recorder_id','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
+            ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
+            ->where(['camera.status'=>1])
+            ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
+            ->all();
+        foreach($rec as $camera ){
+            $camera->streaming_url = self::getStreamingUrl($camera,$recorder);
+            $return[] = $camera;
+
+        }
+        return $return;
+
+
+    }
+    public static  function getStreamingUrl($camera,$recorder){
+        if(!$camera)
+            return '';
+        $protocol = isset($recorder->protocol)?$recorder->protocol:'';
+        if($protocol =='tcp')
+            $protocol = 'rtsp';
+        $ip = isset($recorder->ip)?$recorder->ip:'';
+        $username = isset($recorder->username)?$recorder->username:'';
+        $password = isset($recorder->password)?$recorder->password:'';
+        $channel = isset($camera->channel)?$camera->channel:'';
+        $quality = isset($camera->quality)?$camera->quality:0;
+        $stream = $protocol."://".$ip."/?user=".$username."?password=".$password.'&channel='.$channel.'&stream='.$quality .'.sdp';
+        return $stream ;
+    }
 	
 }
