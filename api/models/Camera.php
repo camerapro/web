@@ -32,7 +32,7 @@ class Camera extends CameraBase
 		$return =[];
         if($recorder_id){
             $rec = self::find()
-                ->select(['id','name','protocol','channel','params','camera.order','camera.status','camera.recorder_id','streaming_url','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
+                ->select(['id','name','channel','params','camera.order','camera.status','camera.recorder_id','streaming_url','relations_cam_user.user_id','agency_id','quality','camera.activation_time'])
                 ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['camera.status'=>1,'recorder_id'=>$recorder_id])
                 ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
