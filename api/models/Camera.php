@@ -61,6 +61,8 @@ class Camera extends CameraBase
 		if(!$camera)
 			return '';
 		$protocol = isset($recorder->protocol)?$recorder->protocol:'';
+		if($protocol =='tcp')
+			$protocol = 'rtsp';
 		$ip = isset($recorder->ip)?$recorder->ip:'';
 		$username = isset($recorder->username)?$recorder->username:'';
 		$password = isset($recorder->password)?$recorder->password:'';
