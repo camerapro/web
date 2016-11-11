@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use frontend\models\FrontendCamera;
+use frontend\models\FrontendRecorder;
 use frontend\models\LoginForm;
 use Yii;
 use yii\base\InvalidParamException;
@@ -58,13 +59,21 @@ class SiteController extends Controller
                 $message = 'Bạn không có quyền xem camera này, vui lòng chọn camera của bạn để xem!';
             }
         }else{
-            $cams = FrontendCamera::getListCam();
+            $recorder = FrontendRecorder::getRecorder();
+            $cams = $recorder[0]['channels'];
+            if(!empty($cams)){
+                $cam_info = $cams[0];
+            }
+            if(empty($cam_info)){
+                $message = 'Hiện tại bạn không có camera nào để xem, vui lòng tạo mới camera';
+            }
+            /*$cams = FrontendCamera::getListCam();
             if(!empty($cams)){
                 $cam_info = $cams['0'];
             }
             if(empty($cam_info)){
                 $message = 'Hiện tại bạn không có camera nào để xem, vui lòng tạo mới camera';
-            }
+            }*/
         }
         return $this->render('index', ['cam_info'=>$cam_info, 'message'=>$message]);
     }

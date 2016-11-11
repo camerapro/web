@@ -1,4 +1,4 @@
-<?php if($recorder_info->protocol == 'http'){?>
+<?php if($cam_info->protocol == 'http'){?>
     <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
         <source src="<?= $streaming_url;?>"  type="application/x-mpegURL">
     </video>

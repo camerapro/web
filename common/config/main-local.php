@@ -6,6 +6,10 @@ return [
             'dsn' => 'mysql:host=115.146.122.39;dbname=cmr',
             'username' => 'cmr',
             'password' => 'cmr@GaQW',
+           /* 'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=camera',
+            'username' => 'root',
+            'password' => '',*/
             'charset' => 'utf8',
         ],
         'mailer' => [

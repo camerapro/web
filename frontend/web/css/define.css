@@ -33,6 +33,9 @@
 .mbt5{
     margin-bottom: 5px;
 }
+.pl15{
+    padding-left: 15px!important;
+}
 .boder_none{
     border: none!important;
 }
@@ -44,6 +47,12 @@
 }
 .w100{
     width: 100%!important;
+}
+.w45{
+    width: 45%!important;
+}
+.w50{
+    width: 50%!important;
 }
 
 .hidden{

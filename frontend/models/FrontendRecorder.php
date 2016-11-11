@@ -18,4 +18,5 @@ class FrontendRecorder extends Recorder
         return $recoder;
     }
 
+
 }
