@@ -39,11 +39,9 @@ class Recorder extends RecorderBase
         if($recorder) {
 			$i =0;
             foreach ($recorder as $records) {
-
                 $channel = \api\models\Camera::getListCam($user_id, $records->id,$records);
 				$rt[$i] = $records;
                 $rt[$i]['channels'] = $channel;
-               
 				$i++;
 				//break;
             }
