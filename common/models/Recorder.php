@@ -25,7 +25,7 @@ class Recorder extends RecorderBase
                 ->where(['status'=>1,'id'=>$recorder_id,'user_id'=>$user_id])->asArray()
                 ->one();
             if($recorder){
-                $channel = \api\models\Camera::getListCam($user_id,$recorder_id, $recorder);
+                $channel = Camera::getListCam($user_id,$recorder_id, $recorder);
                 $recorder['channels'] = $channel;
             }
             return $recorder;
@@ -39,7 +39,8 @@ class Recorder extends RecorderBase
         if($recorder) {
 			$i =0;
             foreach ($recorder as $records) {
-                $channel = \api\models\Camera::getListCam($user_id, $records->id,$records);
+               // $channel = \api\models\Camera::getListCam($user_id, $records->id,$records);
+                $channel = Camera::getListCam($user_id, $records->id,$records);
 				$rt[$i] = $records;
                 $rt[$i]['channels'] = $channel;
 				$i++;
