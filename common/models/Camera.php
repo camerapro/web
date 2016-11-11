@@ -65,6 +65,10 @@ class Camera extends CameraBase
         if(!$camera)
             return '';
         $protocol = isset($recorder->protocol)?$recorder->protocol:'';
+		if($protocol =='http')
+		{
+			 return $camera->streaming_url;
+		}
         if($protocol =='tcp')
             $protocol = 'rtsp';
         $ip = isset($recorder->ip)?$recorder->ip:'';
