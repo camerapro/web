@@ -38,8 +38,8 @@ class Camera extends CameraBase
                 ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
                 ->all();
 			foreach($rec as $camera ){
-				$records->streaming_url = Camera::getStreamingUrl($camera,$recorder);
-				$return[] = $records;
+				$camera->streaming_url = Camera::getStreamingUrl($camera,$recorder);
+				$return[] = $camera;
 	
 			}
 			return $return;
