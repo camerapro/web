@@ -88,10 +88,10 @@ class RecorderController extends ApiController
             $camera->updated_time = date('Y-m-d H:i:s');
             $camera->recorder_id =$recorder_id;
             $camera->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
-            if( $camera->protocol == 'http')
+            if(  $recorder->protocol  == 'http')
                 $camera->streaming_url = $recorder->ip;
-            elseif ($camera->protocol == 'rtsp')
-                $camera->streaming_url = 'rtsp://' .$camera->ip_address. ':' . $camera->port . '/user=' .  $recorder->username . '&password='.$recorder->password . '&channel=' . $data['channel'] . '&stream=1.sdp';
+            elseif ( $recorder->protocol  == 'rtsp')
+                $camera->streaming_url = 'rtsp://' .$recorder->ip. ':' . $recorder->media_port . '/user=' .  $recorder->username . '&password='.$recorder->password . '&channel=' . $data['channel'] . '&stream=1.sdp';
             $save = $camera->save(false);
             if($save){
                 $camera_user = new RelationsCamUser();
