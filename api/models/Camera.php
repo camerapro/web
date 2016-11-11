@@ -2,7 +2,7 @@
 
 namespace api\models;
 
-use common\models\Camera;
+use common\models\_base\CameraBase;
 use Yii;
 
 
