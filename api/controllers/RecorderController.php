@@ -176,7 +176,7 @@ class RecorderController extends ApiController
                     'message'=>'Parameters are missing'
                 );
              $id =    $data['cam_id'];
-			$camera = \common\models\Camera::find()->where(['user_id'=>Yii::$app->user->identity->id,'id'=>$id])->one();
+			$camera = \common\models\Camera::find()->where(['id'=>$id])->one();
 
 			if($camera){
 				 $camera->delete();
