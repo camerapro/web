@@ -45,7 +45,9 @@ return [
 //            'suffix' => '.html',
             'rules' => [
               //  '' => 'site/index',
-                    '<action>'=>'site/<action>',
+			  
+               //'<action>'=>'site/<action>',
+			    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ],
          ],
 
