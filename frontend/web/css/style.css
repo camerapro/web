@@ -237,6 +237,10 @@ body{
     float: left;
     width: 50%;
 }
+#recorder_new_info_modal .form-group, #camera_modal .form-group{
+    float: left;
+    width: 50%;
+}
 #camera_info{
     overflow: hidden;
 }

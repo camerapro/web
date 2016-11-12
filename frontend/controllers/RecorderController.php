@@ -36,7 +36,10 @@ class RecorderController extends Controller
     public function actionIndex()
     {
         $searchModel = new RecorderSearch();
-        $searchModel->user_id = Yii::$app->user->identity->id;
+        if(Yii::$app->user->identity->level <3){
+            $searchModel->user_id = Yii::$app->user->identity->id;
+        }
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -82,15 +85,21 @@ class RecorderController extends Controller
      */
     public function actionUpdate($id)
     {
+        $this->layout = false;
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if(Yii::$app->user->identity->level <3){
+            $model->ip = '';
+            $model->username = '';
+            $model->password = '';
+        }
+        return $this->render('update_popup',  ['model'=>$model]);
+        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
             ]);
-        }
+        }*/
     }
 
     /**

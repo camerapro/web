@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'label' => 'Tên đăng nhập',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        return \common\models\User::findOne($model->user_id)->username;
+                        return isset(\common\models\User::findOne($model->user_id)->username) ?   \common\models\User::findOne($model->user_id)->username :  '';
                     },
                 ],
                 [
@@ -116,6 +116,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="fa fa-pencil"></span>Sửa', $url, [
                                 'title' => Yii::t('app', 'Sửa'),
                                 'class' => 'btn btn-primary btn-xs',
+                                'data-target'=>'#CalenderModalNew',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
                             ]);
                         },
                         'delete' => function ($url, $model) {
@@ -149,3 +152,4 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="modal-content"></div>
     </div>
 </div>
+

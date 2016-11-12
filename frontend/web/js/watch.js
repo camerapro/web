@@ -29,6 +29,7 @@ $( document ).ready(function() {
         });
     });
     $('#save_and_create').on('click', function() {
+        alert('1');
         var title_encoder = $('#title_encoder').val();
         var title_camera = $('#title_camera').val();
         var protocol = $('#protocol').val();

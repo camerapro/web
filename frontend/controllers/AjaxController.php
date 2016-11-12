@@ -577,4 +577,80 @@ class AjaxController extends Controller
         exit;
 
     }
+
+    public function actionUpdate_recorder(){
+        if (Yii::$app->request->isAjax) {
+            $transaction = Yii::$app->db->beginTransaction();
+            $data = Yii::$app->request->post();
+            try{
+                if(!isset($data['recorder_id']) || (int)$data['recorder_id'] ==0 ){
+                    $return = array(
+                        'return_code'=>1,
+                        'message'=>'Không tìm thấy thông tin đầu ghi!'
+                    );
+                    echo json_encode($return);
+                    exit;
+                } else{
+                    //check recoder info
+                    $recorder = FrontendRecorder::findOne($data['recorder_id']);
+                    foreach ($data['recorder_old'] as $item){
+                        if($item['name']=='ip' && $recorder->ip != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'IP/Domain không chính xác'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='username' && $recorder->username != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Tên truy cập không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='password' && $recorder->password != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Mật khẩu không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                    }
+
+
+                    foreach ($data['recorder_new'] as $item){
+                        $recorder->$item['name'] = $item['value'];
+                    }
+                    $recorder->updated_time = date('Y-m-d H:i:s');
+//                    $recorder->user_id = Yii::$app->user->identity->id;
+                    if($recorder->save(false)){
+                        $return = array(
+                            'return_code'=>0,
+                            'message'=>'Cập nhật thành công'
+                        );
+                        $transaction->commit();
+                    }
+
+                }
+
+            } catch (\Exception $e) {
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Thêm mới không thành công thành công'
+                );
+                $transaction->rollBack();
+            }
+        }else{
+            $return = array(
+                'return_code'=>1,
+                'message'=>'Not Ajax request!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
 }
