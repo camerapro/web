@@ -46,12 +46,4 @@ class FrontendUser extends User
 //            [['phone'], 'unique'],
         ];
     }
-
-    public function validatePassword($attribute,$params)
-    {
-        $passLeng = strlen($this->password);
-        if($passLeng<6){
-            $this->addError('password', 'Incorrect username or password.');
-        }
-    }
 }
