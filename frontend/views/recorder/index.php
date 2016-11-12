@@ -46,12 +46,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="fa fa-pencil"></span>Set cam', $url, [
                                 'title' => Yii::t('app', 'Set cam'),
                                 'class' => 'btn btn-primary btn-xs',
+                                'data-target'=>'#CalenderModalNew',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
                             ]);
                         },
                         'update' => function ($url, $model) {
                             return Html::a('<span class="fa fa-pencil"></span>Sửa', $url, [
                                 'title' => Yii::t('app', 'Sửa'),
                                 'class' => 'btn btn-primary btn-xs',
+                                'data-target'=>'#CalenderModalNew',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
                             ]);
                         },
                         'delete' => function ($url, $model) {
