@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\FrontendCamera;
 use Yii;
 use frontend\models\FrontendRecorder;
 use frontend\models\RecorderSearch;
@@ -93,13 +94,6 @@ class RecorderController extends Controller
             $model->password = '';
         }
         return $this->render('update_popup',  ['model'=>$model]);
-        /*if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }*/
     }
 
     /**
@@ -136,5 +130,17 @@ class RecorderController extends Controller
         return $this->render('new');
     }
 
+    public function actionSetcam($id)
+    {
+        $this->layout = false;
+        $model = $this->findModel($id);
+        if(Yii::$app->user->identity->level <3){
+            $model->ip = '';
+            $model->username = '';
+            $model->password = '';
+        }
+        $cams  = FrontendCamera::getListCam($model->user_id, $id);
+        return $this->render('setcam_popup',  ['model'=>$model, 'cams'=>$cams]);
+    }
 
 }

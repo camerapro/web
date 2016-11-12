@@ -36,6 +36,7 @@ class FrontendCamera extends Camera
             ->innerJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
             ->where(['=', 'camera.status', 1])
             ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
+            ->orderBy(['camera.channel' => SORT_ASC])
             ->all();
 			//var_dump($query);
         return $query;

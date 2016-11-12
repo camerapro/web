@@ -530,30 +530,33 @@ class AjaxController extends Controller
                 }
                 for ($i = 0; $i<count($data['camera']); $i=$i+2){
                     $camera = new FrontendCamera();
-                    $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
-                    $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
-                    $camera->created_time = date('Y-m-d H:i:s');
-                    $camera->updated_time = date('Y-m-d H:i:s');
-                    $camera->recorder_id = $recorder_id;
-                    $save = $camera->save(false);
-                    if($save){
-                        $camera_user = new RelationsCamUser();
-                        $camera_user->cam_id = $camera->id;
-                        $camera_user->user_id = Yii::$app->user->identity->id;
-                        $camera_user->created_by_name = Yii::$app->user->identity->username;
-                        $camera_user->created_by_id = Yii::$app->user->identity->id;
-                        $camera_user->owner = 1;
-                        $camera_user->created_time = date('Y-m-d H:i:s');
-                        $camera_user->save();
-                    }else{
-                        $return = array(
-                            'return_code'=>1,
-                            'message'=>'Thêm mới không thành công thành công'
-                        );
-                        $transaction->rollBack();
-                        echo json_encode($return);
-                        exit;
+                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
+                        $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
+                        $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
+                        $camera->created_time = date('Y-m-d H:i:s');
+                        $camera->updated_time = date('Y-m-d H:i:s');
+                        $camera->recorder_id = $recorder_id;
+                        $save = $camera->save(false);
+                        if($save){
+                            $camera_user = new RelationsCamUser();
+                            $camera_user->cam_id = $camera->id;
+                            $camera_user->user_id = Yii::$app->user->identity->id;
+                            $camera_user->created_by_name = Yii::$app->user->identity->username;
+                            $camera_user->created_by_id = Yii::$app->user->identity->id;
+                            $camera_user->owner = 1;
+                            $camera_user->created_time = date('Y-m-d H:i:s');
+                            $camera_user->save();
+                        }else{
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Thêm mới không thành công thành công'
+                            );
+                            $transaction->rollBack();
+                            echo json_encode($return);
+                            exit;
+                        }
                     }
+
                 }
                 $return = array(
                     'return_code'=>0,
@@ -653,4 +656,104 @@ class AjaxController extends Controller
         exit;
 
     }
+
+    public function actionUpdate_camera(){
+        if (Yii::$app->request->isAjax) {
+            $transaction = Yii::$app->db->beginTransaction();
+            $data = Yii::$app->request->post();
+            try{
+                $recorder_id = $data['recorder_id'];
+                if(!isset($recorder_id) || (int)$recorder_id ==0 ){
+                    $return = array(
+                        'return_code'=>1,
+                        'message'=>'Lỗi không tìm thấy thông tin đầu ghi!'
+                    );
+                    echo json_encode($return);
+                    exit;
+                } else{
+                    //check recoder info
+                    $recorder = FrontendRecorder::findOne($data['recorder_id']);
+                    foreach ($data['recorder'] as $item){
+                        if($item['name']=='ip' && $recorder->ip != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'IP/Domain không chính xác'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='username' && $recorder->username != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Tên truy cập không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='password' && $recorder->password != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Mật khẩu không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                    }
+                }
+                //xoa het camera roi tao lai
+                FrontendCamera::deleteAll(['recorder_id'=>$recorder_id]);
+                RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id]);
+                for ($i = 0; $i<count($data['camera']); $i=$i+2){
+                    $camera = new FrontendCamera();
+                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
+                        $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
+                        $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
+                        $camera->created_time = date('Y-m-d H:i:s');
+                        $camera->updated_time = date('Y-m-d H:i:s');
+                        $camera->recorder_id = $recorder_id;
+                        $save = $camera->save(false);
+                        if($save){
+                            $camera_user = new RelationsCamUser();
+                            $camera_user->cam_id = $camera->id;
+                            $camera_user->user_id = Yii::$app->user->identity->id;
+                            $camera_user->created_by_name = Yii::$app->user->identity->username;
+                            $camera_user->created_by_id = Yii::$app->user->identity->id;
+                            $camera_user->owner = 1;
+                            $camera_user->created_time = date('Y-m-d H:i:s');
+                            $camera_user->save();
+                        }else{
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Thêm mới không thành công'
+                            );
+                            $transaction->rollBack();
+                            echo json_encode($return);
+                            exit;
+                        }
+                    }
+
+                }
+                $return = array(
+                    'return_code'=>0,
+                    'message'=>'Cập nhật thông tin camera thành công'
+                );
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Cập nhậ không thành công'
+                );
+                $transaction->rollBack();
+            }
+        }else{
+            $return = array(
+                'return_code'=>1,
+                'message'=>'Not Ajax request!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+
 }
