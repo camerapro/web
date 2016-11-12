@@ -179,6 +179,11 @@
         $("#media_port").val('34567');
         $("#port_stream").val('554');
         $('#protocol').val('rtsp');
+
+    });
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        alert('1');
+        $(".modal-content").empty();
     });
     $( "#recorder_id" ) .change(function () {
             $( "#recorder_id option:selected" ).each(function() {
