@@ -22,6 +22,14 @@ use Yii;
  * @property integer $user_id
  * @property integer $agency_id
  * @property integer $status
+ * @property string $camera_ip
+ * @property integer $camera_port
+ * @property integer $camera_channel
+ * @property string $camera_username
+ * @property string $camera_password
+ * @property string $camera_model
+ * @property string $expired_time
+ * @property integer $company
  */
 class TatBase extends \yii\db\ActiveRecord
 {
@@ -39,11 +47,13 @@ class TatBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'port', 'order', 'camera_main_id', 'camera_secondary_id', 'user_id', 'agency_id', 'status'], 'integer'],
-            [['created_time', 'updated_time'], 'safe'],
+            [['category_id', 'port', 'order', 'camera_main_id', 'camera_secondary_id', 'user_id', 'agency_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
+            [['created_time', 'updated_time', 'expired_time'], 'safe'],
             [['name', 'ip'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
             [['description'], 'string', 'max' => 500],
+            [['camera_ip'], 'string', 'max' => 50],
+            [['camera_username', 'camera_password', 'camera_model'], 'string', 'max' => 100],
         ];
     }
 
@@ -68,6 +78,14 @@ class TatBase extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'agency_id' => 'Agency ID',
             'status' => 'Status',
+            'camera_ip' => 'Camera Ip',
+            'camera_port' => 'Camera Port',
+            'camera_channel' => 'Camera Channel',
+            'camera_username' => 'Camera Username',
+            'camera_password' => 'Camera Password',
+            'camera_model' => 'Camera Model',
+            'expired_time' => 'Expired Time',
+            'company' => 'Company',
         ];
     }
 }
