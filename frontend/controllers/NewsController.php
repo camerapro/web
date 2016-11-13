@@ -75,9 +75,9 @@ class NewsController extends Controller
             $menu->parrent_id = 19;
             $menu->controller = 'guide';
             $menu->action = 'index';
-            $menu->params = 'id=' . $model->id;
+            $menu->params = 'id=1';
             $menu->created_time = date('Y-m-d H:i:s');
-            $menu->created_by = Yii::$app->user->identity->id;
+//            $menu->created_by = Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
             print_r($menu->getErrors());exit;
