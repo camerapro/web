@@ -70,7 +70,7 @@ class NewsController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 //        if ($model->load(Yii::$app->request->post()) ) {
             //tao phan menu
-            /*$menu = new Menu();
+            $menu = new Menu();
             $menu->name = $model->title;
             $menu->parrent_id = 19;
             $menu->controller = 'guide';
@@ -80,21 +80,21 @@ class NewsController extends Controller
             $menu->created_by = Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
-            print_r($menu->getErrors());exit;*/
-            /*//tao quyen
-            $permission = new Permission();
-            $permission->name = $model->title;
-            $permission->parent_id = '39';
-            $permission->created_time = date('Y-m-d H:i:s');
-            $permission->status = 1;
-            $permission->save(false);
-            //tao quyen rule
-            $permission_rule = new RelationsPermissionRule();
-            $permission_rule->permission_id = $permission->id;
-            $permission_rule->controller_name = 'guide';
-            $permission_rule->action_name = 'index';
-            $permission_rule->params = 'id=' . $model->id;
-            $permission_rule->save(false);*/
+            print_r($menu->getErrors());exit;
+            //tao quyen
+            /* $permission = new Permission();
+             $permission->name = $model->title;
+             $permission->parent_id = '39';
+             $permission->created_time = date('Y-m-d H:i:s');
+             $permission->status = 1;
+             $permission->save(false);
+             //tao quyen rule
+             $permission_rule = new RelationsPermissionRule();
+             $permission_rule->permission_id = $permission->id;
+             $permission_rule->controller_name = 'guide';
+             $permission_rule->action_name = 'index';
+             $permission_rule->params = 'id=' . $model->id;
+             $permission_rule->save(false);*/
 
             return $this->redirect(['index']);
 //            return $this->redirect(['view', 'id' => $model->id]);
