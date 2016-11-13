@@ -106,6 +106,53 @@ class AccountController extends Controller
 		}
 
     }
+    public function actionCreate()
+    {
+
+
+        $error= '';
+//        print_r(Yii::$app->request->get());exit;
+        ;
+        if($data = (Yii::$app->request->post())) {
+            if(!$this->validateToken($data)){
+                return ['error_code'=>1,'message'=>'Validate token fail'];
+            }
+            if (empty($data['username']) || empty($data['name']) || empty($data['phone']) || empty($data['email'])){
+                return ['error_code' => 1, 'message' => 'Fill full the information'];
+                exit();
+            }
+            $model = new \common\models\User();
+            $user_name = trim($data['username']);
+            $check_exits = \common\models\User::findOne(['username'=>$user_name]);
+            if($check_exits){
+               return  ['error_code'=>1,'message'=>'Account existed'];
+            }
+            $email = $data['email'];
+            $password = $data['password'];
+            $model->email = $email;
+            $model->username = $user_name;
+            $model->phone = isset($data['phone'])?$data['phone']:'';
+            $model->password = md5($password);
+            $model->fullname = isset($data['name'])?$data['name']:'';
+            $model->created_time = date('Y-m-d H:i:s');
+            $model->updated_time = date('Y-m-d H:i:s');
+            $model->status = 1;
+            $model->permission_group_id =  isset($data['permission']) ? $data['permission'] : 1;
+            if ($model->save(false)) {
+                return ['error_code'=>0,'message'=>'Success','data'=>['userid'=>$model->id,'username'=>$user_name]];
+
+            }else{
+                return ['error_code'=>1,'message'=>'Create fail'];
+
+            }
+        }else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+
+    }
 	    /**
      * Logs out the current user.
      *
