@@ -36,6 +36,7 @@ class Common
         if($recorder_model->protocol == 'http')
             return $camera_model->streaming_url;
         elseif ($recorder_model->protocol == 'rtsp'){
+            $channel = (int) $camera_model->channel + 1;
             if(strtoupper($recorder_model->model) == 'DAHUA'){
                 return 'rtsp://' . $recorder_model->username . ':' . $recorder_model->password . '@' . $recorder_model->ip. ':' . $recorder_model->port_stream . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype='.  $camera_model->quality;
             }
