@@ -27,7 +27,7 @@ class FrontendCamera extends Camera
         return $query;
     }
     
-    public static function getListCam($user_id = NULL){
+    /*public static function getListCam($user_id = NULL){
         if(empty($user_id)){
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
@@ -40,7 +40,7 @@ class FrontendCamera extends Camera
             ->all();
 			//var_dump($query);
         return $query;
-    }
+    }*/
     public static function getAllCamByGrandId($grand_id){
         $query = Camera::find()
             -> leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
