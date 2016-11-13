@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class StaffController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * @inheritdoc
      */
