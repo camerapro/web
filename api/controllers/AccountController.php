@@ -114,7 +114,7 @@ class AccountController extends Controller
 //        print_r(Yii::$app->request->get());exit;
         ;
         if($data = (Yii::$app->request->post())) {
-            if(!$this->validateToken($post)){
+            if(!$this->validateToken($data)){
                 return ['error_code'=>1,'message'=>'Validate token fail'];
             }
             if (empty($data['username']) || empty($data['name']) || empty($data['phone']) || empty($data['email'])){
