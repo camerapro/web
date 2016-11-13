@@ -83,7 +83,7 @@ function SmartWizard(target, options) {
                     var email = $('#email').val();
                     $.ajax({
                         url: '/ajax/create_and_login',
-                        type: "GET",
+                        type: "POST",
                         data: {
                             'fullname':fullname,
                             'user_name':user_name,

@@ -180,7 +180,7 @@ class AjaxController extends Controller
 
     public function actionCreate_and_login(){
         if (Yii::$app->request->isAjax) {
-            $data = Yii::$app->request->get();
+            $data = Yii::$app->request->post();
             $user_name = trim($data['user_name']);
             $password = trim($data['password']);
             $user = new User();
