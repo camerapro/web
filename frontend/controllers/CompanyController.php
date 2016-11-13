@@ -14,9 +14,11 @@ use yii\filters\VerbFilter;
  */
 class CompanyController extends Controller
 {
+    public $enableCsrfValidation = false;
     /**
      * @inheritdoc
      */
+
     public function behaviors()
     {
         return [
@@ -106,6 +108,7 @@ class CompanyController extends Controller
      */
     public function actionDelete($id)
     {
+
         $enableCsrfValidation = false;
         $this->findModel($id)->delete();
 
