@@ -70,7 +70,7 @@ class CompanyController extends Controller
         $model = new CompanyFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'name' => $model->name]);
+            return $this->redirect("/company/index");
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,10 +85,10 @@ class CompanyController extends Controller
      * @param string $name
      * @return mixed
      */
-    public function actionUpdate($id, $name)
+    public function actionUpdate($id)
     {
         $enableCsrfValidation = false;
-        $model = $this->findModel($id, $name);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id, 'name' => $model->name]);
@@ -123,9 +123,9 @@ class CompanyController extends Controller
      * @return CompanyFrontend the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $name)
+    protected function findModel($id)
     {
-        if (($model = CompanyFrontend::findOne(['id' => $id, 'name' => $name])) !== null) {
+        if (($model = CompanyFrontend::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
