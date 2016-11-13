@@ -31,7 +31,10 @@ class NewsController extends Controller
             ],
         ];
     }
-
+    public function beforeAction($action) {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
     /**
      * Lists all News models.
      * @return mixed
@@ -114,12 +117,12 @@ class NewsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $user_id = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $menu = Menu::findOne(['controller'=>'guide', 'action'=>'index', 'params'=>'id=' . $model->id]);
             $menu->name = $model->title;
             $menu->updated_time = date('Y-m-d H:i:s');
-            $menu->updated_by = Yii::$app->user->identity->id;
+            $menu->updated_by = $user_id;
             $menu->save();
             return $this->redirect(['index']);
         } else {
@@ -145,9 +148,11 @@ class NewsController extends Controller
 
         //xoa rule
         $permission_rule = RelationsPermissionRule::findOne(['controller_name'=>'guide', 'action_name'=>'index', 'params'=>'id=' . $id]);
-        $permission_id = $permission_rule->permission_id;
-        $permission = Permission::deleteAll(['id'=>$permission_id]);
-        $permission_rule->delete();
+        if(($permission_rule)){
+            $permission_id = $permission_rule->permission_id;
+            Permission::findOne($permission_id)->delete();
+            $permission_rule->delete();
+        }
 
 
         return $this->redirect(['index']);
