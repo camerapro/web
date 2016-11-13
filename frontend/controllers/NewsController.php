@@ -68,6 +68,7 @@ class NewsController extends Controller
     {
         $model = new News();
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            echo Yii::$app->user->identity->id;exit;
             print_r($model->id);exit;
 //        if ($model->load(Yii::$app->request->post()) ) {
             //tao phan menu
