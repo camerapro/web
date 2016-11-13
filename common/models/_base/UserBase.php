@@ -30,6 +30,7 @@ use Yii;
  * @property string $language
  * @property string $thumb_version
  * @property string $avatar
+ * @property string $client_name
  */
 class UserBase extends \yii\db\ActiveRecord
 {
@@ -57,6 +58,7 @@ class UserBase extends \yii\db\ActiveRecord
             [['address'], 'string', 'max' => 128],
             [['city'], 'string', 'max' => 32],
             [['language'], 'string', 'max' => 20],
+            [['client_name'], 'string', 'max' => 50],
         ];
     }
 
@@ -89,6 +91,7 @@ class UserBase extends \yii\db\ActiveRecord
             'language' => 'Language',
             'thumb_version' => 'Thumb Version',
             'avatar' => 'Avatar',
+            'client_name' => 'Client Name',
         ];
     }
 }
