@@ -70,7 +70,7 @@ class CompanyController extends Controller
         $model = new CompanyFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'name' => $model->name]);
+            return $this->redirect("/company/index");
         } else {
             return $this->render('create', [
                 'model' => $model,
