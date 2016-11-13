@@ -80,6 +80,7 @@ class NewsController extends Controller
             $menu->created_by = Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
+            print_r($menu->getErrors());exit;
             /*//tao quyen
             $permission = new Permission();
             $permission->name = $model->title;
