@@ -281,6 +281,7 @@ body{
 
 .modal_body_info {
     overflow: hidden;
+    padding-bottom: 15px;
 }
 .required_info{
     margin: 10px 0;
