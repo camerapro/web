@@ -77,6 +77,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             $url = '/recorder/delete?id=' . $model->id;
                             return $url;
                         };
+                        if ($action === 'view') {
+                            $url = '/recorder/setcam?id=' . $model->id;
+                            return $url;
+                        };
                     }
                 ],
 
