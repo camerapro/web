@@ -38,9 +38,9 @@ class Common
         elseif ($recorder_model->protocol == 'rtsp'){
             $channel = (int) $camera_model->channel + 1;
             if(strtoupper($recorder_model->model) == 'DAHUA'){
-                return 'rtsp://' . $recorder_model->username . ':' . $recorder_model->password . '@' . $recorder_model->ip. ':' . $recorder_model->port_stream . '/cam/realmonitor?channel='.$camera_model->channel.'&subtype='.  $camera_model->quality;
+                return 'rtsp://' . $recorder_model->username . ':' . $recorder_model->password . '@' . $recorder_model->ip. ':' . $recorder_model->port_stream . '/cam/realmonitor?channel='.$channel.'&subtype='.  $camera_model->quality;
             }
-            return 'rtsp://' .$recorder_model->ip. ':' . $recorder_model->port_stream . '/user=' . $recorder_model->username . '&password='. $recorder_model->password . '&channel=' . $camera_model->channel . '&stream='. $camera_model->quality .'.sdp';
+            return 'rtsp://' .$recorder_model->ip. ':' . $recorder_model->port_stream . '/user=' . $recorder_model->username . '&password='. $recorder_model->password . '&channel=' . $channel . '&stream='. $camera_model->quality .'.sdp';
         }
     }
 
