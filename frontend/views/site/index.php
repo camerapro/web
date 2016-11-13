@@ -1,52 +1,6 @@
 <div class="camera_view">
-    <div class="camera_detail">
-        <?php
-//        print_r($cam_info->id);exit;
-        if($cam_info):
-            $recoder = \frontend\models\FrontendRecorder::findOne($cam_info->recorder_id);
-            if($recoder):?>
-            <?php
-            $link_stream = \common\components\Common::getLinkStream($cam_info->id);
-            if($recoder->protocol == 'http'){?>
-                <video  class="col-md-12 camera_video" id=camera_video_<?= $cam_info->id;?> data-target="http">
-                    <source src="<?= $link_stream;?>"  type="application/x-mpegURL">
-                </video>
-                <script>
-                    var player<?= $cam_info->id;?> = videojs('camera_video_<?= $cam_info->id;?>');
-                    player<?= $cam_info->id;?>.play();
-                </script>
-            <?php }else{
-            if (strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false  || strpos($_SERVER['HTTP_USER_AGENT'], 'CriOS') !== false) {?>
-                <div class="vxgplayer" id="vxg_media_player_<?= $cam_info->id;?>" url="<?= $link_stream;?>" width="720" height="480"
-                     nmf-src="/player/pnacl/Release/media_player.nmf"  nmf-path="media_player.nmf" useragent-prefix="MMP/3.0" latency="10000"  autohide="2"
-                     volume="0.7"  autostart=true avsync  mute aspect-ratio aspect-ratio-mode="1" auto-reconnect>
-                </div>
-                <script>
-                    $(document).ready(function() {
-                        var height = $(window).height();
-                        var width = $(window).width();
-                        $('.camera_detail').css('height',height-80);
-                        $('.camera_detail').css('width',width - 240);
-                    });
-                </script>
-            <?php }else{ ?>
-
-                <embed  windowless="true" data-target="rtsp" id="camera_video_<?= $cam_info->id;?>"  type="application/x-google-vlc-plugin" version="VideoLAN.VLCPlugin.2" autoplay="yes" loop="no" width="100%" height="100%"
-                        target="<?= $link_stream;?>" ></embed>
-                <script>
-                    $(document).ready(function() {
-                        var height = $(window).height();
-                        $('.camera_detail').css('height',height - 80);
-                    });
-                </script>
-            <?php }} ?>
-        <?php elseif($message):?>
-            <?= $message; ?>
-        <?php endif;?>
-        <?php endif;?>
-    </div>
+    <div class="camera_detail"> </div>
 </div>
-
 
 <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: 980px">
@@ -171,6 +125,21 @@
 
 <script>
     $(document).ready(function() {
+        $.ajax({
+            url: '/ajax/play',
+            type: "POST",
+            data: {
+                'cam_id':'<?= $cam_info->id?>',
+            } ,
+            success: function (response) {
+                data = JSON.parse(response);
+                if(data['return_code'] == 0){
+                    $('.camera_detail').html(data['return_html']);
+                }
+            },
+        });
+
+
         var height_camshow = $('.cam_show').height();
         var height = $(window).height();
         if(height_camshow > 600){
@@ -180,10 +149,6 @@
         $("#port_stream").val('554');
         $('#protocol').val('rtsp');
 
-    });
-    $('body').on('hidden.bs.modal', '.modal', function () {
-        alert('1');
-        $(".modal-content").empty();
     });
     $( "#recorder_id" ) .change(function () {
             $( "#recorder_id option:selected" ).each(function() {

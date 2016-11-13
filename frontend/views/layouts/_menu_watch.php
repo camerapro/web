@@ -1,4 +1,4 @@
-<script src="/video.js"></script>
+<script src="/js/video.js"></script>
 <script src="/js/videojs-contrib-hls.js"></script>
 <link href="/css/watch.css" rel="stylesheet">
 

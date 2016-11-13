@@ -18,8 +18,14 @@
                 var width = $(window).width();
                 $('.camera_detail').css('height',height-80);
                 $('.camera_detail').css('width',width - 240);
-                vxgplayer('vxg_media_player_<?= $cam_info->id;?>').play();
-                vxgplayer('vxg_media_player_<?= $cam_info->id;?>').isPlaying();
+                var cam_id = '<?= $cam_info->id;?>';
+                alert(vxgplayer('vxg_media_player_' + cam_id).isPlaying());
+                if(vxgplayer('vxg_media_player_' + cam_id).isPlaying()){
+                    vxgplayer('vxg_media_player_' + cam_id).stop();
+                }else {
+                    vxgplayer('vxg_media_player_' + cam_id).play();
+                }
+
             });
         </script>
     <?php }else{ ?>

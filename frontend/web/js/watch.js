@@ -11,7 +11,12 @@ $( document ).ready(function() {
         }else{
             var isChrome = !!window.chrome && !!window.chrome.webstore;
             if(isChrome){
-                vxgplayer('vxg_media_player_' + current_cam_id).stop();
+
+                if(vxgplayer('vxg_media_player_' + current_cam_id).isPlaying()){
+                    vxgplayer('vxg_media_player_' + current_cam_id).stop();
+                }else {
+                    vxgplayer('vxg_media_player_' + current_cam_id).play();
+                }
             }
         }
         $.ajax({
