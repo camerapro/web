@@ -64,6 +64,7 @@ class CompanyController extends Controller
      */
     public function actionCreate()
     {
+        $enableCsrfValidation = false;
         $model = new CompanyFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -84,6 +85,7 @@ class CompanyController extends Controller
      */
     public function actionUpdate($id, $name)
     {
+        $enableCsrfValidation = false;
         $model = $this->findModel($id, $name);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
