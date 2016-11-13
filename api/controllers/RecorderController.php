@@ -64,7 +64,7 @@ class RecorderController extends ApiController
                     $recorder->username = isset($data['username'])?$data['username']:'';
                     $recorder->password = isset($data['password'])?$data['password']:'';
                     $recorder->protocol = isset($data['protocol'])?$data['protocol']:'';
-                    $recorder->port = isset($data['port'])?$data['port']:'';
+                    $recorder->port_stream = isset($data['port_stream'])?$data['port_stream']:'';
                     $recorder->media_port = isset($data['media_port'])?$data['media_port']:'';
                     $recorder->params = isset($data['params'])?$data['params']:'';
                     $recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:date('Y-m-d H:i:s');
@@ -225,13 +225,14 @@ class RecorderController extends ApiController
 				$recorder->username = isset($data['username'])?$data['username']:$recorder->username;
 				$recorder->password = isset($data['password'])?$data['password']:$recorder->password;
 				$recorder->protocol = isset($data['protocol'])?$data['protocol']:$recorder->protocol;
-				$recorder->port = isset($data['port'])?$data['port']:$recorder->port ;
-				$recorder->media_port = isset($data['media_port'])?$data['media_port']:$recorder->media_port;
+				$recorder->media_port = isset($data['media_port'])?$data['media_port']:$recorder->media_port ;
+				$recorder->port_stream = isset($data['port_stream'])?$data['port_stream']:$recorder->port_stream;
 				$recorder->params = isset($data['params'])?$data['params']:$recorder->params;
 				$recorder->activation_time = isset($data['activationtime'])?$data['activationtime']:$recorder->activation_time ;
 				$recorder->created_time = isset($data['created_time'])?$data['created_time']:$recorder->created_time;
 				$recorder->updated_time = date('Y-m-d H:i:s');
 				$recorder->order = isset($data['order'])?$data['order']:$recorder->order;
+				$recorder->status = isset($data['status'])?$data['status']:$recorder->status;
 				$recorder->agency_id = isset($data['agency_id'])?$data['agency_id']:$recorder->agency_id;
 				$recorder->model = isset($data['model'])?$data['model']:$recorder->model;
 				if($recorder->save(false)){
