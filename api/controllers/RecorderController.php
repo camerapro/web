@@ -279,6 +279,7 @@ class RecorderController extends ApiController
 			if($camera){
 				$camera->name = $data['cam_name'];
 				$camera->channel = $data['channel'];
+				$camera->status = $data['status'];
 				$camera->updated_time = date('Y-m-d H:i:s');
 				if($camera->save(false)){
 					$camera_id = $camera->id;
