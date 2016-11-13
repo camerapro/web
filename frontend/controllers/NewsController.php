@@ -68,11 +68,7 @@ class NewsController extends Controller
     {
 
         $model = new News();
-//        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-        if ($model->load(Yii::$app->request->post()) ) {
-            echo Yii::$app->user->identity->id;exit;
-//            print_r($model->id);exit;
-//        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             //tao phan menu
             $menu = new Menu();
             $menu->name = $model->title;
@@ -81,12 +77,11 @@ class NewsController extends Controller
             $menu->action = 'index';
             $menu->params = 'id=' . $model->id;
             $menu->created_time = date('Y-m-d H:i:s');
-            $menu->created_by = (int) Yii::$app->user->identity->id;
+//            $menu->created_by = (int) Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
-            print_r($menu->getErrors());exit;
             //tao quyen
-            /* $permission = new Permission();
+             $permission = new Permission();
              $permission->name = $model->title;
              $permission->parent_id = '39';
              $permission->created_time = date('Y-m-d H:i:s');
@@ -98,7 +93,7 @@ class NewsController extends Controller
              $permission_rule->controller_name = 'guide';
              $permission_rule->action_name = 'index';
              $permission_rule->params = 'id=' . $model->id;
-             $permission_rule->save(false);*/
+             $permission_rule->save(false);
 
             return $this->redirect(['index']);
 //            return $this->redirect(['view', 'id' => $model->id]);
