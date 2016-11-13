@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Menu;
+use frontend\models\Permission;
+use frontend\models\RelationsPermissionRule;
 use Yii;
 use frontend\models\News;
 use frontend\models\search;
@@ -65,8 +68,34 @@ class NewsController extends Controller
     {
         $model = new News();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //tao phan menu
+            $menu = new Menu();
+            $menu->name = $model->title;
+            $menu->parrent_id = 19;
+            $menu->controller = 'guide';
+            $menu->action = 'index';
+            $menu->params = 'id=' . $model->id;
+            $menu->created_time = date('Y-m-d H:i:s');
+            $menu->created_by = Yii::$app->user->identity->id;
+            $menu->status = 1;
+            $menu->save(false);
+            //tao quyen
+            $permission = new Permission();
+            $permission->name = $model->title;
+            $permission->parent_id = '39';
+            $permission->created_time = date('Y-m-d H:i:s');
+            $permission->status = 1;
+            $permission->save(false);
+            //tao quyen rule
+            $permission_rule = new RelationsPermissionRule();
+            $permission_rule->permission_id = $permission->id;
+            $permission_rule->controller_name = 'guide';
+            $permission_rule->action_name = 'index';
+            $permission_rule->params = 'id=' . $model->id;
+            $permission_rule->save(false);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
+//            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -85,7 +114,12 @@ class NewsController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            $menu = Menu::findOne(['controller'=>'guide', 'action'=>'index', 'params'=>'id=' . $model->id]);
+            $menu->name = $model->title;
+            $menu->updated_time = date('Y-m-d H:i:s');
+            $menu->updated_by = Yii::$app->user->identity->id;
+            $menu->save();
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,

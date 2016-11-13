@@ -9,8 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property integer $permission_id
- * @property string $action_name
  * @property string $controller_name
+ * @property string $action_name
+ * @property string $params
  */
 class RelationsPermissionRuleBase extends \yii\db\ActiveRecord
 {
@@ -29,7 +30,8 @@ class RelationsPermissionRuleBase extends \yii\db\ActiveRecord
     {
         return [
             [['permission_id'], 'integer'],
-            [['action_name', 'controller_name'], 'string', 'max' => 255],
+            [['params'], 'string'],
+            [['controller_name', 'action_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -41,8 +43,9 @@ class RelationsPermissionRuleBase extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'permission_id' => 'Permission ID',
-            'action_name' => 'Action Name',
             'controller_name' => 'Controller Name',
+            'action_name' => 'Action Name',
+            'params' => 'Params',
         ];
     }
 }
