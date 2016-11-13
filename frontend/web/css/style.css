@@ -251,3 +251,30 @@ body{
     height:140px;
     overflow-y: scroll;
 }
+.modal-header{
+    padding: 2px !important;
+    line-height: 30px;
+}
+.modal-header span{
+    font-size: 13px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+.modal-header button{
+    padding: 2px !important;
+}
+.modal-content .form-group{
+    margin-bottom: 3px;
+}
+.modal-content input,.modal-content label{
+    padding: 2px;
+    font-size: 11px;
+}
+.modal-content .form-control{
+    height: 25px;
+
+}
+.modal-content  select{
+    height: 32px !important;
+
+}
