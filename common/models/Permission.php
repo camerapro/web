@@ -65,7 +65,9 @@ class Permission extends PermissionBase
         $list_permission_by_group = explode(',', $pemission_ids);
         $name = [];
         foreach ($list_permission_by_group as $item){
-            $name[] =   self::findOne($item)->name;
+            if(self::findOne($item)){
+                $name[] =   self::findOne($item)->name;
+            }
         }
         $name = implode(', ', $name);
         return $name;
@@ -74,7 +76,10 @@ class Permission extends PermissionBase
         $list_permission_by_group = explode(',', $pemission_ids);
         $name = [];
         foreach ($list_permission_by_group as $item){
-            $name[] =   self::findOne($item)->name;
+            if(self::findOne($item)){
+                $name[] =   self::findOne($item)->name;
+            }
+
         }
         $name = implode(', ', $name);
         return $name;

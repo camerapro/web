@@ -136,6 +136,17 @@ class NewsController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        //xoa menu
+
+        $menu = Menu::findOne(['controller'=>'guide', 'action'=>'index', 'params'=>'id=' . $id]);
+        $menu->delete();
+
+        //xoa rule
+        $permission_rule = RelationsPermissionRule::findOne(['controller_name'=>'guide', 'action_name'=>'index', 'params'=>'id=' . $id]);
+        $permission_id = $permission_rule->permission_id;
+        $permission = Permission::deleteAll(['id'=>$permission_id]);
+        $permission_rule->delete();
+
 
         return $this->redirect(['index']);
     }
