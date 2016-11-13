@@ -67,7 +67,7 @@ class StaffController extends Controller
         $model = new StaffFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect("staff/index");
+            return $this->redirect("/staff/index");
         } else {
             return $this->render('create', [
                 'model' => $model,
