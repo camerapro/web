@@ -67,7 +67,7 @@ class NewsController extends Controller
     public function actionCreate()
     {
         $model = new News();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
 //        if ($model->load(Yii::$app->request->post()) ) {
             //tao phan menu
             $menu = new Menu();
@@ -75,9 +75,9 @@ class NewsController extends Controller
             $menu->parrent_id = 19;
             $menu->controller = 'guide';
             $menu->action = 'index';
-            $menu->params = 'id=1';
+            $menu->params = 'id=' . $model->id;
             $menu->created_time = date('Y-m-d H:i:s');
-//            $menu->created_by = Yii::$app->user->identity->id;
+            $menu->created_by = Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
             print_r($menu->getErrors());exit;
