@@ -122,6 +122,7 @@
 </div>
 
 </div>
+<?php if(!empty($cam_info->id)):?>
 
 <script>
     $(document).ready(function() {
@@ -138,8 +139,10 @@
                 }
             },
         });
-
-
+</script>
+<?php endif;?>
+<script>
+    $(document).ready(function() {
         var height_camshow = $('.cam_show').height();
         var height = $(window).height();
         if(height_camshow > 600){
