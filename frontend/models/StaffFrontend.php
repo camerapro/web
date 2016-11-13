@@ -3,7 +3,7 @@
 namespace frontend\models;
 
 use Yii;
-use common\models\staff;
+use common\models\Staff;
 /**
  * This is the model class for table "staff".
  *
