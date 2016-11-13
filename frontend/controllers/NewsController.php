@@ -80,7 +80,7 @@ class NewsController extends Controller
             $menu->created_by = Yii::$app->user->identity->id;
             $menu->status = 1;
             $menu->save(false);
-            //tao quyen
+            /*//tao quyen
             $permission = new Permission();
             $permission->name = $model->title;
             $permission->parent_id = '39';
@@ -93,7 +93,7 @@ class NewsController extends Controller
             $permission_rule->controller_name = 'guide';
             $permission_rule->action_name = 'index';
             $permission_rule->params = 'id=' . $model->id;
-            $permission_rule->save(false);
+            $permission_rule->save(false);*/
 
             return $this->redirect(['index']);
 //            return $this->redirect(['view', 'id' => $model->id]);
