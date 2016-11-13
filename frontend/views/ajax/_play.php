@@ -19,7 +19,6 @@
                 $('.camera_detail').css('height',height-80);
                 $('.camera_detail').css('width',width - 240);
                 var cam_id = '<?= $cam_info->id;?>';
-                alert(vxgplayer('vxg_media_player_' + cam_id).isPlaying());
                 if(vxgplayer('vxg_media_player_' + cam_id).isPlaying()){
                     vxgplayer('vxg_media_player_' + cam_id).stop();
                 }else {
