@@ -108,6 +108,7 @@ class CompanyController extends Controller
      */
     public function actionDelete($id)
     {
+
         $enableCsrfValidation = false;
         $this->findModel($id)->delete();
 
