@@ -68,6 +68,7 @@ class NewsController extends Controller
     {
 
         $model = new News();
+        $user_id = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             //tao phan menu
             $menu = new Menu();
@@ -77,7 +78,7 @@ class NewsController extends Controller
             $menu->action = 'index';
             $menu->params = 'id=' . $model->id;
             $menu->created_time = date('Y-m-d H:i:s');
-            $menu->created_by = (int) Yii::$app->user->identity->id;
+            $menu->created_by = $user_id;
             $menu->status = 1;
             $menu->save(false);
             //tao quyen
