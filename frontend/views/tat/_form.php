@@ -32,7 +32,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'ip')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'port')->textInput() ?>
-    
+
 
 
     <p>Thông tin camera máy chấm công:</p>
