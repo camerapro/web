@@ -13,6 +13,7 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $token;
+    public $client_name;
     public $rememberMe = true;
 
     private $_user;
@@ -29,7 +30,7 @@ class LoginForm extends Model
             [['password'], 'required', 'message'=>'Vui lòng nhập mật khẩu!'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
-            ['token', 'string'],
+            [['token', 'client_name'], 'string'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
