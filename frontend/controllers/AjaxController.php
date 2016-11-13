@@ -701,8 +701,13 @@ class AjaxController extends Controller
                     }
                 }
                 //xoa het camera roi tao lai
+                //get all cam by id
+                $cams = FrontendCamera::findAll(['recorder_id'=>$recorder_id]);
+                foreach ($cams as $cam){
+                    RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id, 'cam_id'=>$cam->id]);
+                }
                 FrontendCamera::deleteAll(['recorder_id'=>$recorder_id]);
-                RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id]);
+
                 for ($i = 0; $i<count($data['camera']); $i=$i+2){
                     $camera = new FrontendCamera();
                     if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
