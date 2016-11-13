@@ -166,8 +166,15 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <script>
+
+    $('body').on("hidden.bs.modal", function(e) {
+        $(e.target).removeData("bs.modal").find(".modal-content").empty();
+     });
+
     $('body').on("show.bs.modal", function(e) {
         var link = $(e.relatedTarget);
-        $(this).find(".modal-body").load(link.attr("href"));
+        $(this).find(".modal-content").load(link.attr("href"));
     });
+
+
 </script>
