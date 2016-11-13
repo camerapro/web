@@ -102,9 +102,9 @@ class CompanyController extends Controller
      * @param string $name
      * @return mixed
      */
-    public function actionDelete($id, $name)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $name)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
