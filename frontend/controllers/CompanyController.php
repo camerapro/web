@@ -123,9 +123,9 @@ class CompanyController extends Controller
      * @return CompanyFrontend the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $name)
+    protected function findModel($id)
     {
-        if (($model = CompanyFrontend::findOne(['id' => $id, 'name' => $name])) !== null) {
+        if (($model = CompanyFrontend::findOne(['id' => $id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
