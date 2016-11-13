@@ -278,3 +278,10 @@ body{
     height: 32px !important;
 
 }
+
+.modal_body_info {
+    overflow: hidden;
+}
+.required_info{
+    margin: 10px 0;
+}

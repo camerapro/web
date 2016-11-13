@@ -2,11 +2,11 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <div class="modal-title new_recoder" id="myModalLabel">Sửa thông tin mới đầu ghi</div>
-
     </div>
     <p class="show_error"></p>
-    <div class="modal-body">
+    <div class="modal_body_info">
         <div style="width: 95%;float: left;">
+            <div class="required_info">Yêu cầu nhập thông tin cũ của đầu ghi</div>
             <form id="recorder_modal" class="form-horizontal calender" role="form">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Tên đầu ghi</label>
@@ -69,12 +69,10 @@
             </form>
         </div>
     </div>
-    <div class="modal-header">
-        <div class="modal-title new_recoder" id="myModalLabel">Nhập thông tin mới của đầu ghi</div>
-    </div>
 
-    <div class="modal-body" id="recorder_new_info" style="border-top: 1px solid #e5e5e5">
+    <div class="modal_body_info" style="border-top: 1px solid #e5e5e5">
         <div style="width: 95%;float: left;">
+            <div class="required_info">Yêu cầu nhập thông tin mới của đầu ghi</div>
             <form id="recorder_new_info_modal" class="form-horizontal calender" role="form">
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Tên đầu ghi</label>
