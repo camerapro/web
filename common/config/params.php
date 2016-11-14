@@ -5,7 +5,7 @@ return [
     'user.passwordResetTokenExpire' => 3600,
     'images'=>['staff'=>[
         'path'=>'/storage/images/staff/',
-        'url'=>'http://static.thietbianninh.com/images/staff/',
+        'url'=>'http://static.thietbianninh.com/staff/',
         ],
     ],
 ];
