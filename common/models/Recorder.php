@@ -49,8 +49,10 @@ class Recorder extends RecorderBase
             return $rt;
         }
         return false;
+    }
 
-
+    public static function countCamById($recorder_id){
+        return  Camera::find(['recorder_id'=>$recorder_id])->count();
     }
 
 }
