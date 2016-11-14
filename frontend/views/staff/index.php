@@ -48,7 +48,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'card_code',
             'card_id',
             'department',
-
+            [
+                'header' => 'Hình ảnh',
+                'format' => 'raw',
+                'options' => ['width' => '90px'],
+                'headerOptions' => ['style'=>'text-align: center;'],
+                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+                'value' => function($data) {
+                    return ($data) ?
+                        '<a href="'.\yii\helpers\Url::toRoute(['staff/update', 'id' => $data->id]).'">'.
+                        Html::img(\common\components\Common::getImage($data,'staff'),['width'=>'100%', 'title' => $data->{'name'}]).'</a>' : null;
+                }
+            ],
             // 'created_time',
             // 'created_by',
             // 'updated_time',
