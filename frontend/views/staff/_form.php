@@ -45,7 +45,7 @@ use yii\bootstrap\ActiveForm;
             <div class="col-xs-4">
                 <div class="row">
                     <div class=" col-md-push-4" >
-                        <img src="http://static.thietbianninh.com/staff/staff.jpg" width="180"></img>
+                        <img src="<?php echo \common\components\Common::getImage($model,'staff')?>"  onerror="this.src='<?php echo Yii::$app->params['images']['staff']['url'].'/thumb.png';?>'" width="180"></img>
                         <?= $form->field($model, 'imageFile')->fileInput()->label(false) ?>
                     </div>
                 </div>
