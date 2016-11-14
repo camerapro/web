@@ -25,7 +25,7 @@ class Staff extends StaffBase
         if ($this->validate()) {
             if (!is_dir($this->save_path)) {
                 mkdir($this->save_path);
-                @chmod($this->save_path,'0777');
+                chmod($this->save_path,'0777');
             }
             $this->imageFile->saveAs($this->save_path.'/'. $this->image_name . $this->image_ext );
             return true;
