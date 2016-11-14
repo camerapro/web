@@ -81,7 +81,7 @@ class StaffController extends Controller
             if($model->save()){
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
                 $model->image_name = $model->id;
-                $model->save_path = Yii::$app->params['images']['staff']['path'].DS. $model->company_id;
+                $model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
                 if ($model->upload()) {
 
                 }
