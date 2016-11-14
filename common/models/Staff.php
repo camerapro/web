@@ -23,6 +23,10 @@ class Staff extends StaffBase
     public function upload()
     {
         if ($this->validate()) {
+            if (!is_dir($this->save_path)) {
+                mkdir($dir);
+                @chmod($dir,'0777');
+            }
             $this->imageFile->saveAs($this->save_path.'/'. $this->image_name . $this->image_ext );
             return true;
         } else {
