@@ -14,7 +14,7 @@ use yii\bootstrap\ActiveForm;
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
         'action'=>$model->isNewRecord ? '/staff/create' : '/staff/update?id='.$model->id,
-        'method'=>'POST'
+        'method'=>'POST',
         'fieldConfig' => [
             'template' => " <div class=\"form-group form-md-line-input\">{label}\n{beginWrapper}\n{input}<div class=\"form-control-focus\"> </div>\n{error}\n</div>{endWrapper}",
             'horizontalCssClasses' => [
