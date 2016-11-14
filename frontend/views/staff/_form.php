@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
-        'action'=>'/staff/create',
+        'action'=>$model->isNewRecord ? '/staff/create' : '/staff/update',
         'fieldConfig' => [
             'template' => " <div class=\"form-group form-md-line-input\">{label}\n{beginWrapper}\n{input}<div class=\"form-control-focus\"> </div>\n{error}\n</div>{endWrapper}",
             'horizontalCssClasses' => [
@@ -46,7 +46,7 @@ use yii\bootstrap\ActiveForm;
                 <div class="row">
                     <div class=" col-md-push-4" >
                         <img src="http://static.thietbianninh.com/staff/staff.jpg" width="180"></img>
-                        <?= $form->field($model, 'image')->fileInput()->label(false) ?>
+                        <?= $form->field($model, 'imageFile')->fileInput()->label(false) ?>
                     </div>
                 </div>
             </div>
@@ -59,9 +59,9 @@ use yii\bootstrap\ActiveForm;
         <?= $form->field($model, 'company_id')->dropDownList(
             \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name')
         ) ?>
-    <div class="form-group pull-right">
-        <?= Html::submitButton($model->isNewRecord ? 'Thêm ' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success text-right' : 'btn btn-primary']) ?>
-    </div>
+        <div class="form-group pull-right">
+            <?= Html::submitButton($model->isNewRecord ? 'Thêm ' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success text-right' : 'btn btn-primary']) ?>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

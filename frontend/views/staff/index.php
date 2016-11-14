@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'card_code',
             'card_id',
             'department',
-            // 'image:ntext',
+
             // 'created_time',
             // 'created_by',
             // 'updated_time',

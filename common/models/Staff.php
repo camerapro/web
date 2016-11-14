@@ -3,13 +3,35 @@
 namespace common\models;
 
 use common\models\_base\StaffBase;
+use common\behaviors\ImageUploadBehavior;
+use yii\web\UploadedFile;
 use Yii;
 
 
 class Staff extends StaffBase
 {
+    public $imageFile;
+    public  $save_path;
+    public  $image_name;
+    public  $image_ext = '.png';
+    public function rules()
+    {
+        return [
+            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+        ];
+    }
+    public function upload()
+    {
+        if ($this->validate()) {
+            $this->imageFile->saveAs($this->save_path.'/'. $this->image_name . $this->image_ext );
+            return true;
+        } else {
+            return false;
+        }
+    }
 	public static  function add($params){
         $tat = new self;
+        var_dump($params);
         $tat->attributes = $params;
         return $tat->save(false);
     }
