@@ -68,7 +68,8 @@ class StaffController extends Controller
             $model = new StaffFrontend();
         if ($model->load(Yii::$app->request->post()) ) {
             $data = Yii::$app->request->post('StaffFrontend');
-			$image =  $data['imageFile'];
+			
+			$image =  $_FILES['StaffFrontend']['tmp_name']['imageFile'];
             unset($data['imageFile']);
             $model->name =$data['name'];
             $model->phone =$data['phone'];
@@ -113,7 +114,7 @@ class StaffController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
           $data = Yii::$app->request->post('StaffFrontend');
-		  $image =  $data['imageFile'];
+			$image =  $_FILES['StaffFrontend']['tmp_name']['imageFile'];
             unset($data['imageFile']);
             $model->name =$data['name'];
             $model->phone =$data['phone'];
