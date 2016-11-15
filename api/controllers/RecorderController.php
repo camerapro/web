@@ -27,7 +27,7 @@ class RecorderController extends ApiController
     }
     public function actionGet()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->get()));
+		$this->logger->LogInfo("actionGet recorder data  :" .json_encode(Yii::$app->request->get()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
         }
@@ -48,7 +48,7 @@ class RecorderController extends ApiController
     }
     public function actionAdd()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
+		$this->logger->LogInfo("actionAdd recorder data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
@@ -129,7 +129,7 @@ class RecorderController extends ApiController
     }
 	public function actionDelete()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
+		$this->logger->LogInfo("actionDelete recorder data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
@@ -170,7 +170,7 @@ class RecorderController extends ApiController
     }
 	public function actionDeletecam()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
+		$this->logger->LogInfo("actionDeletecam data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {  
 		 
            return ['error_code'=>1,'message'=>'Not login'];
@@ -217,7 +217,7 @@ class RecorderController extends ApiController
      */
     public function actionUpdate()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
+		$this->logger->LogInfo("action recorder data  :" .json_encode(Yii::$app->request->post()));
 		if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
