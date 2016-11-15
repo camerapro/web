@@ -10,6 +10,7 @@ use common\models\_base\RelationsCamUserBase;
 
 class Camera extends CameraBase
 {
+	public $status = [0,1];
     public static  function add($params){
         $cam = new self;
         $cam->attributes = $params;
@@ -37,7 +38,7 @@ class Camera extends CameraBase
                 ->select(['id','name','channel','params','camera.status','camera.recorder_id','streaming_url','relations_cam_user.user_id','quality','camera.activation_time'])
                 ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['recorder_id'=>$recorder_id])
-				->orWhere(['camera.status'=>0,'camera.status'=>1])
+				->orWhere(['camera.status'=>$this->status])
                 ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
                 ->all();
             foreach($rec as $camera ){
