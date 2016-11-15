@@ -107,8 +107,30 @@ class StaffController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+          $data = Yii::$app->request->post('StaffFrontend');
+            unset($data['imageFile']);
+            $model->name =$data['name'];
+            $model->phone =$data['phone'];
+            $model->card_code =$data['card_code'];
+            $model->card_id =$data['card_id'];
+            $model->department =$data['department'];
+            $model->created_time = isset($data['created_time'])?$data['created_time'] : date('Y-m-d H:i:s');
+            $model->status = isset($data['status'])?$data['status']:1;
+            $model->created_by = Yii::$app->user->identity->id;
+            $model->company_id = $data['company_id'];
+            if($model->save()){
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                $model->image_name = $model->id;
+                $model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
+                if ($model->upload()) {
+
+                }
+                else{
+
+                }
+            }
+            return $this->redirect("/staff/index");
         } else {
             return $this->render('update', [
                 'model' => $model,
