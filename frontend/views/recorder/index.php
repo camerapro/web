@@ -89,6 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else:?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
             'columns' => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'name',
@@ -97,19 +98,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'username',
                 'password',
                 [
-                    'label' => 'Tên đăng nhập',
+                    'attribute' => 'user',
+                    'label' => 'Tài khoản đăng nhập',
                     'format' => 'raw',
-                    'value' => function ($model) {
-                        return isset(\common\models\User::findOne($model->user_id)->username) ?   \common\models\User::findOne($model->user_id)->username :  '';
-                    },
+                    'value' => 'user.username'
                 ],
+                'model',
                 [
-                    'label' => 'Thời gian tạo',
-                    'format' => 'raw',
-                    'value' => function ($model) {
-                        return date('d/m/Y H:i', strtotime($model->created_time));
-                    },
+                    'header' => 'Số camera',
+                    'value' => function($model) {
+                        return \frontend\models\FrontendCamera::find()->where(['recorder_id'=>$model->id])->count();
+                    }
                 ],
+                'created_time',
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => 'Quản lý',

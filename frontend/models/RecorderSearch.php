@@ -12,6 +12,7 @@ use frontend\models\FrontendRecorder;
  */
 class RecorderSearch extends FrontendRecorder
 {
+    public $user;
     /**
      * @inheritdoc
      */
@@ -20,6 +21,7 @@ class RecorderSearch extends FrontendRecorder
         return [
             [['id', 'category_id', 'media_port', 'port_stream', 'port', 'order', 'status', 'user_id', 'agency_id'], 'integer'],
             [['name', 'ip', 'username', 'password', 'protocol', 'params', 'activation_time', 'created_time', 'updated_time', 'model', 'channels'], 'safe'],
+            [['user'], 'safe'],
         ];
     }
 
@@ -81,7 +83,11 @@ class RecorderSearch extends FrontendRecorder
             ->andFilterWhere(['like', 'params', $this->params])
             ->andFilterWhere(['like', 'model', $this->model])
             ->andFilterWhere(['like', 'channels', $this->channels]);
+//            ->andFilterWhere(['like', 'user.username', $this->user]);
+        if(!empty($this->user)){
+            $query->joinWith(['user'])->andFilterWhere(['like', 'user.username', $this->user]);
 
+        }
         return $dataProvider;
     }
 }

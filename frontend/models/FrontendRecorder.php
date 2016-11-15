@@ -3,12 +3,18 @@
 namespace frontend\models;;
 
 use common\models\Recorder;
+use common\models\User;
 use Yii;
 
 
 
 class FrontendRecorder extends Recorder
 {
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
 	public static function getRecorderById($user_id = 0){
         if(empty($user_id)){
             $user_id = Yii::$app->user->identity->id;
@@ -29,17 +35,9 @@ class FrontendRecorder extends Recorder
             'protocol' => 'Giao thức',
             'media_port' => 'Cổng media',
             'port_stream' => 'Cổng Rtsp',
-//            'port' => 'Port',
-//            'params' => 'Params',
-//            'activation_time' => 'Activation Time',
-            'created_time' => 'Ngày tạo',
-//            'updated_time' => 'Updated Time',
-//            'order' => 'Order',
-//            'status' => 'Status',
-//            'user_id' => 'User ID',
-//            'agency_id' => 'Agency ID',
-//            'model' => 'Model',
+            'created_time' => 'Thời gian tạo',
             'channels' => 'Kênh',
+            'model'=>'Loại thiết bị'
         ];
     }
 
