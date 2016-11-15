@@ -38,7 +38,7 @@ class Camera extends CameraBase
                 ->select(['id','name','channel','params','camera.status','camera.recorder_id','streaming_url','relations_cam_user.user_id','quality','camera.activation_time'])
                 ->leftJoin('relations_cam_user', 'relations_cam_user.cam_id=camera.id')
                 ->where(['recorder_id'=>$recorder_id])
-				->orWhere(['camera.status'=>$this->status])
+				->orWhere(['camera.status'=>self::status])
                 ->andWhere(['=', 'relations_cam_user.user_id', $user_id])
                 ->all();
             foreach($rec as $camera ){
