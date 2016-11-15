@@ -292,5 +292,5 @@ body{
 }
 #modalPopup .modal-content{
 	border-top: none;
-	border-radius:none !important;
+	border-radius: 0 0 6px 6px !important;
 }
