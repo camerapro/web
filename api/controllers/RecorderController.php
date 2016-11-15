@@ -277,7 +277,7 @@ class RecorderController extends ApiController
      */
     public function actionUpdatecam()
     {
-		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
+		$this->logger->LogInfo("actionUpdatecam data  :" .json_encode(Yii::$app->request->post()));
 		if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
         }
