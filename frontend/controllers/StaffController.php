@@ -68,6 +68,7 @@ class StaffController extends Controller
             $model = new StaffFrontend();
         if ($model->load(Yii::$app->request->post()) ) {
             $data = Yii::$app->request->post('StaffFrontend');
+			$image =  $data['imageFile'];
             unset($data['imageFile']);
             $model->name =$data['name'];
             $model->phone =$data['phone'];
@@ -79,15 +80,18 @@ class StaffController extends Controller
             $model->created_by = Yii::$app->user->identity->id;
             $model->company_id = $data['company_id'];
             if($model->save()){
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->image_name = $model->id;
-                $model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
-                if ($model->upload()) {
+				if($image){
+					$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+					$model->image_name = $model->id;
+					$model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
+					if ($model->upload()) {
 
-                }
-                else{
+					}
+					else{
 
-                }
+					}
+				}
+                
             }
             return $this->redirect("/staff/index");
         } else {
@@ -109,6 +113,7 @@ class StaffController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
           $data = Yii::$app->request->post('StaffFrontend');
+		  $image =  $data['imageFile'];
             unset($data['imageFile']);
             $model->name =$data['name'];
             $model->phone =$data['phone'];
@@ -120,15 +125,17 @@ class StaffController extends Controller
             $model->created_by = Yii::$app->user->identity->id;
             $model->company_id = $data['company_id'];
             if($model->save()){
-                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                $model->image_name = $model->id;
-                $model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
-                if ($model->upload()) {
+				if($image){
+					$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+					$model->image_name = $model->id;
+					$model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
+					if ($model->upload()) {
 
-                }
-                else{
+					}
+					else{
 
-                }
+					}
+				}
             }
             return $this->redirect("/staff/index");
         } else {
