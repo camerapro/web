@@ -8,12 +8,16 @@ use yii\bootstrap\ActiveForm;
 /* @var $model frontend\models\CompanyFrontend */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<div class="modal-body">
+<?php if($ajax){?>
+       
+<?php }?>
 <div class="company-frontend-form">
 
     <?php $form = ActiveForm::begin([
             'layout' => 'horizontal',
             'action'=>$model->isNewRecord ? '/company/create' : '/company/update?id='.$model->id,
+            'method'=>'POST',
             'fieldConfig' => [
                 'template' => " <div class=\"form-group form-md-line-input\">{label}\n{beginWrapper}\n{input}<div class=\"form-control-focus\"> </div>\n{error}\n</div>{endWrapper}",
                 'horizontalCssClasses' => [
@@ -56,4 +60,5 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

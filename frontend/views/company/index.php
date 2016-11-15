@@ -15,27 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4><?php echo  Html::encode($this->title) ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?php
-    Modal::begin([
-        'toggleButton' => [
-            'label' => '<i class="glyphicon glyphicon-plus"></i> Tạo mới',
-            'class' => 'btn btn-success'
-        ],
-        'header' => '<span id="modalHeaderTitle">Thêm mới công ty</span>',
-        'headerOptions' => ['id' => 'modalHeader'],
-        'id' => 'modal',
-        'closeButton' => [
-            'label' => 'X',
-            'class' => 'btn pull-right',
-        ],
-        'size' => '280',
-
-    ]);
-    $myModel = new \frontend\models\CompanyFrontend();
-    echo $this->render('/company/create', ['model' => $myModel]);
-    Modal::end();
-    ?>
+	<p>
+        <a data-ignore-state="1" id="notify-id"  data-target="#modalPopup" data-toggle="modal" class="title pull-left btn btn-success" href="/company/create"><i class="glyphicon glyphicon-plus"></i> Tạo mới</a>
+    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -57,7 +39,99 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'updated_time',
              'website',
 
-            ['class' => 'yii\grid\ActionColumn'],
+           
+			[
+                    'class' => 'yii\grid\ActionColumn',
+                    'header' => 'Quản lý',
+                    'template' => '{update} {delete} {view}',
+                    'buttons' => [
+                        //view button
+                        'view' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                                'title' => Yii::t('app', 'Set cam'),
+                            ]);
+                        },
+                        'update' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                                'title' => Yii::t('app', 'Sửa'),
+                                'data-target'=>'#modalPopup',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
+                            ]);
+                        },
+                        'delete' => function ($url, $model) {
+                            return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                'title' => Yii::t('app', 'Delete'),
+                              
+                                'data-confirm' => 'Bạn có chắc chắn muốn xóa đầu ghi này?',
+                            ]);
+                        },
+                    ],
+                    'urlCreator' => function ($action, $model, $key, $index) {
+                        if ($action === 'update') {
+                            $url = '/company/update?id=' . $model->id;
+                            return $url;
+                        };
+                        if ($action === 'delete') {
+                            $url = '/company/delete?id=' . $model->id;
+                            return $url;
+                        };
+                        if ($action === 'view') {
+                            $url = '/company/view?id=' . $model->id;
+                            return $url;
+                        };
+                    }
+                ],
         ],
     ]); ?>
 </div>
+
+<div id="modalPopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalPopup" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 500px">
+	<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+     
+    </div>
+        <div class="modal-content"></div>
+    </div>
+</div>
+<script>
+
+    $('body').on("hidden.bs.modal", function(e) {
+        $(e.target).removeData("bs.modal").find(".modal-content").empty();
+     });
+
+    $('body').on("show.bs.modal", function(e) {
+        var link = $(e.relatedTarget);
+		
+        $(this).find(".modal-content").load(link.attr("href"));
+    });
+	$("#modalPopup").draggable({
+		handle: ".modal-header"
+	}); 
+    $('#MyButton').click(function(){
+        var recorder_ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            recorder_ids.push($(this).val());
+        });
+
+        $.ajax({
+            url: '/ajax/multiple_delete_recorder',
+            type: "POST",
+            data: {
+                'recorder_ids':recorder_ids,
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['return_code'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+
+</script>
