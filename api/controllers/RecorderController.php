@@ -9,6 +9,7 @@ use common\models\LoginForm;
 use api\models\RelationsCamUser;
 use api\models\Camera;
 use api\components\ApiController;
+use common\components\KLogger;
 
 /**
  * Site controller
@@ -18,12 +19,15 @@ class RecorderController extends ApiController
 	public $enableCsrfValidation = false;
 	private $api_key ='43S4342342Asfd';
 	public $layout =false;
+	public $logger;
 	public function init()
     {
+		 $this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
     public function actionGet()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->get()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
         }
@@ -44,6 +48,7 @@ class RecorderController extends ApiController
     }
     public function actionAdd()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
@@ -124,6 +129,7 @@ class RecorderController extends ApiController
     }
 	public function actionDelete()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
@@ -164,6 +170,7 @@ class RecorderController extends ApiController
     }
 	public function actionDeletecam()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
 		 if (Yii::$app->user->isGuest) {  
 		 
            return ['error_code'=>1,'message'=>'Not login'];
@@ -210,6 +217,7 @@ class RecorderController extends ApiController
      */
     public function actionUpdate()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
 		if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
@@ -269,9 +277,10 @@ class RecorderController extends ApiController
      */
     public function actionUpdatecam()
     {
+		$this->logger->LogInfo("data  :" .json_encode(Yii::$app->request->post()));
 		if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
-         }
+        }
         if($data = Yii::$app->request->post())
         {
 			$id =  $data['cam_id'];
