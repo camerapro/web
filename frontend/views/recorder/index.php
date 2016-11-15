@@ -16,10 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <a data-ignore-state="1" id="notify-id"  data-target="#CalenderModalNew" data-toggle="modal" class="title pull-left btn btn-success" href="/recorder/new">Tạo mới</a>
     </p>
+    <input type="button" class="btn btn-info" value="Multiple Delete" id="MyButton" >
+
     <?php if(Yii::$app->user->identity->level < 3):?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
+                ['class' => 'yii\grid\CheckboxColumn'],
                 ['class' => 'yii\grid\SerialColumn'],
                 'name',
                 [
@@ -91,6 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'columns' => [
+                ['class' => 'yii\grid\CheckboxColumn'],
                 ['class' => 'yii\grid\SerialColumn'],
                 'name',
                 'ip',
@@ -167,7 +171,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="modal-content"></div>
     </div>
 </div>
-
 <script>
 
     $('body').on("hidden.bs.modal", function(e) {
@@ -179,5 +182,29 @@ $this->params['breadcrumbs'][] = $this->title;
         $(this).find(".modal-content").load(link.attr("href"));
     });
 
+    $('#MyButton').click(function(){
+        var recorder_ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            recorder_ids.push($(this).val());
+        });
+
+        $.ajax({
+            url: '/ajax/multiple_delete_recorder',
+            type: "POST",
+            data: {
+                'recorder_ids':recorder_ids,
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['return_code'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
 
 </script>

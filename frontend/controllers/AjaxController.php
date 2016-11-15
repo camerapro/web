@@ -487,6 +487,7 @@ class AjaxController extends Controller
             $transaction = Yii::$app->db->beginTransaction();
             $data = Yii::$app->request->post();
             try{
+
                 if(!isset($data['recorder_id']) || (int)$data['recorder_id'] ==0 ){
                     $recorder = new FrontendRecorder();
                     foreach ($data['recorder'] as $item){
@@ -530,7 +531,7 @@ class AjaxController extends Controller
                 }
                 for ($i = 0; $i<count($data['camera']); $i=$i+2){
                     $camera = new FrontendCamera();
-                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
+                    if(isset($data['camera'][$i]['value']) && isset($data['camera'][$i+1]['value'])){
                         $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
                         $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
                         $camera->created_time = date('Y-m-d H:i:s');
@@ -747,6 +748,35 @@ class AjaxController extends Controller
                 $return = array(
                     'return_code'=>1,
                     'message'=>'Cập nhậ không thành công'
+                );
+                $transaction->rollBack();
+            }
+        }else{
+            $return = array(
+                'return_code'=>1,
+                'message'=>'Not Ajax request!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+
+    public function actionMultiple_delete_recorder(){
+        if (Yii::$app->request->isAjax) {
+            $transaction = Yii::$app->db->beginTransaction();
+            $data = Yii::$app->request->post();
+            try{
+                foreach ($data['recorder_ids'] as $item){
+                    //xoa het camera tao boi dau ghi
+                    //xoa het trong bang relation
+
+                }
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Thêm mới không thành công thành công'
                 );
                 $transaction->rollBack();
             }
