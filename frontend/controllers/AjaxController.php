@@ -660,8 +660,10 @@ class AjaxController extends Controller
 
     public function actionUpdate_camera(){
         if (Yii::$app->request->isAjax) {
+
             $transaction = Yii::$app->db->beginTransaction();
             $data = Yii::$app->request->post();
+
             try{
                 $recorder_id = $data['recorder_id'];
                 if(!isset($recorder_id) || (int)$recorder_id ==0 ){
@@ -712,7 +714,7 @@ class AjaxController extends Controller
                 for ($i = 0; $i<count($data['camera']); $i=$i+2){
                     $camera = new FrontendCamera();
 //                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
-                    if(isset($data['camera'][$i]['value']) && isset($data['camera'][$i+1]['value'])){
+                    if(!empty($data['camera'][$i]['value']) && isset($data['camera'][$i+1]['value'])){
                         $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
                         $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
                         $camera->created_time = date('Y-m-d H:i:s');
