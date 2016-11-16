@@ -93,6 +93,7 @@ function SmartWizard(target, options) {
                             'email':email
                         } ,
                         cache: false,
+                        timeout: 300000,
                         success: function (response) {
                             var data_type = JSON.parse(response);
                             if(data_type['return_code'] == 0){
