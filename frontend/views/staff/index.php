@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'card_id',
             'department',
             [
-                'header' => 'Hình ảnh',
+                'header' => 'Ảnh',
                 'format' => 'raw',
                 'options' => ['width' => '90px'],
                 'headerOptions' => ['style'=>'text-align: center;'],

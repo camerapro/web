@@ -46,11 +46,9 @@ use yii\bootstrap\ActiveForm;
     <p>Thông tin quản trị:</p>
     <?= $form->field($model, 'balance')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_time')->textInput() ?>
+     <?= $form->field($model, 'created_time')->textInput(array('value'=>isset($model->created_time)?$model->created_time:date("Y-m-d H:i:s"))) ?>
 
-    <?= $form->field($model, 'expired_time')->textInput() ?>
-
-    <?= $form->field($model, 'updated_time')->textInput() ?>
+    <?= $form->field($model, 'expired_time')->textInput(array('value'=>isset($model->expired_time)?$model->expired_time:date("Y-m-d H:i:s",time()+ 365*86400)));?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
