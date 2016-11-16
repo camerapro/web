@@ -814,7 +814,7 @@ class AjaxController extends Controller
                         RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id, 'cam_id'=>$cam->id]);
                     }
                     FrontendCamera::deleteAll(['recorder_id'=>$recorder_id]);
-                    
+
                     $recorder->delete();
                     $return = array(
                         'return_code'=>0,
@@ -845,15 +845,31 @@ class AjaxController extends Controller
             $data = Yii::$app->request->post();
             try{
                 foreach ($data['recorder_ids'] as $item){
-                    //xoa het camera tao boi dau ghi
-                    //xoa het trong bang relation
-
+                    $recorder = FrontendRecorder::findOne($item);
+                    $cams = FrontendCamera::findAll(['recorder_id'=>$recorder->id]);
+                    foreach ($cams as $cam){
+                        RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id, 'cam_id'=>$cam->id]);
+                    }
+                    FrontendCamera::deleteAll(['recorder_id'=>$recorder->id]);
+                    if(!$recorder->delete()){
+                        $return = array(
+                            'return_code'=>1,
+                            'message'=>'Xóa đầu ghi không thành công'
+                        );
+                        $transaction->rollBack();
+                        echo json_encode($return);
+                        exit;
+                    }
                 }
+                $return = array(
+                    'return_code'=>0,
+                    'message'=>'Xóa đầu ghi thành công'
+                );
                 $transaction->commit();
             } catch (\Exception $e) {
                 $return = array(
                     'return_code'=>1,
-                    'message'=>'Thêm mới không thành công thành công'
+                    'message'=>'Xóa đầu ghi không thành công'
                 );
                 $transaction->rollBack();
             }

@@ -16,13 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <a data-ignore-state="1" id="notify-id"  data-target="#CalenderModalNew" data-toggle="modal" class="title pull-left btn btn-success" href="/recorder/new">Tạo mới</a>
     </p>
-    <input type="button" class="title pull-left btn btn-success" value="Xóa" id="delete_recorder_btn" >
-
+    <?php if(Yii::$app->user->identity->level >= 3):?>
+    <input type="button" class="title pull-left btn btn-success" value="Xóa" id="delete_recorder_btn" data-confirm="Bạn có chắc chắn muốn xóa?">
+    <?php endif;?>
     <?php if(Yii::$app->user->identity->level < 3):?>
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
             'columns' => [
-                ['class' => 'yii\grid\CheckboxColumn'],
                 ['class' => 'yii\grid\SerialColumn'],
                 'name',
                 [
