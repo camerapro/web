@@ -31,6 +31,8 @@ use Yii;
  * @property string $thumb_version
  * @property string $avatar
  * @property string $client_name
+ * @property integer $company_id
+ * @property integer $company_admin
  */
 class UserBase extends \yii\db\ActiveRecord
 {
@@ -48,8 +50,8 @@ class UserBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'fullname', 'email'], 'required'],
-            [['point', 'level', 'permission_group_id', 'gender', 'country', 'status'], 'integer'],
+            [['username', 'password', 'email'], 'required'],
+            [['point', 'level', 'permission_group_id', 'gender', 'country', 'status', 'company_id', 'company_admin'], 'integer'],
             [['birthday', 'created_time', 'updated_time', 'login_time'], 'safe'],
             [['username'], 'string', 'max' => 100],
             [['password', 'email', 'facebook_id', 'google_id', 'thumb_version', 'avatar'], 'string', 'max' => 255],
@@ -92,6 +94,8 @@ class UserBase extends \yii\db\ActiveRecord
             'thumb_version' => 'Thumb Version',
             'avatar' => 'Avatar',
             'client_name' => 'Client Name',
+            'company_id' => 'Company ID',
+            'company_admin' => 'Company Admin',
         ];
     }
 }
