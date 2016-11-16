@@ -138,6 +138,7 @@
                     $('.camera_detail').html(data['return_html']);
                 }
             },
+        })
         });
 </script>
 <?php endif;?>
