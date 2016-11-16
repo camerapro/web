@@ -96,11 +96,11 @@ function SmartWizard(target, options) {
                         timeout: 300000,
                         success: function (response) {
                             //var data_type = JSON.parse(response);
-                            if(data_type['return_code'] == 0){
+                            if(response['return_code'] == 0){
                                  // window.location = 'http://cam.thietbianninh.com';
                                 window.location.reload();
                             }else{
-                                alert(data_type['message']);
+                                alert(response['message']);
                             }
                         },
                     });
