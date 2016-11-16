@@ -91,6 +91,7 @@ function SmartWizard(target, options) {
                             'phone_number':phone_number,
                             'email':email
                         } ,
+                        cache: false,
                         success: function (response) {
                             var data_type = JSON.parse(response);
                             if(data_type['return_code'] == 0){
