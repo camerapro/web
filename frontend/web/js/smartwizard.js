@@ -82,6 +82,7 @@ function SmartWizard(target, options) {
                     var phone_number = $('#phone_number').val();
                     var email = $('#email').val();
                     $.ajax({
+                        dataType: "json",
                         url: '/ajax/create_and_login',
                         type: "POST",
                         data: {
