@@ -11,7 +11,6 @@
     <link href="/web/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <!-- Bootstrap -->
 
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -30,10 +29,8 @@
     <link href="/css/define.css" rel="stylesheet">
     <link href="/css/vxgplayer-1.7.44.min.css" rel="stylesheet">
     <link href="/css/bootstrap-switch.css" rel="stylesheet">
-<!--    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-    <!--    <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>-->
     <script src="http://vjs.zencdn.net/5.10/video.js"></script>
     <script src="/js/videojs-contrib-hls.js"></script>
 
