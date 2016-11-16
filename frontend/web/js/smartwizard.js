@@ -97,7 +97,8 @@ function SmartWizard(target, options) {
                         success: function (response) {
                             var data_type = JSON.parse(response);
                             if(data_type['return_code'] == 0){
-                                 window.location = 'http://cam.thietbianninh.com';
+                                 // window.location = 'http://cam.thietbianninh.com';
+                                window.location.reload();
                             }else{
                                 alert(data_type['message']);
                             }
