@@ -12,17 +12,26 @@
     <title>Đăng nhập - Thiết bị An Ninh | Astech Việt Nam</title>
 
     <!-- Bootstrap -->
-    <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://colorlib.com/polygon/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="https://colorlib.com/polygon/build/css/custom.min.css" rel="stylesheet">
+<!--    <link href="https://colorlib.com/polygon/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    <!-- Font Awesome -->-->
+<!--    <link href="https://colorlib.com/polygon/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
+<!--    <!-- Custom Theme Style -->-->
+<!--    <link href="https://colorlib.com/polygon/build/css/custom.min.css" rel="stylesheet">-->
     <link href="/css/style.css" rel="stylesheet">
     <link href="/css/login.css" rel="stylesheet">
     <link href="/css/define.css" rel="stylesheet">
-<!--    <script src="https://colorlib.com/polygon/vendors/jquery/dist/jquery.min.js"></script>-->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+
+
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/custom.min.css" rel="stylesheet">
+
+
+
+
+<!--    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>-->
 
     <script src="/js/smartwizard.js"></script>
-
-<!--    <script src="/js/common.js"></script>-->
+    <script src="/js/jquery-2.2.4.min.js"></script>
