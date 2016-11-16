@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         Html::img(\common\components\Common::getImage($data,'staff'),['width'=>'100%', 'title' => $data->{'name'}]).'</a>' : null;
                 }
             ],
-			 ['attribute' => 'company',
+			 ['attribute' => 'company_id',
                 'format' => 'raw',
                 'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name'),
                 'options' => ['width' => '90px'],
