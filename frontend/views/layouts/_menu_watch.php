@@ -24,7 +24,7 @@
                     <?php foreach ($recoder['channels'] as $cam): ?>
                         <ul class="pl15 cam_res cam_number_<?= $cam->id ?>">
                             <li class="pr2">
-                                <a class="cam_name <?php echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test"
+                                <a class="cam_name <?php echo $i == 0 ? 'cam_select' : '' ?>" href="#" alt="test" protocol="<?= $recoder->protocol;?>"
                                    value="<?= $cam->id ?>"><?= $cam->name ?></a>
                             </li>
                         </ul>

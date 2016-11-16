@@ -143,7 +143,7 @@ class Common
         $camera_model = CameraBase::findOne($camera_id);
         $recorder_model = Recorder::findOne($camera_model->recorder_id);
         if($recorder_model->protocol == 'http')
-            return $recorder_model->ip;
+            return $camera_model->streaming_url;
         elseif ($recorder_model->protocol == 'rtsp'){
             $channel = (int) $camera_model->channel + 1;
             if(strtoupper($recorder_model->model) == 'DAHUA'){

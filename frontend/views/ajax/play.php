@@ -2,6 +2,6 @@
     <source src="<?= $check->streaming_url;?>"  type="application/x-mpegURL">
 </video>
 <script>
-    var player<?= $check->id;?> = videojs('camera_video_<?= $$check->id;?>');
+    var player<?= $check->id;?> = videojs('camera_video_<?= $check->id;?>');
     player<?= $check->id;?>.play();
 </script>

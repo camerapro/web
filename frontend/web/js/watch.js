@@ -1,17 +1,18 @@
 $( document ).ready(function() {
     $('.cam_name').on('click', function() {
         var cam_id = $(this).attr('value');
+
         var current_cam_id  = $(this).parent().parent().parent().find('.cam_select').attr('value');
+        var protocol  = $(this).parent().parent().parent().find('.cam_select').attr('protocol');
         $(this).parent().parent().parent().find('.cam_select').removeClass('cam_select');
         $('.cam_number_' + cam_id + ' li a').addClass('cam_select');
-        var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
+        // var protocol = $('#camera_video_' + current_cam_id).attr('data-target');
         if(protocol == 'http'){
             var player = videojs('camera_video_' + current_cam_id);
             player.dispose();
         }else{
             var isChrome = !!window.chrome && !!window.chrome.webstore;
             if(isChrome){
-
                 if(vxgplayer('vxg_media_player_' + current_cam_id).isPlaying()){
                     vxgplayer('vxg_media_player_' + current_cam_id).stop();
                 }else {
@@ -28,6 +29,7 @@ $( document ).ready(function() {
             success: function (response) {
                 data = JSON.parse(response);
                 if(data['return_code'] == 0){
+
                     $('.camera_detail').html(data['return_html']);
                 }
             },

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <a data-ignore-state="1" id="notify-id"  data-target="#CalenderModalNew" data-toggle="modal" class="title pull-left btn btn-success" href="/recorder/new">Tạo mới</a>
     </p>
-    <input type="button" class="btn btn-info" value="Multiple Delete" id="MyButton" >
+    <input type="button" class="title pull-left btn btn-success" value="Xóa" id="delete_recorder_btn" >
 
     <?php if(Yii::$app->user->identity->level < 3):?>
         <?= GridView::widget([
@@ -182,7 +182,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $(this).find(".modal-content").load(link.attr("href"));
     });
 
-    $('#MyButton').click(function(){
+    $('#delete_recorder_btn').click(function(){
         var recorder_ids = [];
         $("input[type=checkbox]:checked").each ( function() {
             recorder_ids.push($(this).val());
