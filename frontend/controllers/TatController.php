@@ -67,7 +67,9 @@ class TatController extends Controller
 		$ajax= $this->verifyAjax();
         $model = new TatFrontend();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+			$model->user_id = Yii::$app->user->identity->id;
+			if($model->save())
             return $this->redirect(['index']); 
         } else {
             return $this->render('create', [

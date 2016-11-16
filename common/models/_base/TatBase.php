@@ -17,10 +17,7 @@ use Yii;
  * @property string $updated_time
  * @property string $description
  * @property integer $order
- * @property integer $camera_main_id
- * @property integer $camera_secondary_id
  * @property integer $user_id
- * @property integer $agency_id
  * @property integer $status
  * @property string $camera_ip
  * @property integer $camera_port
@@ -47,7 +44,7 @@ class TatBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'port', 'order', 'camera_main_id', 'camera_secondary_id', 'user_id', 'agency_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
+            [['category_id', 'port', 'order', 'user_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
             [['created_time', 'updated_time', 'expired_time'], 'safe'],
             [['name', 'ip'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
@@ -73,10 +70,7 @@ class TatBase extends \yii\db\ActiveRecord
             'updated_time' => 'Updated Time',
             'description' => 'Description',
             'order' => 'Order',
-            'camera_main_id' => 'Camera Main ID',
-            'camera_secondary_id' => 'Camera Secondary ID',
             'user_id' => 'User ID',
-            'agency_id' => 'Agency ID',
             'status' => 'Status',
             'camera_ip' => 'Camera Ip',
             'camera_port' => 'Camera Port',

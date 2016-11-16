@@ -8,6 +8,7 @@ use common\models\LoginForm;
 use api\components\ApiController;
 use common\models\Tat;
 use common\models\Camera;
+use common\models\CameraType;
 
 /**
  * Site controller
@@ -41,7 +42,8 @@ class TatController extends ApiController
         $message = '';
         $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
         $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-		$tat = Tat::getTats($id,$user_id);
+        $company_id = isset(Yii::$app->request->get()['company_id']) ? Yii::$app->request->get()['company_id'] : '';
+		$tat = Tat::getTats($id,$user_id,$company_id);
 		if (!empty($tat)) {
 			return ['error_code' => 0, 'message' => 'Success', 'data' => $tat];
 		}
@@ -102,7 +104,6 @@ class TatController extends ApiController
                 'description'=>isset($data['description']) ? $data['description'] : '',
                 'order'=>isset($data['order']) ? $data['order'] : '',
                 'user_id'=>isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
-                'agency_id'=>isset($data['agency_id']) ? $data['agency_id'] : 0,
                 'status'=>isset($data['status']) ? $data['status'] : 0,
                 'camera_ip'=>isset($data['camera_ip']) ? $data['camera_ip'] : '',
                 'camera_port'=>isset($data['camera_port']) ? $data['camera_port'] : '',
@@ -119,9 +120,18 @@ class TatController extends ApiController
             $save = Tat::add($tat_params);
 
             if ($save) {
+				$cam_type = CameraType::find()->where(['name'=>$tat_params['camera_model']])->one();
+				if(!$cam_type){
+					   $type_params = [
+							'name' => isset($data['camera_model']) ? $data['camera_model'] : '',
+							'description' => isset($data['description']) ? $data['description'] : ''
+						];
+					 CameraType::add($type_params);
+				}
                 $return = array(
                     'error_code' => 0,
-                    'message' => 'Success'
+                    'message' => 'Success',
+					'tat_id'=>$save->id
                 );
             } else {
                 $return = array(

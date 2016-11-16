@@ -13,21 +13,22 @@ class Tat extends TatBase
     public static  function add($params){
         $tat = new self;
         $tat->attributes = $params;
-        return $tat->save(false);
+         $tat->save(false);
+		 return $tat;
     }
-	public static  function getTats($tat_id =0,$user_id=0,$company_id=0){
+	public static  function getTats($tat_id =0,$user_id,$company_id=0){
         if(empty($user_id) && empty($tat_id)){
             $user_id = Yii::$app->user->identity->id;
             if(empty($user_id)) return false;
         }
         if($tat_id){
             $tat = self::find()
-                ->where(['status'=>1,'id'=>$tat_id,'user_id'=>$user_id])->asArray()
+                ->where(['status'=>1,'id'=>$tat_id])->asArray()
                 ->all();
         }
 		elseif($company_id){
             $tat = self::find()
-                ->where(['status'=>1,'id'=>$company_id,'user_id'=>$user_id])->asArray()
+                ->where(['status'=>1,'company'=>$company_id])->asArray()
                 ->all();
         }
 		else{
