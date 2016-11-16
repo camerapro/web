@@ -53,8 +53,10 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'expired_time')->textInput() ?>
 
-    <?= $form->field($model, 'company')->textInput() ?>
-    <?= $form->field($model, 'status')->textInput() ?>
+	<?= $form->field($model, 'company')->dropDownList(
+            \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name')
+        ) ?>
+    <?= $form->field($model, 'status')->checkBox(); ?>
 
 
     <div class="form-group">
