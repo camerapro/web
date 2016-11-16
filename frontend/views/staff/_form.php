@@ -43,6 +43,7 @@ use yii\bootstrap\ActiveForm;
                 <?= $form->field($model, 'department')->textInput(['maxlength' => true]) ?>
             </div>
            <div class="col-xs-4">
+		   
                 <div class="row">
                     <div class=" col-md-push-4" >
                         <img src="<?php echo \common\components\Common::getImage($model,'staff')?>"  onerror="this.src='<?php echo Yii::$app->params['images']['staff']['url'].'/thumb.png';?>'" width="180"></img>
