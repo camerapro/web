@@ -3,6 +3,8 @@
 namespace common\models;
 
 use common\models\_base\TimekeepingBase;
+use common\models\Staff;
+use common\models\Tat;
 use Yii;
 
 /**
@@ -25,16 +27,24 @@ class Timekeeping extends TimekeepingBase
         $tat->attributes = $params;
         return $tat->save(false);
     }
-    public static  function search($card_code=0,$staff_name=''){
+    public static  function searchData($card_code=0,$staff_name=''){
         $staff = Timekeeping::find()->where(['and', ['card_code' => $card_code]])
             ->orFilterWhere(['like', 'staff_name', $staff_name])
             ->all();
         $rt = array();
         foreach ($staff as $value)
         {
-            $value->image = 'http://api.thietbianninh.com/kute.jpg';
+            $value->image = \common\components\Common::getImage($value,'staff');
             $rt[] = $value;
         }
         return $rt;
+    }
+	public function getStaff()
+    {
+        return $this->hasOne(Staff::className(), ['id' => 'staff_id']);
+    }
+	public function getTat()
+    {
+        return $this->hasOne(Tat::className(), ['id' => 'tat_id']);
     }
 }

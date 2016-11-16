@@ -11,7 +11,7 @@ use Yii;
  * @property integer $status
  * @property string $card_code
  * @property string $staff_name
- * @property integer $tap_id
+ * @property integer $tat_id
  * @property string $type
  * @property string $created_time
  * @property string $image
@@ -33,7 +33,7 @@ class TimekeepingBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['status', 'tap_id', 'staff_id'], 'integer'],
+            [['status', 'tat_id', 'staff_id'], 'integer'],
             [['created_time'], 'safe'],
             [['image'], 'string'],
             [['card_code', 'staff_name'], 'string', 'max' => 100],
@@ -51,7 +51,7 @@ class TimekeepingBase extends \yii\db\ActiveRecord
             'status' => 'Status',
             'card_code' => 'Card Code',
             'staff_name' => 'Staff Name',
-            'tap_id' => 'Tap ID',
+            'tat_id' => 'Tat ID',
             'type' => 'Type',
             'created_time' => 'Created Time',
             'image' => 'Image',

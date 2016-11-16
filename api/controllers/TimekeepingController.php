@@ -87,7 +87,7 @@ class TimekeepingController extends Controller
         $message = '';
         $card_code = isset(Yii::$app->request->get()['card_code']) ? Yii::$app->request->get()['card_code'] : '';
         $staff_name = isset(Yii::$app->request->get()['staff_name']) ? Yii::$app->request->get()['staff_name'] : '';
-        $staff = Timekeeping::search($card_code,$staff_name);
+        $staff = Timekeeping::searchData($card_code,$staff_name);
         return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
 
     }
