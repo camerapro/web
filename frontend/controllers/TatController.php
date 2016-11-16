@@ -51,6 +51,7 @@ class TatController extends Controller
      */
     public function actionView($id)
     {
+	    $ajax= $this->verifyAjax();
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -63,10 +64,11 @@ class TatController extends Controller
      */
     public function actionCreate()
     {
+		$ajax= $this->verifyAjax();
         $model = new TatFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']); 
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,6 +84,7 @@ class TatController extends Controller
      */
     public function actionUpdate($id)
     {
+		$ajax= $this->verifyAjax();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -120,5 +123,12 @@ class TatController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+	private function verifyAjax(){
+        if(Yii::$app->request->isAjax){
+			$this->layout = false;
+            return true;
+        }
+		return false;
     }
 }
