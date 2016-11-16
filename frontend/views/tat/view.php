@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /* @var $model frontend\models\TatFrontend */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Tat Frontends', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Máy chấm công', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tat-frontend-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h4><?= Html::encode($this->title) ?></h4>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
