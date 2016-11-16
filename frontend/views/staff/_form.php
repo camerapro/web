@@ -82,7 +82,7 @@ use yii\bootstrap\ActiveForm;
             <div class="col-xs-4">
                 <div class="row">
                     <div class=" col-md-push-4" >
-                        <img src="http://static.thietbianninh.com/staff/staff.jpg" width="180"></img>
+                        <img src="http://static.thietbianninh.com/staff/thumb.png" width="180"></img>
                         <?= $form->field($model, 'image')->fileInput()->label(false) ?>
                     </div>
                 </div>
