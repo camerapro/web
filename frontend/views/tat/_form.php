@@ -48,7 +48,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'camera_password')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'camera_model')->textInput(['maxlength' => true]) ?>
-<p>Thông tin quản trị:</p>
+	<p>Thông tin quản trị:</p>
     <?= $form->field($model, 'created_time')->textInput() ?>
 
     <?= $form->field($model, 'expired_time')->textInput() ?>
