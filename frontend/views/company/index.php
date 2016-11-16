@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
                                 'title' => Yii::t('app', 'Delete'),
                               
-                                'data-confirm' => 'Bạn có chắc chắn muốn xóa đầu ghi này?',
+                                'data-confirm' => 'Bạn có chắc chắn muốn xóa?',
                             ]);
                         },
                     ],

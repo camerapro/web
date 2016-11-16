@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $model frontend\models\TatFrontend */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<div class="modal-body">
 <div class="tat-frontend-form">
 
     <?php $form = ActiveForm::begin([
@@ -64,4 +64,5 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>
