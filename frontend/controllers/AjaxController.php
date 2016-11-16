@@ -711,7 +711,8 @@ class AjaxController extends Controller
 
                 for ($i = 0; $i<count($data['camera']); $i=$i+2){
                     $camera = new FrontendCamera();
-                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
+//                    if(!empty($data['camera'][$i]['value']) && !empty($data['camera'][$i+1]['value'])){
+                    if(isset($data['camera'][$i]['value']) && isset($data['camera'][$i+1]['value'])){
                         $camera->$data['camera'][$i]['name'] = $data['camera'][$i]['value'];
                         $camera->$data['camera'][$i+1]['name'] = $data['camera'][$i+1]['value'];
                         $camera->created_time = date('Y-m-d H:i:s');
