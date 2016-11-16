@@ -95,7 +95,7 @@ function SmartWizard(target, options) {
                         cache: false,
                         timeout: 300000,
                         success: function (response) {
-                            var data_type = JSON.parse(response);
+                            //var data_type = JSON.parse(response);
                             if(data_type['return_code'] == 0){
                                  // window.location = 'http://cam.thietbianninh.com';
                                 window.location.reload();
