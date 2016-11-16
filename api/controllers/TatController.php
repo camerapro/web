@@ -57,7 +57,7 @@ class TatController extends ApiController
         }
         if ($data = Yii::$app->request->post()) {
 
-            if (isset($data['camera_main_ip'])) {
+           /* if (isset($data['camera_main_ip'])) {
                 $cam_params = [
                     'name' => isset($data['name_main'])? $data['name_main'] : '',
                     'encoder_name'=>isset($data['cam_main_name']) ? $data['cam_main_name'] : '',
@@ -74,8 +74,8 @@ class TatController extends ApiController
                 if ($cam)
                     $camera_main_ip = $cam->id;
 
-            }
-            if (isset($data['camera_secondary_id'])) {
+            }*/
+          /*  if (isset($data['camera_secondary_id'])) {
                 $cam_params = [
                     'name' => isset($data['name']) ? $data['name'] : '',
                      'encoder_name'=>isset($data['cam_2nd_name']) ? $data['cam_2nd_name'] : '',
@@ -91,26 +91,32 @@ class TatController extends ApiController
                  $cam = \common\models\Camera::add($cam_params);
                 if ($cam)
                     $camera_secondary_id = $cam->id;
-            }
+            }*/
 
             $tat_params = [
 				'name' => isset($data['name']) ? $data['name'] : '',
                 'ip' => isset($data['ip']) ? $data['ip'] : '',
                
-                'port'=>isset($data['port']) ? $data['ip'] : '',
+                'port'=>isset($data['port']) ? $data['port'] : '',
                 'category_id'=>isset($data['category_id']) ? $data['category_id'] : '',
                 'protocol'=>isset($data['protocol']) ? $data['protocol'] : '',
                 'description'=>isset($data['description']) ? $data['description'] : '',
                 'order'=>isset($data['order']) ? $data['order'] : '',
                 'user_id'=>isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                 'agency_id'=>isset($data['agency_id']) ? $data['agency_id'] : 0,
-                'camera_main_id'=>isset($camera_main_ip) ? $camera_main_ip : '',
-                'camera_secondary_id'=>isset($camera_secondary_id) ? $camera_secondary_id : '',
+                'status'=>isset($data['status']) ? $data['status'] : 0,
+                'camera_ip'=>isset($data['camera_ip']) ? $data['camera_ip'] : '',
+                'camera_port'=>isset($data['camera_port']) ? $data['camera_port'] : '',
+                'camera_channel'=>isset($data['camera_channel']) ? $data['camera_channel'] : '',
+                'camera_username'=>isset($data['camera_username']) ? $data['camera_username'] : '',
+                'camera_password'=>isset($data['camera_password']) ? $data['camera_password'] : '',
+                'camera_model'=>isset($data['camera_model']) ? $data['camera_model'] : '',
+                'expired_time'=>isset($data['expired_time']) ? $data['expired_time'] : '',
+                'company_id'=>isset($data['company_id']) ? $data['company_id'] : '',
                 'created_time'=>date('Y-m-d H:i:s'),
                 'updated_time'=>date('Y-m-d H:i:s')
 
             ];
-
             $save = Tat::add($tat_params);
 
             if ($save) {
