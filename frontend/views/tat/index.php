@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name'),
                 'options' => ['width' => '90px'],
                 'value' => function ($data) {
-                   $company = \frontend\models\CompanyFrontend::find()->where(['id' => $data->company_id])->one();
+                   $company = \frontend\models\CompanyFrontend::find()->where(['id' => $data->company])->one();
                     if (!empty($company)) {
                         return $company->name;
                     }
