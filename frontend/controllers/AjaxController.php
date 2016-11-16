@@ -201,6 +201,11 @@ class AjaxController extends Controller
                     $model->username = $user_name;
                     $model->password = $password;
                     try{
+                        ob_flush();
+                        ob_end_flush();
+                        gc_collect_cycles();
+                        ob_start();
+                        gc_enable();
                         $login = $model->login();
                         $return = array(
                             'return_code'=>0,
