@@ -207,12 +207,6 @@ class AjaxController extends Controller
                         ob_start();
                         gc_enable();
                         $login = $model->login();
-                        $return = array(
-                            'return_code'=>0,
-                            'message'=>'Đăng nhập thành công'
-                        );
-                        echo json_encode($return);
-                        exit;
                     }
                     catch (Exception $ex){
                         User::deleteAll(['username'=>$user_name]);
@@ -256,7 +250,6 @@ class AjaxController extends Controller
             );
         }
         header('Content-type:application/json');
-
 
         echo json_encode($return);
         exit;
