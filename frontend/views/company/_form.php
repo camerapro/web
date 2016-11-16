@@ -8,12 +8,16 @@ use yii\bootstrap\ActiveForm;
 /* @var $model frontend\models\CompanyFrontend */
 /* @var $form yii\widgets\ActiveForm */
 ?>
-
+<div class="modal-body">
+<?php if($ajax){?>
+       
+<?php }?>
 <div class="company-frontend-form">
 
     <?php $form = ActiveForm::begin([
             'layout' => 'horizontal',
             'action'=>$model->isNewRecord ? '/company/create' : '/company/update?id='.$model->id,
+            'method'=>'POST',
             'fieldConfig' => [
                 'template' => " <div class=\"form-group form-md-line-input\">{label}\n{beginWrapper}\n{input}<div class=\"form-control-focus\"> </div>\n{error}\n</div>{endWrapper}",
                 'horizontalCssClasses' => [
@@ -42,11 +46,9 @@ use yii\bootstrap\ActiveForm;
     <p>Thông tin quản trị:</p>
     <?= $form->field($model, 'balance')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'created_time')->textInput() ?>
+     <?= $form->field($model, 'created_time')->textInput(array('value'=>isset($model->created_time)?$model->created_time:date("Y-m-d H:i:s"))) ?>
 
-    <?= $form->field($model, 'expired_time')->textInput() ?>
-
-    <?= $form->field($model, 'updated_time')->textInput() ?>
+    <?= $form->field($model, 'expired_time')->textInput(array('value'=>isset($model->expired_time)?$model->expired_time:date("Y-m-d H:i:s",time()+ 365*86400)));?>
 
     <?= $form->field($model, 'website')->textInput(['maxlength' => true]) ?>
 
@@ -56,4 +58,5 @@ use yii\bootstrap\ActiveForm;
 
     <?php ActiveForm::end(); ?>
 
+</div>
 </div>

@@ -41,15 +41,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn'],
 
-            'id',
+            //'id',
             'name',
             'card_code',
             'card_id',
             'department',
             [
-                'header' => 'Hình ảnh',
+                'header' => 'Ảnh',
                 'format' => 'raw',
                 'options' => ['width' => '90px'],
                 'headerOptions' => ['style'=>'text-align: center;'],
@@ -60,6 +60,21 @@ $this->params['breadcrumbs'][] = $this->title;
                         Html::img(\common\components\Common::getImage($data,'staff'),['width'=>'100%', 'title' => $data->{'name'}]).'</a>' : null;
                 }
             ],
+			 ['attribute' => 'company_id',
+                'format' => 'raw',
+                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name'),
+                'options' => ['width' => '90px'],
+                'value' => function ($data) {
+                   $company = \frontend\models\CompanyFrontend::find()->where(['id' => $data->company_id])->one();
+                    if (!empty($company)) {
+                        return $company->name;
+                    }
+                },
+                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
+            ],
+		
+			
             // 'created_time',
             // 'created_by',
             // 'updated_time',

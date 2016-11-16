@@ -18,7 +18,7 @@ class TatSearch extends TatFrontend
     public function rules()
     {
         return [
-            [['id', 'category_id', 'port', 'order', 'camera_main_id', 'camera_secondary_id', 'user_id', 'agency_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
+            [['id', 'category_id', 'port', 'order', 'user_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
             [['name', 'ip', 'protocol', 'created_time', 'updated_time', 'description', 'camera_ip', 'camera_username', 'camera_password', 'camera_model', 'expired_time'], 'safe'],
         ];
     }
@@ -65,10 +65,7 @@ class TatSearch extends TatFrontend
             'created_time' => $this->created_time,
             'updated_time' => $this->updated_time,
             'order' => $this->order,
-            'camera_main_id' => $this->camera_main_id,
-            'camera_secondary_id' => $this->camera_secondary_id,
             'user_id' => $this->user_id,
-            'agency_id' => $this->agency_id,
             'status' => $this->status,
             'camera_port' => $this->camera_port,
             'camera_channel' => $this->camera_channel,

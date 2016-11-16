@@ -286,3 +286,11 @@ body{
 .required_info{
     margin: 10px 0;
 }
+#modalPopup .modal-header{
+	    background: #fff;
+    border-radius: 10px 10px 0px 0px;
+}
+#modalPopup .modal-content{
+	border-top: none;
+	border-radius: 0 0 6px 6px !important;
+}

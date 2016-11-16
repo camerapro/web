@@ -52,10 +52,10 @@ class CompanyController extends Controller
      * @param string $name
      * @return mixed
      */
-    public function actionView($id, $name)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id, $name),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -66,14 +66,15 @@ class CompanyController extends Controller
      */
     public function actionCreate()
     {
-        $enableCsrfValidation = false;
+        $ajax = $this->verifyAjax();
         $model = new CompanyFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect("/company/index");
         } else {
+
             return $this->render('create', [
-                'model' => $model,
+                'model' => $model,'ajax' => $ajax,
             ]);
         }
     }
@@ -87,14 +88,15 @@ class CompanyController extends Controller
      */
     public function actionUpdate($id)
     {
-        $enableCsrfValidation = false;
+          $ajax= $this->verifyAjax();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'name' => $model->name]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
+				 'ajax' => $ajax,
             ]);
         }
     }
@@ -130,5 +132,12 @@ class CompanyController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+	private function verifyAjax(){
+        if(Yii::$app->request->isAjax){
+			$this->layout = false;
+            return true;
+        }
+		return false;
     }
 }

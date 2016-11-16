@@ -6,6 +6,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\CameraType;
 use api\models\RelationsCamUser;
 use api\models\Camera;
 use api\components\ApiController;
@@ -315,6 +316,19 @@ class RecorderController extends ApiController
         echo json_encode($return);
         exit;
 
+    }
+	public function actionCameratype()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+		$Cameratype = CameraType::find()->where(['status'=>1])->all();
+		if (!empty($Cameratype)) {
+			return ['error_code' => 0, 'message' => 'Success', 'data' => $Cameratype];
+		}
+		if (empty($Cameratype)) {
+			return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
+		}
     }
     
 }
