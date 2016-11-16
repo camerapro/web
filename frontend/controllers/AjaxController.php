@@ -765,6 +765,80 @@ class AjaxController extends Controller
 
     }
 
+    public function actionDelete_recorder(){
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            try{
+                $recorder_id = $data['recorder_id'];
+                if(!isset($recorder_id) || (int)$recorder_id ==0 ){
+                    $return = array(
+                        'return_code'=>1,
+                        'message'=>'Lỗi không tìm thấy thông tin đầu ghi!'
+                    );
+                    echo json_encode($return);
+                    exit;
+                } else{
+                    //check recoder info
+                    $recorder = FrontendRecorder::findOne($data['recorder_id']);
+                    foreach ($data['recorder'] as $item){
+                        if($item['name']=='ip' && $recorder->ip != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'IP/Domain không chính xác'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='username' && $recorder->username != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Tên truy cập không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                        if($item['name']=='password' && $recorder->password != $item['value']){
+                            $return = array(
+                                'return_code'=>1,
+                                'message'=>'Mật khẩu không chính xác!'
+                            );
+                            echo json_encode($return);
+                            exit;
+                        }
+                    }
+                    //xoa het cam cua dau ghi nay
+                    //xoa het camera roi tao lai
+                    //get all cam by id
+                    $cams = FrontendCamera::findAll(['recorder_id'=>$recorder_id]);
+                    foreach ($cams as $cam){
+                        RelationsCamUser::deleteAll(['user_id'=>$recorder->user_id, 'cam_id'=>$cam->id]);
+                    }
+                    FrontendCamera::deleteAll(['recorder_id'=>$recorder_id]);
+                    
+                    $recorder->delete();
+                    $return = array(
+                        'return_code'=>0,
+                        'message'=>'Xóa đầu ghi thành công'
+                    );
+                }
+
+            } catch (\Exception $e) {
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Cập nhậ không thành công'
+                );
+            }
+        }else{
+            $return = array(
+                'return_code'=>1,
+                'message'=>'Not Ajax request!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+
     public function actionMultiple_delete_recorder(){
         if (Yii::$app->request->isAjax) {
             $transaction = Yii::$app->db->beginTransaction();

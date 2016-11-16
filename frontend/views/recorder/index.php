@@ -67,7 +67,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="fa fa-trash "></span>Xóa', $url, [
                                 'title' => Yii::t('app', 'Delete'),
                                 'class' => 'btn btn-primary btn-xs',
-                                'data-confirm' => 'Bạn có chắc chắn muốn xóa đầu ghi này?',
+                                'data-target'=>'#CalenderModalNew',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
                             ]);
                         },
                     ],
@@ -77,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $url;
                         };
                         if ($action === 'delete') {
-                            $url = '/recorder/delete?id=' . $model->id;
+                            $url = '/recorder/del?id=' . $model->id;
                             return $url;
                         };
                         if ($action === 'view') {
@@ -143,7 +145,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             return Html::a('<span class="fa fa-trash "></span>Xóa', $url, [
                                 'title' => Yii::t('app', 'Delete'),
                                 'class' => 'btn btn-primary btn-xs',
-                                'data-confirm' => 'Bạn có chắc chắn muốn xóa đầu ghi này?',
+                                'data-target'=>'#CalenderModalNew',
+                                'data-toggle'=>'modal',
+                                'data-ignore-state'=>1,
                             ]);
                         },
                     ],
@@ -153,7 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $url;
                         };
                         if ($action === 'delete') {
-                            $url = '/recorder/delete?id=' . $model->id;
+                            $url = '/recorder/del?id=' . $model->id;
                             return $url;
                         };
                         if ($action === 'view') {

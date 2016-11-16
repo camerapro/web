@@ -143,4 +143,16 @@ class RecorderController extends Controller
         return $this->render('setcam_popup',  ['model'=>$model, 'cams'=>$cams]);
     }
 
+    public function actionDel($id){
+        $this->layout = false;
+        $model = $this->findModel($id);
+        if(Yii::$app->user->identity->level <3){
+            $model->ip = '';
+            $model->username = '';
+            $model->password = '';
+        }
+        $cams  = FrontendCamera::getListCam($model->user_id, $id);
+        return $this->render('del_popup',  ['model'=>$model, 'cams'=>$cams]);
+    }
+
 }
