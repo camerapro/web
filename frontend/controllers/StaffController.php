@@ -70,6 +70,8 @@ class StaffController extends Controller
             $data = Yii::$app->request->post('StaffFrontend');
 			
 			$image =  $_FILES['StaffFrontend']['tmp_name']['imageFile'];
+			
+			
             unset($data['imageFile']);
             $model->name =$data['name'];
             $model->phone =$data['phone'];
