@@ -37,8 +37,7 @@ class CompanyController extends ApiController
         $company = [];
         $message = '';
         $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-		$company = Company::getTats($id,$user_id);
+		$company = Company::getList($id);
 		if (!empty($company)) {
 			return ['error_code' => 0, 'message' => 'Success', 'data' => $company];
 		}
