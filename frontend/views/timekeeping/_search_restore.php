@@ -12,7 +12,7 @@ use yii\bootstrap\ActiveForm;
 <div class="timekeeping-frontend-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
+        'action' => ['restore'],
 		'layout' => 'horizontal',
         'method' => 'get',
     ]); ?>
