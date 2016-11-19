@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	</div>
 	<span class="btn-del-confirm"><img src="/images/btn-del-confirm.png" width="65"></span>
-	<span class="btn-del-confirm"><img src="/images/btn-export-file" width="65"></span>
+	<span class="btn-del-confirm"><img src="/images/btn-export-file.png" width="65"></span>
 		
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
