@@ -39,7 +39,9 @@ class PerController extends FrontendController
     {
         $searchModel = new PermissionGroupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        if(Yii::$app->user->identity->level <4){
+            $dataProvider->query->andWhere(['id'=>Yii::$app->user->identity->permission_group_id]);
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -67,6 +69,12 @@ class PerController extends FrontendController
     {
         $model = new PermissionGroup();
         $list_permission = Permission::getAll();
+        if(Yii::$app->user->identity->level <4){
+            //laylist permision cua user nay
+            $permission_gr = Yii::$app->user->identity->permission_group_id;
+            $list_permission_ids = PermissionGroup::findOne($permission_gr)->permission_ids;
+            $list_permission = Permission::getAllByIds($list_permission_ids);
+        }
 //        if ($model->load(Yii::$app->request->post()) && $model->save()) {
         if ($model->load(Yii::$app->request->post())) {
             $permission = Yii::$app->request->post()['permission'];
