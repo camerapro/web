@@ -100,10 +100,17 @@ class UserController extends FrontendController
             $model->address = $occupation;
             $model->level = $data['level'];
             if(isset($data['gender'])) $model->gender = (int) $data['gender'];
-//            $model->birthday = date('Y-m-d', strtotime($data['birthday']));
+            $model->expired_time = date('Y-m-d', strtotime($data['expired_time']));
             $model->created_time = date('Y-m-d H:i:s');
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
+            $model->company_id = $data['company_id'];
+            if(isset($data['company_admin']) && $data['company_admin'] == 'on'){
+                $model->company_admin = 1;
+            }
+            if(isset($data['lock_user']) && $data['lock_user'] == 'on'){
+                $model->status = 0;
+            }
             $model->permission_group_id =  isset($data['permission']) ? $data['permission'] : 1;
             if ($model->save()) {
                 return $this->redirect(['index']);
@@ -161,6 +168,18 @@ class UserController extends FrontendController
             $model->level = $data['level'];
             $model->status = 1;
             $model->permission_group_id = isset($data['permission']) ? $data['permission'] : 1;
+            $model->company_id = $data['company_id'];
+            $model->expired_time = date('Y-m-d', strtotime($data['expired_time']));
+            if(isset($data['company_admin']) && $data['company_admin'] == 'on'){
+                $model->company_admin = 1;
+            }else{
+                $model->company_admin = 0;
+            }
+            if(isset($data['lock_user']) && $data['lock_user'] == 'on'){
+                $model->status = 0;
+            }else{
+                $model->status = 1;
+            }
             if ($model->save()) {
                 return $this->redirect(['index']);
             }else{
