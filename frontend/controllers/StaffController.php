@@ -16,6 +16,8 @@ use yii\web\UploadedFile;
 class StaffController extends Controller
 {
     public $enableCsrfValidation = false;
+	
+	
     /**
      * @inheritdoc
      */
