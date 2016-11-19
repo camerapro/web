@@ -31,6 +31,20 @@ class Permission extends PermissionBase
         return $data;
     }
 
+    public static  function getAllByIds($list_permission_ids){
+        $data = [];
+        $list = self::find()
+            ->where(['=', 'parent_id', 0])
+            ->where(['IN','id',$list_permission_ids])
+            ->asArray()
+            ->all();
+        foreach ($list as $item){
+            $data[$item['id']]  = $item;
+            $data[$item['id']]['child'] =  self::getChildPer($item['id']);
+        }
+        return $data;
+    }
+
     public function getChildPer($parrent_id){
         return self::find()
             ->where(['=', 'parent_id', $parrent_id])

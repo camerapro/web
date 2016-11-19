@@ -33,6 +33,7 @@ use Yii;
  * @property string $client_name
  * @property integer $company_id
  * @property integer $company_admin
+ * @property string $expired_time
  */
 class UserBase extends \yii\db\ActiveRecord
 {
@@ -52,7 +53,7 @@ class UserBase extends \yii\db\ActiveRecord
         return [
             [['username', 'password', 'email'], 'required'],
             [['point', 'level', 'permission_group_id', 'gender', 'country', 'status', 'company_id', 'company_admin'], 'integer'],
-            [['birthday', 'created_time', 'updated_time', 'login_time'], 'safe'],
+            [['birthday', 'created_time', 'updated_time', 'login_time', 'expired_time'], 'safe'],
             [['username'], 'string', 'max' => 100],
             [['password', 'email', 'facebook_id', 'google_id', 'thumb_version', 'avatar'], 'string', 'max' => 255],
             [['fullname'], 'string', 'max' => 64],
@@ -61,6 +62,7 @@ class UserBase extends \yii\db\ActiveRecord
             [['city'], 'string', 'max' => 32],
             [['language'], 'string', 'max' => 20],
             [['client_name'], 'string', 'max' => 50],
+            [['username'], 'unique'],
         ];
     }
 
@@ -96,6 +98,7 @@ class UserBase extends \yii\db\ActiveRecord
             'client_name' => 'Client Name',
             'company_id' => 'Company ID',
             'company_admin' => 'Company Admin',
+            'expired_time' => 'Expired Time',
         ];
     }
 }
