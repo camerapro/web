@@ -294,3 +294,54 @@ body{
 	border-top: none;
 	border-radius: 0 0 6px 6px !important;
 }
+.timekeeping-frontend-index .form-group{
+	width: 268px;
+    float: left;
+}
+.timekeeping-frontend-index .form-horizontal .form-group input{
+	width: 160px;
+	
+	
+}
+.timekeeping-frontend-index  .form-horizontal .control-label{
+	width: 90px;
+	font-weight:normal;
+}
+.action-timekeeping,.action-timekeeping-auto {
+    float: left;
+    border: 1px solid #ddd;
+    padding: 0px;
+    margin-bottom: 5px;
+    line-height: 23px;
+    padding-bottom: 0px;
+}
+.action-timekeeping .text-edit-manual{
+	float:left;
+	padding-left:10px;
+	line-height:20px;
+	padding-right:5px;
+}
+.action-timekeeping .btn-edit-confirm{
+	padding:5px;
+}
+.action-timekeeping .form-group {
+    width: 111px;
+	margin-bottom: 1px;
+}
+.action-timekeeping .help-block{
+	display:none;
+}
+.action-timekeeping-auto {
+	margin-left:10px;
+	padding-left:10px;
+}
+.btn-del-confirm{
+	padding:10px;
+}
+.btn-restore-confirm{
+	padding-right:10px;
+	margin-bottom:5px;
+}
+.action-restore{
+	margin-bottom:5px;
+}

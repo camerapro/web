@@ -43,7 +43,20 @@ class TimekeepingController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+ /**
+     * Lists all TimekeepingFrontend models.
+     * @return mixed
+     */
+    public function actionRestore()
+    {
+        $searchModel = new TimekeepingSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        return $this->render('restore', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
     /**
      * Displays a single TimekeepingFrontend model.
      * @param integer $id
