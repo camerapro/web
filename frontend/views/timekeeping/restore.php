@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div class ="action-restore">
 	
-	<span class="btn-restore-confirm"><img src="/images/btn-restore.png" width="65"></span>
+	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="65"></span>
 	<span class="btn-restore-confirm"><img src="/images/btn-export-file.png" width="65"></span>
 		</div>
     <?= GridView::widget([
