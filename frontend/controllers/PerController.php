@@ -109,6 +109,12 @@ class PerController extends FrontendController
         $model = $this->findModel($id);
         $list_permission = Permission::getAll();
         $list_permission_by_group = explode(',', $model->permission_ids);
+        if(Yii::$app->user->identity->level <4){
+            //laylist permision cua user nay
+            $permission_gr = Yii::$app->user->identity->permission_group_id;
+            $list_permission_ids = PermissionGroup::findOne($permission_gr)->permission_ids;
+            $list_permission = Permission::getAllByIds($list_permission_ids);
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             $permission = Yii::$app->request->post()['permission'];
             $item_ids = [];
