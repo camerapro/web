@@ -16,6 +16,8 @@ use yii\web\UploadedFile;
 class StaffController extends Controller
 {
     public $enableCsrfValidation = false;
+	
+	
     /**
      * @inheritdoc
      */
@@ -84,6 +86,7 @@ class StaffController extends Controller
             $model->company_id = $data['company_id'];
             if($model->save()){
 				if($image){
+					die('ưerwer');
 					$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 					$model->image_name = $model->id;
 					$model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
@@ -129,14 +132,15 @@ class StaffController extends Controller
             $model->company_id = $data['company_id'];
             if($model->save()){
 				if($image){
+					
 					$model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 					$model->image_name = $model->id;
 					$model->save_path = Yii::$app->params['images']['staff']['path'].'/'. $model->company_id;
 					if ($model->upload()) {
-
+							//die('ddd');
 					}
 					else{
-
+						die('dddcvcvc');
 					}
 				}
             }

@@ -10,47 +10,26 @@ use yii\bootstrap\ActiveForm;
 /* @var $searchModel frontend\models\search\TimekeepingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Báo cáo chấm công';
+$this->title = 'Khôi phục dữ liệu chấm công';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="timekeeping-frontend-index">
 
     <h4><?= Html::encode($this->title) ?></h4>
 	<?php \yii\widgets\Pjax::begin(); ?>
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
-	<div class ="action-timekeeping">
+    <?php  echo $this->render('_search_restore', ['model' => $searchModel]); ?>
 	
-		<?php $form = ActiveForm::begin() ?>
-			<span class="text-edit-manual">Sửa thông tin thủ công :  </span>
-			<?= $form->field($searchModel, 'status')->inline()->hint('')->radioList(['1'=>'Đúng', '0'=>'Sai'])->label(false); ?>
-			<span class="btn-edit-confirm"><img src="/images/btn-edit-confirm.png" width="60"></span>
-		<?php ActiveForm::end(); ?>
-		
+	<div class ="action-restore">
 	
-
-	
-	</div>
-	<div class ="action-timekeeping-auto">
-	
-		<?php $form = ActiveForm::begin() ?>
-			<span class="text-edit-manual">Sửa tự động  </span>
-			<span class="btn-edit-confirm"><img src="/images/btn-edit-confirm.png" width="60"></span>
-		<?php ActiveForm::end(); ?>
-		
-	
-
-	
-	</div>
-	<span class="btn-del-confirm"><img src="/images/btn-del-confirm.png"  width="65"></span>
-	<span class="btn-del-confirm"><img src="/images/btn-export-file.png"  width="65"></span>
-		
+	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="65"></span>
+	<span class="btn-restore-confirm"><img src="/images/btn-export-file.png" width="65"></span>
+		</div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		
         'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-            ['class' => 'yii\grid\CheckboxColumn'],
+             ['class' => 'yii\grid\CheckboxColumn'],
 
             //'id',
             'staff_name',
