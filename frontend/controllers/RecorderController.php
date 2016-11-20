@@ -37,7 +37,7 @@ class RecorderController extends Controller
     public function actionIndex()
     {
         $searchModel = new RecorderSearch();
-        if(Yii::$app->user->identity->level <3){
+        if(Yii::$app->user->identity->level == 4){
             $searchModel->user_id = Yii::$app->user->identity->id;
         }
 
