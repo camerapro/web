@@ -99,9 +99,11 @@ use yii\widgets\ActiveForm;
                                 <?php endforeach;?>
                             </select>
                         </div>
+                        <?php if(Yii::$app->user->identity->level >=3): ?>
                         <div class="col-md-3 col-sm-3 col-xs-12">
                             <a data-ignore-state="1" id="notify-id"  data-target="#show_create_per" data-toggle="modal" class="title pull-left btn btn-success" href="/ajax/show_create_per">Tạo nhóm quyền</a>
                         </div>
+                        <?php endif;?>
                     </div>
 
                     <div class="item form-group">
