@@ -23,15 +23,19 @@ $this->params['breadcrumbs'][] = $this->title;
 //        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-//            'id',
             'name',
-//            'permission_ids:ntext',
             [
                 'label'=>'Danh sách quyền',
                 'format' => 'raw',
-//                'value' => \frontend\models\Permission::getPermissionName($model->permission_ids),
                 'value' => function ($model) {
                     return \frontend\models\Permission::getPermissionName($model->permission_ids);
+                },
+            ],
+            [
+                'label'=>'Người tạo',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->created_by_name . '/' . \frontend\models\Level::findOne(\frontend\models\FrontendUser::findOne($model->created_by_id)->level)->level_name;
                 },
             ],
             'created_time',

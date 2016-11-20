@@ -193,8 +193,8 @@ body{
     display: block;
 }
 .permission-group-form {
-    margin: 0 25%;
-    width: 50%;
+    margin: 0;
+    width: 100%;
 }
 #permissiongroup-name{
     width: 80%;
@@ -293,4 +293,7 @@ body{
 #modalPopup .modal-content{
 	border-top: none;
 	border-radius: 0 0 6px 6px !important;
+}
+.form-group.field-permissiongroup-name {
+    width: 50%;
 }

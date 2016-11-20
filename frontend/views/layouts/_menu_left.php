@@ -18,7 +18,7 @@
                             if(isset($child['params'])) $link .=   '?' .  $child['params'];
 
                         }
-                        if(Yii::$app->user->identity->level >= 3){
+                        if(Yii::$app->user->identity->level == 4){
                             $class = '';
                         }
                         ?>

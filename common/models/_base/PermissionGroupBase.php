@@ -12,6 +12,8 @@ use Yii;
  * @property string $permission_ids
  * @property string $created_time
  * @property integer $status
+ * @property integer $created_by_id
+ * @property string $created_by_name
  */
 class PermissionGroupBase extends \yii\db\ActiveRecord
 {
@@ -31,8 +33,8 @@ class PermissionGroupBase extends \yii\db\ActiveRecord
         return [
             [['permission_ids'], 'string'],
             [['created_time'], 'safe'],
-            [['status'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['status', 'created_by_id'], 'integer'],
+            [['name', 'created_by_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,6 +49,8 @@ class PermissionGroupBase extends \yii\db\ActiveRecord
             'permission_ids' => 'Permission Ids',
             'created_time' => 'Created Time',
             'status' => 'Status',
+            'created_by_id' => 'Created By ID',
+            'created_by_name' => 'Created By Name',
         ];
     }
 }

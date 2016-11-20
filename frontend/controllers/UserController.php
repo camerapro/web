@@ -14,37 +14,25 @@ use yii\filters\VerbFilter;
 
 /**
  * UserController implements the CRUD actions for User model.
- */
+// */
 class UserController extends FrontendController
 //class UserController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
-
     /**
      * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if( Yii::$app->user->identity->level >= 3){
-            $searchModel = new UserSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        }else{
-            $searchModel = new UserSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        if( Yii::$app->user->identity->level == 4){
+
+        }elseif (Yii::$app->user->identity->level == 3){
+            $dataProvider->query->andWhere(['company_id'=>Yii::$app->user->identity->company_id]);
+        }
+        else{
             $dataProvider->query->andWhere(['id'=>Yii::$app->user->identity->id]);
         }
 
@@ -105,9 +93,6 @@ class UserController extends FrontendController
             $model->updated_time = date('Y-m-d H:i:s');
             $model->status = 1;
             $model->company_id = $data['company_id'];
-            if(isset($data['company_admin']) && $data['company_admin'] == 'on'){
-                $model->company_admin = 1;
-            }
             if(isset($data['lock_user']) && $data['lock_user'] == 'on'){
                 $model->status = 0;
             }
@@ -170,11 +155,11 @@ class UserController extends FrontendController
             $model->permission_group_id = isset($data['permission']) ? $data['permission'] : 1;
             $model->company_id = $data['company_id'];
             $model->expired_time = date('Y-m-d', strtotime($data['expired_time']));
-            if(isset($data['company_admin']) && $data['company_admin'] == 'on'){
+/*            if(isset($data['company_admin']) && $data['company_admin'] == 'on'){
                 $model->company_admin = 1;
             }else{
                 $model->company_admin = 0;
-            }
+            }*/
             if(isset($data['lock_user']) && $data['lock_user'] == 'on'){
                 $model->status = 0;
             }else{
@@ -240,5 +225,6 @@ class UserController extends FrontendController
             'granded'=>$granded,
         ]);
     }
+
 
 }

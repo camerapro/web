@@ -66,31 +66,12 @@ use yii\widgets\ActiveForm;
 
                         </div>
                     </div>
-                    <!--<div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Giới tinh</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div id="gender" class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                    <input type="radio" name="gender" value="1"> &nbsp; Nam &nbsp;
-                                </label>
-                                <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                    <input type="radio" name="gender" value="2">&nbsp;&nbsp; Nữ  &nbsp;
-                                </label>
-                            </div>
-                        </div>
-                    </div>-->
-                   <!--<div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12"></span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="birthday" name="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" value="<?/*= date('d-m-Y', strtotime($model->birthday));*/?>">
-                        </div>
-                    </div>-->
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Phân quyền</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select id="heard" class="form-control" required  name="level">
+
+                            <select id="level" class="form-control" required  name="level">
                                 <?php
                                 $lever = \frontend\models\Level::find()->where(['<=', 'id', Yii::$app->user->identity->level])->andWhere(['=', 'status', 1])->all();
                                 ?>
@@ -99,13 +80,14 @@ use yii\widgets\ActiveForm;
                                 <?php endforeach;?>
                             </select>
                         </div>
+
                     </div>
 
                     <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Nhóm quyền</span>
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select id="heard" class="form-control" required  name="permission">
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <select id="permission" class="form-control" required  name="permission">
                                 <?php
                                 $lever = \frontend\models\PermissionGroup::findAll(['status'=>1]);
                                 if(Yii::$app->user->identity->level <4){
@@ -117,6 +99,9 @@ use yii\widgets\ActiveForm;
                                 <?php endforeach;?>
                             </select>
                         </div>
+                        <div class="col-md-3 col-sm-3 col-xs-12">
+                            <a data-ignore-state="1" id="notify-id"  data-target="#show_create_per" data-toggle="modal" class="title pull-left btn btn-success" href="/ajax/show_create_per">Tạo nhóm quyền</a>
+                        </div>
                     </div>
 
                     <div class="item form-group">
@@ -126,22 +111,14 @@ use yii\widgets\ActiveForm;
                             <select id="heard" class="form-control" required  name="company_id">
                                 <?php
                                 $company = \frontend\models\FrontendCompany::findAll(['status'=>1]);
-                                /*if(Yii::$app->user->identity->level <4){
-                                    $permission = \frontend\models\RelationsUserPermissionGroup::findOne(['user_id'=>Yii::$app->user->identity->id]);
-                                    $lever = \frontend\models\PermissionGroup::findAll(['id'=>$permission->permission_group_id]);
-                                }*/
+                                if(Yii::$app->user->identity->level <4){
+                                    $company = \frontend\models\FrontendCompany::findAll(['id'=>Yii::$app->user->identity->company_id, 'status'=>1]);
+                                }
                                 ?>
                                 <?php foreach ($company as $item):?>
                                     <option <?= ($item->id == $model->company_id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->name?></option>
                                 <?php endforeach;?>
                             </select>
-                        </div>
-                    </div>
-                    <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Admin công ty</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input tabindex="1" type="checkbox" id="company_admin" name="company_admin" <?php echo ($model->company_admin == 1) ? 'checked="checked"' : ''?>/>
                         </div>
                     </div>
                     <div class="item form-group">
@@ -173,7 +150,11 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </div>
-
+<div id="show_create_per" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 980px">
+        <div class="modal-content"></div>
+    </div>
+</div>
 <script>
     $('#expired_time').daterangepicker({
         singleDatePicker: true,
@@ -212,4 +193,21 @@ use yii\widgets\ActiveForm;
 
         return false;
     });
+</script>
+<script type="text/javascript">
+    function do_this(id){
+        var checkboxes = document.getElementsByName('permission[' + id +'][]');
+        var button = document.getElementById(id + '_toggle');
+        if(button.alt == 'select'){
+            for (var i in checkboxes){
+                checkboxes[i].checked = 'FALSE';
+            }
+            button.alt = 'deselect'
+        }else{
+            for (var i in checkboxes){
+                checkboxes[i].checked = '';
+            }
+            button.alt = 'select';
+        }
+    }
 </script>

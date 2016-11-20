@@ -14,6 +14,8 @@ use frontend\models\FrontendCamera;
 use frontend\models\FrontendRecorder;
 use frontend\models\FrontendUser;
 use frontend\models\LoginForm;
+use frontend\models\Permission;
+use frontend\models\PermissionGroup;
 use frontend\models\RelationsCamUser;
 use frontend\models\RelationsUserPermissionGroup;
 use Yii;
@@ -888,6 +890,61 @@ class AjaxController extends Controller
         echo json_encode($return);
         exit;
 
+    }
+
+    public function actionShow_create_per(){
+        $list_permission = Permission::getAll();
+        if(Yii::$app->user->identity->level <4){
+            //laylist permision cua user nay
+            $permission_gr = Yii::$app->user->identity->permission_group_id;
+            $list_permission_ids = PermissionGroup::findOne($permission_gr)->permission_ids;
+            $list_permission = Permission::getAllByIds($list_permission_ids);
+        }
+        return $this->render('_create_popup', ['list_permission'=>$list_permission]);
+    }
+
+    public function actionCreate_per(){
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();
+            if(!empty($data['per_name']) && !empty($data['per_ids'])){
+                $permission_ids = implode(',', $data['per_ids']);
+                $model = new PermissionGroup();
+                $model->permission_ids = $permission_ids;
+                $model->name = $data['per_name'];
+                $model->created_time = date('Y-m-d H:i:s');
+                $model->created_by_id = Yii::$app->user->identity->id;
+                $model->created_by_name = Yii::$app->user->identity->username;
+                $res = $model->save();
+//                $res = true;
+                if(!$res){
+                    $return = array(
+                        'return_code'=>1,
+                        'message'=>'Có lỗi xảy ra, vui lòng thử lại sau!'
+                    );
+                }else{
+                    $return = array(
+                        'return_code'=>0,
+                        'message'=>'Tạo quyền thành công',
+                        'id'=>$model->id,
+                    );
+                }
+            }else{
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Vui lòng chọn các quyền!'
+                );
+            }
+
+            echo json_encode($return);
+            exit;
+        }else{
+                $return = array(
+                    'return_code'=>1,
+                    'message'=>'Not Ajax request!'
+                );
+            }
+            echo json_encode($return);
+            exit;
     }
 
 }

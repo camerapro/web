@@ -14,8 +14,23 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?php foreach ($list_permission as $per ):?>
+    <?php foreach ($list_permission as $per ):
+        $label = '';
+        if($per['id']== 1) {
+            $label = 'Giám sát';
+        }elseif($per['id']== 4){
+            $label = 'Báo cáo chấm công';
+        }elseif($per['id']== 21){
+            $label = 'Quản trị';
+        }elseif($per['id']== 39){
+            $label = 'Hướng dẫn';
+        }
+        ?>
+
         <div class="form-group">
+            <?php if(!empty($label)):?>
+                <label class="w100"><?= $label;?></label>
+            <?php endif;?>
             <input type="checkbox" id="<?= $per['id']?>_toggle" name="permission[<?= $per['id']?>][]" value="<?= $per['id']?>"  alt="select" onClick="do_this(<?= $per['id']?>)" <?= (in_array($per['id'], $list_permission_by_group))? 'checked' : '' ?>/>
             <span><?= $per['name']?></span>
             <?php foreach ($per['child'] as $child ):?>
