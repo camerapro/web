@@ -128,7 +128,6 @@ class PerController extends FrontendController
             $model->created_time = date('Y-m-d H:i:s');
             $model->save();
             return $this->redirect(['index']);
-            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
