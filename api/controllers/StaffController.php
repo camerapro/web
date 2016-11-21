@@ -54,6 +54,7 @@ class StaffController extends Controller
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                 'description' => isset($data['description']) ? $data['description'] : '',
                 'created_time' => date('Y-m-d H:i:s'),
+                'company_id' => isset($data['company_id']) ? $data['company_id'] : 0,
             ];
             $save = Staff::add($params);
 
