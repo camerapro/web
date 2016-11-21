@@ -87,6 +87,8 @@ class PerController extends FrontendController
             $permission_ids = implode(',', $item_ids);
             $model->permission_ids = $permission_ids;
             $model->created_time = date('Y-m-d H:i:s');
+            $model->created_by_name = Yii::$app->user->identity->username;
+            $model->created_by_id = Yii::$app->user->identity->id;
             $model->save();
             return $this->redirect(['index']);
 //            return $this->redirect(['view', 'id' => $model->id]);
