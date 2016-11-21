@@ -91,7 +91,8 @@ use yii\widgets\ActiveForm;
                                 <?php
                                 $lever = \frontend\models\PermissionGroup::findAll(['status'=>1]);
                                 if(Yii::$app->user->identity->level <4){
-                                    $lever = \frontend\models\PermissionGroup::findAll(['id'=>Yii::$app->user->identity->permission_group_id]);
+//                                    $lever = \frontend\models\PermissionGroup::findAll(['id'=>Yii::$app->user->identity->permission_group_id]);
+                                    $lever = \frontend\models\PermissionGroup::find()->orWhere(['id'=>Yii::$app->user->identity->permission_group_id])->orWhere(['created_by_id'=>Yii::$app->user->identity->id])->all();
                                 }
                                 ?>
                                 <?php foreach ($lever as $item):?>
