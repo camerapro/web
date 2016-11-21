@@ -17,7 +17,7 @@ class StaffController extends Controller
     public $enableCsrfValidation = false;
     private $api_key = '43S4342@342Asfd';
     public $layout = false;
-
+	public $logger;
     public function init()
     {
 		$this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
