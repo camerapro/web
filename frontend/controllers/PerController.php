@@ -77,27 +77,30 @@ class PerController extends FrontendController
         }
 //        if ($model->load(Yii::$app->request->post()) && $model->save()) {
         if ($model->load(Yii::$app->request->post())) {
-            $permission = Yii::$app->request->post()['permission'];
-            $item_ids = [];
-            foreach ($permission as $items){
-                foreach ($items as $item) {
-                    $item_ids [] = $item;
+            if(isset( Yii::$app->request->post()['permission'])){
+                $permission = Yii::$app->request->post()['permission'];
+                $item_ids = [];
+                foreach ($permission as $items){
+                    foreach ($items as $item) {
+                        $item_ids [] = $item;
+                    }
                 }
+                $permission_ids = implode(',', $item_ids);
+                $model->permission_ids = $permission_ids;
+                $model->created_time = date('Y-m-d H:i:s');
+                $model->created_by_name = Yii::$app->user->identity->username;
+                $model->created_by_id = Yii::$app->user->identity->id;
+                $model->save();
+                return $this->redirect(['index']);
             }
-            $permission_ids = implode(',', $item_ids);
-            $model->permission_ids = $permission_ids;
-            $model->created_time = date('Y-m-d H:i:s');
-            $model->created_by_name = Yii::$app->user->identity->username;
-            $model->created_by_id = Yii::$app->user->identity->id;
-            $model->save();
-            return $this->redirect(['index']);
+
 //            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-                'list_permission'=>$list_permission,
-            ]);
         }
+        return $this->render('create', [
+            'model' => $model,
+            'list_permission'=>$list_permission,
+        ]);
+
     }
 
     /**
