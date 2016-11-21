@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Staff;
+use common\components\KLogger;
 
 /**
  * Site controller
