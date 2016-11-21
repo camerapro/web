@@ -40,7 +40,8 @@ class PerController extends FrontendController
         $searchModel = new PermissionGroupSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if(Yii::$app->user->identity->level <4){
-            $dataProvider->query->andWhere(['created_by_id'=>Yii::$app->user->identity->id]);
+//            $dataProvider->query->andWhere(['id'=>Yii::$app->user->identity->permission_group_id]);
+            $dataProvider->query->orWhere(['id'=>Yii::$app->user->identity->permission_group_id,'created_by_id'=>Yii::$app->user->identity->id]);
         }
         return $this->render('index', [
             'searchModel' => $searchModel,
