@@ -35,7 +35,7 @@ class Staff extends StaffBase
     }
 	public static  function add($params){
         $tat = new self;
-        var_dump($params);
+        //var_dump($params);
         $tat->attributes = $params;
         return $tat->save(false);
     }
