@@ -44,7 +44,8 @@ class Staff extends StaffBase
         $rt = array();
         foreach ($return as $value)
         {
-            $value->image = 'http://api.thietbianninh.com/kute.jpg';
+            
+			$value->image = \common\components\Common::getImage($value,'staff');
             $rt[] = $value;
         }
         return $rt;
