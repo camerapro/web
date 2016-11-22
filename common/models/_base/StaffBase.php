@@ -10,9 +10,12 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $phone
+ * @property string $email
  * @property string $card_code
  * @property integer $card_id
- * @property string $department
+ * @property string $att_code
+ * @property integer $department_id
+ * @property string $department_name
  * @property string $image
  * @property string $created_time
  * @property integer $created_by
@@ -21,6 +24,8 @@ use Yii;
  * @property integer $status
  * @property string $description
  * @property integer $company_id
+ * @property integer $order
+ * @property integer $deleted
  */
 class StaffBase extends \yii\db\ActiveRecord
 {
@@ -39,12 +44,13 @@ class StaffBase extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['card_id', 'created_by', 'updated_by', 'status', 'company_id'], 'integer'],
+            [['card_id', 'department_id', 'created_by', 'updated_by', 'status', 'company_id', 'order', 'deleted'], 'integer'],
             [['image'], 'string'],
             [['created_time', 'updated_time'], 'safe'],
-            [['name', 'department'], 'string', 'max' => 255],
+            [['name', 'department_name'], 'string', 'max' => 255],
             [['phone'], 'string', 'max' => 50],
-            [['card_code'], 'string', 'max' => 100],
+            [['email'], 'string', 'max' => 200],
+            [['card_code', 'att_code'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 500],
         ];
     }
@@ -58,9 +64,12 @@ class StaffBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'phone' => 'Phone',
+            'email' => 'Email',
             'card_code' => 'Card Code',
             'card_id' => 'Card ID',
-            'department' => 'Department',
+            'att_code' => 'Att Code',
+            'department_id' => 'Department ID',
+            'department_name' => 'Department Name',
             'image' => 'Image',
             'created_time' => 'Created Time',
             'created_by' => 'Created By',
@@ -69,6 +78,8 @@ class StaffBase extends \yii\db\ActiveRecord
             'status' => 'Status',
             'description' => 'Description',
             'company_id' => 'Company ID',
+            'order' => 'Order',
+            'deleted' => 'Deleted',
         ];
     }
 }

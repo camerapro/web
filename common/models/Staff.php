@@ -34,10 +34,10 @@ class Staff extends StaffBase
         }
     }
 	public static  function add($params){
-        $tat = new self;
+        $phone = new self;
         //var_dump($params);
         $tat->attributes = $params;
-        return $tat->save(false);
+        return $phone->save(false);
     }
     public static  function getStaffByUserId($userId=0){
         $return = self::find()->where(['created_by'=>$userId])->all();
