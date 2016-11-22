@@ -26,7 +26,7 @@ class Common
     }
     public static function uploadFile($file, $target, $object =null, $extension ='.png', $options = array(), $endcode = false)
     {
-        $fileName =  'test'. $extension;
+        $fileName =  $object->id. $extension;
         $upload = $target . '/' . $fileName;
 
         if ($endcode) {
