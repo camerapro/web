@@ -104,7 +104,7 @@ class StaffController extends Controller
         $staff = Staff::find()->where(['and', ['id' => $id]])
             ->orWhere(['card_code' => $card_code])->one();
         if ($staff)
-            $staff->image = 'http://api.thietbianninh.com/kute.jpg';
+            $staff->image = \common\components\Common::getImage($staff,'staff');
         return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
 
     }
