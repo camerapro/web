@@ -177,13 +177,13 @@ $this->params['breadcrumbs'][] = $this->title;
 			alert('Chọn thuộc tính cần xử lý');
 			return false;
 		}
-		var status = $('#timekeepingsearch-status').find('input[type="radio"]:checked').val();
-        var ids = [];
+		var status = 1;
+		var ids = [];
         $("input[type=checkbox]:checked").each ( function() {
             ids.push($(this).val());
         });
         $.ajax({
-            url: '/timekeeping/manual-confirm',
+            url: '/timekeeping/auto-confirm',
             type: "POST",
             data: {
                 'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
