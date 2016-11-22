@@ -142,7 +142,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php \yii\widgets\Pjax::end(); ?>
 </div>
 <script>
-    $('.btn-edit-confirm').click(function(){
+    $('.btn-edit-manual-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');
 		if(!check){
 			alert('Chọn thuộc tính cần xử lý');
