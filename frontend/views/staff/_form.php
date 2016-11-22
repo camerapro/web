@@ -40,7 +40,9 @@ use yii\bootstrap\ActiveForm;
 
                 <?= $form->field($model, 'card_id')->textInput() ?>
 
-                <?= $form->field($model, 'department')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'department_id')->dropDownList(
+                    \yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name')
+                ) ?>
             </div>
            <div class="col-xs-4">
 		   

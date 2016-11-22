@@ -47,7 +47,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'card_code',
             'card_id',
-            'department',
+            ['attribute' => 'department_id',
+                'format' => 'raw',
+                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
+                'options' => ['width' => '90px'],
+                'value' => function ($data) {
+                    $dep = \frontend\models\DepartmentFrontend::find()->where(['id' => $data->department_id])->one();
+                    if (!empty($dep)) {
+                        return $dep->name;
+                    }
+                },
+                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
+            ],
+
             [
                 'header' => 'Ảnh',
                 'format' => 'raw',

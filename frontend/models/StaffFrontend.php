@@ -33,7 +33,7 @@ class StaffFrontend extends Staff
             'phone' => 'Số điện thoại',
             'card_code' => 'Mã số thẻ',
             'card_id' => 'ID thẻ',
-            'department' => 'Phòng ban',
+            'department_id' => 'Phòng ban',
             'image' => 'Image',
             'created_time' => 'Ngày tạo',
             'created_by' => 'Người tạo',

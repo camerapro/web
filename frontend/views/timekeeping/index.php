@@ -5,6 +5,7 @@ use yii\grid\GridView;
 use yii\bootstrap\ButtonGroup;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
+use yii\bootstrap\TimeP;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\TimekeepingSearch */
@@ -77,15 +78,18 @@ $this->params['breadcrumbs'][] = $this->title;
                       $data->tat->name:null; 
                 }
             ],
-            [
-                'header' => 'Phòng',
+            ['attribute' => 'department_id',
                 'format' => 'raw',
-                'options' => ['width' => '100px'],
-                'headerOptions' => ['style'=>'text-align: center;'],
-                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
-                'value' => function($data) {
-                    return ($data->staff) ?$data->staff->{'department_id'} : null;
-                }
+                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
+                'options' => ['width' => '90px'],
+                'value' => function ($data) {
+                    $dep = \frontend\models\DepartmentFrontend::find()->where(['id' => $data->staff->department_id])->one();
+                    if (!empty($dep)) {
+                        return $dep->name;
+                    }
+                },
+                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
             ],
 			 'created_time',
            
