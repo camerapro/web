@@ -172,11 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     });
 	$('.btn-edit-confirm').click(function(){
-		var check = $('#timekeepingsearch-status input').is(':checked');
-		if(!check){
-			alert('Chọn thuộc tính cần xử lý');
-			return false;
-		}
+		
 		var status = 1;
 		var ids = [];
         $("input[type=checkbox]:checked").each ( function() {
@@ -200,4 +196,30 @@ $this->params['breadcrumbs'][] = $this->title;
         });
 
     });
+		$('.btn-delete-confirm').click(function(){
+		var check = $('#timekeepingsearch-status input').is(':checked');
+		var status = 1;
+		var ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            ids.push($(this).val());
+        });
+        $.ajax({
+            url: '/timekeeping/delete-multi',
+            type: "POST",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+
 </script>

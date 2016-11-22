@@ -96,10 +96,24 @@ class TimekeepingController extends Controller
 			exit();
 		}
 		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
-		exit();
+		exit();	
+    }
+	public function actionDeleteMulti()
+    {
 		
-		
-		
+        $this->verifyAjax();
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status =1;
+			$condition =['in', 'id', $ids];
+			TimekeepingFrontend::updateAll([
+				'deleted' =>$status,
+			], $condition);
+			echo json_encode(['error'=>0,'message'=>'Xử lý thành công']);
+			exit();
+		}
+		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
+		exit();	
     }
 	private function verifyAjax(){
         if(Yii::$app->request->isAjax){
