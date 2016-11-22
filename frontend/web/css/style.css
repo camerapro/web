@@ -294,16 +294,14 @@ body{
 	border-top: none;
 	border-radius: 0 0 6px 6px !important;
 }
-.timekeeping-frontend-index .form-group{
+.timekeeping-frontend-index .form-group, .tmp-video-period-base-index .form-group{
 	width: 268px;
     float: left;
 }
-.timekeeping-frontend-index .form-horizontal .form-group input{
+.timekeeping-frontend-index .form-horizontal .form-group input, .tmp-video-period-base-index  .form-group input{
 	width: 160px;
-	
-	
 }
-.timekeeping-frontend-index  .form-horizontal .control-label{
+.timekeeping-frontend-index  .form-horizontal .control-label, .tmp-video-period-base-index  .control-label{
 	width: 90px;
 	font-weight:normal;
 }
