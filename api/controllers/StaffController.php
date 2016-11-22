@@ -124,7 +124,7 @@ class StaffController extends Controller
         if (!empty($id)) {
             $staff = Staff::findOne(['id' => $id]);
             if ($staff)
-                $staff->image = 'http://api.thietbianninh.com/kute.jpg';
+                $staff->image = \common\components\Common::getImage($staff,'staff');
             return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
         } elseif (!empty($user_id)) {
             $staff = Staff::getStaffByUserId(['user_id' => $user_id]);
