@@ -50,8 +50,9 @@ class Common
                 unlink($upload);
             file_put_contents($upload, $data);
 
-            $success = Common::copyAndResizeImage($upload, $upload, $width, $height);
-            if ($success)
+            //$success = Common::copyAndResizeImage($upload, $upload, $width, $height);
+            $success = true;
+			if ($success)
                 return $fileName;
         }
 
@@ -106,7 +107,7 @@ class Common
         } elseif ($xR > $yR) {
             $newWidth = floor($width * $yR);
         }
-
+		ini_set('gd.jpeg_ignore_warning', true);
         $thumbnail = imagecreatetruecolor($newWidth, $newHeight);
         switch ($mime) {
             case "image/jpeg":
