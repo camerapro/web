@@ -83,8 +83,11 @@ class AccountController extends Controller
 			$user_permission = \common\models\Permission::getListPermissionByGroup($permission_group_id);
 			$list_permission_group = \common\models\Permission::getAllPermissionGroup();
 			$list_permissions = Permission::getAllPermission();
-
-			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'company_id'=>Yii::$app->user->identity->company_id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'list_permission_group'=>$list_permission_group,'user_permission'=>$user_permission,'list_permission'=>$list_permissions]];
+			$department = \common\models\Department::find()
+				->where(['company_id'=>Yii::$app->user->identity->company_id])->asArray()
+				->all();
+				
+			return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'username'=>Yii::$app->user->identity->username,'company_id'=>Yii::$app->user->identity->company_id,'department'=>$department,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'list_permission_group'=>$list_permission_group,'user_permission'=>$user_permission,'list_permission'=>$list_permissions]];
 			
         }
 		if($post = Yii::$app->request->post()){
@@ -98,8 +101,10 @@ class AccountController extends Controller
 				$user_permission = \common\models\Permission::getListPermissionByGroup($permission_group_id);
 				$list_permission_group = \common\models\Permission::getAllPermissionGroup();
 				$list_permissions = Permission::getAllPermission();
-
-				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'company_id'=>Yii::$app->user->identity->company_id,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'list_permission_group'=>$list_permission_group,'user_permission'=>$user_permission,'list_permission'=>$list_permissions]];
+				$department = \common\models\Department::find()
+				->where(['company_id'=>Yii::$app->user->identity->company_id])->asArray()
+				->all();
+				return ['error_code'=>0,'message'=>'Logined','data'=>['userid'=>Yii::$app->user->identity->id,'company_id'=>Yii::$app->user->identity->company_id,'department'=>$department,'username'=>Yii::$app->user->identity->username,'permission_group_id'=>$permission_group_id,'list_permission_group'=>$list_permission_group,'user_permission'=>$user_permission,'list_permission'=>$list_permissions]];
 			} else {
 				return ['error_code'=>1,'message'=>'Login fail'];
 			}
