@@ -63,7 +63,8 @@ class StaffController extends Controller
 				if($staff->image){
 					//upload image 
 					$path = Yii::$app->params['images']['staff']['path'].'/'. $staff->company_id;
-					\common\components\Common::uploadFile($staff->image,$path);
+					$option = ['width'=> 120,'height'=> 120];
+					\common\components\Common::uploadFile($staff->image,$path,$staff,'.png',$option,true);
 				}
                 $return = array(
                     'error_code' => 0,
