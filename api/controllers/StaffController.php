@@ -60,6 +60,11 @@ class StaffController extends Controller
 			$staff->order= isset($data['order']) ? $data['order'] : '';
 			$save = $staff->save(false);
             if ($save) {
+				if($staff->image){
+					//upload image 
+					$path = Yii::$app->params['images']['staff']['path'].'/'. $staff->company_id;
+					\common\components\Common::uploadFile($staff->image,$path);
+				}
                 $return = array(
                     'error_code' => 0,
                     'message' => 'Success'

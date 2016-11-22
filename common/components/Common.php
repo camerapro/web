@@ -24,7 +24,7 @@ class Common
         $company_id = isset($data->company_id)?$data->company_id :'';
         return Yii::$app->params['images'][$type]['url'].'/'.  $company_id.'/'.$data->id.'.png';
     }
-    public static function uploadFile($file, $target, $object, $extension, $options = array(), $endcode = false)
+    public static function uploadFile($file, $target, $object =null, $extension ='.png', $options = array(), $endcode = false)
     {
         $fileName =  'test'. $extension;
         $upload = $target . '/' . $fileName;
