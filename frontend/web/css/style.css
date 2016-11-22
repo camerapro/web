@@ -316,7 +316,7 @@ body{
     padding-bottom: 0px;
 	
 }
-.action-timekeeping img:hover,.action-timekeeping-auto img:hover,.btn-del-confirm img:hover,.btn-del-confirm img:hover{
+.action-timekeeping img:hover,.action-timekeeping-auto img:hover,.btn-del-confirm img:hover,.btn-del-confirm img:hover,.action-restore img:hover{
     opacity: 0.7;
 	cursor:pointer;
 }
@@ -340,7 +340,7 @@ body{
 	margin-left:10px;
 	padding-left:10px;
 }
-.btn-del-confirm{
+.btn-del-confirm,.btn-export-confirm{
 	padding:10px;
 }
 .btn-restore-confirm{

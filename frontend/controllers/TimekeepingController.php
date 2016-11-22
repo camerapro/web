@@ -36,7 +36,9 @@ class TimekeepingController extends Controller
     public function actionIndex()
     {
         $searchModel = new TimekeepingSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$params = Yii::$app->request->queryParams;
+		$params['deleted']=0;
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -50,7 +52,9 @@ class TimekeepingController extends Controller
     public function actionRestore()
     {
         $searchModel = new TimekeepingSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+		$params = Yii::$app->request->queryParams;
+		$params['deleted']=1;
+        $dataProvider = $searchModel->search($params);
 
         return $this->render('restore', [
             'searchModel' => $searchModel,
@@ -114,6 +118,26 @@ class TimekeepingController extends Controller
 		}
 		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
 		exit();	
+    }
+	public function actionRestoreConfirm()
+    {
+		
+        $this->verifyAjax();
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$condition =['in', 'id', $ids];
+			TimekeepingFrontend::updateAll([
+				'deleted' =>$status,
+			], $condition);
+			echo json_encode(['error'=>0,'message'=>'Xử lý thành công']);
+			exit();
+		}
+		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
+		exit();
+		
+		
+		
     }
 	private function verifyAjax(){
         if(Yii::$app->request->isAjax){

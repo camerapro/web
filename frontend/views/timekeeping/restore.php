@@ -21,8 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<div class ="action-restore">
 	
-	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="65"></span>
-	<span class="btn-restore-confirm"><img src="/images/btn-export-file.png" width="65"></span>
+	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="80"></span>
 		</div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -63,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?$data->staff->{'department'} : null;
+                    return ($data->staff) ?$data->staff->{'department_id'} : null;
                 }
             ],
 			 'created_time',
@@ -119,3 +118,30 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 	<?php \yii\widgets\Pjax::end(); ?>
 </div>
+<script>
+		$('.btn-restore-confirm').click(function(){
+		
+		var status = 0;
+		var ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            ids.push($(this).val());
+        });
+        $.ajax({
+            url: '/timekeeping/restore-confirm',
+            type: "POST",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+</script>

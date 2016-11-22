@@ -18,7 +18,7 @@ class TimekeepingSearch extends TimekeepingFrontend
     public function rules()
     {
         return [
-            [['id', 'status', 'tat_id', 'staff_id'], 'integer'],
+            [['id', 'status', 'tat_id', 'staff_id','deleted'], 'integer'],
             [['card_code', 'staff_name', 'type', 'created_time', 'image'], 'safe'],
         ];
     }
@@ -43,7 +43,6 @@ class TimekeepingSearch extends TimekeepingFrontend
     {
         $query = TimekeepingFrontend::find()->innerJoinWith('staff')->innerJoinWith('tat');
         
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -57,7 +56,7 @@ class TimekeepingSearch extends TimekeepingFrontend
             // $query->where('0=1');
             return $dataProvider;
         }
-
+		$deleted = isset($params['deleted'])?$params['deleted']:0;
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -65,13 +64,15 @@ class TimekeepingSearch extends TimekeepingFrontend
             'tat_id' => $this->tat_id,
             'created_time' => $this->created_time,
             'staff_id' => $this->staff_id,
+            'deleted' => $this->deleted,
         ]);
 
         $query->andFilterWhere(['like', 'card_code', $this->card_code])
             ->andFilterWhere(['like', 'staff_name', $this->staff_name])
             ->andFilterWhere(['like', 'type', $this->type])
+            ->andFilterWhere(['like', 'deleted', $this->deleted])
             ->andFilterWhere(['like', 'image', $this->image]);
-
+		$dataProvider->query->where(['timekeeping.deleted'=>$deleted]);
         return $dataProvider;
     }
 }

@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	</div>
 	<span class="btn-del-confirm"><img src="/images/btn-del-confirm.png"  width="65"></span>
-	<span class="btn-del-confirm"><img src="/images/btn-export-file.png"  width="65"></span>
+	<span class="btn-export-confirm"><img src="/images/btn-export-file.png"  width="65"></span>
 		
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -196,7 +196,7 @@ $this->params['breadcrumbs'][] = $this->title;
         });
 
     });
-		$('.btn-delete-confirm').click(function(){
+		$('.btn-del-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');
 		var status = 1;
 		var ids = [];
