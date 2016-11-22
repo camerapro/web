@@ -57,6 +57,35 @@ class TimekeepingController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+	public function actionManualConfirm()
+    {
+		
+        $this->verifyAjax();
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$condition =['in', 'id', $ids];
+			if($status ==0)
+				$status =3;
+			TimekeepingFrontend::updateAll([
+				'status' =>$status,
+			], $condition);
+			echo json_encode(['error'=>0,'message'=>'Xử lý thành công']);
+			exit();
+		}
+		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
+		exit();
+		
+		
+		
+    }
+	private function verifyAjax(){
+        if(Yii::$app->request->isAjax){
+			$this->layout = false;
+            return true;
+        }
+		return false;
+    }
     /**
      * Displays a single TimekeepingFrontend model.
      * @param integer $id

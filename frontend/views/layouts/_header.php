@@ -46,4 +46,7 @@
     <script>
         var lever = parseInt(<?= Yii::$app->user->identity->level;?>);
     </script>
+	 <script type="text/javascript">
+           var YII_CSRF_TOKEN = "<?php print Yii::$app->request->csrfToken; ?>";
+      </script>
 </head>

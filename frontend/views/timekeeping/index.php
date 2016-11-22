@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		<?php $form = ActiveForm::begin() ?>
 			<span class="text-edit-manual">Sửa thông tin thủ công :  </span>
 			<?= $form->field($searchModel, 'status')->inline()->hint('')->radioList(['1'=>'Đúng', '0'=>'Sai'])->label(false); ?>
-			<span class="btn-edit-confirm"><img src="/images/btn-edit-confirm.png" width="60"></span>
+			<span class="btn-edit-manual-confirm"><img src="/images/btn-edit-confirm.png" width="60"></span>
 		<?php ActiveForm::end(); ?>
 		
 	
@@ -84,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?$data->staff->{'department'} : null;
+                    return ($data->staff) ?$data->staff->{'department_id'} : null;
                 }
             ],
 			 'created_time',
@@ -140,3 +140,63 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 	<?php \yii\widgets\Pjax::end(); ?>
 </div>
+<script>
+    $('.btn-edit-confirm').click(function(){
+		var check = $('#timekeepingsearch-status input').is(':checked');
+		if(!check){
+			alert('Chọn thuộc tính cần xử lý');
+			return false;
+		}
+		var status = $('#timekeepingsearch-status').find('input[type="radio"]:checked').val();
+        var ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            ids.push($(this).val());
+        });
+        $.ajax({
+            url: '/timekeeping/manual-confirm',
+            type: "POST",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+	$('.btn-edit-confirm').click(function(){
+		var check = $('#timekeepingsearch-status input').is(':checked');
+		if(!check){
+			alert('Chọn thuộc tính cần xử lý');
+			return false;
+		}
+		var status = $('#timekeepingsearch-status').find('input[type="radio"]:checked').val();
+        var ids = [];
+        $("input[type=checkbox]:checked").each ( function() {
+            ids.push($(this).val());
+        });
+        $.ajax({
+            url: '/timekeeping/manual-confirm',
+            type: "POST",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+</script>

@@ -193,8 +193,8 @@ body{
     display: block;
 }
 .permission-group-form {
-    margin: 0;
-    width: 100%;
+    margin: 0 25%;
+    width: 50%;
 }
 #permissiongroup-name{
     width: 80%;
@@ -294,9 +294,6 @@ body{
 	border-top: none;
 	border-radius: 0 0 6px 6px !important;
 }
-.form-group.field-permissiongroup-name {
-    width: 50%;
-}
 .timekeeping-frontend-index .form-group{
 	width: 268px;
     float: left;
@@ -317,6 +314,11 @@ body{
     margin-bottom: 5px;
     line-height: 23px;
     padding-bottom: 0px;
+	
+}
+.action-timekeeping img:hover,.action-timekeeping-auto img:hover,.btn-del-confirm img:hover,.btn-del-confirm img:hover{
+    opacity: 0.7;
+	cursor:pointer;
 }
 .action-timekeeping .text-edit-manual{
 	float:left;
@@ -324,7 +326,7 @@ body{
 	line-height:20px;
 	padding-right:5px;
 }
-.action-timekeeping .btn-edit-confirm{
+.action-timekeeping .btn-edit-confirm,.btn-edit-manual-confirm{
 	padding:5px;
 }
 .action-timekeeping .form-group {
