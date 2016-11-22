@@ -25,26 +25,6 @@ use kartik\daterange\DateRangePicker;
 		//echo $form->field($model, 'status')->dropDownList(['1' => 'Thành công', '0' => 'Thất bại', '' => 'Tất cả']);
     ?>
 
-    <?php
-    $now = date('Y-m-d');
-    $days = 1;
-    if (!isset($startDate)) $startDate = date("d/m/Y", strtotime("$now - $days day"));
-    if (!isset($endDate)) $endDate = date('d/m/Y');
-    echo DateRangePicker::widget([
-        'name' => 'date',
-        'value' => "$startDate - $endDate",
-        'language' => 'vi',
-        'presetDropdown' => true,
-        'hideInput' => true,
-        'convertFormat' => true,
-        'pluginOptions' => [
-            'locale' => [
-                'format' => 'd/m/Y'
-            ],
-
-        ]
-    ]);
-    ?>
 	<?php echo $form->field($model,'created_time11')->textInput(['value' => '2016-11-10 00:00:00'])->label('Từ ngày'); ?>
 	<?php echo $form->field($model,'created_time1')->textInput(['value' => '2016-11-11 00:00:00'])->label('Đến ngày'); ?>
 
