@@ -26,13 +26,13 @@ class DepartmentFrontend extends DepartmentBase
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'company_id' => 'Company ID',
-            'parent_id' => 'Parent ID',
-            'status' => 'Status',
-            'created_time' => 'Created Time',
-            'updated_time' => 'Updated Time',
-            'description' => 'Description',
+            'name' => 'Tên phòng',
+            'company_id' => 'Công ty',
+            'parent_id' => 'Thuộc phòng',
+            'status' => 'Trạng thái',
+            'created_time' => 'Ngày tạo',
+            'updated_time' => 'Ngày cập nhật',
+            'description' => 'Mô tả',
         ];
     }
 }

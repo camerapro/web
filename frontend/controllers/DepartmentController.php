@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * DdepartmentController implements the CRUD actions for departmentFrontend model.
  */
-class DdepartmentController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * @inheritdoc
@@ -55,6 +55,13 @@ class DdepartmentController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    private function verifyAjax(){
+        if(Yii::$app->request->isAjax){
+            $this->layout = false;
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Creates a new departmentFrontend model.
@@ -63,6 +70,7 @@ class DdepartmentController extends Controller
      */
     public function actionCreate()
     {
+        $ajax = $this->verifyAjax();
         $model = new departmentFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -82,6 +90,7 @@ class DdepartmentController extends Controller
      */
     public function actionUpdate($id)
     {
+        $ajax = $this->verifyAjax();
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
