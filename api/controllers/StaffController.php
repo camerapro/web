@@ -53,9 +53,10 @@ class StaffController extends Controller
 			$staff->att_code= isset($data['att_code']) ? $data['att_code'] : '';
 			$staff->department_id= isset($data['department_id']) ? $data['department_id'] : '';
 			$staff->image= isset($data['image']) ? $data['image'] : '';
-			$staff->created_by= isset($data['created_by']) ? $data['created_by'] : '';
+			$staff->created_by= isset($data['created_by']) ? $data['created_by'] : Yii::$app->user->identity->id;
 			$staff->company_id= isset($data['company_id']) ? $data['company_id'] : '';
 			$staff->description= isset($data['description']) ? $data['description'] : '';
+			$staff->created_time= date("Y-m-d H:i:s");
 			$staff->order= isset($data['order']) ? $data['order'] : '';
 			$save = $staff->save(false);
             if ($save) {
