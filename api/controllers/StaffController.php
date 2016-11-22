@@ -44,20 +44,20 @@ class StaffController extends Controller
         }
         if ($data = Yii::$app->request->post()) {
 
-            $params = [
-                'name' => isset($data['name']) ? $data['name'] : '',
-                'card_code' => isset($data['card_code']) ? $data['card_code'] : '',
-                'card_id' => isset($data['card_id']) ? $data['card_id'] : '',
-                'department' => isset($data['department']) ? $data['department'] : '',
-                'image' => isset($data['image']) ? $data['image'] : '',
-                'order' => isset($data['order']) ? $data['order'] : '',
-                'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
-                'description' => isset($data['description']) ? $data['description'] : '',
-                'created_time' => date('Y-m-d H:i:s'),
-                'company_id' => isset($data['company_id']) ? $data['company_id'] : 0,
-            ];
-            $save = Staff::add($params);
-
+			$staff =  new Staff();
+            $staff->name= isset($data['name']) ? $data['name'] : '';
+			$staff->phone= isset($data['phone']) ? $data['phone'] : '';
+			$staff->email= isset($data['email']) ? $data['email'] : '';
+			$staff->card_code= isset($data['card_code']) ? $data['card_code'] : '';
+			$staff->card_id= isset($data['card_id']) ? $data['card_id'] : '';
+			$staff->att_code= isset($data['att_code']) ? $data['att_code'] : '';
+			$staff->department_id= isset($data['department_id']) ? $data['department_id'] : '';
+			$staff->image= isset($data['image']) ? $data['image'] : '';
+			$staff->created_by= isset($data['created_by']) ? $data['created_by'] : '';
+			$staff->company_id= isset($data['company_id']) ? $data['company_id'] : '';
+			$staff->description= isset($data['description']) ? $data['description'] : '';
+			$staff->order= isset($data['order']) ? $data['order'] : '';
+			$save = $staff->save(false);
             if ($save) {
                 $return = array(
                     'error_code' => 0,
