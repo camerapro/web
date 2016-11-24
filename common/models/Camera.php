@@ -77,7 +77,8 @@ class Camera extends CameraBase
         $port = isset($recorder->port_stream)?$recorder->port_stream:'554';
         $username = isset($recorder->username)?$recorder->username:'';
         $password = isset($recorder->password)?$recorder->password:'';
-        $channel = isset($camera->channel)?$camera->channel:'';
+        $channel = (int)isset($camera->channel)?$camera->channel:'';
+		$channel =  $channel +1;
         $quality = 1;
         $stream = $protocol."://".$ip.":".$port."/?user=".$username."&password=".$password.'&channel='.$channel.'&stream='.$quality .'.sdp';
         return $stream ;
