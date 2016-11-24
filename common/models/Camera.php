@@ -79,7 +79,7 @@ class Camera extends CameraBase
         $password = isset($recorder->password)?$recorder->password:'';
         $channel = isset($camera->channel)?$camera->channel:'';
         $quality = 1;
-        $stream = $protocol."://".$ip.":".$port."/?user=".$username."?password=".$password.'&channel='.$channel.'&stream='.$quality .'.sdp';
+        $stream = $protocol."://".$ip.":".$port."/?user=".$username."&password=".$password.'&channel='.$channel.'&stream='.$quality .'.sdp';
         return $stream ;
     }
 	
