@@ -66,6 +66,12 @@
 .w100{
     width: 100%!important;
 }
+.w70{
+    width: 70%!important;
+}
+.w30{
+    width: 30%!important;
+}
 .w45{
     width: 45%!important;
 }
@@ -79,3 +85,4 @@
 .modal-body{
     overflow: hidden;
 }
+
