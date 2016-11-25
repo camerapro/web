@@ -43,6 +43,16 @@ class DepartmentController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionManager()
+    {
+        $searchModel = new DepartmentSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('manager', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single departmentFrontend model.

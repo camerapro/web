@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\departmentFrontend */
 
-$this->title = 'Create Department Frontend';
+$this->title = '';
 $this->params['breadcrumbs'][] = ['label' => 'Department Frontends', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models\_base;
+namespace common\models;
 
+use common\models\_base\ClassBase;
 use Yii;
 
 /**
@@ -15,10 +16,8 @@ use Yii;
  * @property string $created_time
  * @property string $updated_time
  * @property string $description
- * @property string $start_time
- * @property string $end_time
  */
-class ClassBase extends \yii\db\ActiveRecord
+class ClassModel extends ClassBase
 {
     /**
      * @inheritdoc
@@ -36,7 +35,7 @@ class ClassBase extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['company_id', 'parent_id', 'status'], 'integer'],
-            [['created_time', 'updated_time', 'start_time', 'end_time'], 'safe'],
+            [['created_time', 'updated_time'], 'safe'],
             [['name'], 'string', 'max' => 100],
             [['description'], 'string', 'max' => 255],
         ];
@@ -56,8 +55,6 @@ class ClassBase extends \yii\db\ActiveRecord
             'created_time' => 'Created Time',
             'updated_time' => 'Updated Time',
             'description' => 'Description',
-            'start_time' => 'Start Time',
-            'end_time' => 'End Time',
         ];
     }
 }
