@@ -10,7 +10,7 @@ use frontend\models\departmentFrontend;
 /**
  * DepartmentSearch represents the model behind the search form about `frontend\models\departmentFrontend`.
  */
-class DepartmentSearch extends departmentFrontend
+class DepartmentSearch extends DepartmentFrontend
 {
     /**
      * @inheritdoc

@@ -81,7 +81,7 @@ class DepartmentController extends Controller
     public function actionCreate()
     {
         $ajax = $this->verifyAjax();
-        $model = new departmentFrontend();
+        $model = new DepartmentFrontend();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -134,7 +134,7 @@ class DepartmentController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = departmentFrontend::findOne($id)) !== null) {
+        if (($model = DepartmentFrontend::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
