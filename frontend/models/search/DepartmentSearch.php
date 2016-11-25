@@ -5,7 +5,7 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\departmentFrontend;
+use frontend\models\DepartmentFrontend;
 
 /**
  * DepartmentSearch represents the model behind the search form about `frontend\models\departmentFrontend`.
