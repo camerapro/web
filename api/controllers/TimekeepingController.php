@@ -51,6 +51,8 @@ class TimekeepingController extends Controller
                 'image' => isset($data['image']) ? $data['image'] : '',
                 'type' => isset($data['type']) ? $data['type'] : '',
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
+                'company_id' => isset($data['company_id']) ? $data['company_id'] : '',
+                'department_id' => isset($data['department_id']) ? $data['department_id'] : '',
                 'description' => isset($data['description']) ? $data['description'] : '',
                 'created_time' => isset($data['created_time']) ? $data['created_time'] : date('Y-m-d H:i:s'),
             ];
@@ -91,10 +93,19 @@ class TimekeepingController extends Controller
         }
         $staff = [];
         $message = '';
-        $card_code = isset(Yii::$app->request->get()['card_code']) ? Yii::$app->request->get()['card_code'] : '';
-        $staff_name = isset(Yii::$app->request->get()['staff_name']) ? Yii::$app->request->get()['staff_name'] : '';
-        $staff = Timekeeping::searchData($card_code,$staff_name);
-        return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+        $card_code = isset(Yii::$app->request->get()['codecard']) ? Yii::$app->request->get()['codecard'] : '';
+        $staff_name = isset(Yii::$app->request->get()['name']) ? Yii::$app->request->get()['name'] : '';
+        $to = isset(Yii::$app->request->get()['to']) ? Yii::$app->request->get()['to'] : '';
+        $from = isset(Yii::$app->request->get()['from']) ? Yii::$app->request->get()['from'] : '';
+        if(empty($from) || empty($to))
+            return ['error_code' => 403, 'message' => 'From and To are not null'];
+        $department_id = isset(Yii::$app->request->get()['department_id']) ? Yii::$app->request->get()['department_id'] : '';
+        $company_id = isset(Yii::$app->request->get()['company_id']) ? Yii::$app->request->get()['company_id'] : '';
+        $staff = Timekeeping::searchData($card_code,$staff_name,$company_id,$department_id,$from,$to);
+        if($staff)
+            return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+        else
+            return ['error_code' => 401, 'message' => 'Not found'];
 
     }
     /**
