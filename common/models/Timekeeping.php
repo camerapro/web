@@ -27,14 +27,27 @@ class Timekeeping extends TimekeepingBase
         $tat->attributes = $params;
         return $tat->save(false);
     }
-    public static  function searchData($card_code=0,$staff_name=''){
-        $staff = Timekeeping::find()->where(['and', ['card_code' => $card_code]])
-            ->orFilterWhere(['like', 'staff_name', $staff_name])
-            ->all();
+    public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to=''){
+        $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id]);
+        if($department_id)
+           $$staff->andWhere(['timekeeping.department_id1' => $department_id]);
+        if($from){
+            $staff->andWhere(['>=', 'timekeeping.created_time', $from]);
+        }
+        if($to){
+            $staff->andWhere(['<=', 'timekeeping.created_time', $to]);
+        }
+        $staff->with('staff');
+        $staff->with('tat');
+        $staff = $staff->all();
+//var_dump($staff);
         $rt = array();
         foreach ($staff as $value)
         {
             $value->image = \common\components\Common::getImage($value,'staff');
+            $value->staff_name = isset($value->staff)? $value->staff->name:'';
+            $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
+            $value->tat_name = isset($value->tat)? $value->tat->name:'';
             $rt[] = $value;
         }
         return $rt;
