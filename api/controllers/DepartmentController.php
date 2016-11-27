@@ -13,9 +13,10 @@ class DepartmentController extends ApiController
 {
     public $enableCsrfValidation = false;
     public $layout = false;
-
+    public $logger;
     public function init()
     {
+        $this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
 
