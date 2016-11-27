@@ -122,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($data) {
                     return ($data->staff) ?
                        
-                        Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                        Html::img(\common\components\Common::getImage($data,'timekeeping'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
                 }
             ],
 			[
