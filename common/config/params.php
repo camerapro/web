@@ -1,11 +1,16 @@
 <?php
 return [
-    'adminEmail' => 'admin@example.com',
-    'supportEmail' => 'support@example.com',
+    'adminEmail' => 'thongnv1010@gmail.com',
+    'supportEmail' => 'thongnv1010@gmail.com',
     'user.passwordResetTokenExpire' => 3600,
-    'images'=>['staff'=>[
-        'path'=>'F://',
-        'url'=>'http://static.thietbianninh.com/staff',
+    'images'=>[
+		'staff'=>[
+			'path'=>'/storage/images/staff/',
+			'url'=>'http://static.thietbianninh.com/staff',
+        ],
+		'timekeeping'=>[
+			'path'=>'/storage/images/timekeeping/',
+			'url'=>'http://static.thietbianninh.com/staff',
         ],
     ],
 ];
