@@ -120,9 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?
-                       
-                        Html::img(\common\components\Common::getImage($data,'timekeeping'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                    return ($data->id) ?Html::img(\common\components\Common::getImage($data,'timekeeping'),['width'=>'100%']) : null;
                 }
             ],
 			[
