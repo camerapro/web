@@ -152,6 +152,26 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php \yii\widgets\Pjax::end(); ?>
 </div>
 <script>
+    $('#from_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+	$('#to_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+</script>
+<script>
     $('.btn-edit-manual-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');
 		if(!check){

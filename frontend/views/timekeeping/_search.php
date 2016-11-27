@@ -25,8 +25,8 @@ use kartik\daterange\DateRangePicker;
 		//echo $form->field($model, 'status')->dropDownList(['1' => 'Thành công', '0' => 'Thất bại', '' => 'Tất cả']);
     ?>
 
-	<?php echo $form->field($model,'created_time11')->textInput(['value' => '2016-11-10 00:00:00'])->label('Từ ngày'); ?>
-	<?php echo $form->field($model,'created_time1')->textInput(['value' => '2016-11-11 00:00:00'])->label('Đến ngày'); ?>
+	<?php echo $form->field($model,'from_time')->textInput(['value' => '2016-11-10 00:00:00','id'=>'from_time'])->label('Từ ngày'); ?>
+	<?php echo $form->field($model,'to_time')->textInput(['value' => '2016-11-11 00:00:00','id'=>'to_time'])->label('Đến ngày'); ?>
 
     <?php // echo $form->field($model, 'image') ?>
 
@@ -40,3 +40,23 @@ use kartik\daterange\DateRangePicker;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script>
+    $('#from_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+	$('#to_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+</script>
