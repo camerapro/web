@@ -114,6 +114,7 @@ class StaffController extends Controller
      */
     public function actionGet()
     {
+        $this->logger->LogInfo("actionInfo staff data  :" .json_encode(Yii::$app->request->get()));
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
