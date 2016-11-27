@@ -130,29 +130,6 @@ class TimekeepingController extends Controller
 
     }
     /**
-     * @return array
-     */
-    public function actionDelete()
-    {
-        if (Yii::$app->user->isGuest) {
-            return ['error_code' => 1, 'message' => 'Not login'];
-        }
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        if ($data = Yii::$app->request->post()) {
-            $this->findModel($id)->delete();
-            return ['error_code' => 0, 'message' => 'Success'];
-        }
-        else{
-            return array(
-                'error_code'=>1,
-                'message'=>'Method not supported!'
-            );
-        }
-        return ['error_code' => 1, 'message' => 'Fail'];
-        exit();
-
-    }
-    /**
      * Finds the Camera model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
@@ -179,7 +156,7 @@ class TimekeepingController extends Controller
 			$condition =['in', 'id', $ids];
 			if($status ==0)
 				$status =3;
-			TimekeepingFrontend::updateAll([
+			Timekeeping::updateAll([
 				'status' =>$status,
 			], $condition);
 			 return ['error' => 0, 'message' => 'Success'];
@@ -200,7 +177,7 @@ class TimekeepingController extends Controller
 			$condition =['in', 'id', $ids];
 			if($status ==0)
 				$status =3;
-			TimekeepingFrontend::updateAll([
+			Timekeeping::updateAll([
 				'status' =>$status,
 			], $condition);
 			 return ['error' => 0, 'message' => 'Success'];
@@ -209,14 +186,14 @@ class TimekeepingController extends Controller
 		return ['error_code' => 1, 'message' => 'Method not supported'];
 		exit();	
     }
-	public function actionDeletemulti()
+	public function actionDelete()
     {
 		if ($data = Yii::$app->request->post()) {
 			$ids = Yii::$app->request->post()['ids'];
 			$deleted =1;
 			$ids =explode(",",$ids); 
 			$condition =['in', 'id', $ids];
-			TimekeepingFrontend::updateAll([
+			Timekeeping::updateAll([
 				'deleted' =>$deleted,
 			], $condition);
 			 return ['error' => 0, 'message' => 'Success'];
@@ -232,7 +209,7 @@ class TimekeepingController extends Controller
 			$deleted = 0;
 			$ids =explode(",",$ids); 
 			$condition =['in', 'id', $ids];
-			TimekeepingFrontend::updateAll([
+			Timekeeping::updateAll([
 				'deleted' =>$deleted,
 			], $condition);
 			 return ['error' => 0, 'message' => 'Success'];
