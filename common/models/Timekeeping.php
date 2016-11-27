@@ -30,7 +30,8 @@ class Timekeeping extends TimekeepingBase
     public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to=''){
         $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id]);
         if($department_id)
-           $$staff->andWhere(['timekeeping.department_id1' => $department_id]);
+           $staff->andWhere(['=','timekeeping.department_id',(int)$department_id]);
+
         if($from){
             $staff->andWhere(['>=', 'timekeeping.created_time', $from]);
         }
