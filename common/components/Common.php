@@ -23,7 +23,7 @@ class Common
     {
         $company_id = isset($data->company_id)?$data->company_id :'';
         $path  = Yii::$app->params['images'][$type]['url'];
-        if(!isset($data->id) || isset($data->company_id))
+        if(!isset($data->id) || !isset($data->company_id))
             return 'http://static.thietbianninh.com/staff/thumb.png';
         return $path.'/'.  $company_id.'/'.'.png';
     }
