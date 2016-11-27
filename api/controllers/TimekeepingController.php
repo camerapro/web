@@ -170,28 +170,76 @@ class TimekeepingController extends Controller
     /**
      * @return array
      */
-    public function actionGet22()
+    public function actionAutoconfirm()
     {
-        if (Yii::$app->user->isGuest) {
-            return ['error_code' => 1, 'message' => 'Not login'];
-        }
-        $staff = [];
-        $message = '';
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-        if (!empty($id)) {
-            $staff = Staff::findOne(['id' => $id]);
-            if ($staff)
-                $staff->image = 'http://api.thietbianninh.com/kute.jpg';
-            return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
-        } elseif (!empty($user_id)) {
-            $staff = Staff::getStaffByUserId(['user_id' => $user_id]);
-            if (!empty($staff)) {
-                return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
-            }
-
-        }
-        return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			if($status ==0)
+				$status =3;
+			TimekeepingFrontend::updateAll([
+				'status' =>$status,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();
+		
+		
+		
+    }
+	public function actionManualconfirm()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			if($status ==0)
+				$status =3;
+			TimekeepingFrontend::updateAll([
+				'status' =>$status,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
+    }
+	public function actionDeletemulti()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$deleted =1;
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			TimekeepingFrontend::updateAll([
+				'deleted' =>$deleted,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
+    }
+	public function actionRestore()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$deleted = 0;
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			TimekeepingFrontend::updateAll([
+				'deleted' =>$deleted,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
     }
 
 
