@@ -25,7 +25,8 @@ class Timekeeping extends TimekeepingBase
     public static  function add($params){
         $tat = new self;
         $tat->attributes = $params;
-        return $tat->save(false);
+        $tat->save(false);
+        return  $tat;
     }
     public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to=''){
         $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id]);
@@ -45,7 +46,8 @@ class Timekeeping extends TimekeepingBase
         $rt = array();
         foreach ($staff as $value)
         {
-            $value->image = \common\components\Common::getImage($value,'staff');
+            $value->image = \common\components\Common::getImage($value,'timekeeeping');
+            $value->image_base = isset($value->staff)?\common\components\Common::getImage($value->staff->id,'staff'):"";
             $value->staff_name = isset($value->staff)? $value->staff->name:'';
             $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
             $value->tat_name = isset($value->tat)? $value->tat->name:'';
