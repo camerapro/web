@@ -10,7 +10,7 @@ return [
         ],
 		'timekeeping'=>[
 			'path'=>'/storage/images/timekeeping/',
-			'url'=>'http://static.thietbianninh.com/staff',
+			'url'=>'http://static.thietbianninh.com/timekeeping',
         ],
     ],
 ];
