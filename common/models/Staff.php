@@ -68,4 +68,14 @@ class Staff extends StaffBase
         }
         return $rt;
     }
+    public static function getStaffById($staff_id)
+    {
+        $return = self::find()->where(['id'=>$staff_id])
+            ->with('department')
+            ->one();
+    }
+    public function getDepartment()
+    {
+        return $this->hasOne(Department::className(), ['id' => 'department_id']);
+    }
 }
