@@ -47,7 +47,7 @@ class TimekeepingController extends Controller
             $params = [
                 'card_code' => isset($data['card_code']) ? $data['card_code'] : '',
                 'staff_id' => isset($data['staff_id']) ? $data['staff_id'] : '',
-                'tap_id' => isset($data['tap_id']) ? $data['tap_id'] : '',
+                'tat_id' => isset($data['tat_id']) ? $data['tat_id'] : '',
                 'image' => isset($data['image']) ? $data['image'] : '',
                 'type' => isset($data['type']) ? $data['type'] : '',
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
