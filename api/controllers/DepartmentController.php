@@ -5,6 +5,7 @@ use yii\web\Controller;
 use common\models\LoginForm;
 use api\components\ApiController;
 use common\models\Department;
+use common\components\KLogger;
 
 /**
  * Site controller
