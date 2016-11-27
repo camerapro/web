@@ -23,9 +23,14 @@ class Common
     {
         $company_id = isset($data->company_id)?$data->company_id :'';
         $path  = Yii::$app->params['images'][$type]['url'];
-        if(!isset($data->id) || isset($data->company_id))
-            return 'http://static.thietbianninh.com/staff/thumb.png';
-        return $path.'/'.  $company_id.'/'.$data->id.'.png';
+       
+        if(isset($data->id) && isset($data->company_id))
+		{
+			 //var_dump($data->id,$data->company_id);
+			 return $path.'/'.  $company_id.'/'.$data->id.'.png';
+		}
+        return 'http://static.thietbianninh.com/staff/thumb.png';
+       
     }
     public static function uploadFile($file, $target, $object =null, $extension ='.png', $options = array(), $endcode = false)
     {
