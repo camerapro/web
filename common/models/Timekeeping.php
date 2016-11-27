@@ -46,7 +46,7 @@ class Timekeeping extends TimekeepingBase
         $rt = array();
         foreach ($staff as $value)
         {
-            $value->image = \common\components\Common::getImage($value,'timekeeeping');
+            $value->image = \common\components\Common::getImage($value,'timekeeping');
             $value->image_base = isset($value->staff)?\common\components\Common::getImage($value->staff->id,'staff'):"";
             $value->staff_name = isset($value->staff)? $value->staff->name:'';
             $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
