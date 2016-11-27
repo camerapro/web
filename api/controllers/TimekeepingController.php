@@ -37,7 +37,7 @@ class TimekeepingController extends Controller
 
     public function actionAdd()
     {
-		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode(Yii::$app->request->get()));
+		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode(Yii::$app->request->post()));
 		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
@@ -60,6 +60,12 @@ class TimekeepingController extends Controller
             $save = Timekeeping::add($params);
 
             if ($save) {
+                if ($save->image) {
+                    //upload image
+                    $path = Yii::$app->params['images']['timekeeping']['path'] . '/' . $save->company_id;
+                    $option = ['width' => 120, 'height' => 120];
+                    \common\components\Common::uploadFile($save->image, $path, $save, '.png', $option, true);
+                }
                 $return = array(
                     'error_code' => 0,
                     'message' => 'Success'
