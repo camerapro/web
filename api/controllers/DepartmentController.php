@@ -63,7 +63,6 @@ class DepartmentController extends ApiController
             $staff->parent_id = isset($data['parent_id']) ? $data['parent_id'] : '';
             $staff->local_department_id = isset($data['local_department_id']) ? $data['local_department_id'] : '';
             $staff->created_time = date("Y-m-d H:i:s");
-            $staff->order = isset($data['order']) ? $data['order'] : '';
             $save = $staff->save(false);
 
             if ($save) {
