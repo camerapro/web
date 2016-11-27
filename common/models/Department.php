@@ -30,8 +30,7 @@ class Department extends DepartmentBase
 				->all();
 			}
 			return null;
-				
-				
+
 		}
 		if($id){
 			return self::find()
