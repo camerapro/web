@@ -41,15 +41,23 @@ class Timekeeping extends TimekeepingBase
         }
         $staff->with('staff');
         $staff->with('tat');
+        $staff->with('tat');
         $staff = $staff->all();
 //var_dump($staff);
         $rt = array();
         foreach ($staff as $value)
         {
             $value->image = \common\components\Common::getImage($value,'timekeeping');
-            $value->image_base = isset($value->staff)?\common\components\Common::getImage($value->staff->id,'staff'):"";
-            $value->staff_name = isset($value->staff)? $value->staff->name:'';
-            $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
+            if($value->staff){
+                $value->image_base = isset($value->staff)?\common\components\Common::getImage($value->staff->id,'staff'):"";
+                $department = \common\models\Staff::getStaffById($value->staff->id);
+                $department_name ='';
+                if($department)
+                    $department_name = $department->name;
+                $value->department_name = $department_name;
+                $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
+            }
+
             $value->tat_name = isset($value->tat)? $value->tat->name:'';
             $rt[] = $value;
         }
