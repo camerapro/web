@@ -22,7 +22,10 @@ class Common
     public static function getImage($data,$type ='staff')
     {
         $company_id = isset($data->company_id)?$data->company_id :'';
-        return Yii::$app->params['images'][$type]['url'].'/'.  $company_id.'/'.$data->id.'.png';
+        $path  = Yii::$app->params['images'][$type]['url'];
+        if(!isset($data->id) || isset($data->company_id))
+            return '';
+        return $path.'/'.  $company_id.'/'.'.png';
     }
     public static function uploadFile($file, $target, $object =null, $extension ='.png', $options = array(), $endcode = false)
     {
