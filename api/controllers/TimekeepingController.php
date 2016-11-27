@@ -102,12 +102,13 @@ class TimekeepingController extends Controller
         $card_code = isset(Yii::$app->request->get()['codecard']) ? Yii::$app->request->get()['codecard'] : '';
         $staff_name = isset(Yii::$app->request->get()['name']) ? Yii::$app->request->get()['name'] : '';
         $to = isset(Yii::$app->request->get()['to']) ? Yii::$app->request->get()['to'] : '';
+        $deleted = isset(Yii::$app->request->get()['deleted']) ? Yii::$app->request->get()['deleted'] : 0;
         $from = isset(Yii::$app->request->get()['from']) ? Yii::$app->request->get()['from'] : '';
         if(empty($from) || empty($to))
             return ['error_code' => 403, 'message' => 'From and To are not null'];
         $department_id = isset(Yii::$app->request->get()['department_id']) ? Yii::$app->request->get()['department_id'] : '';
         $company_id = isset(Yii::$app->request->get()['company_id']) ? Yii::$app->request->get()['company_id'] : '';
-        $staff = Timekeeping::searchData($card_code,$staff_name,$company_id,$department_id,$from,$to);
+        $staff = Timekeeping::searchData($card_code,$staff_name,$company_id,$department_id,$from,$to,0,$deleted);
         if($staff)
             return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
         else
