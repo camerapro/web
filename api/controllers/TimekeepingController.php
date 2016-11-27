@@ -19,6 +19,7 @@ class TimekeepingController extends Controller
 
     public function init()
     {
+		 $this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
 
@@ -35,6 +36,8 @@ class TimekeepingController extends Controller
 
     public function actionAdd()
     {
+		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode(Yii::$app->request->get()));
+		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
@@ -80,6 +83,8 @@ class TimekeepingController extends Controller
      */
     public function actionGet()
     {
+		$this->logger->LogInfo("actionGet timekeeping data  :" .json_encode(Yii::$app->request->get()));
+		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
