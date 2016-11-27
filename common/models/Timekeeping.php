@@ -28,8 +28,8 @@ class Timekeeping extends TimekeepingBase
         $tat->save(false);
         return  $tat;
     }
-    public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to=''){
-        $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id]);
+    public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to='',$status){
+        $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id,'timekeeping.deleted'=>0,'timekeeping.status'=>$status]);
         if($department_id)
            $staff->andWhere(['=','timekeeping.department_id',(int)$department_id]);
 
