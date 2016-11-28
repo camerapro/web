@@ -25,16 +25,40 @@ class Timekeeping extends TimekeepingBase
     public static  function add($params){
         $tat = new self;
         $tat->attributes = $params;
-        return $tat->save(false);
+        $tat->save(false);
+        return  $tat;
     }
-    public static  function searchData($card_code=0,$staff_name=''){
-        $staff = Timekeeping::find()->where(['and', ['card_code' => $card_code]])
-            ->orFilterWhere(['like', 'staff_name', $staff_name])
-            ->all();
+    public static  function searchData($card_code ='',$staff_name='',$company_id=0,$department_id=0,$from='',$to='',$status,$deleted= 0){
+        $staff = Timekeeping::find()->where(['timekeeping.company_id' => $company_id,'timekeeping.deleted'=>$deleted]);
+        if($department_id)
+           $staff->andWhere(['=','timekeeping.department_id',(int)$department_id]);
+
+        if($from){
+            $staff->andWhere(['>=', 'timekeeping.created_time', $from]);
+        }
+        if($to){
+            $staff->andWhere(['<=', 'timekeeping.created_time', $to]);
+        }
+        $staff->with('staff');
+        $staff->with('tat');
+        $staff->with('tat');
+        $staff = $staff->all();
         $rt = array();
         foreach ($staff as $value)
         {
-            $value->image = \common\components\Common::getImage($value,'staff');
+            $value->image = \common\components\Common::getImage($value,'timekeeping');
+			
+            if($value->staff){
+				$image_base = \common\components\Common::getImage($value->staff,'staff');
+                $value->image_base = $image_base;
+                $department = \common\models\Department::findOne(['id'=>$value->staff->department_id]);
+				$value->department_name = isset($department)? $department->name:'';
+				$value->department_id = isset($department)? $department->id:'';
+                $value->staff_name = $value->staff->name;
+                $value->staff_phone = isset($value->staff)? $value->staff->phone:'';
+            }
+
+            $value->tat_name = isset($value->tat)? $value->tat->name:'';
             $rt[] = $value;
         }
         return $rt;

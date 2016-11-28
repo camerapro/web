@@ -5,12 +5,12 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\DepartmentFrontend;
+use frontend\models\ClassFrontend;
 
 /**
- * DepartmentSearch represents the model behind the search form about `frontend\models\departmentFrontend`.
+ * ClassSearch represents the model behind the search form about `frontend\models\ClassFrontend`.
  */
-class DepartmentSearch extends DepartmentFrontend
+class ClassSearch extends ClassFrontend
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class DepartmentSearch extends DepartmentFrontend
      */
     public function search($params)
     {
-        $query = departmentFrontend::find();
+        $query = ClassFrontend::find();
 
         // add conditions that should always apply here
 

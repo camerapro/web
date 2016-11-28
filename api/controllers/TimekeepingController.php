@@ -7,6 +7,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\Timekeeping;
+use common\components\KLogger;
 
 /**
  * Site controller
@@ -16,9 +17,10 @@ class TimekeepingController extends Controller
     public $enableCsrfValidation = false;
     private $api_key = '43S4342@342Asfd';
     public $layout = false;
-
+    public $logger;
     public function init()
     {
+		 $this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
 
@@ -35,6 +37,8 @@ class TimekeepingController extends Controller
 
     public function actionAdd()
     {
+		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode(Yii::$app->request->post()));
+		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
@@ -43,17 +47,24 @@ class TimekeepingController extends Controller
             $params = [
                 'card_code' => isset($data['card_code']) ? $data['card_code'] : '',
                 'staff_id' => isset($data['staff_id']) ? $data['staff_id'] : '',
-                'tap_id' => isset($data['tap_id']) ? $data['tap_id'] : '',
-                'image' => isset($data['image']) ? $data['image'] : '',
+                'tat_id' => isset($data['tat_id']) ? $data['tat_id'] : '',
+                'image' => '',
                 'type' => isset($data['type']) ? $data['type'] : '',
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
+                'company_id' => isset($data['company_id']) ? $data['company_id'] : '',
+                'department_id' => isset($data['department_id']) ? $data['department_id'] : '',
                 'description' => isset($data['description']) ? $data['description'] : '',
                 'created_time' => isset($data['created_time']) ? $data['created_time'] : date('Y-m-d H:i:s'),
             ];
-
+			$image = isset($data['image']) ? $data['image'] : '';
             $save = Timekeeping::add($params);
-
             if ($save) {
+                if ($image) {
+                    //upload image
+                    $path = Yii::$app->params['images']['timekeeping']['path'] . '/' . $save->company_id;
+                    $option = ['width' => 120, 'height' => 120];
+                    \common\components\Common::uploadFile($image, $path, $save, '.png', $option, true);
+                }
                 $return = array(
                     'error_code' => 0,
                     'message' => 'Success'
@@ -80,15 +91,27 @@ class TimekeepingController extends Controller
      */
     public function actionGet()
     {
+		$this->logger->LogInfo("actionGet timekeeping data  :" .json_encode(Yii::$app->request->get()));
+		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
         $staff = [];
         $message = '';
-        $card_code = isset(Yii::$app->request->get()['card_code']) ? Yii::$app->request->get()['card_code'] : '';
-        $staff_name = isset(Yii::$app->request->get()['staff_name']) ? Yii::$app->request->get()['staff_name'] : '';
-        $staff = Timekeeping::searchData($card_code,$staff_name);
-        return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+        $card_code = isset(Yii::$app->request->get()['codecard']) ? Yii::$app->request->get()['codecard'] : '';
+        $staff_name = isset(Yii::$app->request->get()['name']) ? Yii::$app->request->get()['name'] : '';
+        $to = isset(Yii::$app->request->get()['to']) ? Yii::$app->request->get()['to'] : '';
+        $deleted = isset(Yii::$app->request->get()['deleted']) ? Yii::$app->request->get()['deleted'] : 0;
+        $from = isset(Yii::$app->request->get()['from']) ? Yii::$app->request->get()['from'] : '';
+        if(empty($from) || empty($to))
+            return ['error_code' => 403, 'message' => 'From and To are not null'];
+        $department_id = isset(Yii::$app->request->get()['department_id']) ? Yii::$app->request->get()['department_id'] : '';
+        $company_id = isset(Yii::$app->request->get()['company_id']) ? Yii::$app->request->get()['company_id'] : '';
+        $staff = Timekeeping::searchData($card_code,$staff_name,$company_id,$department_id,$from,$to,0,$deleted);
+        if($staff)
+            return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
+        else
+            return ['error_code' => 401, 'message' => 'Not found'];
 
     }
     /**
@@ -102,29 +125,6 @@ class TimekeepingController extends Controller
         if ($data = Yii::$app->request->post()) {
             return ['error_code' => 0, 'message' => 'Success'];
         }
-        exit();
-
-    }
-    /**
-     * @return array
-     */
-    public function actionDelete()
-    {
-        if (Yii::$app->user->isGuest) {
-            return ['error_code' => 1, 'message' => 'Not login'];
-        }
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        if ($data = Yii::$app->request->post()) {
-            $this->findModel($id)->delete();
-            return ['error_code' => 0, 'message' => 'Success'];
-        }
-        else{
-            return array(
-                'error_code'=>1,
-                'message'=>'Method not supported!'
-            );
-        }
-        return ['error_code' => 1, 'message' => 'Fail'];
         exit();
 
     }
@@ -146,28 +146,76 @@ class TimekeepingController extends Controller
     /**
      * @return array
      */
-    public function actionGet22()
+    public function actionAutoconfirm()
     {
-        if (Yii::$app->user->isGuest) {
-            return ['error_code' => 1, 'message' => 'Not login'];
-        }
-        $staff = [];
-        $message = '';
-        $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
-        $user_id = isset(Yii::$app->request->get()['user_id']) ? Yii::$app->request->get()['user_id'] : '';
-        if (!empty($id)) {
-            $staff = Staff::findOne(['id' => $id]);
-            if ($staff)
-                $staff->image = 'http://api.thietbianninh.com/kute.jpg';
-            return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
-        } elseif (!empty($user_id)) {
-            $staff = Staff::getStaffByUserId(['user_id' => $user_id]);
-            if (!empty($staff)) {
-                return ['error_code' => 0, 'message' => 'Success', 'data' => $staff];
-            }
-
-        }
-        return ['error_code' => 401, 'message' => 'Data empty', 'data' => []];
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			if($status ==0)
+				$status =3;
+			Timekeeping::updateAll([
+				'status' =>$status,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();
+		
+		
+		
+    }
+	public function actionManualconfirm()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status = Yii::$app->request->post()['status'];
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			if($status ==0)
+				$status =3;
+			Timekeeping::updateAll([
+				'status' =>$status,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
+    }
+	public function actionDelete()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$deleted =1;
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			Timekeeping::updateAll([
+				'deleted' =>$deleted,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
+    }
+	public function actionRestore()
+    {
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$deleted = 0;
+			$ids =explode(",",$ids); 
+			$condition =['in', 'id', $ids];
+			Timekeeping::updateAll([
+				'deleted' =>$deleted,
+			], $condition);
+			 return ['error' => 0, 'message' => 'Success'];
+			exit();
+		}
+		return ['error_code' => 1, 'message' => 'Method not supported'];
+		exit();	
     }
 
 

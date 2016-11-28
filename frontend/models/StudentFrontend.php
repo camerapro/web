@@ -1,7 +1,8 @@
 <?php
 
-namespace common\models\_base;
+namespace frontend\models;
 
+use common\models\Student;
 use Yii;
 
 /**
@@ -10,10 +11,8 @@ use Yii;
  * @property integer $id
  * @property string $name
  * @property string $phone
- * @property string $att_code
  * @property string $card_code
  * @property integer $card_id
- * @property string $email
  * @property integer $class_id
  * @property string $class_name
  * @property string $image
@@ -25,32 +24,8 @@ use Yii;
  * @property string $description
  * @property integer $company_id
  */
-class StudentBase extends \yii\db\ActiveRecord
+class StudentFrontend extends Student
 {
-    /**
-     * @inheritdoc
-     */
-    public static function tableName()
-    {
-        return 'student';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['name'], 'required'],
-            [['card_id', 'class_id', 'created_by', 'updated_by', 'status', 'company_id'], 'integer'],
-            [['image'], 'string'],
-            [['created_time', 'updated_time'], 'safe'],
-            [['name', 'class_name'], 'string', 'max' => 255],
-            [['phone'], 'string', 'max' => 50],
-            [['att_code', 'card_code', 'email'], 'string', 'max' => 100],
-            [['description'], 'string', 'max' => 500],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -61,10 +36,8 @@ class StudentBase extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'phone' => 'Phone',
-            'att_code' => 'Att Code',
             'card_code' => 'Card Code',
             'card_id' => 'Card ID',
-            'email' => 'Email',
             'class_id' => 'Class ID',
             'class_name' => 'Class Name',
             'image' => 'Image',

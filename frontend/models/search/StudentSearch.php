@@ -5,12 +5,12 @@ namespace frontend\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use frontend\models\DepartmentFrontend;
+use frontend\models\StudentFrontend;
 
 /**
- * DepartmentSearch represents the model behind the search form about `frontend\models\departmentFrontend`.
+ * StudentSearch represents the model behind the search form about `frontend\models\StudentFrontend`.
  */
-class DepartmentSearch extends DepartmentFrontend
+class StudentSearch extends StudentFrontend
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class DepartmentSearch extends DepartmentFrontend
     public function rules()
     {
         return [
-            [['id', 'company_id', 'parent_id', 'status'], 'integer'],
-            [['name', 'created_time', 'updated_time', 'description'], 'safe'],
+            [['id', 'card_id', 'class_id', 'created_by', 'updated_by', 'status', 'company_id'], 'integer'],
+            [['name', 'phone', 'card_code', 'class_name', 'image', 'created_time', 'updated_time', 'description'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class DepartmentSearch extends DepartmentFrontend
      */
     public function search($params)
     {
-        $query = departmentFrontend::find();
+        $query = StudentFrontend::find();
 
         // add conditions that should always apply here
 
@@ -60,14 +60,21 @@ class DepartmentSearch extends DepartmentFrontend
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'company_id' => $this->company_id,
-            'parent_id' => $this->parent_id,
-            'status' => $this->status,
+            'card_id' => $this->card_id,
+            'class_id' => $this->class_id,
             'created_time' => $this->created_time,
+            'created_by' => $this->created_by,
             'updated_time' => $this->updated_time,
+            'updated_by' => $this->updated_by,
+            'status' => $this->status,
+            'company_id' => $this->company_id,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'phone', $this->phone])
+            ->andFilterWhere(['like', 'card_code', $this->card_code])
+            ->andFilterWhere(['like', 'class_name', $this->class_name])
+            ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

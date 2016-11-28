@@ -30,8 +30,7 @@ class Department extends DepartmentBase
 				->all();
 			}
 			return null;
-				
-				
+
 		}
 		if($id){
 			return self::find()
@@ -41,5 +40,10 @@ class Department extends DepartmentBase
 		return self::find()
 				->where(['status'=>1])->asArray()
 				->all();
+    }
+	public static function getDepartmentByLocalId($local_id)
+    {
+       return self::find()->where(['local_department_id'=>$local_id])
+            ->one();
     }
 }

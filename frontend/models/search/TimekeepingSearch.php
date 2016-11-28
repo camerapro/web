@@ -62,17 +62,23 @@ class TimekeepingSearch extends TimekeepingFrontend
             'id' => $this->id,
             'timekeeping.status' => $this->status,
             'tat_id' => $this->tat_id,
-            'created_time' => $this->created_time,
             'staff_id' => $this->staff_id,
             'deleted' => $this->deleted,
         ]);
-
+		
         $query->andFilterWhere(['like', 'card_code', $this->card_code])
             ->andFilterWhere(['like', 'staff_name', $this->staff_name])
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'deleted', $this->deleted])
             ->andFilterWhere(['like', 'image', $this->image]);
+		
 		$dataProvider->query->where(['timekeeping.deleted'=>$deleted]);
+		if($params['from_time']){
+			$dataProvider->query->andWhere(['>=', 'timekeeping.created_time', $params['from_time']]);
+		}
+		if($params['to_time']){
+			 $dataProvider->query->andWhere(['<=', 'timekeeping.created_time', $params['to_time']]);
+		}
         return $dataProvider;
     }
 }

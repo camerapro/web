@@ -41,7 +41,7 @@ class StaffController extends Controller
     {
         $searchModel = new StaffSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if (Yii::$app->user->identity->level == 3){
+        if (Yii::$app->user->identity->level < 3){
             $dataProvider->query->andWhere(['company_id'=>Yii::$app->user->identity->company_id]);
         }
         return $this->render('index', [
@@ -127,7 +127,7 @@ class StaffController extends Controller
             $model->phone =$data['phone'];
             $model->card_code =$data['card_code'];
             $model->card_id =$data['card_id'];
-            $model->department =$data['department'];
+            $model->department_id =$data['department_id'];
             $model->created_time = isset($data['created_time'])?$data['created_time'] : date('Y-m-d H:i:s');
             $model->status = isset($data['status'])?$data['status']:1;
             $model->created_by = Yii::$app->user->identity->id;

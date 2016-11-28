@@ -38,8 +38,10 @@ class TimekeepingController extends Controller
         $searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=0;
+		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?$params['TimekeepingSearch']['from_time']:'';
+		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?$params['TimekeepingSearch']['to_time']:'';
+		$params['deleted']=0;
         $dataProvider = $searchModel->search($params);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -54,6 +56,8 @@ class TimekeepingController extends Controller
         $searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=1;
+		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?$params['TimekeepingSearch']['from_time']:'';
+		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?$params['TimekeepingSearch']['to_time']:'';
         $dataProvider = $searchModel->search($params);
 
         return $this->render('restore', [

@@ -52,9 +52,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
             ['class' => 'yii\grid\CheckboxColumn'],
-
-            //'id',
-            'staff_name',
+			[
+                'header' => 'Tên nhân viên',
+                'format' => 'raw',
+                'options' => ['width' => '20px'],
+                'headerOptions' => ['style'=>'text-align: center;'],
+                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+                'value' => function($data) {
+	
+                    return isset($data->staff) ?$data->staff->name : null;
+   
+                }
+             ],
 			 [
                 'header' => 'Điện thoại',
                 'format' => 'raw',
@@ -62,8 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-					
-                    return "09047933668";
+	
+                    return isset($data->staff) ?$data->staff->phone : null;
+   
                 }
             ],
 			
@@ -120,9 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?
-                       
-                        Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                    return ($data->id) ?Html::img(\common\components\Common::getImage($data,'timekeeping'),['width'=>'100%']) : null;
                 }
             ],
 			[
@@ -132,9 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?
-                       
-                        Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                    return ($data->staff) ?Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
                 }
             ],
 			
@@ -145,6 +151,26 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 	<?php \yii\widgets\Pjax::end(); ?>
 </div>
+<script>
+    $('#from_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+	$('#to_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+</script>
 <script>
     $('.btn-edit-manual-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');

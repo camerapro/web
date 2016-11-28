@@ -50,4 +50,32 @@ class Staff extends StaffBase
         }
         return $rt;
     }
+    public static  function getStaff($userId=0,$company_id =0){
+        $staff = self::find()->where(['created_by'=>$userId]);
+        if($company_id)
+        {
+            $return = self::find()->where(['company_id'=>$company_id])->all();
+        }
+        if($userId){
+            $return = self::find()->where(['company_id'=>$company_id])->all();
+        }
+        $rt = array();
+        foreach ($return as $value)
+        {
+
+            $value->image = \common\components\Common::getImage($value,'staff');
+            $rt[] = $value;
+        }
+        return $rt;
+    }
+    public static function getStaffById($staff_id)
+    {
+        $return = self::find()->where(['id'=>$staff_id])
+            ->with('department')
+            ->one();
+    }
+    public function getDepartment()
+    {
+        return $this->hasOne(Department::className(), ['id' => 'department_id']);
+    }
 }

@@ -22,7 +22,16 @@ class Common
     public static function getImage($data,$type ='staff')
     {
         $company_id = isset($data->company_id)?$data->company_id :'';
-        return Yii::$app->params['images'][$type]['url'].'/'.  $company_id.'/'.$data->id.'.png';
+        $path  = Yii::$app->params['images'][$type]['url'];
+       
+        if(isset($data->id) && isset($data->company_id))
+		{
+			 //var_dump($data->id,$data->company_id);
+			 $time = isset($data->updated_time)?$data->updated_time:'0';
+			 return $path.'/'.  $company_id.'/'.$data->id.'.png?v='.$time;
+		}
+        return 'http://static.thietbianninh.com/staff/thumb.png';
+       
     }
     public static function uploadFile($file, $target, $object =null, $extension ='.png', $options = array(), $endcode = false)
     {

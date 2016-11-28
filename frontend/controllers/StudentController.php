@@ -3,16 +3,16 @@
 namespace frontend\controllers;
 
 use Yii;
-use frontend\models\DepartmentFrontend;
-use frontend\models\search\DepartmentSearch;
+use frontend\models\StudentFrontend;
+use frontend\models\search\StudentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * DdepartmentController implements the CRUD actions for departmentFrontend model.
+ * StudentController implements the CRUD actions for StudentFrontend model.
  */
-class DepartmentController extends Controller
+class StudentController extends Controller
 {
     /**
      * @inheritdoc
@@ -30,12 +30,12 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Lists all departmentFrontend models.
+     * Lists all StudentFrontend models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new DepartmentSearch();
+        $searchModel = new StudentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -43,20 +43,10 @@ class DepartmentController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionManager()
-    {
-        $searchModel = new DepartmentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('manager', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
     /**
-     * Displays a single departmentFrontend model.
-     * @param string $id
+     * Displays a single StudentFrontend model.
+     * @param integer $id
      * @return mixed
      */
     public function actionView($id)
@@ -64,6 +54,24 @@ class DepartmentController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Creates a new StudentFrontend model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new StudentFrontend();
+        $ajax = $this->verifyAjax();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
     private function verifyAjax(){
         if(Yii::$app->request->isAjax){
@@ -74,35 +82,15 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Creates a new departmentFrontend model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $ajax = $this->verifyAjax();
-        $model = new DepartmentFrontend();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing departmentFrontend model.
+     * Updates an existing StudentFrontend model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-        $ajax = $this->verifyAjax();
         $model = $this->findModel($id);
-
+        $ajax = $this->verifyAjax();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -113,9 +101,9 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Deletes an existing departmentFrontend model.
+     * Deletes an existing StudentFrontend model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
+     * @param integer $id
      * @return mixed
      */
     public function actionDelete($id)
@@ -126,15 +114,15 @@ class DepartmentController extends Controller
     }
 
     /**
-     * Finds the departmentFrontend model based on its primary key value.
+     * Finds the StudentFrontend model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return departmentFrontend the loaded model
+     * @param integer $id
+     * @return StudentFrontend the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = DepartmentFrontend::findOne($id)) !== null) {
+        if (($model = StudentFrontend::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

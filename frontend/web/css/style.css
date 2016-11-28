@@ -415,3 +415,37 @@ body{
     overflow: hidden;
     padding: 10px;
 }
+.dep-left {
+    width: 250px;
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    /* border: rebeccapurple; */
+    border-right: none;
+    line-height: 34px;
+    padding-left: 10px;
+}
+.dep-left li{
+     line-height: 15px;
+    list-style: none;
+
+ }
+.dep-left ul li .child:hover{
+    font-style: italic;
+    cursor: pointer;
+
+}
+.dep-left ul{
+    padding-left: 10px;
+
+}
+.dep-right{
+    float: left;
+    width: 62%;
+}
+.dep-table{
+    width: 1000px;
+}
+.clear-both{
+    clear: both;
+}
