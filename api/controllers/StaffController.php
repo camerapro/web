@@ -58,7 +58,8 @@ class StaffController extends Controller
 				$department_id = $department->id;
             $staff->department_id = $department_id;
 			
-            $staff->image = isset($data['image']) ? $data['image'] : '';
+            $image = isset($data['image']) ? $data['image'] : '';
+            $staff->image = '';
             $staff->created_by = isset($data['created_by']) ? $data['created_by'] : Yii::$app->user->identity->id;
             $staff->company_id = isset($data['company_id']) ? $data['company_id'] : '';
             $staff->description = isset($data['description']) ? $data['description'] : '';
@@ -66,11 +67,11 @@ class StaffController extends Controller
             $staff->order = isset($data['order']) ? $data['order'] : '';
             $save = $staff->save(false);
             if ($save) {
-                if ($staff->image) {
+                if ($image) {
                     //upload image
                     $path = Yii::$app->params['images']['staff']['path'] . '/' . $staff->company_id;
                     $option = ['width' => 120, 'height' => 120];
-                    \common\components\Common::uploadFile($staff->image, $path, $staff, '.png', $option, true);
+                    \common\components\Common::uploadFile($image, $path, $staff, '.png', $option, true);
                 }
                 $return = array(
                     'error_code' => 0,
