@@ -23,15 +23,26 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="80"></span>
 		</div>
+   	
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
 		
         'columns' => [
-             ['class' => 'yii\grid\CheckboxColumn'],
-
-            //'id',
-            'staff_name',
+            //['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn'],
+			[
+                'header' => 'Tên nhân viên',
+                'format' => 'raw',
+                'options' => ['width' => '20px'],
+                'headerOptions' => ['style'=>'text-align: center;'],
+                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+                'value' => function($data) {
+	
+                    return isset($data->staff) ?$data->staff->name : null;
+   
+                }
+             ],
 			 [
                 'header' => 'Điện thoại',
                 'format' => 'raw',
@@ -39,8 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-					
-                    return "09047933668";
+	
+                    return isset($data->staff) ?$data->staff->phone : null;
+   
                 }
             ],
 			
@@ -55,15 +67,18 @@ $this->params['breadcrumbs'][] = $this->title;
                       $data->tat->name:null; 
                 }
             ],
-            [
-                'header' => 'Phòng',
+            ['attribute' => 'department_id',
                 'format' => 'raw',
-                'options' => ['width' => '100px'],
-                'headerOptions' => ['style'=>'text-align: center;'],
-                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
-                'value' => function($data) {
-                    return ($data->staff) ?$data->staff->{'department_id'} : null;
-                }
+                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
+                'options' => ['width' => '90px'],
+                'value' => function ($data) {
+                    $dep = \frontend\models\DepartmentFrontend::find()->where(['id' => $data->staff->department_id])->one();
+                    if (!empty($dep)) {
+                        return $dep->name;
+                    }
+                },
+                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
             ],
 			 'created_time',
            
@@ -85,6 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 			
+			
             // 'image:ntext',
 			[
                 'header' => 'Ảnh camera',
@@ -93,9 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?
-                       
-                        Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                    return ($data->id) ?Html::img(\common\components\Common::getImage($data,'timekeeping'),['width'=>'100%']) : null;
                 }
             ],
 			[
@@ -105,12 +119,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return ($data->staff) ?
-                       
-                        Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
+                    return ($data->staff) ?Html::img(\common\components\Common::getImage($data->staff,'staff'),['width'=>'100%', 'title' => $data->staff->{'name'}]) : null;
                 }
             ],
 			
+            //'staff_id',
             //'staff_id',
 			
  
