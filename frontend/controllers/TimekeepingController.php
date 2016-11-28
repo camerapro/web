@@ -13,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * TimekeepingController implements the CRUD actions for TimekeepingFrontend model.
  */
-class TimekeepingController extends FrontendController 
+class TimekeepingController extends FrontendController
 {
     /**
      * @inheritdoc
