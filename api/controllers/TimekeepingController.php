@@ -48,7 +48,7 @@ class TimekeepingController extends Controller
                 'card_code' => isset($data['card_code']) ? $data['card_code'] : '',
                 'staff_id' => isset($data['staff_id']) ? $data['staff_id'] : '',
                 'tat_id' => isset($data['tat_id']) ? $data['tat_id'] : '',
-                'image' => isset($data['image']) ? $data['image'] : '',
+                'image' => '',
                 'type' => isset($data['type']) ? $data['type'] : '',
                 'created_by' => isset($data['user_id']) ? $data['user_id'] : Yii::$app->user->identity->id,
                 'company_id' => isset($data['company_id']) ? $data['company_id'] : '',
@@ -56,15 +56,14 @@ class TimekeepingController extends Controller
                 'description' => isset($data['description']) ? $data['description'] : '',
                 'created_time' => isset($data['created_time']) ? $data['created_time'] : date('Y-m-d H:i:s'),
             ];
-
+			$image = isset($data['image']) ? $data['image'] : '';
             $save = Timekeeping::add($params);
-
             if ($save) {
-                if ($save->image) {
+                if ($image) {
                     //upload image
                     $path = Yii::$app->params['images']['timekeeping']['path'] . '/' . $save->company_id;
                     $option = ['width' => 120, 'height' => 120];
-                    \common\components\Common::uploadFile($save->image, $path, $save, '.png', $option, true);
+                    \common\components\Common::uploadFile($image, $path, $save, '.png', $option, true);
                 }
                 $return = array(
                     'error_code' => 0,
