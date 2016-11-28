@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\_base\PermissionBase;
 use common\models\_base\PermissionGroupBase;
+use frontend\models\FrontendMenu;
 use Yii;
 
 
@@ -19,9 +20,31 @@ class Permission extends PermissionBase
     }
 
     public static  function getAll(){
+        /*$data = [];
+        $list = self::find()
+            ->where(['=', 'parent_id', 0])
+            ->asArray()
+            ->all();
+        foreach ($list as $item){
+            $data[$item['id']]  = $item;
+            $data[$item['id']]['child'] =  self::getChildPer($item['id']);
+        }
+        return $data;*/
+        $list_perent_id = FrontendMenu::find()->where(['=', 'parrent_id', 0])
+            ->asArray()->all();
+            foreach ($list_perent_id as $item){
+                $data[$item['id']]  = $item;
+                $data[$item['id']]['list_ids'] =  self::getAllByParent($item['id']);
+        }
+
+        return $data;
+    }
+
+    public static  function getAllByParent($id){
         $data = [];
         $list = self::find()
             ->where(['=', 'parent_id', 0])
+            ->where(['=', 'menu_parent_id', $id])
             ->asArray()
             ->all();
         foreach ($list as $item){
@@ -31,11 +54,37 @@ class Permission extends PermissionBase
         return $data;
     }
 
+
     public static  function getAllByIds($list_permission_ids){
+       /* $data = [];
+        $list = self::find()
+            ->where(['=', 'parent_id', 0])
+            ->andWhere('id IN('.$list_permission_ids.')')
+            ->asArray()
+            ->all();
+        foreach ($list as $item){
+            $data[$item['id']]  = $item;
+            $data[$item['id']]['child'] =  self::getChildPerByIds($item['id'], $list_permission_ids);
+        }
+        return $data;*/
+
+
+        $list_perent_id = FrontendMenu::find()->where(['=', 'parrent_id', 0])
+            ->asArray()->all();
+        foreach ($list_perent_id as $item){
+            $data[$item['id']]  = $item;
+            $data[$item['id']]['list_ids'] =  self::getAllByParentIds($item['id'], $list_permission_ids);
+        }
+
+        return $data;
+
+
+    }
+    public static  function getAllByParentIds($parent_idm, $list_permission_ids){
         $data = [];
         $list = self::find()
             ->where(['=', 'parent_id', 0])
-//            ->where(['IN','id',$list_permission_ids])
+            ->where(['=', 'menu_parent_id', $parent_idm])
             ->andWhere('id IN('.$list_permission_ids.')')
             ->asArray()
             ->all();

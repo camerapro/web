@@ -193,8 +193,7 @@ body{
     display: block;
 }
 .permission-group-form {
-    margin: 0 25%;
-    width: 50%;
+    width: 100%;
 }
 #permissiongroup-name{
     width: 80%;

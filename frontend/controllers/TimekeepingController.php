@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\FrontendController;
 use Yii;
 use frontend\models\TimekeepingFrontend;
 use frontend\models\search\TimekeepingSearch;
@@ -12,7 +13,7 @@ use yii\filters\VerbFilter;
 /**
  * TimekeepingController implements the CRUD actions for TimekeepingFrontend model.
  */
-class TimekeepingController extends Controller
+class TimekeepingController extends FrontendController 
 {
     /**
      * @inheritdoc
