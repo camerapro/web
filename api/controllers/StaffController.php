@@ -52,7 +52,12 @@ class StaffController extends Controller
             $staff->card_code = isset($data['card_code']) ? $data['card_code'] : '';
             $staff->card_id = isset($data['card_id']) ? $data['card_id'] : '';
             $staff->att_code = isset($data['att_code']) ? $data['att_code'] : '';
-            $staff->department_id = isset($data['department_id']) ? $data['department_id'] : '';
+			$department_id = isset($data['department_id']) ? $data['department_id'] : 0;
+			$department = \common\models\Department::getDepartmentByLocalId($department_id);
+			if($department)
+				$department_id = $department->id;
+            $staff->department_id = $department_id;
+			
             $staff->image = isset($data['image']) ? $data['image'] : '';
             $staff->created_by = isset($data['created_by']) ? $data['created_by'] : Yii::$app->user->identity->id;
             $staff->company_id = isset($data['company_id']) ? $data['company_id'] : '';

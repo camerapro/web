@@ -41,4 +41,9 @@ class Department extends DepartmentBase
 				->where(['status'=>1])->asArray()
 				->all();
     }
+	public static function getDepartmentByLocalId($local_id)
+    {
+       return self::find()->where(['local_department_id'=>$local_id])
+            ->one();
+    }
 }
