@@ -41,7 +41,7 @@ class StaffController extends Controller
     {
         $searchModel = new StaffSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        if (Yii::$app->user->identity->level == 3){
+        if (Yii::$app->user->identity->level < 3){
             $dataProvider->query->andWhere(['company_id'=>Yii::$app->user->identity->company_id]);
         }
         return $this->render('index', [
