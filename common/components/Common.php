@@ -27,7 +27,8 @@ class Common
         if(isset($data->id) && isset($data->company_id))
 		{
 			 //var_dump($data->id,$data->company_id);
-			 return $path.'/'.  $company_id.'/'.$data->id.'.png';
+			 $time = isset($data->updated_time)?$data->updated_time:'0';
+			 return $path.'/'.  $company_id.'/'.$data->id.'.png?v='.$time;
 		}
         return 'http://static.thietbianninh.com/staff/thumb.png';
        
