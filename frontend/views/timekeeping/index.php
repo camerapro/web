@@ -56,7 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
 		var from_time = $("#from_time").val();
 		var to_time = $("#to_time").val();
 		var url = 'http://cam.thietbianninh.com/timekeeping/export?from_time='+from_time+'&to_time='+to_time;
-		alert(url);
 		var win = window.open(url, '_blank');
         return false;
 
