@@ -60,7 +60,7 @@ use yii\bootstrap\ActiveForm;
     <p>Thông tin quản trị:</p>
     <div class="pull-center" >
         <?php
-        if (Yii::$app->user->identity->level < 3){
+        if (Yii::$app->user->identity->level <= 3){
             $company =  \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1, 'id'=>Yii::$app->user->identity->company_id]), 'id', 'name');
         }else{
             $company =  \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name');
