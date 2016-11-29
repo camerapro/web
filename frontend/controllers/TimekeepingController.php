@@ -167,6 +167,8 @@ class TimekeepingController extends FrontendController
 					'created_at' => 'Test',
 				],
 		]);
+		echo json_encode(['error'=>0,'message'=>'Xử lý thành công']);
+		exit();
     }
  /**
      * Lists all TimekeepingFrontend models.
