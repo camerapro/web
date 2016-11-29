@@ -59,8 +59,8 @@ class TimekeepingController extends FrontendController
 		$searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=0;
-		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['from_time'])):'';
-		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['to_time'])):'';
+		$params['from_time']= isset($params['from_time'])?date("Y-m-d H:i",strtotime($params['from_time'])):'';
+		$params['to_time']= isset($params['to_time'])?date("Y-m-d H:i",strtotime($params['to_time'])):'';
 		$params['deleted']=0;
         $dataProvider = $searchModel->search($params);
 		$model = $dataProvider->getModels();
