@@ -50,7 +50,7 @@ use yii\bootstrap\ActiveForm;
     <div class="pull-center popup-img" style="border: 1px solid #dddddd;padding: 10px;border-radius: 10px;min-height:300px">
 		<div class="col-xs-8" >
 		Ảnh camera<br>
-               <img width="200"src ="<?php echo $model->image;?>">
+               <img  style="height: 260px; width: 100%" src ="<?php echo $model->image;?>">
             </div>
             <div class="col-xs-4">
 			Ảnh đăng ký<br>

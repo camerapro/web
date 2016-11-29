@@ -59,9 +59,14 @@ use yii\bootstrap\ActiveForm;
     <div class="clearfix" style="padding-top: 10px;"></div>
     <p>Thông tin quản trị:</p>
     <div class="pull-center" >
-        <?= $form->field($model, 'company_id')->dropDownList(
-            \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name')
-        ) ?>
+        <?php
+        if (Yii::$app->user->identity->level <= 3){
+            $company =  \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1, 'id'=>Yii::$app->user->identity->company_id]), 'id', 'name');
+        }else{
+            $company =  \yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name');
+        }
+        ?>
+        <?= $form->field($model, 'company_id')->dropDownList( $company ) ?>
         <div class="form-group pull-right">
             <?= Html::submitButton($model->isNewRecord ? 'Thêm ' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success text-right' : 'btn btn-primary']) ?>
         </div>

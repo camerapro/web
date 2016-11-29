@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\FrontendController;
 use Yii;
 use frontend\models\StaffFrontend;
 use frontend\models\search\StaffSearch;
@@ -13,7 +14,7 @@ use yii\web\UploadedFile;
 /**
  * StaffController implements the CRUD actions for StaffFrontend model.
  */
-class StaffController extends Controller
+class StaffController extends FrontendController
 {
     public $enableCsrfValidation = false;
 	
