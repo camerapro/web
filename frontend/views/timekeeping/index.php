@@ -55,22 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
         var ids = [];
 		var from_time = $("#from_time").val();
 		var to_time = $("#to_time").val();
-        $.ajax({
-            url: '/timekeeping/export',
-            type: "GET",
-            data: {
-                'ids':ids,'_csrf':YII_CSRF_TOKEN,from_time:from_time,to_time:to_time
-            } ,
-            success: function (response) {
-                data_res = JSON.parse(response);
-                if(data_res['error'] == 0){
-                    alert(data_res['message']);
-                    window.location.reload();
-                }else{
-                    alert(data_res['message']);
-                }
-            },
-        });
+		var win = window.open('http://cam.thietbianninh.com/timekeeping/export?from_time='+from_time+'&to_time='+to_time, '_blank');
+        return false;
 
     });
 	$('.btn-edit-manual-confirm').click(function(){
