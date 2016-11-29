@@ -38,6 +38,7 @@ class TimekeepingController extends FrontendController
     {
         $searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
+		
 		$params['deleted']=0;
 		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['from_time'])):'';
 		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['to_time'])):'';
@@ -47,6 +48,124 @@ class TimekeepingController extends FrontendController
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+	   /**
+     * Lists all TimekeepingFrontend models.
+     * @return mixed
+     */
+    public function actionExport()
+    {
+		$searchModel = new TimekeepingSearch();
+		$params = Yii::$app->request->queryParams;
+		$params['deleted']=0;
+		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['from_time'])):'';
+		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['to_time'])):'';
+		$params['deleted']=0;
+        $dataProvider = $searchModel->search($params);
+		$model = $dataProvider->getModels();
+        \moonland\phpexcel\Excel::export([
+			'models' => $model,
+			 'fileName' => 'Timekeeping_export_'.date("Y-m-d_His"), 
+			
+				'columns' => [
+						[
+							'attribute' => 'staff_name',
+							'header' => 'Tên nhân viên',
+							'format' => 'raw',
+							'headerOptions' => ['style'=>'text-align: center;width:150px'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+				
+								return isset($data->staff) ?$data->staff->name : null;
+			   
+							}
+						 ],
+						 [
+							 'attribute' => 'phone',
+							'header' => 'Điện thoại',
+							'format' => 'raw',
+							'options' => ['width' => '20px'],
+							'headerOptions' => ['style'=>'text-align: center;'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+				
+								return isset($data->staff) ?$data->staff->phone : null;
+			   
+							}
+						],
+
+						[
+							'attribute' => 'tat_name',
+							'header' => 'Máy chấm công',
+							'format' => 'raw',
+							'options' => ['width' => '120px'],
+							'headerOptions' => ['style'=>'text-align: center;'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+								return ($data) ?
+								  $data->tat->name:null; 
+							}
+						],
+						[
+							'attribute' => 'department_id',
+							'header' => 'Phòng ban',
+							'format' => 'raw',
+							'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
+							'options' => ['width' => '100px'],
+							'contentOptions'=>['style'=>'text-align: center;'],
+							'value' => function ($data) {
+								$dep = \frontend\models\DepartmentFrontend::find()->where(['id' => $data->staff->department_id])->one();
+								if (!empty($dep)) {
+									return $dep->name;
+								}
+							},
+							'headerOptions' => ['style' => 'text-align: center;'],
+							'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
+						],
+				  
+						[
+							'attribute' => 'created_time',
+							'header' => 'Thời gian',
+							'format' => 'raw',
+							'options' => ['width' => '120px'],
+							'headerOptions' => ['style'=>'text-align: center;'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+								return date("H:i:s d-m-Y",strtotime($data->created_time));
+							}
+						],   
+						[
+							'attribute' => 'type',
+							'header' => 'Kiểu',
+							'format' => 'raw',
+							'options' => ['width' => '120px'],
+							'headerOptions' => ['style'=>'text-align: center;'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+								return $data->type;
+							}
+						],            [
+							'header' => 'Trạng thái',
+							'format' => 'raw',
+							'options' => ['width' => '100px'],
+							'headerOptions' => ['style'=>'text-align: center;'],
+							'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+							'value' => function($data) {
+								if($data->status ==1 )
+								$status ='Đúng';
+								if($data->status ==0 )
+								$status ='Chưa xác nhận';
+								if($data->status ==3 )
+								$status ='Sai';
+								return $status;
+							}
+						],
+						
+				],
+				'headers' => [
+					'created_at' => 'Test',
+				],
+		]);
     }
  /**
      * Lists all TimekeepingFrontend models.
