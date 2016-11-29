@@ -39,8 +39,8 @@ class TimekeepingController extends FrontendController
         $searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=0;
-		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?$params['TimekeepingSearch']['from_time']:'';
-		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?$params['TimekeepingSearch']['to_time']:'';
+		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['from_time'])):'';
+		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['to_time'])):'';
 		$params['deleted']=0;
         $dataProvider = $searchModel->search($params);
         return $this->render('index', [
@@ -57,8 +57,9 @@ class TimekeepingController extends FrontendController
         $searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=1;
-		$params['from_time']= isset($params['TimekeepingSearch']['from_time'])?$params['TimekeepingSearch']['from_time']:'';
-		$params['to_time']= isset($params['TimekeepingSearch']['to_time'])?$params['TimekeepingSearch']['to_time']:'';
+        $params['from_time']= isset($params['TimekeepingSearch']['from_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['from_time'])):'';
+        $params['to_time']= isset($params['TimekeepingSearch']['to_time'])?date("Y-m-d H:i",strtotime($params['TimekeepingSearch']['to_time'])):'';
+
         $dataProvider = $searchModel->search($params);
 
         return $this->render('restore', [
@@ -162,7 +163,29 @@ class TimekeepingController extends FrontendController
             'model' => $this->findModel($id),
         ]);
     }
+    /**
+     * Displays a single TimekeepingFrontend model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPopupConfirm($id =0)
+    {
+        $this->layout =false;
+        $staff_timekeeping = \common\models\Timekeeping::searchData(0,0,0,0,0,0,0,0,$id);
+        $staff_model = [];
+        if($staff_timekeeping){
+            foreach ($staff_timekeeping as $staff)
+            {
+                $staff_model = $staff;
+                break;
+            }
+        }
 
+        return $this->render('popupconfirm', [
+            'model' =>$staff_model,
+        ]);
+
+    }
     /**
      * Creates a new TimekeepingFrontend model.
      * If creation is successful, the browser will be redirected to the 'view' page.

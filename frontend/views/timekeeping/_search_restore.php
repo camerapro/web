@@ -24,9 +24,9 @@ use yii\bootstrap\ActiveForm;
 		//echo $form->field($model, 'status')->dropDownList(['1' => 'Thành công', '0' => 'Thất bại', '' => 'Tất cả']);
     ?>
 
- 
-	<?php echo $form->field($model,'from_time')->textInput(['value' => '2016-11-10 00:00:00','id'=>'from_time'])->label('Từ ngày'); ?>
-	<?php echo $form->field($model,'to_time')->textInput(['value' => '2016-11-11 00:00:00','id'=>'to_time'])->label('Đến ngày'); ?>
+
+    <?php echo $form->field($model,'from_time')->textInput(['value' =>isset($_GET['TimekeepingSearch']['from_time'])?$_GET['TimekeepingSearch']['from_time']:date('00:00 d-m-Y'),'id'=>'from_time'])->label('Từ ngày'); ?>
+    <?php echo $form->field($model,'to_time')->textInput(['value' => isset($_GET['TimekeepingSearch']['to_time'])?$_GET['TimekeepingSearch']['to_time']:date('23:59 d-m-Y'),'id'=>'to_time'])->label('Đến ngày'); ?>
 
     <?php // echo $form->field($model, 'image') ?>
 
@@ -41,20 +41,23 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 <script>
+    moment.locale('vi');
     $('#from_time').daterangepicker({
         singleDatePicker: true,
+        timePicker: true,
         calender_style: "picker_4",
         locale: {
-            format: 'DD-MM-YYYY'
+            format: 'h:mm DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
     });
-	$('#to_time').daterangepicker({
+    $('#to_time').daterangepicker({
         singleDatePicker: true,
+        timePicker: true,
         calender_style: "picker_4",
         locale: {
-            format: 'DD-MM-YYYY'
+            format: 'h:mm DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);

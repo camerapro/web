@@ -448,3 +448,25 @@ body{
 .clear-both{
     clear: both;
 }
+.timekeeping-frontend-index table th {
+    font-size: 11px;
+    text-align: center;
+}
+.timekeeping-frontend-index .popup-form .control-label{
+	width: auto !important;
+	font-size:13px;
+}
+.timekeeping-frontend-index .popup-form label{
+	padding-right: 15px;
+    font-size: 13px;
+}
+.timekeeping-frontend-index .popup-form input{
+	width:auto !important;
+}
+.timekeeping-frontend-index .popup-form .col-sm-5{
+	width: 118px;
+}
+.popup-img img{
+	max-height: 260px;
+}
+
