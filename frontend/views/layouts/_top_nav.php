@@ -58,11 +58,11 @@ use yii\helpers\Url;
                         $class = 'hidden';
                         if(isset($child['controller']) && isset($child['action'])){
                             $link = \yii\helpers\Url::base() . '/'. $child['controller'] . '/'. $child['action'];
-                            $checkMenuShow = \frontend\models\Permission::checkShowMenu($user_id = Yii::$app->user->identity->id, $child['controller'], $child['action']);
+                            $checkMenuShow = \frontend\models\Permission::checkShowMenu($user_id = Yii::$app->user->identity->id, $child['controller'], $child['action'], $child['params']);
                             if($checkMenuShow){
                                 $class = '';
                             }
-                            if(isset($child['params'])) $link .=   '?' .  $child['params'];
+                            if(!empty($child['params'])) $link .=   '?' .  $child['params'];
                         }
                         if(Yii::$app->user->identity->level == 4){
                             $class = '';
