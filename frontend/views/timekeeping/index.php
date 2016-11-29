@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <script>
+	
     $('.btn-edit-manual-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');
 		if(!check){
