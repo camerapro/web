@@ -37,7 +37,11 @@
         </div>
 
         <div class="cam_setup boder_1 pd5">
-            <input id="fc_create" data-toggle="modal" data-target="#CalenderModalNew" value="Thêm mới" type="button">
+            <?php
+            $checkMenuShow = \frontend\models\Permission::checkShowMenu($user_id = Yii::$app->user->identity->id, 'camera', 'create');
+            if($checkMenuShow): ?>
+                <input id="fc_create" data-toggle="modal" data-target="#CalenderModalNew" value="Thêm mới" type="button">
+            <?php endif; ?>
             <input data-toggle="modal" data-target="#grand_cam" value="Gán cam" type="button"
                    onclick="window.location='<?= \yii\helpers\Url::base() ?>/user/grand';">
         </div>
