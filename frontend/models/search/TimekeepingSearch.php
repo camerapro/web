@@ -79,6 +79,11 @@ class TimekeepingSearch extends TimekeepingFrontend
 		if($params['to_time']){
 			 $dataProvider->query->andWhere(['<=', 'timekeeping.created_time', $params['to_time']]);
 		}
+
+		 if (isset(Yii::$app->user->identity->level) && Yii::$app->user->identity->level < 3){
+			 $company_id = Yii::$app->user->identity->company_id;
+			 $dataProvider->query->andWhere(['=', 'timekeeping.company_id', $company_id]);
+		 }
         return $dataProvider;
     }
 }
