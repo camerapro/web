@@ -69,10 +69,18 @@ use yii\bootstrap\ActiveForm;
                 'headerOptions' => ['style' => 'text-align: center;'],
                 'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
             ],
-            [
+      
+			[
                 'attribute' => 'created_time',
-                'format' => ['date', 'php:H:i:s d/m/Y']
-            ],
+                'header' => 'Thời gian',
+                'format' => 'raw',
+                'options' => ['width' => '120px'],
+                'headerOptions' => ['style'=>'text-align: center;'],
+                'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
+                'value' => function($data) {
+                    return date("H:i d-m-Y",$data->created_time);
+                }
+            ],   
             [
                 'attribute' => 'type',
                 'header' => 'Kiểu',
