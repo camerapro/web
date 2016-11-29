@@ -37,7 +37,7 @@ class FrontendController extends Controller
         $permission = PermissionGroup::findOne($list_permistion_gr)->permission_ids;
         $list_permistion = explode(',', $permission);
         foreach ($list_permistion as $per){
-            $check = RelationsPermissionRule::getListAction($per, $controller, $action_controller);
+            $check = RelationsPermissionRule::getListAction($per, $controller, $action_controller, $current_params_id);
             if($check){
                 if(!isset($check['params']) || empty($check['params']) || trim($check['params']) == 'id=' . $current_params_id){
                     $permission_enable = true;
