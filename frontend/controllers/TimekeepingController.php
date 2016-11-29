@@ -55,6 +55,7 @@ class TimekeepingController extends FrontendController
      */
     public function actionExport()
     {
+		
 		$searchModel = new TimekeepingSearch();
 		$params = Yii::$app->request->queryParams;
 		$params['deleted']=0;
