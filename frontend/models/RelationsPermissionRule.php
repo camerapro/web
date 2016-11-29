@@ -9,7 +9,7 @@ use Yii;
 class RelationsPermissionRule extends RelationsPermissionRuleBase
 {
     public static function getListAction($permission_id, $controller, $action, $params=NULL){
-        if($params){
+        if(!empty($params)){
             $query = RelationsPermissionRule::find()
                 ->where(['=', 'relations_permission_rule.permission_id', $permission_id])
                 ->andWhere(['=', 'relations_permission_rule.controller_name', $controller])
