@@ -14,7 +14,7 @@ class RelationsPermissionRule extends RelationsPermissionRuleBase
                 ->where(['=', 'relations_permission_rule.permission_id', $permission_id])
                 ->andWhere(['=', 'relations_permission_rule.controller_name', $controller])
                 ->andWhere(['=', 'relations_permission_rule.action_name', $action])
-//                ->andWhere(['=', 'relations_permission_rule.params', $params])
+                ->andWhere(['=', 'relations_permission_rule.params', $params])
                 ->one();
         }else{
             $query = RelationsPermissionRule::find()
