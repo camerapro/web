@@ -51,7 +51,29 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <script>
 	
-    $('.btn-edit-manual-confirm').click(function(){
+    $('.btn-export-confirm').click(function(){
+        var ids = [];
+		var from_time = $("#.from_time").val();
+		var to_time = $("#.to_time").val();
+        $.ajax({
+            url: '/timekeeping/export',
+            type: "GET",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,from_time:from_time,to_time:to_time
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+	$('.btn-edit-manual-confirm').click(function(){
 		var check = $('#timekeepingsearch-status input').is(':checked');
 		if(!check){
 			alert('Chọn thuộc tính cần xử lý');
