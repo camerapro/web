@@ -67,7 +67,6 @@ class TimekeepingController extends FrontendController
         \moonland\phpexcel\Excel::export([
 			'models' => $model,
 			 'fileName' => 'Timekeeping_export_'.date("Y-m-d_His"), 
-			
 				'columns' => [
 						[
 							'attribute' => 'staff_name',
