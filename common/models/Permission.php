@@ -20,16 +20,6 @@ class Permission extends PermissionBase
     }
 
     public static  function getAll(){
-        /*$data = [];
-        $list = self::find()
-            ->where(['=', 'parent_id', 0])
-            ->asArray()
-            ->all();
-        foreach ($list as $item){
-            $data[$item['id']]  = $item;
-            $data[$item['id']]['child'] =  self::getChildPer($item['id']);
-        }
-        return $data;*/
         $list_perent_id = FrontendMenu::find()->where(['=', 'parrent_id', 0])
             ->asArray()->all();
             foreach ($list_perent_id as $item){
@@ -44,7 +34,8 @@ class Permission extends PermissionBase
         $data = [];
         $list = self::find()
             ->where(['=', 'parent_id', 0])
-            ->where(['=', 'menu_parent_id', $id])
+            ->andWhere(['=', 'menu_parent_id', $id])
+            ->andWhere(['=', 'status', 1])
             ->asArray()
             ->all();
         foreach ($list as $item){
@@ -84,7 +75,8 @@ class Permission extends PermissionBase
         $data = [];
         $list = self::find()
             ->where(['=', 'parent_id', 0])
-            ->where(['=', 'menu_parent_id', $parent_idm])
+            ->andWhere(['=', 'menu_parent_id', $parent_idm])
+            ->andWhere(['=', 'status', 1])
             ->andWhere('id IN('.$list_permission_ids.')')
             ->asArray()
             ->all();
@@ -98,6 +90,7 @@ class Permission extends PermissionBase
     public function getChildPer($parrent_id){
         return self::find()
             ->where(['=', 'parent_id', $parrent_id])
+            ->andWhere(['=', 'status', 1])
             ->asArray()
             ->all();
     }
@@ -105,6 +98,7 @@ class Permission extends PermissionBase
     public function getChildPerByIds($parrent_id, $list_permission_ids){
             return self::find()
                 ->where(['=', 'parent_id', $parrent_id])
+                ->andWhere(['=', 'status', 1])
                 ->andWhere('id IN('.$list_permission_ids.')')
                 ->asArray()
                 ->all();
