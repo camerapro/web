@@ -60,7 +60,11 @@ class DepartmentController extends ApiController
             $staff = new Department();
             $staff->name = isset($data['name']) ? $data['name'] : '';
             $staff->company_id = isset($data['company_id']) ? $data['company_id'] : '';
-            $staff->parent_id = isset($data['parent_id']) ? $data['parent_id'] : '';
+			$parent_id = isset($data['parent_id']) ? $data['parent_id'] : 0;
+			$department = \common\models\Department::getDepartmentByLocalId($parent_id);
+			if($department)
+				$parent_id = $department->id;
+            $staff->parent_id = $parent_id;
             $staff->local_department_id = isset($data['local_department_id']) ? $data['local_department_id'] : '';
             $staff->created_time = date("Y-m-d H:i:s");
             $save = $staff->save(false);
