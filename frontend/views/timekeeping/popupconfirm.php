@@ -11,7 +11,7 @@ use yii\bootstrap\ActiveForm;
 
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
-        'action'=> '/timekeeping/manualconfirm',
+        'action'=> '/timekeeping/index',
         'fieldConfig' => [
             'template' => " <div class=\"form-group form-md-line-input\">{label}\n{beginWrapper}\n{input}<div class=\"form-control-focus\"> </div>\n{error}\n</div>{endWrapper}",
             'horizontalCssClasses' => [
@@ -36,7 +36,8 @@ use yii\bootstrap\ActiveForm;
 
                 <div class="row">
                     <div class=" col-md-push-4" style="text-align: center" >
-                      <?php echo Html::submitButton('Xác nhận',['class' =>  'btn btn-success']);?><br>
+						<input type="hidden" id="popup-value-id" value="<?php echo $model->id;?>">
+                      <?php echo Html::submitButton('Xác nhận',['class' =>  'btn btn-success','id'=>'btn-popup-confirm']);?><br>
                       <?php echo Html::submitButton('Đóng',['class' =>  'btn btn-primary','data-dismiss'=>'modal']);?>
                     </div>
                 </div>
@@ -61,3 +62,33 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+<script>
+	$( "#btn-popup-confirm" ).on( "click", function() {
+		var check = $('.popup-form input').is(':checked');
+		if(!check){
+			alert('Chọn thuộc tính cần xử lý');
+			return false;
+		}
+		var status = $('.popup-form').find('input[type="radio"]:checked').val();
+        var ids = [];
+		var id = $("#popup-value-id").val();
+         ids.push(id);
+        $.ajax({
+            url: '/timekeeping/manual-confirm',
+            type: "POST",
+            data: {
+                'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+            } ,
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['error'] == 0){
+                    alert(data_res['message']);
+                    window.location.reload();
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+
+    });
+	</script>
