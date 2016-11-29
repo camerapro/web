@@ -80,7 +80,10 @@ class StaffSearch extends StaffFrontend
             ->andFilterWhere(['like', 'department_name', $this->department_name])
             ->andFilterWhere(['like', 'image', $this->image])
             ->andFilterWhere(['like', 'description', $this->description]);
-
+		 if (isset(Yii::$app->user->identity->level) && Yii::$app->user->identity->level < 4){
+			 $company_id = Yii::$app->user->identity->company_id;
+			 $dataProvider->query->andWhere(['=', 'staff.company_id', $company_id]);
+		 }
         return $dataProvider;
     }
 }
