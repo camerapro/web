@@ -78,7 +78,7 @@ use yii\bootstrap\ActiveForm;
                 'headerOptions' => ['style'=>'text-align: center;'],
                 'contentOptions'=>['style'=>'text-align: center; vertical-align:middle;'],
                 'value' => function($data) {
-                    return date("H:i d-m-Y",$data->created_time);
+                    return date("H:i d-m-Y",strtotime($data->created_time));
                 }
             ],   
             [
