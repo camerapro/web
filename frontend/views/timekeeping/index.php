@@ -53,8 +53,8 @@ $this->params['breadcrumbs'][] = $this->title;
 	
     $( ".btn-export-confirm" ).on( "click", function() {
         var ids = [];
-		var from_time = $("#.from_time").val();
-		var to_time = $("#.to_time").val();
+		var from_time = $("#from_time").val();
+		var to_time = $("#to_time").val();
         $.ajax({
             url: '/timekeeping/export',
             type: "GET",
