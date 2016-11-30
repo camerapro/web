@@ -44,6 +44,7 @@ use kartik\daterange\DateRangePicker;
     $('#from_time').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
+		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
             format: 'h:mm DD-MM-YYYY'
@@ -54,6 +55,7 @@ use kartik\daterange\DateRangePicker;
 	$('#to_time').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
+		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
             format: 'h:mm DD-MM-YYYY'
