@@ -45,6 +45,7 @@ use yii\bootstrap\ActiveForm;
     $('#from_time').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
+		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
             format: 'hh:mm DD-MM-YYYY'
@@ -55,6 +56,7 @@ use yii\bootstrap\ActiveForm;
     $('#to_time').daterangepicker({
         singleDatePicker: true,
         timePicker: true,
+		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
             format: 'hh:mm DD-MM-YYYY'
