@@ -52,7 +52,7 @@ class StaffController extends Controller
 			if($staff){
 				$return = array(
                     'error_code' => 1,
-                    'message' => 'Card code is existed';
+                    'message' => 'Card code is existed'
                 );
 			}
 			//check card_id existed 
