@@ -45,8 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'name',
+            'tat_id',
+            'tat_id',
             'card_code',
             'card_id',
+            'phone',
+            'email',
             ['attribute' => 'department_id',
                 'format' => 'raw',
                 'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
