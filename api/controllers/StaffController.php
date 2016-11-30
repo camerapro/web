@@ -58,7 +58,9 @@ class StaffController extends Controller
 			}
 			//check card_id existed 
 			if(empty($card_code)){
-				$att_code = isset($data['att_code]']) ? $data['att_code]'] :isset($data['att_code']) ? $data['att_code']:'';
+				$att_code = isset($data['att_code]']) ? $data['att_code]'] :'';
+				if(!$att_code)
+					$att_code = isset($data['att_code']) ? $data['att_code'] :'';
 				$company_id = isset($data['company_id']) ? $data['company_id'] : '';
 				$staff = \common\models\Staff::getStaffFromAttCode($att_code,$company_id);
 				
@@ -71,8 +73,7 @@ class StaffController extends Controller
             $staff->email = isset($data['email']) ? $data['email'] : '';
             $staff->card_code = isset($data['card_code']) ? $data['card_code'] : '';
             $staff->card_id = isset($data['card_id']) ? $data['card_id'] : '';
-            $staff->att_code = isset($data['att_code]']) ? $data['att_code]'] :isset($data['att_code']) ? $data['att_code']:'';
-			
+            $staff->att_code = $att_code;
 			
 			$department_id = isset($data['department_id']) ? $data['department_id'] : 0;
 			$department = \common\models\Department::getDepartmentByLocalId($department_id);
