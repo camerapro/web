@@ -45,13 +45,34 @@ class StaffController extends Controller
         }
         if ($data = Yii::$app->request->post()) {
 
-            $staff = new Staff();
+            //check card_code existed 
+			$card_code = isset($data['card_code']) ? $data['card_code'] : '';
+			$company_id = isset($data['company_id']) ? $data['company_id'] : '';
+			$staff = \common\models\Staff::getStaffFromCardCode($card_code,$company_id);
+			if($staff){
+				$return = array(
+                    'error_code' => 1,
+                    'message' => 'Card code is existed';
+                );
+			}
+			//check card_id existed 
+			if(empty($card_code)){
+				$card_id = isset($data['card_id']) ? $data['card_id'] : '';
+				$company_id = isset($data['company_id']) ? $data['company_id'] : '';
+				$staff = \common\models\Staff::getStaffFromCardId($card_id,$company_id);
+				
+			}
+			if(!$staff){
+				$staff = new Staff();
+			}
             $staff->name = isset($data['name']) ? $data['name'] : '';
             $staff->phone = isset($data['phone']) ? $data['phone'] : '';
             $staff->email = isset($data['email']) ? $data['email'] : '';
             $staff->card_code = isset($data['card_code']) ? $data['card_code'] : '';
-            $staff->card_id = isset($data['card_id']) ? $data['card_id'] : '';
+            $staff->card_id = isset($data['card_id']) ? $data[''] : '';
             $staff->att_code = isset($data['att_code']) ? $data['att_code'] : '';
+			
+			
 			$department_id = isset($data['department_id']) ? $data['department_id'] : 0;
 			$department = \common\models\Department::getDepartmentByLocalId($department_id);
 			if($department)
