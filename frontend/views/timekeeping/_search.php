@@ -47,7 +47,7 @@ use kartik\daterange\DateRangePicker;
 		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
-            format: 'mm:hh DD-MM-YYYY'
+            format: 'mm:h DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
@@ -58,7 +58,7 @@ use kartik\daterange\DateRangePicker;
 		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
-            format: 'mm:hh DD-MM-YYYY'
+            format: 'mm:h DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
