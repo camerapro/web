@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'name',
-            'tat_id',
+            'att_code',
             'tat_id',
             'card_code',
             'card_id',
