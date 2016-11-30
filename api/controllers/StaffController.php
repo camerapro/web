@@ -70,7 +70,7 @@ class StaffController extends Controller
             $staff->phone = isset($data['phone']) ? $data['phone'] : '';
             $staff->email = isset($data['email']) ? $data['email'] : '';
             $staff->card_code = isset($data['card_code']) ? $data['card_code'] : '';
-            $staff->card_id = isset($data['card_id']) ? $data[''] : '';
+            $staff->card_id = isset($data['card_id']) ? $data['card_id'] : '';
             $staff->att_code = isset($data['att_code']) ? $data['att_code'] : '';
 			
 			
