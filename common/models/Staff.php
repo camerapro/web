@@ -68,7 +68,20 @@ class Staff extends StaffBase
         }
         return $rt;
     }
-    public static  function getStaffFromCardCode($card_code=0,$company_id =0){
+	
+    public static  function getStaffFromAttCode($att_code=0,$company_id =0){
+		if(!$att_code || !$company_id){
+			return false;
+		}
+        $staff = self::find()->where(['att_code'=>$att_code]);
+        if($company_id)
+        {
+            
+			$staff->andWhere(['company_id'=>$company_id]);
+        }
+		return $staff->one();
+    }
+	public static  function getStaffFromCardCode($card_code=0,$company_id =0){
 		if(!$card_code || !$company_id){
 			return false;
 		}
