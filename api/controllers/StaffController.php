@@ -43,6 +43,7 @@ class StaffController extends Controller
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
+		
         if ($data = Yii::$app->request->post()) {
 
             //check card_code existed 
