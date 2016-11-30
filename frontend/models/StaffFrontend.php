@@ -32,6 +32,7 @@ class StaffFrontend extends Staff
             'name' => 'Tên nhân viên',
             'phone' => 'Số điện thoại',
             'card_code' => 'Mã số thẻ',
+            'att_code' => 'Mã số chấm công',
             'card_id' => 'ID thẻ',
             'department_id' => 'Phòng ban',
             'image' => 'Image',
