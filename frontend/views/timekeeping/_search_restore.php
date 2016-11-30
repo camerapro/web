@@ -48,7 +48,7 @@ use yii\bootstrap\ActiveForm;
 		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
-            format: 'hh:mm DD-MM-YYYY'
+             format: 'HH:mm DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
@@ -59,7 +59,7 @@ use yii\bootstrap\ActiveForm;
 		timePicker24Hour: true,
         calender_style: "picker_4",
         locale: {
-            format: 'hh:mm DD-MM-YYYY'
+             format: 'HH:mm DD-MM-YYYY'
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
