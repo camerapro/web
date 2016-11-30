@@ -58,9 +58,9 @@ class StaffController extends Controller
 			}
 			//check card_id existed 
 			if(empty($card_code)){
-				$card_id = isset($data['card_id']) ? $data['card_id'] : '';
+				$att_code = isset($data['att_code]']) ? $data['att_code]'] :isset($data['att_code']) ? $data['att_code']:'';
 				$company_id = isset($data['company_id']) ? $data['company_id'] : '';
-				$staff = \common\models\Staff::getStaffFromCardId($card_id,$company_id);
+				$staff = \common\models\Staff::getStaffFromAttCode($att_code,$company_id);
 				
 			}
 			if(!$staff){
