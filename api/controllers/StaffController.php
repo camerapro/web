@@ -47,22 +47,21 @@ class StaffController extends Controller
         if ($data = Yii::$app->request->post()) {
 
             //check card_code existed 
-			$card_code = isset($data['card_code']) ? $data['card_code'] : '';
+			$att_code = isset($data['att_code]']) ? $data['att_code]'] :'';
+				if(!$att_code)
+					$att_code = isset($data['att_code']) ? $data['att_code'] :'';
 			$company_id = isset($data['company_id']) ? $data['company_id'] : '';
-			$staff = \common\models\Staff::getStaffFromCardCode($card_code,$company_id);
+			$staff = \common\models\Staff::getStaffFromAttCode($att_code,$company_id);
 			if($staff){
 				$return = array(
                     'error_code' => 1,
-                    'message' => 'Card code is existed'
+                    'message' => 'Att code is existed'
                 );
 			}
 			//check card_id existed 
-			if(empty($card_code)){
-				$att_code = isset($data['att_code]']) ? $data['att_code]'] :'';
-				if(!$att_code)
-					$att_code = isset($data['att_code']) ? $data['att_code'] :'';
-				$company_id = isset($data['company_id']) ? $data['company_id'] : '';
-				$staff = \common\models\Staff::getStaffFromAttCode($att_code,$company_id);
+			if(empty($att_code)){
+				$card_id = isset($data['card_id]']) ? $data['card_id]'] :'';
+				$staff = \common\models\Staff::getStaffFromCardId($card_id,$company_id);
 				
 			}
 			if(!$staff){
@@ -84,7 +83,7 @@ class StaffController extends Controller
             $image = isset($data['image']) ? $data['image'] : '';
             $staff->image = '';
             $staff->created_by = isset($data['created_by']) ? $data['created_by'] : Yii::$app->user->identity->id;
-            $staff->company_id = isset($data['company_id']) ? $data['company_id'] : '';
+            $staff->company_id = $company_id;
             $staff->description = isset($data['description']) ? $data['description'] : '';
             $staff->created_time = date("Y-m-d H:i:s");
             $staff->order = isset($data['order']) ? $data['order'] : '';
