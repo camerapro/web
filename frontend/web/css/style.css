@@ -469,4 +469,22 @@ body{
 .popup-img img{
 	max-height: 260px;
 }
+.staff_search_name{
+	float:none;
+	width: 300px;
+	
+}
+.staff_search_name{
+	float:none;
+	width: 300px;
+	
+}
+.staff_search_name .control-label {
+		width:130px !important;
+		padding:10px;
+}
+.staff_search_name #timekeepingsearch-staff_name {
+		width:481px !important
+}
+
 
