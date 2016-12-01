@@ -27,7 +27,13 @@ use yii\bootstrap\ActiveForm;
 
     <?php echo $form->field($model,'from_time')->textInput(['value' =>isset($_GET['TimekeepingSearch']['from_time'])?$_GET['TimekeepingSearch']['from_time']:date('00:00 d-m-Y'),'id'=>'from_time'])->label('Từ ngày'); ?>
     <?php echo $form->field($model,'to_time')->textInput(['value' => isset($_GET['TimekeepingSearch']['to_time'])?$_GET['TimekeepingSearch']['to_time']:date('23:59 d-m-Y'),'id'=>'to_time'])->label('Đến ngày'); ?>
-
+	<div class="form-group">
+        <?= Html::submitButton('Tìm kiếm', ['class' => 'btn btn-primary']) ?>
+        <?php // Html::resetButton('Reset', ['class' => 'btn btn-default']); ?>
+    </div>
+	 <div class="staff_search_name" style="">
+     <?= $form->field($model, 'staff_name')->textInput(['maxlength' => true]) ?>
+    </div>
     <?php // echo $form->field($model, 'image') ?>
 
     <?php // echo $form->field($model, 'staff_id') ?>
