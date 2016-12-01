@@ -22,6 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class ="action-restore">
 	
 	<span class="btn-restore-confirm"><img src="/images/btn-restore.png"  width="80"></span>
+	<span class="btn-del-confirm"><img src="/images/btn-del-confirm.png"  width="65"></span>
 		</div>
 
     <?php  echo $this->render('_index', ['dataProvider' => $dataProvider,'searchModel'=>$searchModel]); ?>
@@ -29,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <script>
 		$('.btn-restore-confirm').click(function(){
-		
 		var status = 0;
 		var ids = [];
         $("input[type=checkbox]:checked").each ( function() {
@@ -51,6 +51,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             },
         });
+
+    });
+	$('.btn-del-confirm').click(function(){
+		 if (confirm('Bạn có chắc chắn xóa')) {
+			var check = $('#timekeepingsearch-status input').is(':checked');
+			var status = 1;
+			var ids = [];
+			$("input[type=checkbox]:checked").each ( function() {
+				ids.push($(this).val());
+			});
+			$.ajax({
+				url: '/timekeeping/delete-restore',
+				type: "POST",
+				data: {
+					'ids':ids,'_csrf':YII_CSRF_TOKEN,'status':status
+				} ,
+				success: function (response) {
+					data_res = JSON.parse(response);
+					if(data_res['error'] == 0){
+						alert(data_res['message']);
+						window.location.reload();
+					}else{
+						alert(data_res['message']);
+					}
+				},
+        });
+		}
+		
 
     });
 </script>
