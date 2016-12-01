@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 
 	
-	</div>
+	</div><!--
 	<div class ="action-timekeeping-auto">
 	
 		<?php $form = ActiveForm::begin() ?>
@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	
 
 	
-	</div>
+	</div>-->
 	<span class="btn-del-confirm"><img src="/images/btn-del-confirm.png"  width="65"></span>
 	<span class="btn-export-confirm"><img src="/images/btn-export-file.png"  width="65"></span>
     <?php  echo $this->render('_index', ['dataProvider' => $dataProvider,'searchModel'=>$searchModel]); ?>
