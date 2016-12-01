@@ -50,19 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'card_id',
             'phone',
             'email',
-			['attribute' => 'company_id',
-                'format' => 'raw',
-                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name'),
-                'options' => ['width' => '90px'],
-                'value' => function ($data) {
-                   $company = \frontend\models\CompanyFrontend::find()->where(['id' => $data->company_id])->one();
-                    if (!empty($company)) {
-                        return $company->name;
-                    }
-                },
-                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
-                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
-            ],
             ['attribute' => 'department_id',
                 'format' => 'raw',
                 'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\DepartmentFrontend::findAll(['status' => 1]), 'id', 'name'),
@@ -76,7 +63,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
                 'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
             ],
-			
+			['attribute' => 'company_id',
+                'format' => 'raw',
+                'filter' =>  yii\helpers\ArrayHelper::map(\frontend\models\CompanyFrontend::findAll(['status' => 1]), 'id', 'name'),
+                'options' => ['width' => '90px'],
+                'value' => function ($data) {
+                   $company = \frontend\models\CompanyFrontend::find()->where(['id' => $data->company_id])->one();
+                    if (!empty($company)) {
+                        return $company->name;
+                    }
+                },
+                'headerOptions' => ['style' => 'text-align: center; vertical-align: middle;'],
+                'contentOptions' => ['style' => 'text-align: center; vertical-align: middle;']
+            ],
             [
                 'header' => 'Ảnh',
                 'format' => 'raw',
