@@ -246,6 +246,23 @@ class TimekeepingController extends FrontendController
 		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
 		exit();	
     }
+   public function actionDeleteRestore()
+    {
+		
+        $this->verifyAjax();
+		if ($data = Yii::$app->request->post()) {
+			$ids = Yii::$app->request->post()['ids'];
+			$status =5;
+			$condition =['in', 'id', $ids];
+			TimekeepingFrontend::updateAll([
+				'deleted' =>$status,
+			], $condition);
+			echo json_encode(['error'=>0,'message'=>'Xử lý thành công']);
+			exit();
+		}
+		echo json_encode(['error'=>1,'message'=>'Xử lý thất bại']);
+		exit();	
+    }
 	public function actionRestoreConfirm()
     {
 		
