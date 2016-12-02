@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	$('.btn-del-confirm').click(function(){
 		 if (confirm('Bạn có chắc chắn xóa')) {
 			var check = $('#timekeepingsearch-status input').is(':checked');
-			var status = 1;
+			var status = 5;
 			var ids = [];
 			$("input[type=checkbox]:checked").each ( function() {
 				ids.push($(this).val());
