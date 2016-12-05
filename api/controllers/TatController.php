@@ -198,6 +198,12 @@ class TatController extends ApiController
                 );
             }
 			}
+			else{
+				 $return = array(
+                    'error_code' => 1,
+                    'message' => 'Not found'
+                );
+			}
 			
 
            
