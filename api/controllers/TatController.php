@@ -112,7 +112,7 @@ class TatController extends ApiController
                 'camera_password'=>isset($data['camera_password']) ? $data['camera_password'] : '',
                 'camera_model'=>isset($data['camera_model']) ? $data['camera_model'] : '',
                 'expired_time'=>isset($data['expired_time']) ? $data['expired_time'] : '',
-                'company_id'=>isset($data['company_id']) ? $data['company_id'] : '',
+                'company'=>isset($data['company_id']) ? $data['company_id'] : '',
                 'created_time'=>date('Y-m-d H:i:s'),
                 'updated_time'=>date('Y-m-d H:i:s')
 
@@ -174,7 +174,7 @@ class TatController extends ApiController
 				$tat->camera_password= isset($data['camera_password']) ? $data['camera_password'] : $tat->camera_password;
 				$tat->camera_model= isset($data['camera_model']) ? $data['camera_model'] : $tat->camera_model;
 				$tat->expired_time= isset($data['expired_time']) ? $data['expired_time'] : $tat->expired_time;
-				$tat->company_id= isset($data['company_id']) ? $data['company_id'] : $tat->company_id;
+				$tat->company = isset($data['company_id']) ? $data['company_id'] : $tat->company;
 				$tat->updated_time= date('Y-m-d H:i:s');
 				$save = $tat->save(false);
 				 if ($save) {
