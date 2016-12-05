@@ -178,7 +178,7 @@ class TatController extends ApiController
 				$tat->company = isset($data['company_id']) ? $data['company_id'] : $tat->company;
 				$tat->updated_time= date('Y-m-d H:i:s');
 				$save = $tat->save(false);
-				 if ($save && $tat->camera_model)) {
+				 if ($save && $tat->camera_model) {
 					$cam_type = CameraType::find()->where(['name'=>$tat->camera_model])->one();
 				if(!$cam_type && $tat->camera_model){
 					   $type_params = [
