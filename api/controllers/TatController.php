@@ -228,7 +228,8 @@ class TatController extends ApiController
 			$tat = Tat::find()->where(['id'=>$id])->one();
 
 			if($tat){
-				 $tat->delete();
+				 $tat->deleted =1;
+				 $tat->save(false);
 				 $return = array(
                     'error_code'=>0,
                     'message'=>'Deleted'
