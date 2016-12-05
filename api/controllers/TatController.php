@@ -156,7 +156,7 @@ class TatController extends ApiController
         }
         if ($data = Yii::$app->request->post()) {
 			$id = isset($data['id']) ? $data['id'] : 0;
-			$tat = Tat::findOne('id'=>$id);
+			$tat = Tat::findOne(['id'=>$id]);
 			if($tat){
 				$tat->name =  isset($data['name']) ? $data['name'] : $tat->name ;
 				$tat->ip=  isset($data['ip']) ? $data['ip'] : $tat->ip;
