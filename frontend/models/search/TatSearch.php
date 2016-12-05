@@ -81,7 +81,7 @@ class TatSearch extends TatFrontend
             ->andFilterWhere(['like', 'camera_username', $this->camera_username])
             ->andFilterWhere(['like', 'camera_password', $this->camera_password])
             ->andFilterWhere(['like', 'camera_model', $this->camera_model]);
-
+		$dataProvider->query->where(['tat.deleted'=>0]);
         return $dataProvider;
     }
 }
