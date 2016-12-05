@@ -23,17 +23,17 @@ class Tat extends TatBase
         }
         if($tat_id){
             $tat = self::find()
-                ->where(['status'=>1,'id'=>$tat_id])->asArray()
+                ->where(['status'=>1,'id'=>$tat_id,'deleted'=>0])->asArray()
                 ->all();
         }
 		elseif($company_id){
             $tat = self::find()
-                ->where(['status'=>1,'company'=>$company_id])->asArray()
+                ->where(['status'=>1,'company'=>$company_id,'deleted'=>0])->asArray()
                 ->all();
         }
 		else{
 			 $tat = self::find()
-            ->where(['status'=>1,'user_id'=>$user_id])->asArray()
+            ->where(['status'=>1,'user_id'=>$user_id,'deleted'=>0])->asArray()
             ->all();
 		}
 		//echo "data";
