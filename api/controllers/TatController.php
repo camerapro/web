@@ -149,5 +149,101 @@ class TatController extends ApiController
         exit;
 
     }
+	 public function actionUpdate()
+    {
+        if (Yii::$app->user->isGuest) {
+            return ['error_code' => 1, 'message' => 'Not login'];
+        }
+        if ($data = Yii::$app->request->post()) {
+			$id = isset($data['id']) ? $data['id'] : 0;
+			$tat = Tat::findOne('id'=>$id);
+			if($tat){
+				$tat->name =  isset($data['name']) ? $data['name'] : $tat->name ;
+				$tat->ip=  isset($data['ip']) ? $data['ip'] : $tat->ip;
+				$tat->port= isset($data['port']) ? $data['port'] : $tat->port;
+				$tat->category_id= isset($data['category_id']) ? $data['category_id'] : $tat->category_id;
+				$tat->protocol= isset($data['protocol']) ? $data['protocol'] : $tat->protocol;
+				$tat->description= isset($data['description']) ? $data['description'] : $tat->description;
+				$tat->order= isset($data['order']) ? $data['order'] : $tat->order;
+				$tat->user_id= isset($data['user_id']) ? $data['user_id'] : $tat->user_id;
+				$tat->status= isset($data['status']) ? $data['status'] : $tat->status;
+				$tat->camera_ip= isset($data['camera_ip']) ? $data['camera_ip'] : $tat->camera_ip;
+				$tat->camera_port= isset($data['camera_port']) ? $data['camera_port'] : $tat->camera_port;
+				$tat->camera_channel= isset($data['camera_channel']) ? $data['camera_channel'] : $tat->camera_channel;
+				$tat->camera_username= isset($data['camera_username']) ? $data['camera_username'] : $tat->camera_username;
+				$tat->camera_password= isset($data['camera_password']) ? $data['camera_password'] : $tat->camera_password;
+				$tat->camera_model= isset($data['camera_model']) ? $data['camera_model'] : $tat->camera_model;
+				$tat->expired_time= isset($data['expired_time']) ? $data['expired_time'] : $tat->expired_time;
+				$tat->company_id= isset($data['company_id']) ? $data['company_id'] : $tat->company_id;
+				$tat->updated_time= date('Y-m-d H:i:s');
+				$save = $tat->save(false);
+				 if ($save) {
+					$cam_type = CameraType::find()->where(['name'=>$tat_params['camera_model']])->one();
+				if(!$cam_type && $tat->camera_model){
+					   $type_params = [
+							'name' => isset($data['camera_model']) ? $data['camera_model'] : '',
+							'description' => isset($data['description']) ? $data['description'] : ''
+						];
+					 CameraType::add($type_params);
+				}
+                $return = array(
+                    'error_code' => 0,
+                    'message' => 'Success',
+					'tat_id'=>$save->id
+                );
+            } else {
+                $return = array(
+                    'error_code' => 1,
+                    'message' => 'Add fail'
+                );
+            }
+			}
+			
+
+           
+        } else {
+            $return = array(
+                'error_code' => 1,
+                'message' => 'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+
+    }
+	public function actionDelete()
+    {
+		$this->logger->LogInfo("actionDelete TAT data  :" .json_encode(Yii::$app->request->post()));
+		 if (Yii::$app->user->isGuest) {
+           return ['error_code'=>1,'message'=>'Not login'];
+         }
+         
+             $id =    $data['id'];
+			$tat = Tat::find()->where(['id'=>$id])->one();
+
+			if($tat){
+				 $tat->delete();
+				 $return = array(
+                    'error_code'=>0,
+                    'message'=>'Deleted'
+                );
+			}else{
+                $return = array(
+                    'error_code'=>1,
+                    'message'=>'Not found or no permission'
+                );
+            }
+            
+            
+		}else{
+            $return = array(
+                'error_code'=>1,
+                'message'=>'Method not supported!'
+            );
+        }
+        echo json_encode($return);
+        exit;
+        
+    }
 
 }

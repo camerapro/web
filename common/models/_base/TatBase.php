@@ -27,6 +27,7 @@ use Yii;
  * @property string $camera_model
  * @property string $expired_time
  * @property integer $company
+ * @property integer $deleted
  */
 class TatBase extends \yii\db\ActiveRecord
 {
@@ -44,7 +45,7 @@ class TatBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'port', 'order', 'user_id', 'status', 'camera_port', 'camera_channel', 'company'], 'integer'],
+            [['category_id', 'port', 'order', 'user_id', 'status', 'camera_port', 'camera_channel', 'company', 'deleted'], 'integer'],
             [['created_time', 'updated_time', 'expired_time'], 'safe'],
             [['name', 'ip'], 'string', 'max' => 255],
             [['protocol'], 'string', 'max' => 15],
@@ -80,6 +81,7 @@ class TatBase extends \yii\db\ActiveRecord
             'camera_model' => 'Camera Model',
             'expired_time' => 'Expired Time',
             'company' => 'Company',
+            'deleted' => 'Deleted',
         ];
     }
 }
