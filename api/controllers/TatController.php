@@ -158,6 +158,7 @@ class TatController extends ApiController
 			$id = isset($data['id']) ? $data['id'] : 0;
 			$tat = Tat::findOne(['id'=>$id]);
 			if($tat){
+				$cam_type = false;
 				$tat->name =  isset($data['name']) ? $data['name'] : $tat->name ;
 				$tat->ip=  isset($data['ip']) ? $data['ip'] : $tat->ip;
 				$tat->port= isset($data['port']) ? $data['port'] : $tat->port;
@@ -177,8 +178,8 @@ class TatController extends ApiController
 				$tat->company = isset($data['company_id']) ? $data['company_id'] : $tat->company;
 				$tat->updated_time= date('Y-m-d H:i:s');
 				$save = $tat->save(false);
-				 if ($save) {
-					$cam_type = CameraType::find()->where(['name'=>$tat_params['camera_model']])->one();
+				 if ($save && $tat->camera_model)) {
+					$cam_type = CameraType::find()->where(['name'=>$tat->camera_model])->one();
 				if(!$cam_type && $tat->camera_model){
 					   $type_params = [
 							'name' => isset($data['camera_model']) ? $data['camera_model'] : '',
