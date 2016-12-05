@@ -9,6 +9,7 @@ use api\components\ApiController;
 use common\models\Tat;
 use common\models\Camera;
 use common\models\CameraType;
+use common\components\KLogger;
 
 /**
  * Site controller
@@ -20,6 +21,7 @@ class TatController extends ApiController
 
     public function init()
     {
+		$this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
 
@@ -57,6 +59,8 @@ class TatController extends ApiController
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
+		$this->logger->LogInfo("actionAdd TAT data  :" .json_encode(Yii::$app->request->post()));
+		
         if ($data = Yii::$app->request->post()) {
 
            /* if (isset($data['camera_main_ip'])) {
@@ -154,6 +158,8 @@ class TatController extends ApiController
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
         }
+		$this->logger->LogInfo("actionUpdate TAT data  :" .json_encode(Yii::$app->request->post()));
+		
         if ($data = Yii::$app->request->post()) {
 			$id = isset($data['id']) ? $data['id'] : 0;
 			$tat = Tat::findOne(['id'=>$id]);
