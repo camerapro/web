@@ -217,7 +217,7 @@ class TatController extends ApiController
 		 if (Yii::$app->user->isGuest) {
            return ['error_code'=>1,'message'=>'Not login'];
          }
-         
+       if ($data = Yii::$app->request->post()) {
              $id =    $data['id'];
 			$tat = Tat::find()->where(['id'=>$id])->one();
 
