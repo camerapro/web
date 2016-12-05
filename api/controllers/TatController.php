@@ -189,8 +189,7 @@ class TatController extends ApiController
 				}
                 $return = array(
                     'error_code' => 0,
-                    'message' => 'Success',
-					'tat_id'=>$save->id
+                    'message' => 'Success'
                 );
             } else {
                 $return = array(
