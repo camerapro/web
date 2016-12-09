@@ -37,7 +37,9 @@ class TimekeepingController extends Controller
 
     public function actionAdd()
     {
-		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode(Yii::$app->request->post()));
+		$logdata =Yii::$app->request->post();
+		$logdata['image'] = '';
+		$this->logger->LogInfo("actionAdd timekeeping data  :" .json_encode($logdata));
 		
         if (Yii::$app->user->isGuest) {
             return ['error_code' => 1, 'message' => 'Not login'];
