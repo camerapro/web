@@ -71,14 +71,10 @@ class TimekeepingSearch extends TimekeepingFrontend
 		 if (isset(Yii::$app->user->identity->level) && Yii::$app->user->identity->level < 4){
 			 $company_id = Yii::$app->user->identity->company_id;
 			 $dataProvider->query->andWhere(['=', 'timekeeping.company_id', $company_id]);
+			echo '--'.$company_id;
 		 }
 		$staff_name = explode(',',$this->staff_name);
-		$i= 0;
-		foreach($staff_name as $val){
-			$i++;
-			$dataProvider->query->andWhere(['like', 'staff.name', $val]);
-			break;
-		}
+	
         return $dataProvider;
     }
 }
