@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'label' => '<i class="glyphicon glyphicon-plus"></i> Tạo mới',
             'class' => 'btn btn-success'
         ],
-        'header' => '<span id="modalHeaderTitle">Thêm mới nhân viên</span>',
+        'header' => '<span id="modalHeaderTitle">Thêm mới đại lý</span>',
         'headerOptions' => ['id' => 'modalHeader'],
         'id' => 'modal',
         'closeButton' => [
