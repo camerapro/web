@@ -24,6 +24,22 @@ class FrontendController extends Controller
         $action_controller =  strtolower(Yii::$app->controller->action->id);
         $current_params_id = isset($_GET['id']) ? $_GET['id'] : NULL;
         $check_per_session = isset ($_SESSION[$user_id . '_' . $controller . '_' . $action_controller . '_' . $current_params_id])  ? $_SESSION[$user_id . '_' . $controller . '_' . $action_controller. '_' . $current_params_id] : NULL;
+		
+		//LOG 
+		$params = [
+			'user_id'=> $user_id,
+			'user_username'=>Yii::$app->user->identity->username,
+			'ip'=>isset($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:'',
+			'controller'=>$controller,
+			'action'=> $action_controller,
+			'activity'=>'',
+			'object_id'=> $current_params_id,
+			'object_name'=>'',
+			'created_time'=> date("Y-m-d H:i:s"),
+			'referer'=> isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:''
+			];
+		
+		$this->userLog($params);
         if(isset($check_per_session)){
             if($check_per_session == 'has_permission'){
                 return parent::beforeAction($action);
@@ -48,6 +64,7 @@ class FrontendController extends Controller
                 }
             }
         }
+		
         if(!$permission_enable){
             $_SESSION[$user_id . '_' . $controller . '_' . $action_controller . '_' . $current_params_id] = 'no_permission';
             Yii::$app->getResponse()->redirect('/site/permission', 302)->send();
@@ -55,4 +72,10 @@ class FrontendController extends Controller
         }
         return parent::beforeAction($action);
     }
+	public function userLog($params) {
+		$userLog = new \common\models\UserLog();
+        //var_dump($params);
+        $userLog->attributes = $params;
+        return $userLog->save(false);
+	}
 }
