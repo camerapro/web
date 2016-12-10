@@ -64,6 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'title' => Yii::t('app', 'Delete'),
                               
                                 'data-confirm' => 'Bạn có chắc chắn muốn xóa?',
+								'data-method' => 'post',
                             ]);
                         },
                     ],

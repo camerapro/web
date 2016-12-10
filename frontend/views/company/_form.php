@@ -40,7 +40,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'phone')->textInput() ?>
 <p>Thông tin tài khoản quản trị: </p>
 	<?php
 			$user = new \common\models\User();
@@ -52,6 +52,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($user, 'fullname')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'phone')->textInput(['maxlength' => true]) ?>
+	<?= $form->field($user, 'address')->textInput(['maxlength' => true]) ?>
 	<div class="item form-group">
 		<label class="control-label col-md-3 col-sm-3 col-xs-12">Phân quyền</span>
 		</label>
@@ -69,10 +70,10 @@ use yii\bootstrap\ActiveForm;
 
 	</div>
 	<p>Thông tin quản trị: </p>
-    <?= $form->field($user, 'address')->textInput(['maxlength' => true]) ?>
+   
     <?= $form->field($user, 'created_time')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'expired_time')->textInput(['maxlength' => true]) ?>
-	<?= $form->field($model, "status")->checkbox(); ?>
+	<?= $form->field($user, "status")->checkbox()->label('Khóa'); ?>
 	
 	
     <div class="form-group">
