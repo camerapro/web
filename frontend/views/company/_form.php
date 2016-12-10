@@ -71,8 +71,8 @@ use yii\bootstrap\ActiveForm;
 	</div>
 	<p>Thông tin quản trị: </p>
    
-    <?= $form->field($user, 'created_time')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($user, 'expired_time')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($user, 'created_time')->textInput(['maxlength' => true,'value'=>date('d-m-Y',time())]) ?>
+    <?= $form->field($user, 'expired_time')->textInput(['maxlength' => true,'value'=>date('d-m-Y',time()+365*86400)]) ?>
 	<?= $form->field($user, "status")->checkbox()->label('Khóa'); ?>
 	
 	
@@ -84,3 +84,14 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 </div>
+<script>
+    $('#user-expired_time').daterangepicker({
+        singleDatePicker: true,
+        calender_style: "picker_4",
+        locale: {
+            format: 'DD-MM-YYYY'
+        },
+    }, function(start, end, label) {
+        console.log(start.toISOString(), end.toISOString(), label);
+    });
+</script>

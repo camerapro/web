@@ -94,6 +94,7 @@ use yii\bootstrap\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? 'Lưu' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
     </div>
+    </div>
 		
 
     <?php ActiveForm::end(); ?>

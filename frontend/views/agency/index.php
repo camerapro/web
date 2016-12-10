@@ -3,17 +3,16 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\bootstrap\Modal;
-
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\AgencySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Đại lý';
+$this->title = 'Agencies';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="agency-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+        <h4><?= Html::encode($this->title) ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php
@@ -32,11 +31,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'size' => '300',
 
     ]);
-    $myModel = new \common\models\Agency();
-    echo $this->render('/agency/create', ['model' => $myModel]);
+    $myModel1 = new \common\models\Agency();
+    echo $this->render('/agency/create', ['model' => $myModel1]);
     Modal::end();
     ?>
-    <?= GridView::widget([
+<?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -58,3 +57,4 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+
