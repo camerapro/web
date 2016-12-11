@@ -7,17 +7,20 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use api\models\LoginForm;
 use common\models\Permission;
+use common\components\KLogger;
 
 /**
  * Site controller
  */
 class AccountController extends Controller
 {
+    public $logger;
 	public $enableCsrfValidation = false;
 	private $api_key ='43S4342342Asfd';
 	public $layout =false;
 	public function init()
     {
+        $this->logger = new KLogger('api_' . date('Ymd'), KLogger::INFO);
         \Yii::$app->response->format = 'json';
     }
     /**
@@ -77,6 +80,8 @@ class AccountController extends Controller
 
 	public function actionLogin()
     {
+        $this->logger->LogInfo("actionLogin data  :" . json_encode(Yii::$app->request->post()));
+
         if (!Yii::$app->user->isGuest) {
 			
 			$permission_group_id = Yii::$app->user->identity->permission_group_id;
