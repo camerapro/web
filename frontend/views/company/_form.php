@@ -40,7 +40,9 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone')->textInput() ?>
+	  <?= $form->field($model, 'phone')->textInput(['maxlength' => true,
+                    'type' => 'number'
+                ]) ?>
 <p>Thông tin tài khoản quản trị: </p>
 	<?php
 			$user = new \common\models\User();
@@ -51,7 +53,10 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($user, 'password')->passwordInput() ?>
     <?= $form->field($user, 'fullname')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($user, 'phone')->textInput(['maxlength' => true]) ?>
+	  <?= $form->field($model, 'phone')->textInput(['maxlength' => true,
+                    'type' => 'number'
+                ]) ?>
+ 
 	<?= $form->field($user, 'address')->textInput(['maxlength' => true]) ?>
 	<div class="item form-group">
 		<label class="control-label col-md-3 col-sm-3 col-xs-12">Phân quyền</span>
@@ -63,13 +68,37 @@ use yii\bootstrap\ActiveForm;
 				$lever = \frontend\models\Level::find()->where(['<=', 'id', Yii::$app->user->identity->level])->andWhere(['=', 'status', 1])->all();
 				?>
 				<?php foreach ($lever as $item):?>
-					<option <?= ($user->level == $item->id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->level_name?></option>
+					<option <?= ($item->id ==3) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->level_name?></option>
 				<?php endforeach;?>
 			</select>
 		</div>
 
 	</div>
-	<p>Thông tin quản trị: </p>
+       <div class="item form-group">
+           <label class="control-label col-md-3 col-sm-3 col-xs-12">Nhóm quyền</span>
+           </label>
+           <div class="col-md-3 col-sm-3 col-xs-12">
+               <select id="permission" class="form-control" required  name="permission">
+                   <?php
+                   $lever = \frontend\models\PermissionGroup::findAll(['status'=>1]);
+                   if(Yii::$app->user->identity->level <4){
+//                                    $lever = \frontend\models\PermissionGroup::findAll(['id'=>Yii::$app->user->identity->permission_group_id]);
+                       $lever = \frontend\models\PermissionGroup::find()->orWhere(['id'=>Yii::$app->user->identity->permission_group_id])->orWhere(['created_by_id'=>Yii::$app->user->identity->id])->all();
+                   }
+                   ?>
+                   <?php foreach ($lever as $item):?>
+                       <option <?= ($item->id == $user->permission_group_id) ? 'selected' : ''?> value="<?= $item->id?>"><?= $item->name?></option>
+                   <?php endforeach;?>
+               </select>
+           </div>
+           <?php if(Yii::$app->user->identity->level >=3): ?>
+               <div class="col-md-3 col-sm-3 col-xs-12">
+                   <a data-ignore-state="1" id="notify-id"  data-target="#show_create_per" data-toggle="modal" class="title pull-left btn btn-success" href="/ajax/show_create_per">Tạo nhóm quyền</a>
+               </div>
+           <?php endif;?>
+       </div>
+
+       <p>Thông tin quản trị: </p>
    
     <?= $form->field($user, 'created_time')->textInput(['maxlength' => true,'value'=>date('d-m-Y',time())]) ?>
     <?= $form->field($user, 'expired_time')->textInput(['maxlength' => true,'value'=>date('d-m-Y',time()+365*86400)]) ?>
