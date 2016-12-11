@@ -34,7 +34,6 @@ use yii\bootstrap\ActiveForm;
 <p>Thông tin công ty: </p>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'contact_name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
@@ -52,10 +51,11 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($user, 'username')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'password')->passwordInput() ?>
     <?= $form->field($user, 'fullname')->textInput(['maxlength' => true]) ?>
+       <?= $form->field($model, 'phone')->textInput(['maxlength' => true,
+           'type' => 'number'
+       ]) ?>
     <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
-	  <?= $form->field($model, 'phone')->textInput(['maxlength' => true,
-                    'type' => 'number'
-                ]) ?>
+
  
 	<?= $form->field($user, 'address')->textInput(['maxlength' => true]) ?>
 	<div class="item form-group">
