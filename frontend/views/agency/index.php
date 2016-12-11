@@ -13,29 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="agency-index">
 
         <h4><?= Html::encode($this->title) ?></h4>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <a data-ignore-state="1" id="notify-id" class="title pull-left btn btn-success" href="/agency/create"><i class="glyphicon glyphicon-plus"></i> Tạo mới</a>
 
-    <?php
-    Modal::begin([
-        'toggleButton' => [
-            'label' => '<i class="glyphicon glyphicon-plus"></i> Tạo mới',
-            'class' => 'btn btn-success'
-        ],
-        'header' => '<span id="modalHeaderTitle">Thêm mới đại lý</span>',
-        'headerOptions' => ['id' => 'modalHeader'],
-        'id' => 'modal',
-        'closeButton' => [
-            'label' => 'x',
-            'class' => 'btn pull-right',
-        ],
-        'size' => '300',
-
-    ]);
-    $myModel1 = new \common\models\Agency();
-    echo $this->render('/agency/create', ['model' => $myModel1]);
-    Modal::end();
-    ?>
-<?= GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
@@ -53,7 +33,47 @@ $this->params['breadcrumbs'][] = $this->title;
              'created_time',
             // 'updated_time',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => 'Quản lý',
+                'template' => '{update} {delete} {view}',
+                'buttons' => [
+                    //view button
+                    'view' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
+                            'title' => Yii::t('app', 'Xem'),
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
+                            'title' => Yii::t('app', 'Sửa'),
+                            'data-ignore-state'=>1,
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                            'title' => Yii::t('app', 'Delete'),
+
+                            'data-confirm' => 'Bạn có chắc chắn muốn xóa?',
+                            'data-method' => 'post',
+                        ]);
+                    },
+                ],
+                'urlCreator' => function ($action, $model, $key, $index) {
+                    if ($action === 'update') {
+                        $url = '/agency/update?id=' . $model->id;
+                        return $url;
+                    };
+                    if ($action === 'delete') {
+                        $url = '/agency/delete?id=' . $model->id;
+                        return $url;
+                    };
+                    if ($action === 'view') {
+                        $url = '/agency/view?id=' . $model->id;
+                        return $url;
+                    };
+                }
+            ],
         ],
     ]); ?>
 </div>
