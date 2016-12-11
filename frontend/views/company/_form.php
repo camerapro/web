@@ -55,8 +55,6 @@ use yii\bootstrap\ActiveForm;
        ]) ?>
     <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
 
- 
-	<?= $form->field($user, 'address')->textInput(['maxlength' => true]) ?>
 	<div class="item form-group">
 		<label class="control-label col-md-3 col-sm-3 col-xs-12">Phân quyền</span>
 		</label>
