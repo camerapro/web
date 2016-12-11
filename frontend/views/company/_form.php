@@ -77,7 +77,7 @@ use yii\bootstrap\ActiveForm;
        <div class="item form-group">
            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nhóm quyền</span>
            </label>
-           <div class="col-md-3 col-sm-3 col-xs-12">
+           <div class="col-md-3 col-sm-3 col-xs-12 " id = "list-permission">
                <select id="permission" class="form-control" required  name="permission">
                    <?php
                    $lever = \frontend\models\PermissionGroup::findAll(['status'=>1]);
@@ -93,7 +93,8 @@ use yii\bootstrap\ActiveForm;
            </div>
            <?php if(Yii::$app->user->identity->level >=3): ?>
                <div class="col-md-3 col-sm-3 col-xs-12">
-                   <a data-ignore-state="1" id="notify-id"  data-target="#show_create_per" data-toggle="modal" class="title pull-left btn btn-success" href="/ajax/show_create_per">Tạo nhóm quyền</a>
+                   <a data-ignore-state="1" id="notify-id"  data-target="#modalPopup" data-toggle="modal" class="title pull-left btn btn-success" href="/per/create"><i class="glyphicon glyphicon-plus"></i> Tạo mới</a>
+
                </div>
            <?php endif;?>
        </div>
@@ -113,6 +114,19 @@ use yii\bootstrap\ActiveForm;
 
 </div>
 </div>
+
+
+    <div id="modalPopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalPopup" aria-hidden="true">
+        <div class="modal-dialog modal-lg" style="width: 500px">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+            </div>
+            <div class="modal-content"></div>
+        </div>
+    </div>
+
+
 <script>
     $('#user-expired_time').daterangepicker({
         singleDatePicker: true,
@@ -122,5 +136,17 @@ use yii\bootstrap\ActiveForm;
         },
     }, function(start, end, label) {
         console.log(start.toISOString(), end.toISOString(), label);
+    });
+    $('body').on("hidden.bs.modal", function(e) {
+        $(e.target).removeData("bs.modal").find(".modal-content").empty();
+    });
+
+    $('body').on("show.bs.modal", function(e) {
+        var link = $(e.relatedTarget);
+
+        $(this).find(".modal-content").load(link.attr("href"));
+    });
+    $("#modalPopup").draggable({
+        handle: ".modal-header"
     });
 </script>

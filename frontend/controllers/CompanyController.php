@@ -38,6 +38,13 @@ class CompanyController extends Controller
      */
     public function actionIndex()
     {
+        $type = isset(Yii::$app->request->get()['type']) ? Yii::$app->request->get()['type'] : '';
+        if($type == 'perlist')
+        {
+            $this->layout = false;
+            $id = isset(Yii::$app->request->get()['id']) ? Yii::$app->request->get()['id'] : '';
+            return $this->render('permission_list',['id'=>$id]);
+        }
         $searchModel = new CompanySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         if (Yii::$app->user->identity->level == 3){
@@ -71,9 +78,12 @@ class CompanyController extends Controller
     {
         $ajax = $this->verifyAjax();
         $model = new CompanyFrontend();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-			//create user 
+		
+        if ($model->load(Yii::$app->request->post())) {
+			$model->expired_time = date('Y-m-d', strtotime($user_data['expired_time']));
+			$model->created_time = date('Y-m-d H:i:s');
+			if($model->save()){
+				//create user 
 			$data = Yii::$app->request->post();
 			$user_data = $data['User'];
 			$user_name = $user_data['username'];
@@ -105,6 +115,8 @@ class CompanyController extends Controller
                 $error = 'Có lỗi xảy ra, vui lòng liên hệ kỹ thuật';
                 return;
             }
+			}
+			
            
         } else {
 

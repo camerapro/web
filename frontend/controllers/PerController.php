@@ -59,6 +59,16 @@ class PerController extends FrontendController
             'model' => $this->findModel($id),
         ]);
     }
+    /**
+     * Displays a single PermissionGroup model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPerlist()
+    {
+        die('4444');
+        return $this->render('permission_list');
+    }
 
     /**
      * Creates a new PermissionGroup model.
@@ -67,6 +77,7 @@ class PerController extends FrontendController
      */
     public function actionCreate()
     {
+        $ajax = $this->verifyAjax();
         $model = new PermissionGroup();
         $list_permission = Permission::getAll();
         if(Yii::$app->user->identity->level <4){
@@ -90,14 +101,25 @@ class PerController extends FrontendController
                 $model->created_time = date('Y-m-d H:i:s');
                 $model->created_by_name = Yii::$app->user->identity->username;
                 $model->created_by_id = Yii::$app->user->identity->id;
-                $model->save();
+                $model->save(false);
+                if( $ajax){
+                    echo json_encode(['return_code'=>0,'message'=>'Thêm thành công!','data'=>$model->id]);
+                    exit();
+                }
                 return $this->redirect(['index']);
             }
 
 //            return $this->redirect(['view', 'id' => $model->id]);
         }
+        if($ajax){
+            return $this->render('create_pop', [
+                'model' => $model,
+                'list_permission'=>$list_permission,
+            ]);
+        }
         return $this->render('create', [
             'model' => $model,
+            'ajax' =>  $ajax,
             'list_permission'=>$list_permission,
         ]);
 
@@ -169,6 +191,13 @@ class PerController extends FrontendController
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    private function verifyAjax(){
+        if(Yii::$app->request->isAjax){
+            $this->layout = false;
+            return true;
+        }
+        return false;
     }
 
 

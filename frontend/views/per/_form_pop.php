@@ -10,7 +10,8 @@ use yii\widgets\ActiveForm;
 <div class="modal-body">
 <div class="permission-group-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['enableAjaxValidation'=>true,
+        'validateOnSubmit'=>true]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -32,7 +33,7 @@ use yii\widgets\ActiveForm;
 
     <?php endforeach;?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Thêm mới' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Thêm mới' : 'Cập nhật', ['class' => $model->isNewRecord ? 'btn btn-success main-form-btn' : 'btn btn-primary main-form-btn']) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
@@ -55,4 +56,27 @@ use yii\widgets\ActiveForm;
             button.alt = 'select';
         }
     }
+    $('.main-form-btn').click(function(){
+        $.ajax({
+            url: '/per/create',
+            type: "POST",
+            data: $('.permission-group-form form').serializeArray(),
+            success: function (response) {
+                data_res = JSON.parse(response);
+                if(data_res['return_code'] == 0){
+                    alert(data_res['message']);
+                    var id = data_res['data'];
+                    $.get( "/company/index?type=perlist&id="+id, function( data ) {
+                        $( "#list-permission" ).html( data );
+
+                    });
+                    this.modal("close");
+                    return false;
+                }else{
+                    alert(data_res['message']);
+                }
+            },
+        });
+        return false;
+    });
 </script>

@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h4><?php echo  Html::encode($this->title) ?></h4>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 	<p>
-        <a data-ignore-state="1" id="notify-id"  data-target="#modalPopup" data-toggle="modal" class="title pull-left btn btn-success" href="/company/create"><i class="glyphicon glyphicon-plus"></i> Tạo mới</a>
+        <a data-ignore-state="1" id="notify-id" class="title pull-left btn btn-success" href="/company/create"><i class="glyphicon glyphicon-plus"></i> Tạo mới</a>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -54,8 +54,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'update' => function ($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-pencil"></span>', $url, [
                                 'title' => Yii::t('app', 'Sửa'),
-                                'data-target'=>'#modalPopup',
-                                'data-toggle'=>'modal',
                                 'data-ignore-state'=>1,
                             ]);
                         },
@@ -87,15 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 </div>
 
-<div id="modalPopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modalPopup" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="width: 500px">
-	<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-     
-    </div>
-        <div class="modal-content"></div>
-    </div>
-</div>
+
 <script>
 
     $('body').on("hidden.bs.modal", function(e) {

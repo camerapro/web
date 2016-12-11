@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="permission-group-create">
 
 
-    <?= $this->render('_form', [
+    <?= $this->render('_form_pop', [
         'model' => $model,
         'list_permission'=>$list_permission,
         'list_permission_by_group'=>[],
