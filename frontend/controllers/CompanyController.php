@@ -96,10 +96,10 @@ class CompanyController extends Controller
             $user->username = $user_data['username'];
             $user->fullname = $user_data['fullname'];
             $user->email = $user_data['email'];
-            $user->phone = $user_data['phone'];
+            $user->phone = isset($user_data['phone'])?$user_data['phone']:'';
       
             $user->password = md5($user_data['password']);
-            $user->address = $user_data['address'];
+            $user->address = isset($user_data['address'])?$user_data['address']:'';
             $user->level = $data['level'];
      
             $user->expired_time = date('Y-m-d', strtotime($user_data['expired_time']));
