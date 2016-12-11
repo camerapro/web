@@ -51,8 +51,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($user, 'username')->textInput(['maxlength' => true]) ?>
     <?= $form->field($user, 'password')->passwordInput() ?>
     <?= $form->field($user, 'fullname')->textInput(['maxlength' => true]) ?>
-       <?= $form->field($model, 'phone')->textInput('type' => 'number'
-       ]) ?>
+       <?= $form->field($model, 'phone')->textInput(['type' => 'number' ]) ?>
     <?= $form->field($user, 'email')->textInput(['maxlength' => true]) ?>
 
 	<div class="item form-group">
