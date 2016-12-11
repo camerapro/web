@@ -80,12 +80,14 @@ class CompanyController extends Controller
         $model = new CompanyFrontend();
 		
         if ($model->load(Yii::$app->request->post())) {
+            $data = Yii::$app->request->post();
+            $user_data = $data['User'];
 			$model->expired_time = date('Y-m-d', strtotime($user_data['expired_time']));
 			$model->created_time = date('Y-m-d H:i:s');
 			if($model->save()){
 				//create user 
-			$data = Yii::$app->request->post();
-			$user_data = $data['User'];
+
+
 			$user_name = $user_data['username'];
             $user = FrontendUser::findOne(['username'=>$user_name]);
             if(!$user){
