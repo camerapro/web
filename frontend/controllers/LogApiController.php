@@ -14,7 +14,7 @@ use yii\web\UploadedFile;
 /**
  * StaffController implements the CRUD actions for StaffFrontend model.
  */
-class LogApiController extends FrontendController
+class LogApiController extends Controller
 {
     public $enableCsrfValidation = false;
 	
