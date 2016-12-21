@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4><?= Html::encode($this->title) ?></h4>
   <div style="max-height: 800px;overflow: auto; background: #000;color: #fff;;">
-		<?php  $hdd = shell_exec('tail -fn2000 '.$file_name);?>
+		<?php  echo file_get_contents($file_name);?>
   </div>
    
 </div>
