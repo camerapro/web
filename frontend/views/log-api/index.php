@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4><?= Html::encode($this->title) ?></h4>
 	<?php $form = ActiveForm::begin([
-			'action' => 'log-api/index'
+			'action' => '/log-api'
 		]
 	); ?>
 	   <span>Nhập ngày cần xem (YYYYMMDD~20160101)</span>
