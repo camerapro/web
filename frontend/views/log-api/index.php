@@ -14,7 +14,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h4><?= Html::encode($this->title) ?></h4>
   <div style="max-height: 800px;overflow: auto; background: #000;color: #fff;;">
-		<?php  echo file_get_contents($file_name);?>
+		
+		<?php 
+			if(file_exists($file_name))
+				echo file_get_contents($file_name);
+			 else
+				 echo "Không tồn tại file log";
+			?>
   </div>
    
 </div>
