@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		]
 	); ?>
 	   <span>Nhập ngày cần xem (YYYYMMDD~20160101)</span>
-			  <input name="date" value="<?php echo date('Ymd');?>">
+			  <input name="date" value="<?php echo isset($_GET['date'])?$_GET['date']:date('Ymd');?>">
 			
 			 <?= Html::submitButton('Xem', ['class' => 'btn btn-primary']) ?>
 	 <?php ActiveForm::end(); ?>
