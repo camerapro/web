@@ -42,7 +42,7 @@ class LogApiController extends Controller
     {
         $log_path = '/srv/www/cmr/runtime/';
 		$date = isset(Yii::$app->request->get()['date']) ? Yii::$app->request->get()['date'] : date("Ymd");
-		$file_name = $log_path.'api_'.$date;
+		$file_name = $log_path.'api_'.$date.'.log';
         return $this->render('index', [
             'file_name' => $file_name
         ]);
