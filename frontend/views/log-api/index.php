@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h4><?= Html::encode($this->title) ?></h4>
 	<?php $form = ActiveForm::begin(); ?>
 	   <span>Nhập ngày cần xem (YYYYMMDD~20160101)</span>
-			  <input value="<?php echo date('Ymd');?>">
+			  <input name="date" value="<?php echo date('Ymd');?>">
 			
 			 <?= Html::submitButton('Xem', ['class' => 'btn btn-primary']) ?>
 	 <?php ActiveForm::end(); ?>
