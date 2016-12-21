@@ -41,7 +41,7 @@ class LogApiController extends Controller
     public function actionIndex()
     {
         $log_path = '/srv/www/cmr/runtime/';
-		$date = isset(Yii::$app->request->get()['data']) ? Yii::$app->request->get()['date'] : date("Ymd");
+		$date = isset(Yii::$app->request->get()['date']) ? Yii::$app->request->get()['date'] : date("Ymd");
 		$file_name = $log_path.'api_'.$date;
         return $this->render('index', [
             'file_name' => $file_name
