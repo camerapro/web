@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		
 		<?php 
 			if(file_exists($file_name))
-				echo file_get_contents($file_name);
+				echo nl2br(file_get_contents($file_name));
 			 else
 				 echo "Không tồn tại file log";
 			?>
