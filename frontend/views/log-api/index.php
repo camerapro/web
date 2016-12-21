@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\search\UserLogSearch */
@@ -13,6 +14,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-log-index">
 
     <h4><?= Html::encode($this->title) ?></h4>
+	<?php $form = ActiveForm::begin(); ?>
+	   <span>Nhập ngày cần xem (YYYYMMDD~20160101)</span>
+			  <input value="<?php echo date('Ymd');?>">
+			
+			 <?= Html::submitButton('Xem', ['class' => 'btn btn-primary']) ?>
+	 <?php ActiveForm::end(); ?>
   <div style="max-height: 800px;overflow: auto; background: #000;color: #fff;;">
 		
 		<?php 
