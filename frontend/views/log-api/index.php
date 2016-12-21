@@ -14,7 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-log-index">
 
     <h4><?= Html::encode($this->title) ?></h4>
-	<?php $form = ActiveForm::begin(); ?>
+	<?php $form = ActiveForm::begin([
+			'action' => 'log-api/index'
+		]
+	); ?>
 	   <span>Nhập ngày cần xem (YYYYMMDD~20160101)</span>
 			  <input name="date" value="<?php echo date('Ymd');?>">
 			
